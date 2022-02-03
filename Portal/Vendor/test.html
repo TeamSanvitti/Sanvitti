@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>JavaScript Automatic Page Redirect</title>
+<script>
+    function pageRedirect() {
+        window.location.replace("https://auth.sandbox.ebay.com/oauth2/authorize?client_id=stkmanag-langloba-SBX-77ffb2180-30f97435&response_type=code&redirect_uri=stkmanagement-stkmanag-langlo-akkji&scope=https://api.ebay.com/oauth/api_scope+https://api.ebay.com/oauth/api_scope/sell.fulfillment+https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly+https://api.ebay.com/oauth/api_scope/sell.inventory+https://api.ebay.com/oauth/api_scope/sell.inventory.readonly&state=current-page");
+    }      
+    setTimeout("pageRedirect()", 1000);
+</script>
+</head>
+<body>
+    <p><strong>Note:</strong> You will be redirected to the eBay login in 1 sec.</p>
+</body>
+</html>
+

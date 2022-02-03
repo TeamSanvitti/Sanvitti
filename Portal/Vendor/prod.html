@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>JavaScript Automatic Page Redirect</title>
+<script>
+    function pageRedirect() {
+        window.location.replace("https://auth.ebay.com/oauth2/authorize?client_id=stkmanag-langloba-PRD-91d9af84c-be224c1b&response_type=code&redirect_uri=stkmanagement-stkmanag-langlo-vmasgpbws&scope=https://api.ebay.com/oauth/api_scope+https://api.ebay.com/oauth/api_scope/sell.fulfillment+https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly+https://api.ebay.com/oauth/api_scope/sell.inventory+https://api.ebay.com/oauth/api_scope/sell.inventory.readonly&state=current-page&state=current-page");
+    }      
+    setTimeout("pageRedirect()", 10000);
+</script>
+</head>
+<body>
+    <p><strong>Note:</strong> You will be redirected to the tutorialrepublic.com in 10 sec.</p>
+</body>
+</html>

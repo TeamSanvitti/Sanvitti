@@ -1,0 +1,943 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="2155aa36-2e9e-4c29-8430-ab283dfc3aec" activeEnvironment="Default" name="SanvittiFulfillment" soapui-version="5.6.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="afdc0e89-5c48-471a-be95-a1a10c3adc41" wsaVersion="NONE" name="FulfillmentServiceSoap12" type="wsdl" bindingName="{http://sanvitti.com/}FulfillmentServiceSoap12" soapVersion="1_2" anonymous="optional" definition="https://api.langlobal.com/fulfillmentservice.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint></con:endpoints><con:operation id="15684bfa-4ae5-405f-a347-d47498e1e2b8" isOneWay="false" action="http://sanvitti.com/addPurchaseOrder" name="addPurchaseOrder" bindingOperationName="addPurchaseOrder" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d7addb06-8b90-4b49-afe5-e61835e76c07" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:addPurchaseOrder>\r
+         <!--Optional:-->\r
+         <san:purchaseOrderRequest>\r
+            <!--Optional:-->\r
+            <san:PurchaseOrder>\r
+               <san:purchaseordernumber>?</san:purchaseordernumber>\r
+               <san:customerordernumber>?</san:customerordernumber>\r
+               <san:purchaseorderdate>?</san:purchaseorderdate>\r
+               <san:requestedshipdate>?</san:requestedshipdate>\r
+               <san:customernumber>?</san:customernumber>\r
+               <san:customername>?</san:customername>\r
+               <san:POType>?</san:POType>\r
+               <san:storeid>?</san:storeid>\r
+               <san:b2bstoreid>?</san:b2bstoreid>\r
+               <san:b2b>?</san:b2b>\r
+               <san:comment>?</san:comment>\r
+               <san:shipping>\r
+                  <san:contactname>?</san:contactname>\r
+                  <san:contactphone>?</san:contactphone>\r
+                  <san:shiptoattn>?</san:shiptoattn>\r
+                  <san:shiptoaddress1>?</san:shiptoaddress1>\r
+                  <san:shiptoaddress2>?</san:shiptoaddress2>\r
+                  <san:shiptocity>?</san:shiptocity>\r
+                  <san:shiptostate>?</san:shiptostate>\r
+                  <san:shiptozip>?</san:shiptozip>\r
+               </san:shipping>\r
+               <san:shipthrough>?</san:shipthrough>\r
+               <san:shipmenttype>?</san:shipmenttype>\r
+               <!--Optional:-->\r
+               <san:details>\r
+                  <!--Zero or more repetitions:-->\r
+                  <san:lineitem>\r
+                     <san:lineno>?</san:lineno>\r
+                     <!--Optional:-->\r
+                     <san:itemcode>?</san:itemcode>\r
+                     <san:quantity>?</san:quantity>\r
+                  </san:lineitem>\r
+               </san:details>\r
+            </san:PurchaseOrder>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:Authentication>\r
+         </san:purchaseOrderRequest>\r
+      </san:addPurchaseOrder>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/FulfillmentServiceSoap/addPurchaseOrderRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="eac2ccd5-bc0e-42dd-8607-f4d28c252805" isOneWay="false" action="http://sanvitti.com/CancelFulfillment" name="CancelFulfillment" bindingOperationName="CancelFulfillment" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b232dc63-f482-4995-b80f-267cc86c0eaf" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:CancelFulfillment>\r
+         <!--Optional:-->\r
+         <san:fulfillmentRequest>\r
+            <!--Optional:-->\r
+            <san:PurchaseOrderNumber>?</san:PurchaseOrderNumber>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:Authentication>\r
+         </san:fulfillmentRequest>\r
+      </san:CancelFulfillment>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/FulfillmentServiceSoap/CancelFulfillmentRequest"/></con:call></con:operation><con:operation id="a089cb3f-e674-4543-9ce5-be6161e282aa" isOneWay="false" action="http://sanvitti.com/GetPurchaseOrder" name="GetPurchaseOrder" bindingOperationName="GetPurchaseOrder" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1da54dbb-d92b-43ff-9ed7-acba1ee337dc" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:GetPurchaseOrder>\r
+         <!--Optional:-->\r
+         <san:purchaseOrderRequest>\r
+            <!--Optional:-->\r
+            <san:PurchaseOrderNumber>?</san:PurchaseOrderNumber>\r
+            <!--Optional:-->\r
+            <san:ESN>?</san:ESN>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:Authentication>\r
+         </san:purchaseOrderRequest>\r
+      </san:GetPurchaseOrder>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/FulfillmentServiceSoap/GetPurchaseOrderRequest"/></con:call></con:operation><con:operation id="2d343d47-f306-4093-a5a8-c52b55835341" isOneWay="false" action="http://sanvitti.com/GetPurchaseOrderShipment" name="GetPurchaseOrderShipment" bindingOperationName="GetPurchaseOrderShipment" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5a172f34-0c22-49f5-b903-6ff60a0f621b" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:GetPurchaseOrderShipment>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:UserCredentials>\r
+            <!--Optional:-->\r
+            <san:PurchaseOrderNumber>?</san:PurchaseOrderNumber>\r
+            <san:DateFrom>?</san:DateFrom>\r
+            <san:DateTo>?</san:DateTo>\r
+         </san:serviceRequest>\r
+      </san:GetPurchaseOrderShipment>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/FulfillmentServiceSoap/GetPurchaseOrderShipmentRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="154dc784-fbfc-4d21-a93e-a1a73cdff364" isOneWay="false" action="http://sanvitti.com/GetPurchaseOrderShipmentToBeSent" name="GetPurchaseOrderShipmentToBeSent" bindingOperationName="GetPurchaseOrderShipmentToBeSent" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b1ca6d18-e65e-4b5a-a118-07393a657c0e" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:GetPurchaseOrderShipmentToBeSent>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:UserCredentials>\r
+         </san:serviceRequest>\r
+      </san:GetPurchaseOrderShipmentToBeSent>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/FulfillmentServiceSoap/GetPurchaseOrderShipmentToBeSentRequest"/></con:call></con:operation><con:operation id="4cef1038-ebd5-465a-9b7d-163a3cf14296" isOneWay="false" action="http://sanvitti.com/GetShippingCodes" name="GetShippingCodes" bindingOperationName="GetShippingCodes" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5acca38c-56c6-4149-914e-ebe5a6d2320a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:GetShippingCodes/>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/FulfillmentServiceSoap/GetShippingCodesRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="3eba2442-b124-40f1-8651-fc3881d90ac0" isOneWay="false" action="http://sanvitti.com/UpdatePurchaseOrder" name="UpdatePurchaseOrder" bindingOperationName="UpdatePurchaseOrder" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6569201c-e562-447f-8341-4c4a15fe11f6" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:UpdatePurchaseOrder>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:UserCredentials>\r
+            <!--Optional:-->\r
+            <san:FulfillmentOrder>\r
+               <!--Optional:-->\r
+               <san:FulfillmentNumber>?</san:FulfillmentNumber>\r
+               <!--Optional:-->\r
+               <san:contactname>?</san:contactname>\r
+               <!--Optional:-->\r
+               <san:address1>?</san:address1>\r
+               <!--Optional:-->\r
+               <san:address2>?</san:address2>\r
+               <!--Optional:-->\r
+               <san:city>?</san:city>\r
+               <!--Optional:-->\r
+               <san:state>?</san:state>\r
+               <!--Optional:-->\r
+               <san:zip>?</san:zip>\r
+               <!--Optional:-->\r
+               <san:contactphone>?</san:contactphone>\r
+               <!--Optional:-->\r
+               <san:shipvia>?</san:shipvia>\r
+               <!--Optional:-->\r
+               <san:comments>?</san:comments>\r
+               <!--Optional:-->\r
+               <san:FulfillmentItems>\r
+                  <!--Zero or more repetitions:-->\r
+                  <san:FulfillmentItem>\r
+                     <!--Optional:-->\r
+                     <san:sku>?</san:sku>\r
+                     <!--Optional:-->\r
+                     <san:MdnNumber>?</san:MdnNumber>\r
+                     <san:linenumber>?</san:linenumber>\r
+                     <san:Quantity>?</san:Quantity>\r
+                  </san:FulfillmentItem>\r
+               </san:FulfillmentItems>\r
+            </san:FulfillmentOrder>\r
+         </san:serviceRequest>\r
+      </san:UpdatePurchaseOrder>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/FulfillmentServiceSoap/UpdatePurchaseOrderRequest"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="88f02e71-1b2d-458a-99b7-e97ef5104abb" wsaVersion="NONE" name="FulfillmentServiceSoap" type="wsdl" bindingName="{http://sanvitti.com/}FulfillmentServiceSoap" soapVersion="1_1" anonymous="optional" definition="https://api.langlobal.com/fulfillmentservice.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://api.langlobal.com/fulfillmentservice.asmx?WSDL"><con:part><con:url>https://api.langlobal.com/fulfillmentservice.asmx?WSDL</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://sanvitti.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sanvitti.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://sanvitti.com/">
+      <s:element name="addPurchaseOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="purchaseOrderRequest" type="tns:PurchaseOrderRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PurchaseOrderRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PurchaseOrder" type="tns:clsPurchaseOrder"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:clsAuthentication"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="clsPurchaseOrder">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="purchaseordernumber" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="customerordernumber" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="purchaseorderdate" type="s:date"/>
+          <s:element minOccurs="1" maxOccurs="1" name="requestedshipdate" type="s:date"/>
+          <s:element minOccurs="1" maxOccurs="1" name="customernumber" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="customername" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="PurchaseOrderType" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="storeid" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="b2bstoreid" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="comment" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="shipping" nillable="true" type="tns:clsShipping"/>
+          <s:element minOccurs="1" maxOccurs="1" name="shipthrough" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="shipmenttype" type="tns:ShipmentType"/>
+          <s:element minOccurs="0" maxOccurs="1" name="details" type="tns:ArrayOfPurchaseOrderItem"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="clsShipping">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="contactname" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="contactphone" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="shiptoattn" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="shiptoaddress1" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="shiptoaddress2" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="shiptocity" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="shiptostate" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="shiptozip" nillable="true" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ShipmentType">
+        <s:list>
+          <s:simpleType>
+            <s:restriction base="s:string">
+              <s:enumeration value="Ship"/>
+              <s:enumeration value="Return"/>
+            </s:restriction>
+          </s:simpleType>
+        </s:list>
+      </s:simpleType>
+      <s:complexType name="ArrayOfPurchaseOrderItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="lineitem" nillable="true" type="tns:PurchaseOrderItem"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PurchaseOrderItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="lineno" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="itemcode" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="quantity" nillable="true" type="s:int"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="clsAuthentication">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="addPurchaseOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="addPurchaseOrderResult" type="tns:PurchaseOrderResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PurchaseOrderResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PurchaseOrderNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPurchaseOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="purchaseOrderRequest" type="tns:PurchaseOrderInfoRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PurchaseOrderInfoRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PurchaseOrderNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ESN" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:clsAuthentication"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPurchaseOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPurchaseOrderResult" type="tns:PurchaseOrderInfoResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PurchaseOrderInfoResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PurchaseOrder" type="tns:clsPurchaseOrder"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CancelFulfillment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="fulfillmentRequest" type="tns:PurchaseOrderCancelRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PurchaseOrderCancelRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PurchaseOrderNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:clsAuthentication"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CancelFulfillmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CancelFulfillmentResult" type="tns:CancelPurchaseOrderResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CancelPurchaseOrderResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdatePurchaseOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceRequest" type="tns:FulfillmentRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FulfillmentRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserCredentials" type="tns:UserCredentials"/>
+          <s:element minOccurs="0" maxOccurs="1" name="FulfillmentOrder" type="tns:Fulfillment"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserCredentials">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Fulfillment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="FulfillmentNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="contactname" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="address1" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="address2" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="city" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="state" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="zip" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="contactphone" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="shipvia" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="comments" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="FulfillmentItems" type="tns:ArrayOfFulfillmentItem"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFulfillmentItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FulfillmentItem" nillable="true" type="tns:FulfillmentItem"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FulfillmentItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="sku" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="MdnNumber" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="linenumber" nillable="true" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" nillable="true" type="s:int"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdatePurchaseOrderResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdatePurchaseOrderResult" type="tns:FulfillmentResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="FulfillmentResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPurchaseOrderShipment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceRequest" type="tns:PurchaseOrderShipmentRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PurchaseOrderShipmentRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserCredentials" type="tns:UserCredentials"/>
+          <s:element minOccurs="0" maxOccurs="1" name="PurchaseOrderNumber" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="DateFrom" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="DateTo" type="s:dateTime"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPurchaseOrderShipmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPurchaseOrderShipmentResult" type="tns:PurchaseOrderShipmentAPIResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PurchaseOrderShipmentAPIResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Shipments" type="tns:ArrayOfPurchaseOrderShipping"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPurchaseOrderShipping">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PurchaseOrderShipping" nillable="true" type="tns:PurchaseOrderShipping"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PurchaseOrderShipping">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PurchaseOrderNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="PODate" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingMethod" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Trackings" type="tns:ArrayOfPurchaseOrderTracking"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPurchaseOrderTracking">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PurchaseOrderTracking" nillable="true" type="tns:PurchaseOrderTracking"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PurchaseOrderTracking">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ShipDate" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="TrackingNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="AcknowledgmentSent" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ShipmentType" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="LineItems" type="tns:ArrayOfLineItems"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLineItems">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LineItems" nillable="true" type="tns:LineItems"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LineItems">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Qty" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="SKU" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ESN" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ICCID" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="BatchNumber" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPurchaseOrderShipmentToBeSent">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceRequest" type="tns:PurchaseOrderShippingRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PurchaseOrderShippingRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserCredentials" type="tns:UserCredentials"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetPurchaseOrderShipmentToBeSentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPurchaseOrderShipmentToBeSentResult" type="tns:PurchaseOrderShippingResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PurchaseOrderShippingResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Shipments" type="tns:ArrayOfPurchaseOrderShipment"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfPurchaseOrderShipment">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="PurchaseOrderShipment" nillable="true" type="tns:PurchaseOrderShipment"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PurchaseOrderShipment">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UserID" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="API_URL" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="PO_ID" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="PurchaseOrderNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingDate" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingMethod" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ShippingTrackingNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="LineItems" type="tns:ArrayOfLineItem"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfLineItem">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="LineItem" nillable="true" type="tns:LineItem"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LineItem">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="LineNo" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemCode" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Quantity" type="s:int"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ESN" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ICCID" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="BatchNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ContainerID" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetShippingCodes">
+        <s:complexType/>
+      </s:element>
+      <s:element name="GetShippingCodesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetShippingCodesResult" type="tns:ShippByResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ShippByResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ShipByList" type="tns:ArrayOfShipBy"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfShipBy">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ShipBy" nillable="true" type="tns:ShipBy"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ShipBy">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ShipByCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ShipByText" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="addPurchaseOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:addPurchaseOrder"/>
+  </wsdl:message>
+  <wsdl:message name="addPurchaseOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:addPurchaseOrderResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetPurchaseOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPurchaseOrder"/>
+  </wsdl:message>
+  <wsdl:message name="GetPurchaseOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPurchaseOrderResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CancelFulfillmentSoapIn">
+    <wsdl:part name="parameters" element="tns:CancelFulfillment"/>
+  </wsdl:message>
+  <wsdl:message name="CancelFulfillmentSoapOut">
+    <wsdl:part name="parameters" element="tns:CancelFulfillmentResponse"/>
+  </wsdl:message>
+  <wsdl:message name="UpdatePurchaseOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdatePurchaseOrder"/>
+  </wsdl:message>
+  <wsdl:message name="UpdatePurchaseOrderSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatePurchaseOrderResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetPurchaseOrderShipmentSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPurchaseOrderShipment"/>
+  </wsdl:message>
+  <wsdl:message name="GetPurchaseOrderShipmentSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPurchaseOrderShipmentResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetPurchaseOrderShipmentToBeSentSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPurchaseOrderShipmentToBeSent"/>
+  </wsdl:message>
+  <wsdl:message name="GetPurchaseOrderShipmentToBeSentSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPurchaseOrderShipmentToBeSentResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetShippingCodesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetShippingCodes"/>
+  </wsdl:message>
+  <wsdl:message name="GetShippingCodesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetShippingCodesResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="FulfillmentServiceSoap">
+    <wsdl:operation name="addPurchaseOrder">
+      <wsdl:input message="tns:addPurchaseOrderSoapIn"/>
+      <wsdl:output message="tns:addPurchaseOrderSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetPurchaseOrder">
+      <wsdl:input message="tns:GetPurchaseOrderSoapIn"/>
+      <wsdl:output message="tns:GetPurchaseOrderSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="CancelFulfillment">
+      <wsdl:input message="tns:CancelFulfillmentSoapIn"/>
+      <wsdl:output message="tns:CancelFulfillmentSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePurchaseOrder">
+      <wsdl:input message="tns:UpdatePurchaseOrderSoapIn"/>
+      <wsdl:output message="tns:UpdatePurchaseOrderSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetPurchaseOrderShipment">
+      <wsdl:input message="tns:GetPurchaseOrderShipmentSoapIn"/>
+      <wsdl:output message="tns:GetPurchaseOrderShipmentSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetPurchaseOrderShipmentToBeSent">
+      <wsdl:input message="tns:GetPurchaseOrderShipmentToBeSentSoapIn"/>
+      <wsdl:output message="tns:GetPurchaseOrderShipmentToBeSentSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetShippingCodes">
+      <wsdl:input message="tns:GetShippingCodesSoapIn"/>
+      <wsdl:output message="tns:GetShippingCodesSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FulfillmentServiceSoap" type="tns:FulfillmentServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="addPurchaseOrder">
+      <soap:operation soapAction="http://sanvitti.com/addPurchaseOrder" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPurchaseOrder">
+      <soap:operation soapAction="http://sanvitti.com/GetPurchaseOrder" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelFulfillment">
+      <soap:operation soapAction="http://sanvitti.com/CancelFulfillment" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePurchaseOrder">
+      <soap:operation soapAction="http://sanvitti.com/UpdatePurchaseOrder" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPurchaseOrderShipment">
+      <soap:operation soapAction="http://sanvitti.com/GetPurchaseOrderShipment" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPurchaseOrderShipmentToBeSent">
+      <soap:operation soapAction="http://sanvitti.com/GetPurchaseOrderShipmentToBeSent" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShippingCodes">
+      <soap:operation soapAction="http://sanvitti.com/GetShippingCodes" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FulfillmentServiceSoap12" type="tns:FulfillmentServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="addPurchaseOrder">
+      <soap12:operation soapAction="http://sanvitti.com/addPurchaseOrder" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPurchaseOrder">
+      <soap12:operation soapAction="http://sanvitti.com/GetPurchaseOrder" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelFulfillment">
+      <soap12:operation soapAction="http://sanvitti.com/CancelFulfillment" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePurchaseOrder">
+      <soap12:operation soapAction="http://sanvitti.com/UpdatePurchaseOrder" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPurchaseOrderShipment">
+      <soap12:operation soapAction="http://sanvitti.com/GetPurchaseOrderShipment" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPurchaseOrderShipmentToBeSent">
+      <soap12:operation soapAction="http://sanvitti.com/GetPurchaseOrderShipmentToBeSent" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetShippingCodes">
+      <soap12:operation soapAction="http://sanvitti.com/GetShippingCodes" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FulfillmentService">
+    <wsdl:port name="FulfillmentServiceSoap" binding="tns:FulfillmentServiceSoap">
+      <soap:address location="https://api.langlobal.com/fulfillmentservice.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="FulfillmentServiceSoap12" binding="tns:FulfillmentServiceSoap12">
+      <soap12:address location="https://api.langlobal.com/fulfillmentservice.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint></con:endpoints><con:operation id="0a003cff-7bc0-4bd4-b959-b1e42ac3ea61" isOneWay="false" action="http://sanvitti.com/addPurchaseOrder" name="addPurchaseOrder" bindingOperationName="addPurchaseOrder" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="32fb54eb-d6f7-4bee-bb0a-930969a66484" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:addPurchaseOrder>\r
+         <!--Optional:-->\r
+         <san:purchaseOrderRequest>\r
+            <!--Optional:-->\r
+            <san:PurchaseOrder>\r
+               <san:purchaseordernumber>TESTAPI003</san:purchaseordernumber>\r
+               <san:customerordernumber>TESTAPI003</san:customerordernumber>\r
+               <san:purchaseorderdate>2022-01-04</san:purchaseorderdate>\r
+               <san:requestedshipdate>2022-01-05</san:requestedshipdate>\r
+               <san:POType>B2B</san:POType>\r
+               <san:storeid>MAIN</san:storeid>\r
+               <san:comment>Testing</san:comment>\r
+               <san:shipping>\r
+                  <san:contactname>James</san:contactname>\r
+                  <san:contactphone>8822663390</san:contactphone>\r
+                  <san:shiptoattn>James</san:shiptoattn>\r
+                  <san:shiptoaddress1>Address 123</san:shiptoaddress1>\r
+                  <san:shiptocity>New york city</san:shiptocity>\r
+                  <san:shiptostate>NY</san:shiptostate>\r
+                  <san:shiptozip>90234</san:shiptozip>\r
+               </san:shipping>\r
+               <san:shipthrough>First</san:shipthrough>\r
+               <san:shipmenttype>Ship</san:shipmenttype>\r
+               <!--Optional:-->\r
+               <san:details>\r
+                  <!--Zero or more repetitions:-->\r
+                  <san:lineitem>\r
+                     <san:lineno>1</san:lineno>\r
+                     <!--Optional:-->\r
+                     <san:itemcode>TESTSKU02</san:itemcode>\r
+                     <san:quantity>100</san:quantity>\r
+                  </san:lineitem>\r
+               </san:details>\r
+            </san:PurchaseOrder>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>LGIuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>LGIuser</san:Password>\r
+            </san:Authentication>\r
+         </san:purchaseOrderRequest>\r
+      </san:addPurchaseOrder>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/addPurchaseOrder"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="1301e208-19c9-4e5c-8a5c-bd3d23d86688" isOneWay="false" action="http://sanvitti.com/CancelFulfillment" name="CancelFulfillment" bindingOperationName="CancelFulfillment" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="733176c6-fc33-4d4b-8cec-0e74b61b31fa" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:CancelFulfillment>\r
+         <!--Optional:-->\r
+         <san:fulfillmentRequest>\r
+            <!--Optional:-->\r
+            <san:PurchaseOrderNumber>TESTAPI003</san:PurchaseOrderNumber>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>LGIuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>LGIuser</san:Password>\r
+            </san:Authentication>\r
+         </san:fulfillmentRequest>\r
+      </san:CancelFulfillment>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/CancelFulfillment"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="163c9d9e-3da1-4229-96c8-6867d46921ce" isOneWay="false" action="http://sanvitti.com/GetPurchaseOrder" name="GetPurchaseOrder" bindingOperationName="GetPurchaseOrder" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5082a246-a5cc-4a5c-83e2-4ec9148e404b" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetPurchaseOrder>\r
+         <!--Optional:-->\r
+         <san:purchaseOrderRequest>\r
+            <!--Optional:-->\r
+            <san:PurchaseOrderNumber>TESTAPI003</san:PurchaseOrderNumber>\r
+            <!--Optional:-->\r
+            <san:ESN>?</san:ESN>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>LGIuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>LGIuser</san:Password>\r
+            </san:Authentication>\r
+         </san:purchaseOrderRequest>\r
+      </san:GetPurchaseOrder>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetPurchaseOrder"/><con:wsrmConfig version="1.2"/></con:call><con:call id="5870806a-0d9c-4c40-9d28-94019bfde6ee" name="Copy of Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetPurchaseOrder>\r
+         <!--Optional:-->\r
+         <san:purchaseOrderRequest>\r
+            <!--Optional:-->\r
+            <san:PurchaseOrderNumber>TESTAPI003</san:PurchaseOrderNumber>\r
+            <!--Optional:-->\r
+            <san:ESN></san:ESN>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>LGIuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>LGIuser</san:Password>\r
+            </san:Authentication>\r
+         </san:purchaseOrderRequest>\r
+      </san:GetPurchaseOrder>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetPurchaseOrder"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="cb102bec-70aa-42c4-82e0-396e9902d709" isOneWay="false" action="http://sanvitti.com/GetPurchaseOrderShipment" name="GetPurchaseOrderShipment" bindingOperationName="GetPurchaseOrderShipment" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="370b66e6-1023-458c-bdfc-8c365fe36794" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetPurchaseOrderShipment>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>dishuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>dishuser</san:Password>\r
+            </san:UserCredentials>\r
+            <!--Optional:-->\r
+            <san:PurchaseOrderNumber>6055800-6</san:PurchaseOrderNumber>
+            
+         </san:serviceRequest>\r
+      </san:GetPurchaseOrderShipment>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetPurchaseOrderShipment"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="43558525-bfa1-4b62-9111-274e2cb6418e" isOneWay="false" action="http://sanvitti.com/GetPurchaseOrderShipmentToBeSent" name="GetPurchaseOrderShipmentToBeSent" bindingOperationName="GetPurchaseOrderShipmentToBeSent" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="68cf13d3-bb9a-46aa-9ea0-281768de1203" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetPurchaseOrderShipmentToBeSent>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>dishuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>dishuser</san:Password>\r
+            </san:UserCredentials>\r
+         </san:serviceRequest>\r
+      </san:GetPurchaseOrderShipmentToBeSent>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetPurchaseOrderShipmentToBeSent"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="3621dc04-b983-4f1f-a57a-6ae6030bb477" isOneWay="false" action="http://sanvitti.com/GetShippingCodes" name="GetShippingCodes" bindingOperationName="GetShippingCodes" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="40754ed2-3be1-435f-b6cc-36056c83235b" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetShippingCodes/>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetShippingCodes"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="b10d9211-78ef-4a7a-85fe-a6a75b2bee56" isOneWay="false" action="http://sanvitti.com/UpdatePurchaseOrder" name="UpdatePurchaseOrder" bindingOperationName="UpdatePurchaseOrder" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="29a0a436-82db-4467-af6c-07017fd31990" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/fulfillmentservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:UpdatePurchaseOrder>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>LGIuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>LGIuser</san:Password>\r
+            </san:UserCredentials>\r
+            <!--Optional:-->\r
+            <san:FulfillmentOrder>\r
+               <!--Optional:-->\r
+               <san:FulfillmentNumber>TESTAPI003</san:FulfillmentNumber>\r
+               <!--Optional:-->\r
+               <san:contactname>Joe</san:contactname>\r
+               <!--Optional:-->\r
+               <san:address1>Main street 123</san:address1>\r
+               <!--Optional:-->\r
+               <!--Optional:-->\r
+               <!--Optional:-->\r
+               <san:comments>test456</san:comments>\r
+               <!--Optional:-->\r
+               <san:FulfillmentItems>\r
+                  <!--Zero or more repetitions:-->\r
+                  <san:FulfillmentItem>\r
+                     <!--Optional:-->\r
+                     <san:sku>SKU001</san:sku>\r
+                     <!--Optional:-->\r
+                     <san:MdnNumber>133</san:MdnNumber>\r
+                     <san:linenumber>2</san:linenumber>\r
+                     <san:Quantity>250</san:Quantity>\r
+                  </san:FulfillmentItem>\r
+               </san:FulfillmentItems>\r
+            </san:FulfillmentOrder>\r
+         </san:serviceRequest>\r
+      </san:UpdatePurchaseOrder>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/UpdatePurchaseOrder"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

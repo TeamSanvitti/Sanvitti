@@ -1,0 +1,455 @@
+.copy10 {
+	FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.txfield {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #ffffff 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #ffffff 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #4d82bd
+}
+.txfield2 {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #ffffff 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #ffffff 1px solid; FONT-FAMILY: Arial, Helvetica, sans-serif;}
+.copy10white {
+	FONT-WEIGHT: bold; FONT-SIZE: 10px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.txfield1 {
+	BORDER-RIGHT: #6699cc 1px solid; BORDER-TOP: #6699cc 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #6699cc 1px solid; COLOR: #333333; BORDER-BOTTOM: #6699cc 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.border {
+	BORDER-RIGHT: #cccccc 1px solid; BORDER-TOP: #cccccc 1px solid; BORDER-LEFT: #cccccc 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #cccccc 1px solid; BACKGROUND-COLOR: #4d82bd
+}
+.bgcolorblue
+{
+	BACKGROUND-COLOR: #4092D1
+}
+.copy12hd {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.copy11 {
+	FONT-SIZE: 10px; COLOR: #000000; border: 0; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.copy11whb {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.txfield1 {
+	BORDER-RIGHT: #6699cc 1px solid; BORDER-TOP: #6699cc 1px solid; FONT-SIZE: 11px; BORDER-LEFT: #6699cc 1px solid; COLOR: #000000; BORDER-BOTTOM: #6699cc 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+
+
+.button {
+    border: 2px solid #FF0000;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    TEXT-TRANSFORM: uppercase;
+    COLOR: #FF0000;
+    LINE-HEIGHT: 16px;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    BACKGROUND-COLOR: #FFFFFF;
+    margin-bottom: 5px;
+}
+.buttongrid {
+    border: 1px solid #cccccc;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    TEXT-TRANSFORM: uppercase;
+    COLOR: #4092D1;
+    LINE-HEIGHT: 16px;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    BACKGROUND-COLOR: #cccccc;
+    margin-bottom: 5px;
+}
+
+.buttonlabel {
+    border: 1px solid #cccccc;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    TEXT-TRANSFORM: uppercase;
+    COLOR: #4092D1;
+    LINE-HEIGHT: 16px;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    BACKGROUND-COLOR: #cccccc;
+    margin-bottom: 5px;
+}
+
+
+.buttonundlinelabel {
+    border: 1px solid #cccccc;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    TEXT-TRANSFORM: uppercase;
+    COLOR: #4092D1;
+    LINE-HEIGHT: 16px;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    BACKGROUND-COLOR: #cccccc;
+    margin-bottom: 5px;
+    text-decoration: underline;
+}
+
+.buttongray {
+    BORDER-RIGHT: #ffffff 1px solid;
+    BORDER-TOP: #ffffff 1px solid;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    TEXT-TRANSFORM: uppercase;
+    BORDER-LEFT: #ffffff 1px solid;
+    COLOR: #ffffff;
+    LINE-HEIGHT: 16px;
+    BORDER-BOTTOM: #ffffff 1px solid;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    BACKGROUND-COLOR: Gray
+}
+.topHeader {
+	BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 1px solid; FONT-WEIGHT: bold; 
+	FONT-SIZE: 10px; TEXT-TRANSFORM: uppercase; BORDER-LEFT: #ffffff 1px solid; COLOR: #4092D1; LINE-HEIGHT: 16px; BORDER-BOTTOM: #ffffff 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR:#ffffff
+}
+
+
+
+.copy10or {
+	FONT-SIZE: 11px; COLOR: #cc6600; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.buybt {
+    /*BORDER-RIGHT: #ffffff 1px solid; BORDER-TOP: #ffffff 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 10px; BORDER-LEFT: #ffffff 1px solid; COLOR: #ffffff; BORDER-BOTTOM: #ffffff 1px solid; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #4092D1*/
+    border: 1px solid #FF0000;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    TEXT-TRANSFORM: uppercase;
+    COLOR: #FF0000;
+    LINE-HEIGHT: 16px;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    BACKGROUND-COLOR: #ffffff;
+    margin-bottom: 5px;
+}
+.copy8grey {
+	FONT-SIZE: 8px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+
+.copy10grey {
+	FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+.copy14grey {
+	FONT-SIZE: 14px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; font-weight:bold;
+}
+
+
+.copy10underline {
+	FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; text-decoration:underline;
+}
+.copy10link {
+	FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;text-decoration: none
+}
+.copy10greyb {
+	FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	BORDER-RIGHT: #F2F2F2 1px solid; BORDER-TOP: #F2F2F2 1px solid;border-bottom: #F2F2F2 1px solid;border-left: #F2F2F2 1px solid;
+}
+
+.copy11white {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.linktop {
+	FONT-WEIGHT: bold; FONT-SIZE: 10px; TEXT-TRANSFORM: uppercase; COLOR: #ffffff; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none; BACKGROUND-COLOR:#4092D1
+}
+.linkgrid {
+	FONT-WEIGHT: bold; FONT-SIZE: 10px; TEXT-TRANSFORM: uppercase; COLOR: navy; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none; 
+}
+
+.copy10grey2 {
+	FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.bgleft {
+	BACKGROUND-COLOR: #dee7f6;BACKGROUND-POSITION: left top; BACKGROUND-ATTACHMENT: fixed; BACKGROUND-IMAGE: url(images/acceribg.jpg); BACKGROUND-REPEAT: repeat-x
+}
+.copyblue11b {
+
+	FONT-WEIGHT: bold; FONT-SIZE: 10px; TEXT-TRANSFORM: uppercase; COLOR: #064d9f; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; TEXT-DECORATION: none
+}
+.errormessage
+{
+	font-family:  Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: Red;
+}
+
+.errorGreenMsg
+{
+	font-family:  Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: Green;
+}
+
+.SubTitle
+{
+	font-weight: bold;
+	FONT-FAMILY: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+}
+.LabelBold
+{
+	color: #000000;
+	font-size: x-small;
+	font-weight: bold;
+	font-family:  Verdana, Arial, Helvetica, sans-serif;
+}
+.Label
+{
+	color: #000000;
+	font-family:  Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-weight: normal;
+}
+
+#scroller { 
+overflow: auto; 
+width: 775px; 
+height: 220px; 
+} 
+.RequiredField    {font:8pt Arial, Helvetica, sans-serif; color:#FF0000}
+
+.esntext {
+ FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif
+}
+
+.modalBackground
+{
+	background-color: Black;
+    opacity: 0.70;
+    position: absolute;
+    left: 50%;
+    top: 20%; /*margin-left:-300px;*/
+    width:800px;
+    padding-top: 50px;
+    filter: Alpha(Opacity=50);
+    
+}
+.modalPopup
+{
+background-color: White;
+height: 400px;
+width:800px;
+text-align:left;
+
+}
+
+.modal1Popup {
+    background-color: White;
+    height: 350px;
+    width: 470px;
+    text-align: left;
+}
+
+.modal2Background
+{
+	background-color: Black;
+    opacity: 0.70;
+    position: absolute;
+    left: 50%;
+    top: 20%; /*margin-left:-300px;
+    width:800px;*/
+    padding-top: 50px;
+    filter: Alpha(Opacity=50);
+    
+}
+.modal2Popup
+{
+background-color: White;
+height: 615px;
+width:600px;
+text-align:left;
+
+}
+.modalItemCode
+{
+background-color: White;
+height: 430px;
+width:330px;
+text-align:left;
+
+}
+.modal3Background
+{
+	background-color: Black;
+    opacity: 0.70;
+    position: absolute;
+    left: 50%;
+    top: 20%; /*margin-left:-300px;
+	width:800px;*/
+    
+    padding-top: 50px;
+    filter: Alpha(Opacity=50);
+    
+}
+.modal3Popup
+{
+background-color: White;
+height: 535px;
+width:600px;
+text-align:left;
+
+}
+.modal4Background
+{
+	background-color: Black;
+    opacity: 0.70;
+    position: absolute;
+    left: 50%;
+    top: 20%; /*margin-left:-300px;*/
+    width:800px;
+    padding-top: 50px;
+    filter: Alpha(Opacity=50);
+    
+}
+.modal4Popup
+{
+background-color: White;
+height: 300px;
+width:800px;
+text-align:left;
+
+}
+
+.modal5Background
+{
+	background-color: Black;
+    opacity: 0.70;
+    position: absolute;
+    left: 50%;
+    top: 20%; /*margin-left:-300px;*/
+    width:900px;
+    padding-top: 50px;
+    filter: Alpha(Opacity=50);
+    
+}
+.modal5Popup
+{
+background-color: White;
+height: 500px;
+width:900px;
+text-align:left;
+
+}
+.modal6Popup
+{
+background-color: White;
+height: 300px;
+width:500px;
+text-align:left;
+}
+ #UpdateProgress1 {
+   background-color:#CF4342;
+   color:#fff;
+   top:300px;
+   right:390px;
+   position:fixed;
+ }
+
+#UpdateProgress1 img {
+   vertical-align:middle;
+   margin:2px;
+ }
+
+.tableInDatalist {
+    display: block;
+    border: 1px solid #cccccc;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 10px;
+    TEXT-TRANSFORM: uppercase;
+    COLOR: #4092D1;
+    LINE-HEIGHT: 16px;
+    FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+    BACKGROUND-COLOR: #cccccc;
+    margin-bottom: 5px;
+}
+	
+.hideTable
+{
+	display:none;
+}
+.image {
+	border:1px solid #CCC;
+	margin:0px;
+	
+}
+
+
+.header {
+	border: 1px solid #ffffff;
+    FONT-WEIGHT: bold; FONT-SIZE: 12px; TEXT-TRANSFORM: uppercase; COLOR: #ffffff; LINE-HEIGHT: 16px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; BACKGROUND-COLOR: #4092D1;
+    margin-bottom: 5px;
+    
+}
+.copy10Underline {
+	FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;text-decoration: underline;
+}
+.alternaterow
+{
+	background-color:#DCDCDC;
+	}
+
+
+.copy10greyStrik {
+	FONT-SIZE: 10px; COLOR: #000000; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; text-decoration:line-through;
+}
+
+
+.grayhd1/* CSS Document */
+
+   {
+	font-size: 24px;
+	color: #939598;
+	font-family:Arial;
+	text-align:left;
+	margin: 0;
+}
+.whitetx1{
+	font-size: 18px;
+	color: #ffffff;
+	font-family:Arial;
+	margin: 0px;
+	font-weight: normal;
+	background-position: left;
+	line-height: 20px;
+	
+}
+.footer{
+	font-size: 12px;
+	color:#FFF;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	margin: 0;
+}
+
+.bannerbg {
+	background-image: url(images/voice3.jpg);
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+.bodytext1 {
+	font-size: 14px;
+	color:#464646;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:normal;
+	text-align:justify;
+	margin: 0;
+}
+.whitehd {
+	font-size: 22px;
+	color: #ffffff;
+	font-family:Arial;
+	margin: 0px;
+	font-weight: normal;
+	background-position: left;
+	line-height: 20px;
+}
+.copyblue {
+	font-size: 17px;
+	color:#007fc1;
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:normal;
+	text-align:justify;
+	margin: 0;
+}
+.loginTitle
+{
+	font-weight: normal;
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+}

@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]: Langlobal</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico" />
+    <link href="/css/dashboard.css" rel="stylesheet" />
+    <link href="~/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <script src="~/js/sources/font-awesome_5.15.1.min.js"></script>
+    <link href="~/css/materialicons.css" rel="stylesheet" />
+    <style>
+        #layoutSidenav_nav img {
+            padding: 10px;
+        }
+        table tr:nth-of-type(even) {
+            background-color: #ccc;
+        }
+    </style>
+
+    <link href="~/css/toastr.css" rel="stylesheet" />
+</head>
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand bg-white" href="index.html"><img src="/images/logo.png" width="230" height="85" /></a>
+        <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+        <div class="text-white ml-4 roboto-regular font-size-15 kitchen_name">
+            @ViewData["Title"]
+
+            @*<span class="roboto-regular font-size-15">  LABELS</span>*@
+
+
+        </div>
+        <!-- Navbar Search-->
+        <div class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0"></div>
+        <!-- Navbar-->
+        <ul class="navbar-nav ml-auto ml-md-0 user-profile-dropdonw">
+            <li class="nav-item">
+                <a class="nav-link  " id="userDropdown" href="#" role="button"  aria-haspopup="true" aria-expanded="false">
+                    <span class="material-icons float-left color-black">
+                        person_outline
+                    </span>
+                    <span class="float-left color-white mt-1 ml-3">
+                        User Name
+                    </span>
+                    @*<span class="material-icons bg-trans color-white">
+                        expand_more
+                    </span>*@
+                </a>
+                
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <img src="/images/logo.png" width="245" height="85" />
+            <nav class="sb-sidenav accordion" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        
+                       
+                            <a class="nav-link home_" asp-action="create" asp-controller="label">Create Label</a>
+                            <a class="nav-link manage_users" asp-action="index" asp-controller="label">Label Search</a>                        
+
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                @RenderBody()
+            </main>
+
+        </div>
+    </div>
+    <input type="hidden" id="hdnSystemTime" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script src="~/js/toastr.min.js"></script>*@
+    <script src="~/js/jquery.common.js"></script>
+    @RenderSection("Scripts", required: false)
+    @functions {
+        public int SubtractNumbers(int number1, int number2)
+        {
+            return number1 - number2;
+        }
+    }
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Generate Label </title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico" />
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Label" asp-action="Create">Generate Label</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">-->
+@*<li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    </li>*@
+<!--<li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Label" asp-action="Index">Search</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - LabelApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    RenderSection("Scripts", required: false)
+</body>
+</html>-->

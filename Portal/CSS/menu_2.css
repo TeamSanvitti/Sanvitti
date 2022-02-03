@@ -1,0 +1,99 @@
+﻿BODY
+{font-family: verdana, tahoma, arial, sans-serif;
+font-size: 10pt;
+margin: 0px;
+margin-left: 0px;
+margin-right: 0px;
+padding: 0px;}
+
+P
+{padding-top: 5px;
+margin:10px;
+padding: 4px;
+}
+
+H1
+{font-size: 12pt;
+font-weight: bold;
+padding-top: 5px;
+margin: 0px;}
+
+table.navbar
+{font-size: 8pt;
+margin: 0px;
+padding: 0px; 
+border: 0px; 
+font-weight: bold;}
+
+table.menu
+{font-size: 8pt;
+margin: 0px;
+padding: 0px;
+font-weight: bold;}
+
+
+td.menuHover
+{padding: 0px;
+color: #ff6c00;
+font-weight: bold;
+vertical-align:top;}
+
+
+div.menuHover
+{border: 0px;
+display: block;
+position: absolute;}
+
+td.menuNormal
+{padding: 0px;
+color: white;
+font-weight: bold;
+vertical-align: top;}
+
+div.menuNormal
+{display: none;
+position: absolute;}
+
+
+td.menuNorma2
+{font-family: verdana, tahoma, arial, sans-serif;
+font-size: 10pt;
+padding: 5px;
+margin: 2px;
+text-color: Black;
+font-weight: bold;
+vertical-align: top;
+position:relative;
+background-image:url('menu_bg.jpg');
+}
+
+div.menuNorma2
+{display:none;
+position:absolute;}
+
+a.menuitem:link
+{text-decoration: none;
+color:Black;
+background-image:url('menu_bg.jpg');
+display:block;
+}
+
+a.menuitem:visited
+{text-decoration:none;
+color: black;
+background-image:url('menu_bg.jpg');
+display: block;
+}
+
+a.menuitem:hover
+{text-decoration: none;
+color:#004071;
+padding: 0px;
+background-image:url('menu_bg.jpg');
+display: block;
+}
+
+a.menuitem:active
+{text-decoration: none;
+color: black;
+display: block;}

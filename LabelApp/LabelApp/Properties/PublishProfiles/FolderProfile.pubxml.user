@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>E:\git\lan\jbhargava\LabelApp\LabelApp\bin\Release\netcoreapp3.1\publish\</_PublishTargetUrl>
+    <History>True|2021-09-23T19:44:17.9034057Z;True|2021-09-23T15:43:28.1251799+05:30;True|2021-09-22T16:32:16.4224969+05:30;True|2021-09-22T14:30:16.3497033+05:30;True|2021-09-22T14:01:05.5068020+05:30;True|2021-09-22T13:09:43.8883558+05:30;True|2021-09-22T03:20:26.6188062+05:30;True|2021-09-20T22:51:43.2616345+05:30;True|2021-09-20T21:29:29.8392814+05:30;True|2021-09-20T20:33:32.7756360+05:30;True|2021-09-20T20:31:55.2984198+05:30;True|2021-09-20T18:33:44.5681739+05:30;True|2021-09-17T13:54:45.2195063+05:30;</History>
+  </PropertyGroup>
+</Project>

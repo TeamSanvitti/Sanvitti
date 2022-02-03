@@ -1,0 +1,248 @@
+﻿@model LabelApp.Models.ViewModels.svGeneralShipmentLabelSelectVM
+@{ ViewData["Title"] = "Label Search";
+                Layout = "~/Views/Shared/_Layout.cshtml"; }
+@*<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/sources/bootstrap_v3.2.0.min.js"></script>
+    <script src="~/js/sources/bootstrap-datepicker_1.3.0.js"></script>*@
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+@*<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>*@
+@*<script>
+    $(document).ready(function () {
+        $("table tr:odd").css("background", "#DCDCDC");
+    });
+</script>*@
+
+<form method="post">
+    <div class="container-fluid">
+        @*    <div class="row pt-4">
+                <div class="col-6">
+                    <h2 class="text-primary">Label Search</h2>
+                </div>
+                <div class="col-6 text-right">
+                    <a asp-action="Create" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> &nbsp; New Label
+                    </a>
+                </div>
+            </div>
+            <br />*@
+        <br />
+        <div class="border container" style="padding:20px;">
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <label asp-for="FromName"></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for="FromName" class="form-control" />
+                </div>
+                <div class="col-2 text-right">
+                    <label>To Name</label>
+                </div>
+                <div class="col-4 text-left">
+                    <input asp-for="ToName" class="form-control" />
+
+                    @*<span asp-validation-for="svGeneralShipmentLabel.ShipPackage" class="text-danger"></span>*@
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <label asp-for="FromDate"></label>
+                </div>
+                <div class="col-4">
+                    <input id="datepicker" type="text" class="form-control" asp-for="FromDate" value="@Model.FromDate" autocomplete="off" />
+                </div>
+                <div class="col-2 text-right">
+                    <label>To Date</label>
+                </div>
+                <div class="col-4 text-left">
+                    <input id="datepicker2" type="text" class="form-control" asp-for="ToDate" value="@Model.ToDate" autocomplete="off" />
+
+                    @*<span asp-validation-for="svGeneralShipmentLabel.ShipPackage" class="text-danger"></span>*@
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <label asp-for="TrackingNumber"></label>
+                </div>
+                <div class="col-4">
+                    <input asp-for="TrackingNumber" class="form-control" />
+                </div>
+                <div class="col-2 text-right">
+
+                </div>
+                <div class="col-4 text-left">
+
+
+                    @*<span asp-validation-for="svGeneralShipmentLabel.ShipPackage" class="text-danger"></span>*@
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="form-group row">
+            <div class="col-3">
+
+
+            </div>
+            <div class="col-6 align-items-center">
+                &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                <input type="submit" style="width:115px" class="btn btn-primary" value="  Search  " />
+                &nbsp; &nbsp;
+                <a asp-action="Index" style="width:115px" class="btn btn-primary">
+                    Cancel
+                </a>
+                &nbsp; &nbsp;
+                <a asp-action="Create" style="width:115px" class="btn btn-primary">
+                    @*<i class="fas fa-plus"></i> &nbsp;*@  Create Label
+                </a>
+            </div>
+            <div class="col-3">
+
+
+            </div>
+        </div>
+
+
+
+        <div class="table-responsive mt-5 pb-4 bg-white">
+            <table class="table table-bordered manage_report--table custom-responsive_grid-orderdetail" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            S.No.
+                        </th>
+                        <th>
+                            To Name
+                        </th>
+                        <th>
+                            Destination Address
+                        </th>
+                        <th>
+                            Phone#
+                        </th>
+                        <th>
+                            ShipVia
+                        </th>
+                        <th>
+                            Package
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                        <th>
+                            Tracking#
+                        </th>
+                        <th>
+                            Weight(lbs)
+                        </th>
+                        <th>
+                            Price($)
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ var i = 1; }
+                    @if (Model != null && Model.LabelList != null && Model.LabelList.Count() > 0)
+                    {
+                @foreach (var obj in Model.LabelList)
+                {
+                <tr>
+                    <td width="1%">@i</td>
+                    <td width="12%">@obj.ToName</td>
+                    <td width="18%">@obj.ToAddress1 @obj.ToCity @obj.ToState @obj.ToZip</td>
+                    <td width="11%">@obj.FromPhone</td>
+                    <td width="11%">@obj.ShipVia</td>
+                    <td width="8%">@obj.ShipPackage</td>
+                    <td width="11%">@Convert.ToDateTime(obj.RequestedShipmentdate).ToString("MM/dd/yyyy")</td>
+                    <td width="16%">@obj.TrackingNumber</td>
+                    <td width="6%">@obj.ShipmentWeight lbs</td>
+                    <td width="5%">
+                        $ @obj.FinalPostage
+
+                    </td>
+                    <td width="1%">
+                        <a asp-route-Id="@obj.ShipmentID" asp-controller="Label" asp-action="Download">
+                            <img src="~/images/printer.png" width="16" height="16" />
+                        </a>
+
+                    </td>
+                    <td width="1%">
+                        <a asp-route-Id="@obj.ShipmentID" asp-controller="Label" asp-action="Delete">
+                            <img src="~/images/delete.png" width="16" height="16" />
+                        </a>
+                    </td>
+                </tr>
+                    i++;
+                    
+                }
+                                <tr>
+                                    <td colspan="9" align="right"><b> <label>Total Price: </label> </b></td>
+                                    
+                                    <td colspan="3"><b> $ @ViewBag.TotalPrice </b></td>
+                                    
+                               
+                                </tr>
+                                
+                                }
+                                            else
+                                            {
+                                <tr>
+                                    <td colspan="10">No label found!</td>
+                                </tr>}
+
+                </tbody>
+
+            </table>
+            <div id="pagingDiv" class="float-right pr-3">@Html.Raw(ViewBag.Paging)</div>
+        </div>
+    </div>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({
+                // minDate: new Date()
+            });
+            $("#datepicker2").datepicker({
+                // minDate: new Date()
+            });
+        });
+    </script>
+}
+<script>
+    function PrintDiv() {
+        var divContents = document.getElementById("divPrint").innerHTML;
+        var printWindow = window.open('', '', 'height=320,width=500');
+        printWindow.document.write('<html><head><title></title>');
+        printWindow.document.write('</head><body leftmargin="0" rightmargin="0">');
+        printWindow.document.write(divContents);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+    function Print() {
+        //alert('print');
+        $("#divPrint").printThis();
+    }
+
+
+
+</script>
+
+
+@*<script src="assets/js/jquery-1.9.1.js"></script>*@
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="~/js/printThis.js"></script>
+<link href="~/css/jquery-ui.css" rel="stylesheet" />
+<script src="~/js/jquery-ui-1.11.4.js"></script>
+<script src="~/js/bootstrap-confirm-delete.js"></script>
+<script src="~/js/dashboard.js"></script>
+
+

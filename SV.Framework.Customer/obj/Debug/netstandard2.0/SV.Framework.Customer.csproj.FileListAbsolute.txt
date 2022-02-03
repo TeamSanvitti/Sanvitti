@@ -1,0 +1,15 @@
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\bin\Debug\netstandard2.0\SV.Framework.Customer.deps.json
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\bin\Debug\netstandard2.0\SV.Framework.Customer.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\bin\Debug\netstandard2.0\SV.Framework.Customer.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\bin\Debug\netstandard2.0\SV.Framework.DAL.Admin.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\bin\Debug\netstandard2.0\SV.Framework.Models.Fulfillment.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\bin\Debug\netstandard2.0\SV.Framework.DAL.Admin.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\bin\Debug\netstandard2.0\SV.Framework.Models.Fulfillment.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\obj\Debug\netstandard2.0\SV.Framework.Customer.csproj.AssemblyReference.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\obj\Debug\netstandard2.0\SV.Framework.Customer.GeneratedMSBuildEditorConfig.editorconfig
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\obj\Debug\netstandard2.0\SV.Framework.Customer.AssemblyInfoInputs.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\obj\Debug\netstandard2.0\SV.Framework.Customer.AssemblyInfo.cs
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\obj\Debug\netstandard2.0\SV.Framework.Customer.csproj.CoreCompileInputs.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\obj\Debug\netstandard2.0\SV.Framework.Customer.csproj.CopyComplete
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\obj\Debug\netstandard2.0\SV.Framework.Customer.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Customer\obj\Debug\netstandard2.0\SV.Framework.Customer.pdb

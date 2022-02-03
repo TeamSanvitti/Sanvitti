@@ -1,0 +1,13 @@
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Catalog\SV.Framework.DAL.Catalog\bin\Debug\netstandard2.0\SV.Framework.DAL.Catalog.deps.json
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Catalog\SV.Framework.DAL.Catalog\bin\Debug\netstandard2.0\SV.Framework.DAL.Catalog.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Catalog\SV.Framework.DAL.Catalog\bin\Debug\netstandard2.0\SV.Framework.DAL.Catalog.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Catalog\SV.Framework.DAL.Catalog\bin\Debug\netstandard2.0\SV.Framework.Models.Fulfillment.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Catalog\SV.Framework.DAL.Catalog\bin\Debug\netstandard2.0\SV.Framework.Models.Fulfillment.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Catalog\SV.Framework.DAL.Catalog\obj\Debug\netstandard2.0\SV.Framework.DAL.Catalog.csproj.AssemblyReference.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Catalog\SV.Framework.DAL.Catalog\obj\Debug\netstandard2.0\SV.Framework.DAL.Catalog.GeneratedMSBuildEditorConfig.editorconfig
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Catalog\SV.Framework.DAL.Catalog\obj\Debug\netstandard2.0\SV.Framework.DAL.Catalog.AssemblyInfoInputs.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Catalog\SV.Framework.DAL.Catalog\obj\Debug\netstandard2.0\SV.Framework.DAL.Catalog.AssemblyInfo.cs
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Catalog\SV.Framework.DAL.Catalog\obj\Debug\netstandard2.0\SV.Framework.DAL.Catalog.csproj.CoreCompileInputs.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Catalog\SV.Framework.DAL.Catalog\obj\Debug\netstandard2.0\SV.Framework.DAL.Catalog.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Catalog\SV.Framework.DAL.Catalog\obj\Debug\netstandard2.0\SV.Framework.DAL.Catalog.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Catalog\SV.Framework.DAL.Catalog\obj\Debug\netstandard2.0\SV.Framework.DAL.Catalog.csproj.CopyComplete

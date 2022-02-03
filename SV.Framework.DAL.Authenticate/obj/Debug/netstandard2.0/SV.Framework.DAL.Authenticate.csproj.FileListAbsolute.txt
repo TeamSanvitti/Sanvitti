@@ -1,0 +1,13 @@
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Authenticate\bin\Debug\netstandard2.0\SV.Framework.DAL.Authenticate.deps.json
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Authenticate\bin\Debug\netstandard2.0\SV.Framework.DAL.Authenticate.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Authenticate\bin\Debug\netstandard2.0\SV.Framework.DAL.Authenticate.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Authenticate\bin\Debug\netstandard2.0\SV.Framework.Models.Fulfillment.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Authenticate\bin\Debug\netstandard2.0\SV.Framework.Models.Fulfillment.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Authenticate\obj\Debug\netstandard2.0\SV.Framework.DAL.Authenticate.csproj.AssemblyReference.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Authenticate\obj\Debug\netstandard2.0\SV.Framework.DAL.Authenticate.GeneratedMSBuildEditorConfig.editorconfig
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Authenticate\obj\Debug\netstandard2.0\SV.Framework.DAL.Authenticate.AssemblyInfoInputs.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Authenticate\obj\Debug\netstandard2.0\SV.Framework.DAL.Authenticate.AssemblyInfo.cs
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Authenticate\obj\Debug\netstandard2.0\SV.Framework.DAL.Authenticate.csproj.CoreCompileInputs.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Authenticate\obj\Debug\netstandard2.0\SV.Framework.DAL.Authenticate.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Authenticate\obj\Debug\netstandard2.0\SV.Framework.DAL.Authenticate.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Authenticate\obj\Debug\netstandard2.0\SV.Framework.DAL.Authenticate.csproj.CopyComplete

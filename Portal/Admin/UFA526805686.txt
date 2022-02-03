@@ -1,0 +1,36 @@
+
+ALTER PROCEDURE Aero_PurchaseOrder_Select
+	@Po_Num Varchar(20) = null ,
+	@Store_ID Varchar(20) = null,
+	@From_Date Varchar(12) =null,
+	@To_Date Varchar(12) = null
+AS
+
+DECLARE @i int
+
+BEGIN
+
+DECLARE @SQL VARCHAR(3000)
+
+SET @SQL = 'SELECT PO.*, POD.* FROM dbo.PurchaseOrder PO INNER JOIN dbo.PurchaseOrder_Detail POD ON PO.PO_ID = POD.PO_ID WHERE 1=1 '
+
+IF @Po_Num IS NOT NULL OR LEN(@Po_Num) > 0
+	SET @SQL = @SQL + ' AND PO.PO_Num = ''' + @Po_Num + ''''
+
+IF @Store_ID IS NOT NULL OR LEN(@Store_ID) > 0
+	SET @SQL = @SQL + '  AND PO.Store_ID = ''' + @Store_ID + ''''
+
+IF @From_Date IS NOT NULL OR LEN(@From_Date) > 0
+	SET @SQL = @SQL + '  AND PO.PO_Date >= #' + @From_Date + '#'
+
+IF @To_Date IS NOT NULL OR LEN(@To_Date) > 0
+	SET @SQL = @SQL + '  AND PO.PO_Date <= #' + @To_Date + '#'
+
+SET @SQL = @SQL + ' FOR XML AUTO, ELEMENTS, xmldata '
+
+INSERT INTO TEST VALUES(@SQL)
+EXEC (@SQL)
+
+END
+
+

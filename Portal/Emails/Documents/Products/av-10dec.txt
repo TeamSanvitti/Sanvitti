@@ -1,0 +1,30 @@
+1. technology - carrier 
+2. item type to product condition
+3. item to product
+4. menu on product ldetail
+5. active checkbox in all (product)search - by default active -- today
+6. used to pre-owned item type ddl
+
+
+1. Populate Carriers dropdown with following options:
+	1. RSA CDMA
+	2. RSA GSm
+	3. Sprint MVNO
+	4. Verizon MVNO
+	5. Verizon
+	6. Sprint
+	7. T-Mobile
+	8. AT&T
+	9. Routers/Air Cards/Modem
+2. Create a simple input form for Carrier/Technology. (You can design in Grid form). 
+   Please add a separate table for this assignment. Create a script to move the existing 
+   data to the new table.
+
+3. Manage Product Changes:
+	i. Add feature to assign multiple technologies to products.
+	ii. Add a "Show under Catalog" checkbox in the Manage Products form and add a bit 
+            column in the AV_ITEM table for it. We shall be showing only products in AV site 
+            having Show = TRUE
+	iii. Please fix the Product page search (Left nav) to use few table of technology assignment.
+
+4. AllowRMA, AllowForecast on SKU assignement TAB

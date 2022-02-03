@@ -1,0 +1,8 @@
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Fulfillment\SV.Framework.DAL.Fulfillment\obj\Debug\netstandard2.1\SV.Framework.DAL.Fulfillment.AssemblyInfoInputs.cache
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Fulfillment\SV.Framework.DAL.Fulfillment\obj\Debug\netstandard2.1\SV.Framework.DAL.Fulfillment.AssemblyInfo.cs
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Fulfillment\SV.Framework.DAL.Fulfillment\obj\Debug\netstandard2.1\SV.Framework.DAL.Fulfillment.csproj.CoreCompileInputs.cache
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Fulfillment\SV.Framework.DAL.Fulfillment\bin\Debug\netstandard2.1\SV.Framework.DAL.Fulfillment.deps.json
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Fulfillment\SV.Framework.DAL.Fulfillment\bin\Debug\netstandard2.1\SV.Framework.DAL.Fulfillment.dll
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Fulfillment\SV.Framework.DAL.Fulfillment\bin\Debug\netstandard2.1\SV.Framework.DAL.Fulfillment.pdb
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Fulfillment\SV.Framework.DAL.Fulfillment\obj\Debug\netstandard2.1\SV.Framework.DAL.Fulfillment.dll
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Fulfillment\SV.Framework.DAL.Fulfillment\obj\Debug\netstandard2.1\SV.Framework.DAL.Fulfillment.pdb

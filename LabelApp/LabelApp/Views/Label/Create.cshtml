@@ -1,0 +1,484 @@
+﻿@model LabelApp.Models.ViewModels.svGeneralShipmentLabelVM
+@{ 
+    ViewData["Title"] = "Create Label";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*@{ var title = "Create Label"; }*@
+
+<br />
+@*<h2 class="text-info">Generate Label</h2>*@
+@*<div class="border container" style="padding:30px;" >*@
+<script src="~/lib/jquery/dist/jquery.js"></script>
+@*<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css" rel="stylesheet" type="text/css" />
+    <script src="~/js/sources/bootstrap_v3.2.0.min.js"></script>
+    <script src="~/js/sources/bootstrap-datepicker_1.3.0.js"></script>*@
+
+<form method="post">
+    <div class="container-fluid">
+        <div class="border container" style="padding:20px;">
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <b>  <label asp-for="svGeneralShipmentLabel.Carrier"></label></b>
+                </div>
+                <div class="col-4">
+                    <select id="ddlCarrier" asp-for="svGeneralShipmentLabel.Carrier" class="form-control">
+                        <option disabled selected>--Select Carrier--</option>
+                        <option>Fedex</option>
+                        <option>USPS</option>
+                    </select>
+                    <span asp-validation-for="svGeneralShipmentLabel.Carrier" class="text-danger"></span>
+                </div>
+                <div class="col-2 text-right">
+                    <label>Postage</label>
+                </div>
+                <div class="col-4 text-left">
+                    <select id="ddlNational" class="form-control">
+                        <option disabled selected></option>
+                        <option  selected="selected" >Domestic</option>
+                        <option>International</option>
+                    </select>
+
+                    <input id="chkIsInternation" type="checkbox" asp-for="svGeneralShipmentLabel.IsInternation"  />
+
+                    @*<span asp-validation-for="svGeneralShipmentLabel.ShipPackage" class="text-danger"></span>*@
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="border container" style="padding:30px;">
+            <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+            <div class="form-group row">
+                <div class="col-6">
+                    <h6 class="text-info  text-center">Ship From</h6>
+                </div>
+                <div class="col-6">
+                    <h6 class="text-info  text-center">Ship To</h6>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <b> <label asp-for="svGeneralShipmentLabel.FromName"></label></b>
+</div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.FromName" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.FromName" class="text-danger"></span>
+                </div>
+                <div class="col-2  text-right">
+                    <b>   <label asp-for="svGeneralShipmentLabel.ToName"></label></b>
+</div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.ToName" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.ToName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2  text-right">
+                    <b> <label asp-for="svGeneralShipmentLabel.FromAddress1"></label></b>
+</div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.FromAddress1" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.FromAddress1" class="text-danger"></span>
+                </div>
+                <div class="col-2 text-right">
+                    <label>Company</label>
+                </div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.ToCompany" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.ToCompany" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <label>Address2</label>
+                </div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.FromAddress2" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.FromAddress2" class="text-danger"></span>
+                </div>
+                <div class="col-2 text-right">
+                    <b> <label asp-for="svGeneralShipmentLabel.ToAddress1"></label></b>
+                </div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.ToAddress1" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.ToAddress1" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <b>   <label>City</label></b>
+</div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.FromCity" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.FromCity" class="text-danger"></span>
+                </div>
+
+                <div class="col-2 text-right">
+                    <label>Address2</label>
+                </div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.ToAddress2" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.ToAddress2" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <b> <label>State</label></b>
+</div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.FromState" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.FromState" class="text-danger"></span>
+                </div>
+
+                <div class="col-2 text-right">
+                    <b> <label>City</label></b>
+</div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.ToCity" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.ToCity" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <b> <label>Zip</label></b>
+</div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.FromZip" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.FromZip" class="text-danger"></span>
+                </div>
+
+                <div class="col-2 text-right">
+                    <b> <label>State</label></b>
+</div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.ToState" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.ToState" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <b>  <label>Phone</label></b>
+</div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.FromPhone" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.FromPhone" class="text-danger"></span>
+                </div>
+
+                <div class="col-2 text-right">
+                    <b> <label>Zip</label></b>
+</div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.ToZip" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.ToZip" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <b>  <label asp-for="svGeneralShipmentLabel.RequestedShipmentdate" class="control-label">Shipment date</label></b>
+</div>
+                <div class="col-4">
+                    @Html.Hidden("Shipmentdate", "")
+                    <input id="datepicker" type="text" class="form-control" autocomplete="off"  />
+                    <span asp-validation-for="svGeneralShipmentLabel.RequestedShipmentdate" class="text-danger"></span>
+
+                </div>
+
+                <div class="col-2 text-right">
+                    <b>  <label>Phone</label></b>
+</div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.ToPhone" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.ToPhone" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <div class="col-2">
+
+                </div>
+                <div class="col-4">
+
+                </div>
+                <div class="col-2 text-right">
+                    <b>   <label>Email</label></b>
+</div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.ToEmail" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.ToEmail" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="border container" style="padding:20px;">
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <b>  <label asp-for="svGeneralShipmentLabel.ShipVia"></label></b>
+</div>
+                <div class="col-4">
+                    <select id="ddlShipVia" asp-for="svGeneralShipmentLabel.ShipVia" asp-items="@Model.ShipViaSelectList" class="form-control">
+                        <option disabled selected></option>
+                    </select>
+                    @*<input asp-for="svGeneralShipmentLabel.ShipVia" class="form-control" />*@
+                    <span asp-validation-for="svGeneralShipmentLabel.ShipVia" class="text-danger"></span>
+                </div>
+                <div class="col-2 text-right">
+                    <b> <label asp-for="svGeneralShipmentLabel.ShipPackage"></label></b>
+</div>
+                <div class="col-4">
+                    @*<input asp-for="svGeneralShipmentLabel.ShipPackage" class="form-control" />*@
+                    <select id="ddlPackageType" asp-for="svGeneralShipmentLabel.ShipPackage" asp-items="@Model.PackageTypeSelectList" class="form-control">
+                        <option disabled selected></option>
+                    </select>
+                    <span asp-validation-for="svGeneralShipmentLabel.ShipPackage" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <b>  <label asp-for="svGeneralShipmentLabel.ShipmentWeight">Shipment weight(lbs)</label></b>
+</div>
+                <div class="col-4">
+                    <input asp-for="svGeneralShipmentLabel.ShipmentWeight" class="form-control" />
+                    <span asp-validation-for="svGeneralShipmentLabel.ShipmentWeight" class="text-danger"></span>
+                </div>
+
+                <div class="col-2 text-right">
+                    @*<label asp-for="svGeneralShipmentLabel.TrackingNumber"></label>*@
+                </div>
+                <div class="col-4">
+                    @*<input asp-for="svGeneralShipmentLabel.TrackingNumber" class="form-control" />
+                        <span asp-validation-for="svGeneralShipmentLabel.TrackingNumber" class="text-danger"></span>*@
+                </div>
+            </div>
+            @*<div class="form-group row" style="display:none">
+                    <div class="col-2 text-right">
+                        <label asp-for="svGeneralShipmentLabel.FinalPostage"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="svGeneralShipmentLabel.FinalPostage" class="form-control" />
+                        <span asp-validation-for="svGeneralShipmentLabel.FinalPostage" class="text-danger"></span>
+                    </div>
+                    <div class="col-2 text-right">
+                        <label asp-for="svGeneralShipmentLabel.Carrier"></label>
+                    </div>
+                    <div class="col-4">
+                        <input asp-for="svGeneralShipmentLabel.Carrier" class="form-control" />
+                        <span asp-validation-for="svGeneralShipmentLabel.Carrier" class="text-danger"></span>
+                    </div>
+                </div>*@
+        </div>
+        <br />
+
+        <div class="form-group row">
+            <div class="col-5">
+
+
+            </div>
+            <div class="col-1 align-content-sm-center">
+
+                <input type="submit" class="btn btn-primary" value="Submit" />
+
+
+            </div>
+            @*<div class="col-2">
+                    <a asp-action="Index" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> &nbsp;  Back to search
+                    </a>
+                </div>*@
+            <div class="col-1">
+                <a asp-action="Create" class="btn btn-primary" >
+                    @*<i class="fas"></i> &nbsp;*@  Cancel
+                </a>
+            </div>
+            <div class="col-5">
+
+
+            </div>
+        </div>
+    </div>
+        <script>
+            $(function () {
+
+                $("#ddlCarrier").change(function () {
+                    //alert('hi');
+                    var CarrierName = $(this).val();
+                    var Postage = $("#ddlNational").val();
+                    /*if (!isNaN(CarrierName))*/
+                    {
+
+                        var ddlShipVia = $('#ddlShipVia');
+                        // alert(ddlShipVia);
+                        ddlShipVia.empty();
+                        ddlShipVia.append($("<option></option>").val('').html('Please wait ...'));
+                        $.ajax({
+                            url: '/Label/GetShipViaList',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: { CarrierName: CarrierName, Postage: Postage},
+                            success: function (d) {
+                                ddlShipVia.empty(); // Clear the please wait
+                                ddlShipVia.append($("<option></option>").val("").html(""));
+                                //alert(d);
+                                $.each(d, function (i, packageTypes) {
+                                    //alert(packageTypes.value);
+                                    ddlShipVia.append($("<option></option>").val(packageTypes.value).html(packageTypes.text));
+                                });
+                            },
+                            error: function () {
+                                alert('Error!');
+                            }
+                        });
+                    }
+                });
+
+
+                $("#ddlNational").change(function () {
+                    //alert('hi');
+                    var IsInternational = false;
+                    var National = $(this).val();
+                    if (National == "International")
+                        IsInternational = true;
+
+                    
+                    if (!isNaN(IsInternational)) {
+
+                        var ddlPackageType = $('#ddlPackageType');
+                        ddlPackageType.empty();
+                        ddlPackageType.append($("<option></option>").val('').html('Please wait ...'));
+                        $.ajax({
+                            url: '/Label/GetPackageTypeList',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: { IsInternational: IsInternational },
+                            success: function (d) {
+                                ddlPackageType.empty(); // Clear the please wait
+                                ddlPackageType.append($("<option></option>").val("").html(""));
+                                $.each(d, function (i, packageTypes) {
+                                    ddlPackageType.append($("<option></option>").val(packageTypes.value).html(packageTypes.text));
+                                });
+                            },
+                            error: function () {
+                                alert('Error!');
+                            }
+                        });
+
+
+                        
+                        var CarrierName = $("#ddlCarrier").val();
+                        /*if (!isNaN(CarrierName))*/
+                        {
+
+                            var ddlShipVia = $('#ddlShipVia');
+                            // alert(ddlShipVia);
+                            ddlShipVia.empty();
+                            ddlShipVia.append($("<option></option>").val('').html('Please wait ...'));
+                            $.ajax({
+                                url: '/Label/GetShipViaList',
+                                type: 'POST',
+                                dataType: 'json',
+                                data: { CarrierName: CarrierName, Postage: National },
+                                success: function (d) {
+                                    ddlShipVia.empty(); // Clear the please wait
+                                    ddlShipVia.append($("<option></option>").val("").html(""));
+                                    //alert(d);
+                                    $.each(d, function (i, packageTypes) {
+                                        //alert(packageTypes.value);
+                                        ddlShipVia.append($("<option></option>").val(packageTypes.value).html(packageTypes.text));
+                                    });
+                                },
+                                error: function () {
+                                    alert('Error!');
+                                }
+                            });
+                        }
+                    }
+                    $('#chkIsInternation').prop('checked', this.value);
+
+
+
+                });
+
+
+                $("#chkIsInternation").click(function () {
+                    //   alert($(this).checked);
+                    var IsInternational = $(this).is(':checked');
+                    if (!isNaN(IsInternational)) {
+                        var ddlPackageType = $('#ddlPackageType');
+                        ddlPackageType.empty();
+                        ddlPackageType.append($("<option></option>").val('').html('Please wait ...'));
+                        $.ajax({
+                            url: '/Label/GetPackageTypeList',
+                            type: 'POST',
+                            dataType: 'json',
+                            data: { IsInternational: IsInternational },
+                            success: function (d) {
+                                ddlPackageType.empty(); // Clear the please wait
+                                ddlPackageType.append($("<option></option>").val("").html(""));
+                                $.each(d, function (i, packageTypes) {
+                                    ddlPackageType.append($("<option></option>").val(packageTypes.value).html(packageTypes.text));
+                                });
+                            },
+                            error: function () {
+                                alert('Error!');
+                            }
+                        });
+                    }
+                });
+            })
+        </script>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker").datepicker({
+                minDate: new Date()
+            });
+        });
+        $(document).ready(function () {
+            $("#datepicker").change(function () {
+                $('#Shipmentdate').val(this.value);
+            }).change();
+
+            //$("#ddlNational").change(function () {
+              
+            //    $('#chkIsInternation').prop('checked', this.value);
+               
+
+            //    var IsInternational = this.value;
+            //    if (IsInternational == "")
+            //        IsInternational = false;
+            //    alert(IsInternational);
+            //        if (!isNaN(IsInternational)) {
+            //            var ddlPackageType = $('#ddlPackageType');
+            //            alert(IsInternational);
+            //            ddlPackageType.empty();
+            //            ddlPackageType.append($("<option></option>").val('').html('Please wait ...'));
+            //            $.ajax({
+            //                url: '/Label/GetPackageTypeList',
+            //                type: 'POST',
+            //                dataType: 'json',
+            //                data: { IsInternational: IsInternational },
+            //                success: function (d) {
+            //                    ddlPackageType.empty(); 
+            //                    ddlPackageType.append($("<option></option>").val("").html(""));
+            //                    $.each(d, function (i, packageTypes) {
+            //                        ddlPackageType.append($("<option></option>").val(packageTypes.value).html(packageTypes.text));
+            //                    });
+            //                },
+            //                error: function () {
+            //                    alert('Error!');
+            //                }
+            //            });
+            //        }
+               
+            //}).change();
+
+            
+        });
+    </script>
+}

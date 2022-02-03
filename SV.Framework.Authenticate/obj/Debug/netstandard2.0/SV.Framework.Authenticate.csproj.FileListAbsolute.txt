@@ -1,0 +1,15 @@
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\bin\Debug\netstandard2.0\SV.Framework.Authenticate.deps.json
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\bin\Debug\netstandard2.0\SV.Framework.Authenticate.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\bin\Debug\netstandard2.0\SV.Framework.Authenticate.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\bin\Debug\netstandard2.0\SV.Framework.DAL.Authenticate.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\bin\Debug\netstandard2.0\SV.Framework.Models.Fulfillment.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\bin\Debug\netstandard2.0\SV.Framework.DAL.Authenticate.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\bin\Debug\netstandard2.0\SV.Framework.Models.Fulfillment.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\obj\Debug\netstandard2.0\SV.Framework.Authenticate.csproj.AssemblyReference.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\obj\Debug\netstandard2.0\SV.Framework.Authenticate.GeneratedMSBuildEditorConfig.editorconfig
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\obj\Debug\netstandard2.0\SV.Framework.Authenticate.AssemblyInfoInputs.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\obj\Debug\netstandard2.0\SV.Framework.Authenticate.AssemblyInfo.cs
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\obj\Debug\netstandard2.0\SV.Framework.Authenticate.csproj.CoreCompileInputs.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\obj\Debug\netstandard2.0\SV.Framework.Authenticate.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\obj\Debug\netstandard2.0\SV.Framework.Authenticate.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Authenticate\obj\Debug\netstandard2.0\SV.Framework.Authenticate.csproj.CopyComplete

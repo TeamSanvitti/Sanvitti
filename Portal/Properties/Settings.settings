@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="avii.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="avii_com_telspace_ShoppingBag" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://mvneplatform.com/ShoppingBag.asmx</Value>
+    </Setting>
+    <Setting Name="avii_com_sanvitti_www_PurchaseOrder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://sanvitti.com/purchaseorder.asmx</Value>
+    </Setting>
+    <Setting Name="avii_com_aerovoice_www_PurchaseOrder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://jbhargava-001-site1.htempurl.com/purchaseorder.asmx</Value>
+    </Setting>
+    <Setting Name="avii_com_aerovoice2_www_PurchaseOrder" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">http://jbhargava-001-site1.htempurl.com/purchaseorder.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

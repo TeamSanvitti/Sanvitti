@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="806da81e-d37f-49e6-86b5-f131fa90d4a2" activeEnvironment="Default" name="SanvittiCustomer" soapui-version="5.6.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="46f2f189-f3e2-4e20-95dc-b431115726fb" wsaVersion="NONE" name="CustomerServiceSoap" type="wsdl" bindingName="{http://sanvitti.com/}CustomerServiceSoap" soapVersion="1_1" anonymous="optional" definition="https://api.langlobal.com/customerservice.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>https://api.langlobal.com/customerservice.asmx</con:endpoint></con:endpoints><con:operation id="03767c6d-7571-4e45-a49b-98bf5d33ac96" isOneWay="false" action="http://sanvitti.com/GetAssignedUsers" name="GetAssignedUsers" bindingOperationName="GetAssignedUsers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6c93ad10-248c-4364-8e8f-6be873134c31" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/customerservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetAssignedUsers>\r
+         <!--Optional:-->\r
+         <san:userRequest>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:Authentication>\r
+         </san:userRequest>\r
+      </san:GetAssignedUsers>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetAssignedUsers"/></con:call></con:operation><con:operation id="1c6d70cd-e0de-441c-a0a0-ed83852be5eb" isOneWay="false" action="http://sanvitti.com/GetCompanyStores" name="GetCompanyStores" bindingOperationName="GetCompanyStores" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6fe050fe-0ff0-43dd-b57a-fa89117e1402" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/customerservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetCompanyStores>\r
+         <!--Optional:-->\r
+         <san:companyStoreRequest>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:Authentication>\r
+         </san:companyStoreRequest>\r
+      </san:GetCompanyStores>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetCompanyStores"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="07b1f3ae-a413-40a3-b759-ff70d9a0a42d" wsaVersion="NONE" name="CustomerServiceSoap12" type="wsdl" bindingName="{http://sanvitti.com/}CustomerServiceSoap12" soapVersion="1_2" anonymous="optional" definition="https://api.langlobal.com/customerservice.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://api.langlobal.com/customerservice.asmx?WSDL"><con:part><con:url>https://api.langlobal.com/customerservice.asmx?WSDL</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://sanvitti.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sanvitti.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://sanvitti.com/">
+      <s:element name="GetCompanyStores">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="companyStoreRequest" type="tns:CompanyStoreRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CompanyStoreRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:clsAuthentication"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="clsAuthentication">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCompanyStoresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCompanyStoresResult" type="tns:CompanyStoreResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CompanyStoreResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyInformation" type="tns:CompanyInfo"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyAccountNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyShortName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyAddresses" type="tns:ArrayOfCompanyAddresses"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Stores" type="tns:ArrayOfCompanyStore"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="GroupEmail" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Website" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="BussinessType" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCompanyAddresses">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CompanyAddresses" nillable="true" type="tns:CompanyAddresses"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyAddresses">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyAddress" type="tns:Address"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyContactInfo" type="tns:ContactInfo"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Address">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="AddressType" type="tns:AddressType"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Address1" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Address2" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="City" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="State" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Zip" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Country" nillable="true" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="AddressType">
+        <s:restriction base="s:string">
+          <s:enumeration value="0"/>
+          <s:enumeration value="1"/>
+          <s:enumeration value="2"/>
+          <s:enumeration value="3"/>
+          <s:enumeration value="4"/>
+          <s:enumeration value="5"/>
+          <s:enumeration value="6"/>
+          <s:enumeration value="7"/>
+          <s:enumeration value="8"/>
+          <s:enumeration value="9"/>
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ContactInfo">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Comment" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="ContactName" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="OfficePhone1" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="OfficePhone2" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="HomePhone" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="CellPhone" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Email1" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Email2" nillable="true" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCompanyStore">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CompanyStore" nillable="true" type="tns:CompanyStore"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyStore">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StoreID" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="StoreName" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Address" nillable="true" type="tns:Address"/>
+          <s:element minOccurs="1" maxOccurs="1" name="ContactInfo" nillable="true" type="tns:ContactInfo"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAssignedUsers">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userRequest" type="tns:UsersRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UsersRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:clsAuthentication"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAssignedUsersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAssignedUsersResult" type="tns:UsersResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UsersResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CompanyInfo" type="tns:CompanyInformation"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyInformation">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="CompanyAccountNumber" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="CompanyName" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="CompanyShortName" nillable="true" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Users" nillable="true" type="tns:Users"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Users">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="UserName" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Email" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Status" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="RolesAssigned" nillable="true" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetCompanyStoresSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCompanyStores"/>
+  </wsdl:message>
+  <wsdl:message name="GetCompanyStoresSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCompanyStoresResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetAssignedUsersSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAssignedUsers"/>
+  </wsdl:message>
+  <wsdl:message name="GetAssignedUsersSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAssignedUsersResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CustomerServiceSoap">
+    <wsdl:operation name="GetCompanyStores">
+      <wsdl:input message="tns:GetCompanyStoresSoapIn"/>
+      <wsdl:output message="tns:GetCompanyStoresSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssignedUsers">
+      <wsdl:input message="tns:GetAssignedUsersSoapIn"/>
+      <wsdl:output message="tns:GetAssignedUsersSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomerServiceSoap" type="tns:CustomerServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetCompanyStores">
+      <soap:operation soapAction="http://sanvitti.com/GetCompanyStores" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssignedUsers">
+      <soap:operation soapAction="http://sanvitti.com/GetAssignedUsers" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CustomerServiceSoap12" type="tns:CustomerServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetCompanyStores">
+      <soap12:operation soapAction="http://sanvitti.com/GetCompanyStores" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAssignedUsers">
+      <soap12:operation soapAction="http://sanvitti.com/GetAssignedUsers" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CustomerService">
+    <wsdl:port name="CustomerServiceSoap" binding="tns:CustomerServiceSoap">
+      <soap:address location="https://api.langlobal.com/customerservice.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="CustomerServiceSoap12" binding="tns:CustomerServiceSoap12">
+      <soap12:address location="https://api.langlobal.com/customerservice.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://api.langlobal.com/customerservice.asmx</con:endpoint></con:endpoints><con:operation id="2119578c-a27e-4c23-9842-751ab961e0ef" isOneWay="false" action="http://sanvitti.com/GetAssignedUsers" name="GetAssignedUsers" bindingOperationName="GetAssignedUsers" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="26e8ba04-895c-4961-8426-85c3a8b7c5fa" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/customerservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:GetAssignedUsers>\r
+         <!--Optional:-->\r
+         <san:userRequest>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>dishuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>dishuser</san:Password>\r
+            </san:Authentication>\r
+         </san:userRequest>\r
+      </san:GetAssignedUsers>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/CustomerServiceSoap/GetAssignedUsersRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="9e2f22c9-8cf3-4fc8-a1be-c81826d6abaf" isOneWay="false" action="http://sanvitti.com/GetCompanyStores" name="GetCompanyStores" bindingOperationName="GetCompanyStores" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6e1b3750-dc49-4f4b-b8dd-2772f5225ef8" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/customerservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:GetCompanyStores>\r
+         <!--Optional:-->\r
+         <san:companyStoreRequest>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>dishuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>dishuser</san:Password>\r
+            </san:Authentication>\r
+         </san:companyStoreRequest>\r
+      </san:GetCompanyStores>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/CustomerServiceSoap/GetCompanyStoresRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

@@ -1,0 +1,9 @@
+E:\git\lan\jbhargava\LabelApp\SV.Framework.Label\SV.Framework.Label\bin\Release\netcoreapp3.1\SV.Framework.Label.deps.json
+E:\git\lan\jbhargava\LabelApp\SV.Framework.Label\SV.Framework.Label\bin\Release\netcoreapp3.1\SV.Framework.Label.dll
+E:\git\lan\jbhargava\LabelApp\SV.Framework.Label\SV.Framework.Label\bin\Release\netcoreapp3.1\SV.Framework.Label.pdb
+E:\git\lan\jbhargava\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Release\netcoreapp3.1\SV.Framework.Label.AssemblyInfoInputs.cache
+E:\git\lan\jbhargava\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Release\netcoreapp3.1\SV.Framework.Label.AssemblyInfo.cs
+E:\git\lan\jbhargava\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Release\netcoreapp3.1\SV.Framework.Label.csproj.CoreCompileInputs.cache
+E:\git\lan\jbhargava\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Release\netcoreapp3.1\SV.Framework.Label.dll
+E:\git\lan\jbhargava\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Release\netcoreapp3.1\SV.Framework.Label.pdb
+E:\git\lan\jbhargava\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Release\netcoreapp3.1\SV.Framework.Label.csproj.AssemblyReference.cache

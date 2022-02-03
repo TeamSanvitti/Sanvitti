@@ -1,0 +1,112 @@
+﻿@model LabelApp.Models.DownloadModel
+@{
+    ViewData["Title"] = "Delete Label";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+
+
+<form >
+    <div class="container-fluid">
+        <div class="border container" style="padding:20px;">
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <label class="control-label">Tracking#</label>
+                </div>
+                <div class="col-4">
+                    <label class="control-label">@Model.TrackingNumber</label>
+
+                </div>
+
+                <div class="col-2 text-right">
+                    <label>Final Postage</label>
+                </div>
+                <div class="col-4">
+                    <label class="control-label">$ @Model.FinalPostage</label>
+
+                </div>
+            </div>
+            </div>
+        <br />
+            <div class="border container" style="padding:20px;">
+                <div class="form-group row">
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-8">
+                        <div id="divPrint" style="text-align:center">
+                            @*@if (Model.Carrier.ToLower() == "fedex")
+                        {*@
+                            <embed src="@Model.Base64String" style="height:@Model.Height;width:@Model.Width;border:solid" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">
+                            @*}
+                        else
+                        {
+                            @if (Model.Base64String != null)
+                            {
+                                <img alt="" src="@Model.Base64String" style="height:@Model.Height;width:@Model.Width;border:solid" />
+                            }
+                        }*@
+                        </div>
+                    </div>
+                    <div class="col-2">
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-3">
+
+                    </div>
+                    <div class="col-6 align-items-center">
+                        &nbsp; &nbsp; &nbsp; &nbsp;
+                        <a asp-route-Id="@Model.ShipmentID" onclick="return clickMe(@Model.ShipmentID);" class="btn  btn-primary">
+                            &nbsp;   Delete  &nbsp;
+                        </a>
+
+                        &nbsp; &nbsp;
+                        <a asp-action="Index" class="btn btn-primary">
+                            Back to search
+                        </a>
+                        &nbsp; &nbsp;
+                        <a asp-action="Create" class="btn btn-primary">
+                            &nbsp; Create Label &nbsp;
+                        </a>
+                    </div>
+                    <div class="col-3">
+
+                    </div>
+                </div>
+                </div>
+        </div>
+
+</form>
+<script>
+    function clickMe(id) {
+
+        var ok = confirm('Are you sure?');
+        if (ok) {
+            if (id != "") {
+                $.ajax({
+                    url: "/Label/DeleteLabels",
+                    data: { id: id },
+                    type: "POST",
+                    success: function (response) {
+                        //alert('Deleted');
+                        alert(response);
+                        //return false;
+                        window.location.href = "/Label/Index/";
+                    },
+                    error: function () {
+                        alert("Error");
+                    }
+                });
+            }
+        }
+        else
+            return false;
+
+    }
+</script>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    
+}

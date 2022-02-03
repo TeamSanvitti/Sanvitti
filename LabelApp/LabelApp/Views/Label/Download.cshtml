@@ -1,0 +1,109 @@
+﻿@model LabelApp.Models.DownloadModel
+@{
+    ViewData["Title"] = "Print Label";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br />
+@*<h2 class="text-info">Print Label</h2>
+<br />*@
+
+
+<form>
+    <div class="container-fluid">
+        <div class="border container" style="padding:20px;">
+            <div class="form-group row">
+                <div class="col-2 text-right">
+                    <label class="control-label">Tracking#</label>
+                </div>
+                <div class="col-4">
+                    <label class="control-label">@Model.TrackingNumber</label>
+
+                </div>
+
+                <div class="col-2 text-right">
+                    <label>Final Postage</label>
+                </div>
+                <div class="col-4">
+                    <label class="control-label">$ @Model.FinalPostage</label>
+
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="border container" style="padding:20px;">
+            
+
+                <div class="form-group row">
+                    <div class="col-2">
+
+                    </div>
+                    <div class="col-8">
+                        <div id="divPrint" style="text-align:center">
+                            @*@if (Model.Carrier.ToLower() == "fedex")
+                            {*@
+                            <embed src="@Model.Base64String" style="height:@Model.Height;width:@Model.Width;border:solid" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">
+                            @*}
+                            else
+                            {
+                                @if (Model.Base64String != null)
+                                {
+                                    <img alt="" src="@Model.Base64String" style="height:@Model.Height;width:@Model.Width;border:solid" />
+                                }
+                            }*@
+                        </div>
+                    </div>
+                    <div class="col-2">
+
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+
+                    </div>
+                    @*<div class="col-2">
+                            @if (Model.Carrier.ToLower() != "fedex")
+                        {
+                            <button type="button" onclick="PrintDiv();" class="btn btn-primary form-control">Print</button>
+                        }
+                    </div>*@
+                    <div class="col-2">
+                        <a asp-action="Index" class="btn btn-primary">
+                            @*<i class="fas fa-plus"></i> &nbsp;*@  Back to search
+                        </a>
+                    </div>
+                    <div class="col-2">
+                        <a asp-action="Create" class="btn btn-primary">
+                            @*<i class="fas fa-plus"></i> &nbsp;*@  Create Label
+                        </a>
+                    </div>
+                    <div class="col-4">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function PrintDiv() {
+            var divContents = document.getElementById("divPrint").innerHTML;
+            var printWindow = window.open('', '', 'height=320,width=500');
+            printWindow.document.write('<html><head><title></title>');
+            printWindow.document.write('</head><body leftmargin="0" rightmargin="0">');
+            printWindow.document.write(divContents);
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        }
+        function Print() {
+            //alert('print');
+            $("#divPrint").printThis();
+        }
+
+    </script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="~/js/printThis.js"></script>
+}

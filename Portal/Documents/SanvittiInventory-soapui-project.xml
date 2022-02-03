@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="31f88f2e-85c9-4783-8e31-730a5da31823" activeEnvironment="Default" name="SanvittiInventory" soapui-version="5.6.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="db621d10-7480-4560-9bb6-491e22a4485a" wsaVersion="NONE" name="InventoryServiceSoap12" type="wsdl" bindingName="{http://sanvitti.com/}InventoryServiceSoap12" soapVersion="1_2" anonymous="optional" definition="https://api.langlobal.com/inventoryservice.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>https://api.langlobal.com/inventoryservice.asmx</con:endpoint></con:endpoints><con:operation id="da9469bf-fcdd-4ec6-87ac-f94c33fd1e24" isOneWay="false" action="http://sanvitti.com/GetCurrentStock" name="GetCurrentStock" bindingOperationName="GetCurrentStock" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="ba3898f5-8577-47c0-b80e-f3e50eed50ef" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/inventoryservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:GetCurrentStock>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:UserCredentials>\r
+            <!--Optional:-->\r
+            <san:SKU>?</san:SKU>\r
+         </san:serviceRequest>\r
+      </san:GetCurrentStock>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/InventoryServiceSoap/GetCurrentStockRequest"/></con:call></con:operation><con:operation id="09900aca-dc99-453f-8676-d3dd3f9c4205" isOneWay="false" action="http://sanvitti.com/GetEsnRepositoryList" name="GetEsnRepositoryList" bindingOperationName="GetEsnRepositoryList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="b72ee36d-5204-45f1-99b8-bc43ce0a9d46" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/inventoryservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:GetEsnRepositoryList>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:UserCredentials>\r
+            <san:FromDate>?</san:FromDate>\r
+            <san:ToDate>?</san:ToDate>\r
+            <san:UnusedOnly>?</san:UnusedOnly>\r
+            <san:ShowAllUnusedEsn>?</san:ShowAllUnusedEsn>\r
+         </san:serviceRequest>\r
+      </san:GetEsnRepositoryList>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/InventoryServiceSoap/GetEsnRepositoryListRequest"/></con:call></con:operation><con:operation id="0136bbef-a0fc-4d57-8de4-5df3121e17f3" isOneWay="false" action="http://sanvitti.com/GetInventorySKU" name="GetInventorySKU" bindingOperationName="GetInventorySKU" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="78b926a8-7fda-4b79-a089-87eda07a3c34" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/inventoryservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:GetInventorySKU>\r
+         <!--Optional:-->\r
+         <san:inventoryRequest>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:Authentication>\r
+         </san:inventoryRequest>\r
+      </san:GetInventorySKU>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/InventoryServiceSoap/GetInventorySKURequest"/></con:call></con:operation><con:operation id="fc962301-0e1b-49a3-94ef-42bfb41bd32a" isOneWay="false" action="http://sanvitti.com/GetRunningStock" name="GetRunningStock" bindingOperationName="GetRunningStock" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="c833f30c-bc92-4ba9-8cd3-46e4baf17b2d" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/inventoryservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:GetRunningStock>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:UserCredentials>\r
+            <san:IncludeDisabledSKU>?</san:IncludeDisabledSKU>\r
+            <!--Optional:-->\r
+            <san:SKU>?</san:SKU>\r
+            <san:DateFrom>?</san:DateFrom>\r
+            <san:DateTo>?</san:DateTo>\r
+         </san:serviceRequest>\r
+      </san:GetRunningStock>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/InventoryServiceSoap/GetRunningStockRequest"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="8c5b6393-07d8-47a9-8863-a3e8f1bc9176" wsaVersion="NONE" name="InventoryServiceSoap" type="wsdl" bindingName="{http://sanvitti.com/}InventoryServiceSoap" soapVersion="1_1" anonymous="optional" definition="https://api.langlobal.com/inventoryservice.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://api.langlobal.com/inventoryservice.asmx?WSDL"><con:part><con:url>https://api.langlobal.com/inventoryservice.asmx?WSDL</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://sanvitti.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sanvitti.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://sanvitti.com/">
+      <s:element name="GetRunningStock">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceRequest" type="tns:RunningStockRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RunningStockRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserCredentials" type="tns:UserCredentials"/>
+          <s:element minOccurs="1" maxOccurs="1" name="IncludeDisabledSKU" type="s:boolean"/>
+          <s:element minOccurs="0" maxOccurs="1" name="SKU" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="DateFrom" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="DateTo" type="s:dateTime"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserCredentials">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetRunningStockResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRunningStockResult" type="tns:RunningStockResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RunningStockResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="RunningStock" type="tns:ArrayOfStockCount"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfStockCount">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="StockCount" nillable="true" type="tns:StockCount"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="StockCount">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="SKU" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemName" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="StockDate" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="RefreshDate" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="OpeningBalance" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="StockReceived" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="StockAssigned" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="StockReassignment" type="s:int"/>
+          <s:element minOccurs="1" maxOccurs="1" name="ClosingBalance" type="s:int"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetEsnRepositoryList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceRequest" type="tns:EsnRepositoryRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EsnRepositoryRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserCredentials" type="tns:UserCredentials"/>
+          <s:element minOccurs="1" maxOccurs="1" name="FromDate" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="ToDate" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="UnusedOnly" type="s:boolean"/>
+          <s:element minOccurs="1" maxOccurs="1" name="ShowAllUnusedEsn" type="s:boolean"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetEsnRepositoryListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEsnRepositoryListResult" type="tns:EsnRepositoryResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EsnRepositoryResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="EsnList" type="tns:ArrayOfEsnRepository"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEsnRepository">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="EsnRepository" nillable="true" type="tns:EsnRepository"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="EsnRepository">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UnusedESN" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="InPorocessESN" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ShippedESN" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="RmaESN" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetInventorySKU">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="inventoryRequest" type="tns:InventoryRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InventoryRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:clsAuthentication"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="clsAuthentication">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetInventorySKUResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInventorySKUResult" type="tns:InventoryResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InventoryResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="InventoryList" type="tns:ArrayOfInventorySKU"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInventorySKU">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="InventorySKU" nillable="true" type="tns:InventorySKU"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="InventorySKU">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SKU" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ItemName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ModelNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="UPC" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="OEM" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryName" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCurrentStock">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceRequest" type="tns:CurrentStockRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CurrentStockRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserCredentials" type="tns:UserCredentials"/>
+          <s:element minOccurs="0" maxOccurs="1" name="SKU" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetCurrentStockResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCurrentStockResult" type="tns:CurrentStockResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CurrentStockResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CurrentStocks" type="tns:ArrayOfCurrentStock"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfCurrentStock">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CurrentStock" nillable="true" type="tns:CurrentStock"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CurrentStock">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SKU" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ProductName" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="StockInHand" type="s:int"/>
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetRunningStockSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRunningStock"/>
+  </wsdl:message>
+  <wsdl:message name="GetRunningStockSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRunningStockResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetEsnRepositoryListSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEsnRepositoryList"/>
+  </wsdl:message>
+  <wsdl:message name="GetEsnRepositoryListSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEsnRepositoryListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetInventorySKUSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInventorySKU"/>
+  </wsdl:message>
+  <wsdl:message name="GetInventorySKUSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInventorySKUResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetCurrentStockSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCurrentStock"/>
+  </wsdl:message>
+  <wsdl:message name="GetCurrentStockSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCurrentStockResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="InventoryServiceSoap">
+    <wsdl:operation name="GetRunningStock">
+      <wsdl:input message="tns:GetRunningStockSoapIn"/>
+      <wsdl:output message="tns:GetRunningStockSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetEsnRepositoryList">
+      <wsdl:input message="tns:GetEsnRepositoryListSoapIn"/>
+      <wsdl:output message="tns:GetEsnRepositoryListSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetInventorySKU">
+      <wsdl:input message="tns:GetInventorySKUSoapIn"/>
+      <wsdl:output message="tns:GetInventorySKUSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentStock">
+      <wsdl:input message="tns:GetCurrentStockSoapIn"/>
+      <wsdl:output message="tns:GetCurrentStockSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="InventoryServiceSoap" type="tns:InventoryServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetRunningStock">
+      <soap:operation soapAction="http://sanvitti.com/GetRunningStock" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEsnRepositoryList">
+      <soap:operation soapAction="http://sanvitti.com/GetEsnRepositoryList" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInventorySKU">
+      <soap:operation soapAction="http://sanvitti.com/GetInventorySKU" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentStock">
+      <soap:operation soapAction="http://sanvitti.com/GetCurrentStock" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="InventoryServiceSoap12" type="tns:InventoryServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetRunningStock">
+      <soap12:operation soapAction="http://sanvitti.com/GetRunningStock" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetEsnRepositoryList">
+      <soap12:operation soapAction="http://sanvitti.com/GetEsnRepositoryList" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInventorySKU">
+      <soap12:operation soapAction="http://sanvitti.com/GetInventorySKU" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCurrentStock">
+      <soap12:operation soapAction="http://sanvitti.com/GetCurrentStock" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="InventoryService">
+    <wsdl:port name="InventoryServiceSoap" binding="tns:InventoryServiceSoap">
+      <soap:address location="https://api.langlobal.com/inventoryservice.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="InventoryServiceSoap12" binding="tns:InventoryServiceSoap12">
+      <soap12:address location="https://api.langlobal.com/inventoryservice.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://api.langlobal.com/inventoryservice.asmx</con:endpoint></con:endpoints><con:operation id="67442635-391c-43aa-817d-ff4bb90afb7b" isOneWay="false" action="http://sanvitti.com/GetCurrentStock" name="GetCurrentStock" bindingOperationName="GetCurrentStock" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="542fa9e6-5ed3-4dc1-9794-a1d5cd54a5c6" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/inventoryservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetCurrentStock>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>popapi</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>p0pupap1</san:Password>\r
+            </san:UserCredentials>\r
+            <!--Optional:-->\r
+            <san:SKU>RPM-USIM-DOTRI01</san:SKU>\r
+         </san:serviceRequest>\r
+      </san:GetCurrentStock>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetCurrentStock"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="02e6fb3d-8044-4231-9081-6bcb06c6c85b" isOneWay="false" action="http://sanvitti.com/GetEsnRepositoryList" name="GetEsnRepositoryList" bindingOperationName="GetEsnRepositoryList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="a31f02aa-4b5a-4342-9cc6-e80455927dee" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/inventoryservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetEsnRepositoryList>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>dishuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>dishuser</san:Password>\r
+            </san:UserCredentials>\r
+            <san:FromDate>2021-11-11</san:FromDate>\r
+            <san:ToDate>2022-01-01</san:ToDate>\r
+            <san:UnusedOnly>false</san:UnusedOnly>\r
+            <san:ShowAllUnusedEsn>false</san:ShowAllUnusedEsn>\r
+         </san:serviceRequest>\r
+      </san:GetEsnRepositoryList>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetEsnRepositoryList"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="49c40e12-7d4c-471b-80d7-16f13cea6daa" isOneWay="false" action="http://sanvitti.com/GetInventorySKU" name="GetInventorySKU" bindingOperationName="GetInventorySKU" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5967fe58-1923-46de-a825-888d631f04ac" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/inventoryservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetInventorySKU>\r
+         <!--Optional:-->\r
+         <san:inventoryRequest>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>dishuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>dishuser</san:Password>\r
+            </san:Authentication>\r
+         </san:inventoryRequest>\r
+      </san:GetInventorySKU>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetInventorySKU"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="bf2a1cda-0961-45d3-a8e4-58797600e4e0" isOneWay="false" action="http://sanvitti.com/GetRunningStock" name="GetRunningStock" bindingOperationName="GetRunningStock" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="0844980e-9adb-4b06-a7d0-7d8b27103043" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/inventoryservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetRunningStock>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>lgiuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>lgiuser</san:Password>\r
+            </san:UserCredentials>\r
+            <san:IncludeDisabledSKU>false</san:IncludeDisabledSKU>\r
+            <!--Optional:-->\r
+            <san:DateFrom>2022-01-01</san:DateFrom>\r
+            <san:DateTo>2022-01-01</san:DateTo>\r
+         </san:serviceRequest>\r
+      </san:GetRunningStock>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetRunningStock"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

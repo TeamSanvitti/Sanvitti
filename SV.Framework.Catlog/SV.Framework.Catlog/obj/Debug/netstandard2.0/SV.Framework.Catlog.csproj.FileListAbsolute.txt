@@ -1,0 +1,15 @@
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\bin\Debug\netstandard2.0\SV.Framework.Catlog.deps.json
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\bin\Debug\netstandard2.0\SV.Framework.Catlog.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\bin\Debug\netstandard2.0\SV.Framework.Catlog.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\bin\Debug\netstandard2.0\SV.Framework.DAL.Catalog.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\bin\Debug\netstandard2.0\SV.Framework.Models.Fulfillment.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\bin\Debug\netstandard2.0\SV.Framework.DAL.Catalog.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\bin\Debug\netstandard2.0\SV.Framework.Models.Fulfillment.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\obj\Debug\netstandard2.0\SV.Framework.Catlog.csproj.AssemblyReference.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\obj\Debug\netstandard2.0\SV.Framework.Catlog.GeneratedMSBuildEditorConfig.editorconfig
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\obj\Debug\netstandard2.0\SV.Framework.Catlog.AssemblyInfoInputs.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\obj\Debug\netstandard2.0\SV.Framework.Catlog.AssemblyInfo.cs
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\obj\Debug\netstandard2.0\SV.Framework.Catlog.csproj.CoreCompileInputs.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\obj\Debug\netstandard2.0\SV.Framework.Catlog.csproj.CopyComplete
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\obj\Debug\netstandard2.0\SV.Framework.Catlog.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Catlog\SV.Framework.Catlog\obj\Debug\netstandard2.0\SV.Framework.Catlog.pdb

@@ -1,0 +1,23 @@
+RMA Form:
+1. Change icon to a button "RMA History".
+2. Add Line before Comments column as we have before Customer Name.
+3. Show the header with column of RMA Details. You can place a blank line so that user can see the columns. --no
+4. Put a alert on Submit button if user click without addting any lineitem.
+
+
+RMA Line Item Add/Edit:
+1. Remove UPC, AVSO, SKU or Fullfillment# from ADD because we shall not be showing.
+2. Add read astric to the required column.  -- madetory fields for edit rma? and new SKu#? 
+3. Lets add Reason for backward compatibility.  - REASON WHEN ADD?  db?
+4. Did u find new calender/date control. 
+5. Adjust the column width according to the column size viz. Call time column should not be longer than Notes.
+6. Remove Edit button and put the icon and make the column width smaller.
+7. SKU# should not be empty if PO# is there. NO
+
+STATUS DDL DB? - yes
+hanu@335
+REASON, Warranty, warranty date in add popup
+
+calltime, REASON, Warranty, warranty date& despostion  in edit popup
+there is nothing mandetory in edit popupha
+

@@ -1,0 +1,9 @@
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Storefront\SV.Framework.Storefront\bin\Debug\netstandard2.1\SV.Framework.Storefront.deps.json
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Storefront\SV.Framework.Storefront\bin\Debug\netstandard2.1\SV.Framework.Storefront.dll
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Storefront\SV.Framework.Storefront\bin\Debug\netstandard2.1\SV.Framework.Storefront.pdb
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Storefront\SV.Framework.Storefront\obj\Debug\netstandard2.1\SV.Framework.Storefront.csproj.AssemblyReference.cache
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Storefront\SV.Framework.Storefront\obj\Debug\netstandard2.1\SV.Framework.Storefront.AssemblyInfoInputs.cache
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Storefront\SV.Framework.Storefront\obj\Debug\netstandard2.1\SV.Framework.Storefront.AssemblyInfo.cs
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Storefront\SV.Framework.Storefront\obj\Debug\netstandard2.1\SV.Framework.Storefront.csproj.CoreCompileInputs.cache
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Storefront\SV.Framework.Storefront\obj\Debug\netstandard2.1\SV.Framework.Storefront.dll
+E:\git\lan\jbhargava\SanvittiProjects\SV.Framework.Storefront\SV.Framework.Storefront\obj\Debug\netstandard2.1\SV.Framework.Storefront.pdb

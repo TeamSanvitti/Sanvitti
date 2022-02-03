@@ -1,0 +1,727 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="84589a39-1018-44f3-bf59-a92e25450bea" activeEnvironment="Default" name="SanvittiRMA" soapui-version="5.6.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="a699b037-d662-4b22-9575-531053cb8077" wsaVersion="NONE" name="RMAServiceSoap12" type="wsdl" bindingName="{http://sanvitti.com/}RMAServiceSoap12" soapVersion="1_2" anonymous="optional" definition="https://api.langlobal.com/rmaservice.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>https://api.langlobal.com/rmaservice.asmx</con:endpoint></con:endpoints><con:operation id="8482fe75-c13e-4f4d-a21c-3da40d5084a1" isOneWay="false" action="http://sanvitti.com/CancelRMA" name="CancelRMA" bindingOperationName="CancelRMA" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bf917956-d77a-4967-8509-ece92a16fe57" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/rmaservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:CancelRMA>\r
+         <!--Optional:-->\r
+         <san:rmaRequest>\r
+            <!--Optional:-->\r
+            <san:RMANumber>?</san:RMANumber>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:Authentication>\r
+         </san:rmaRequest>\r
+      </san:CancelRMA>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/RMAServiceSoap/CancelRMARequest"/></con:call></con:operation><con:operation id="e1287ff2-8d67-4477-bf11-72f28b975129" isOneWay="false" action="http://sanvitti.com/GetRMA" name="GetRMA" bindingOperationName="GetRMA" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="f401c8fb-2600-4a9a-8711-79355467df95" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/rmaservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:GetRMA>\r
+         <!--Optional:-->\r
+         <san:rmaRequest>\r
+            <!--Optional:-->\r
+            <san:RMANumber>?</san:RMANumber>\r
+            <san:RMAStatus>?</san:RMAStatus>\r
+            <!--Optional:-->\r
+            <san:ESN>?</san:ESN>\r
+            <!--Optional:-->\r
+            <san:ReturnReason>?</san:ReturnReason>\r
+            <san:RMA_To_Date>?</san:RMA_To_Date>\r
+            <san:RMA_From_Date>?</san:RMA_From_Date>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:Authentication>\r
+         </san:rmaRequest>\r
+      </san:GetRMA>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/RMAServiceSoap/GetRMARequest"/></con:call></con:operation><con:operation id="3a7f258b-3810-4e55-a4f9-d6c9be542e78" isOneWay="false" action="http://sanvitti.com/GetRmaEsnDetail" name="GetRmaEsnDetail" bindingOperationName="GetRmaEsnDetail" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5005f320-3296-46b5-afe9-df0936d60db9" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/rmaservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:GetRmaEsnDetail>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:UserCredentials>\r
+            <san:FromDate>?</san:FromDate>\r
+            <san:ToDate>?</san:ToDate>\r
+            <san:EsnStatus>?</san:EsnStatus>\r
+            <san:RmaStatus>?</san:RmaStatus>\r
+         </san:serviceRequest>\r
+      </san:GetRmaEsnDetail>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/RMAServiceSoap/GetRmaEsnDetailRequest"/></con:call></con:operation><con:operation id="392ab3cd-1915-4971-a46d-950f05914591" isOneWay="false" action="http://sanvitti.com/GetRmaEsnListing" name="GetRmaEsnListing" bindingOperationName="GetRmaEsnListing" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2df79fb5-8a20-4f65-a103-3bc0deb9080a" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/rmaservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:GetRmaEsnListing>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:UserCredentials>\r
+            <san:FromDate>?</san:FromDate>\r
+            <san:ToDate>?</san:ToDate>\r
+            <san:EsnStatus>?</san:EsnStatus>\r
+            <san:RmaStatus>?</san:RmaStatus>\r
+         </san:serviceRequest>\r
+      </san:GetRmaEsnListing>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/RMAServiceSoap/GetRmaEsnListingRequest"/></con:call></con:operation><con:operation id="f1fdf5a9-2a9f-464f-bc14-8efd8dc47265" isOneWay="false" action="http://sanvitti.com/SetRMA" name="SetRMA" bindingOperationName="SetRMA" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="2ff81b99-2fa8-482d-b4a3-814b2b8ea103" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/rmaservice.asmx</con:endpoint><con:request><![CDATA[<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" xmlns:san="http://sanvitti.com/">\r
+   <soap:Header/>\r
+   <soap:Body>\r
+      <san:SetRMA>\r
+         <!--Optional:-->\r
+         <san:RMARequest>\r
+            <!--Optional:-->\r
+            <san:RMA>\r
+               <!--Optional:-->\r
+               <san:StoreID>?</san:StoreID>\r
+               <!--Zero or more repetitions:-->\r
+               <san:RMADetail>\r
+                  <san:Disposition>?</san:Disposition>\r
+                  <san:Warranty>?</san:Warranty>\r
+                  <san:ESN>?</san:ESN>\r
+                  <san:Reason>?</san:Reason>\r
+                  <san:Notes>?</san:Notes>\r
+                  <san:LinkedPurchaseOrder>?</san:LinkedPurchaseOrder>\r
+                  <san:LinkedPOLineNumber>?</san:LinkedPOLineNumber>\r
+               </san:RMADetail>\r
+               <san:RmaNumber>?</san:RmaNumber>\r
+               <san:CustomerRmaNumber>?</san:CustomerRmaNumber>\r
+               <san:RmaDate>?</san:RmaDate>\r
+               <san:RmaContactName>?</san:RmaContactName>\r
+               <san:Email>?</san:Email>\r
+               <san:Phone>?</san:Phone>\r
+               <san:Address>?</san:Address>\r
+               <san:City>?</san:City>\r
+               <san:State>?</san:State>\r
+               <san:Zip>?</san:Zip>\r
+               <san:Comment>?</san:Comment>\r
+            </san:RMA>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:Authentication>\r
+         </san:RMARequest>\r
+      </san:SetRMA>\r
+   </soap:Body>\r
+</soap:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/RMAServiceSoap/SetRMARequest"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" id="853e07a8-6395-49d2-8e31-3e8939440bbc" wsaVersion="NONE" name="RMAServiceSoap" type="wsdl" bindingName="{http://sanvitti.com/}RMAServiceSoap" soapVersion="1_1" anonymous="optional" definition="https://api.langlobal.com/rmaservice.asmx?WSDL" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="https://api.langlobal.com/rmaservice.asmx?WSDL"><con:part><con:url>https://api.langlobal.com/rmaservice.asmx?WSDL</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://sanvitti.com/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://sanvitti.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://sanvitti.com/">
+      <s:element name="GetRmaEsnListing">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceRequest" type="tns:RmaEsnListingRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RmaEsnListingRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserCredentials" type="tns:UserCredentials"/>
+          <s:element minOccurs="1" maxOccurs="1" name="FromDate" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="ToDate" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="EsnStatus" type="tns:RMAStatus"/>
+          <s:element minOccurs="1" maxOccurs="1" name="RmaStatus" type="tns:RMAStatus"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="UserCredentials">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="RMAStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="None"/>
+          <s:enumeration value="Pending"/>
+          <s:enumeration value="Received"/>
+          <s:enumeration value="PendingForRepair"/>
+          <s:enumeration value="PendingForCredit"/>
+          <s:enumeration value="PendingForReplacement"/>
+          <s:enumeration value="Approved"/>
+          <s:enumeration value="Returned"/>
+          <s:enumeration value="Credited"/>
+          <s:enumeration value="Denied"/>
+          <s:enumeration value="Closed"/>
+          <s:enumeration value="OutWithOEMForRepair"/>
+          <s:enumeration value="BackToStockNDF"/>
+          <s:enumeration value="BackToStockCredited"/>
+          <s:enumeration value="BackToStockReplacedByOEM"/>
+          <s:enumeration value="RepairedByOEM"/>
+          <s:enumeration value="ReplacedBYOEM"/>
+          <s:enumeration value="ReplacedByAV"/>
+          <s:enumeration value="RepairedByAV"/>
+          <s:enumeration value="NDFNoDefectFound"/>
+          <s:enumeration value="PreOwnedAstock"/>
+          <s:enumeration value="PreOwnedBtock"/>
+          <s:enumeration value="PreOwnedCtock"/>
+          <s:enumeration value="Rejected"/>
+          <s:enumeration value="RTSReturnToStock"/>
+          <s:enumeration value="Incomplete"/>
+          <s:enumeration value="Damaged"/>
+          <s:enumeration value="Preowned"/>
+          <s:enumeration value="ReturnToOEM"/>
+          <s:enumeration value="ReturnedToStock"/>
+          <s:enumeration value="Cancel"/>
+          <s:enumeration value="ExternalESN"/>
+          <s:enumeration value="PendingShipToOEM"/>
+          <s:enumeration value="SentToOEM"/>
+          <s:enumeration value="PendingShipToSupplier"/>
+          <s:enumeration value="SentToSupplier"/>
+          <s:enumeration value="ReturnedFromOEM"/>
+          <s:enumeration value="ShippingError"/>
+          <s:enumeration value="ReplacedByOEMNew"/>
+          <s:enumeration value="ReplacedByOEMPreowned"/>
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetRmaEsnListingResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRmaEsnListingResult" type="tns:RmaEsnListingResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RmaEsnListingResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="RmaEsnListing" type="tns:ArrayOfRmaEsnStatuses"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRmaEsnStatuses">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RmaEsnStatuses" nillable="true" type="tns:RmaEsnStatuses"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RmaEsnStatuses">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="SKU" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="RmaNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ESN" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="RmaStatus" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="EsnStatus" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="RmaDate" type="s:dateTime"/>
+          <s:element minOccurs="0" maxOccurs="1" name="AVPO" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetRmaEsnDetail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceRequest" type="tns:RmaEsnListingRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetRmaEsnDetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRmaEsnDetailResult" type="tns:RmaEsnDetailResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RmaEsnDetailResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="RmaEsnDetail" type="tns:ArrayOfRMAESNDetail"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRMAESNDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RMAESNDetail" nillable="true" type="tns:RMAESNDetail"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RMAESNDetail">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="CategoryName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="SKU" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ESN" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="BatchNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ICCID" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="RmaNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="RmaDate" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="RmaStatus" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="TriageDate" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="TriageStatus" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Reason" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="TrackingNumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="CustomerName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Zip" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetRMA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rmaRequest" type="tns:RMASearchCriteria"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RMASearchCriteria">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RMANumber" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="RMAStatus" type="tns:RMAStatus"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ESN" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ReturnReason" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="RMA_To_Date" type="s:dateTime"/>
+          <s:element minOccurs="1" maxOccurs="1" name="RMA_From_Date" type="s:dateTime"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:clsAuthentication"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="clsAuthentication">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetRMAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetRMAResult" type="tns:RMAResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RMAResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RmaReportList" type="tns:ArrayOfRMAReport"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfRMAReport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RMAReport" nillable="true" type="tns:RMAReport"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RMAReport">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RMANumber" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="RMADate" type="s:dateTime"/>
+          <s:element minOccurs="0" maxOccurs="1" name="SKU" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ESN" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="DefectReason" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Status" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Notes" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="LanglobalNotes" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SetRMA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="RMARequest" type="tns:RMAAPIRequest"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RMAAPIRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RMA" type="tns:RMANew"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:clsAuthentication"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RMANew">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="StoreID" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="RMADetail" type="tns:RMADetails"/>
+          <s:element minOccurs="1" maxOccurs="1" name="RmaNumber" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="CustomerRmaNumber" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="RmaDate" type="s:date"/>
+          <s:element minOccurs="1" maxOccurs="1" name="RmaContactName" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Email" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Phone" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Address" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="City" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="State" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Zip" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Comment" nillable="true" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="RMADetails">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="Disposition" type="tns:Disposition"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Warranty" type="tns:Warranty"/>
+          <s:element minOccurs="1" maxOccurs="1" name="ESN" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Reason" type="tns:RMAReason"/>
+          <s:element minOccurs="1" maxOccurs="1" name="Notes" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="LinkedPurchaseOrder" nillable="true" type="s:string"/>
+          <s:element minOccurs="1" maxOccurs="1" name="LinkedPOLineNumber" type="s:int"/>
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="Disposition">
+        <s:restriction base="s:string">
+          <s:enumeration value="None"/>
+          <s:enumeration value="Credit"/>
+          <s:enumeration value="Replaced"/>
+          <s:enumeration value="Repair"/>
+          <s:enumeration value="Discarded"/>
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="Warranty">
+        <s:restriction base="s:string">
+          <s:enumeration value="None"/>
+          <s:enumeration value="Warranty"/>
+          <s:enumeration value="OutOfWarranty"/>
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="RMAReason">
+        <s:restriction base="s:string">
+          <s:enumeration value="None"/>
+          <s:enumeration value="DOA"/>
+          <s:enumeration value="AudioIssues"/>
+          <s:enumeration value="ScreenIssues"/>
+          <s:enumeration value="PowerIssues"/>
+          <s:enumeration value="Others"/>
+          <s:enumeration value="MissingParts"/>
+          <s:enumeration value="ReturnToStock"/>
+          <s:enumeration value="BuyerRemorse"/>
+          <s:enumeration value="PhysicalAbuse"/>
+          <s:enumeration value="LiquidDamage"/>
+          <s:enumeration value="DropCalls"/>
+          <s:enumeration value="Software"/>
+          <s:enumeration value="ActivationIssues"/>
+          <s:enumeration value="CoverageIssues"/>
+          <s:enumeration value="LoanerProgram"/>
+          <s:enumeration value="ShippingError"/>
+          <s:enumeration value="HardwareIssues"/>
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="SetRMAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetRMAResult" type="tns:RMAAPIResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RMAAPIResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RMANumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="RMADate" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CancelRMA">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="rmaRequest" type="tns:RMARequests"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="RMARequests">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="RMANumber" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Authentication" type="tns:clsAuthentication"/>
+        </s:sequence>
+      </s:complexType>
+      <s:element name="CancelRMAResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CancelRMAResult" type="tns:CancelRMAResponse"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="CancelRMAResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ErrorCode" type="s:string"/>
+          <s:element minOccurs="0" maxOccurs="1" name="Comment" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetRmaEsnListingSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRmaEsnListing"/>
+  </wsdl:message>
+  <wsdl:message name="GetRmaEsnListingSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRmaEsnListingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetRmaEsnDetailSoapIn">
+    <wsdl:part name="parameters" element="tns:GetRmaEsnDetail"/>
+  </wsdl:message>
+  <wsdl:message name="GetRmaEsnDetailSoapOut">
+    <wsdl:part name="parameters" element="tns:GetRmaEsnDetailResponse"/>
+  </wsdl:message>
+  <wsdl:message name="GetRMASoapIn">
+    <wsdl:part name="parameters" element="tns:GetRMA"/>
+  </wsdl:message>
+  <wsdl:message name="GetRMASoapOut">
+    <wsdl:part name="parameters" element="tns:GetRMAResponse"/>
+  </wsdl:message>
+  <wsdl:message name="SetRMASoapIn">
+    <wsdl:part name="parameters" element="tns:SetRMA"/>
+  </wsdl:message>
+  <wsdl:message name="SetRMASoapOut">
+    <wsdl:part name="parameters" element="tns:SetRMAResponse"/>
+  </wsdl:message>
+  <wsdl:message name="CancelRMASoapIn">
+    <wsdl:part name="parameters" element="tns:CancelRMA"/>
+  </wsdl:message>
+  <wsdl:message name="CancelRMASoapOut">
+    <wsdl:part name="parameters" element="tns:CancelRMAResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="RMAServiceSoap">
+    <wsdl:operation name="GetRmaEsnListing">
+      <wsdl:input message="tns:GetRmaEsnListingSoapIn"/>
+      <wsdl:output message="tns:GetRmaEsnListingSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetRmaEsnDetail">
+      <wsdl:input message="tns:GetRmaEsnDetailSoapIn"/>
+      <wsdl:output message="tns:GetRmaEsnDetailSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="GetRMA">
+      <wsdl:input message="tns:GetRMASoapIn"/>
+      <wsdl:output message="tns:GetRMASoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="SetRMA">
+      <wsdl:input message="tns:SetRMASoapIn"/>
+      <wsdl:output message="tns:SetRMASoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="CancelRMA">
+      <wsdl:input message="tns:CancelRMASoapIn"/>
+      <wsdl:output message="tns:CancelRMASoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RMAServiceSoap" type="tns:RMAServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetRmaEsnListing">
+      <soap:operation soapAction="http://sanvitti.com/GetRmaEsnListing" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRmaEsnDetail">
+      <soap:operation soapAction="http://sanvitti.com/GetRmaEsnDetail" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRMA">
+      <soap:operation soapAction="http://sanvitti.com/GetRMA" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetRMA">
+      <soap:operation soapAction="http://sanvitti.com/SetRMA" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelRMA">
+      <soap:operation soapAction="http://sanvitti.com/CancelRMA" style="document"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RMAServiceSoap12" type="tns:RMAServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="GetRmaEsnListing">
+      <soap12:operation soapAction="http://sanvitti.com/GetRmaEsnListing" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRmaEsnDetail">
+      <soap12:operation soapAction="http://sanvitti.com/GetRmaEsnDetail" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRMA">
+      <soap12:operation soapAction="http://sanvitti.com/GetRMA" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetRMA">
+      <soap12:operation soapAction="http://sanvitti.com/SetRMA" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CancelRMA">
+      <soap12:operation soapAction="http://sanvitti.com/CancelRMA" style="document"/>
+      <wsdl:input>
+        <soap12:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RMAService">
+    <wsdl:port name="RMAServiceSoap" binding="tns:RMAServiceSoap">
+      <soap:address location="https://api.langlobal.com/rmaservice.asmx"/>
+    </wsdl:port>
+    <wsdl:port name="RMAServiceSoap12" binding="tns:RMAServiceSoap12">
+      <soap12:address location="https://api.langlobal.com/rmaservice.asmx"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>https://api.langlobal.com/rmaservice.asmx</con:endpoint></con:endpoints><con:operation id="a26ba4f5-5975-4227-a04f-13a45d99ba4d" isOneWay="false" action="http://sanvitti.com/CancelRMA" name="CancelRMA" bindingOperationName="CancelRMA" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="de3c185b-ebe9-43e6-9377-72369d6f1aa9" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/rmaservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:CancelRMA>\r
+         <!--Optional:-->\r
+         <san:rmaRequest>\r
+            <!--Optional:-->\r
+            <san:RMANumber>?</san:RMANumber>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:Authentication>\r
+         </san:rmaRequest>\r
+      </san:CancelRMA>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/CancelRMA"/></con:call></con:operation><con:operation id="56151b99-ccc6-4f02-bdb3-ead10b6e779c" isOneWay="false" action="http://sanvitti.com/GetRMA" name="GetRMA" bindingOperationName="GetRMA" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="104d5c29-56d3-4c7e-b2bb-3c331c2870cc" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/rmaservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetRMA>\r
+         <!--Optional:-->\r
+         <san:rmaRequest>\r
+            <!--Optional:-->\r
+            <san:RMANumber>AVRA2021091011240</san:RMANumber>\r
+            <!--Optional:-->\r
+            <san:ESN>354574100013594</san:ESN>\r
+            <!--Optional:-->\r
+            <san:RMA_To_Date>2021-01-01</san:RMA_To_Date>\r
+            <san:RMA_From_Date>2022-01-01</san:RMA_From_Date>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>dishuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>dishuser</san:Password>\r
+            </san:Authentication>\r
+         </san:rmaRequest>\r
+      </san:GetRMA>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetRMA"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="9a03cfe1-a9be-4397-a89b-3764d0157b98" isOneWay="false" action="http://sanvitti.com/GetRmaEsnDetail" name="GetRmaEsnDetail" bindingOperationName="GetRmaEsnDetail" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bb21712d-e8a2-4747-8a31-d2cb2263ae48" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/rmaservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetRmaEsnDetail>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>dishuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>dishuser</san:Password>\r
+            </san:UserCredentials>\r
+            <san:FromDate>2021-01-01</san:FromDate>\r
+            <san:ToDate>2022-01-01</san:ToDate>\r
+            
+         </san:serviceRequest>\r
+      </san:GetRmaEsnDetail>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetRmaEsnDetail"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="8cd65ead-baf0-440d-8331-971cae0c9c2c" isOneWay="false" action="http://sanvitti.com/GetRmaEsnListing" name="GetRmaEsnListing" bindingOperationName="GetRmaEsnListing" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="6599cb84-84d1-4646-8e14-9b5ffe2f847a" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/rmaservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:GetRmaEsnListing>\r
+         <!--Optional:-->\r
+         <san:serviceRequest>\r
+            <!--Optional:-->\r
+            <san:UserCredentials>\r
+               <!--Optional:-->\r
+               <san:UserName>dishuser</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>dishuser</san:Password>\r
+            </san:UserCredentials>\r
+             <san:FromDate>2021-01-01</san:FromDate>
+            <san:ToDate>2022-01-01</san:ToDate>
+           
+         </san:serviceRequest>\r
+      </san:GetRmaEsnListing>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/GetRmaEsnListing"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="4f0cf87d-d0c1-4a1b-8f79-36b2eea361c2" isOneWay="false" action="http://sanvitti.com/SetRMA" name="SetRMA" bindingOperationName="SetRMA" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="254f5df0-7aec-4c95-bd8b-bb3609e09f18" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>https://api.langlobal.com/rmaservice.asmx</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:san="http://sanvitti.com/">\r
+   <soapenv:Header/>\r
+   <soapenv:Body>\r
+      <san:SetRMA>\r
+         <!--Optional:-->\r
+         <san:RMARequest>\r
+            <!--Optional:-->\r
+            <san:RMA>\r
+               <!--Optional:-->\r
+               <san:StoreID>?</san:StoreID>\r
+               <!--Zero or more repetitions:-->\r
+               <san:RMADetail>\r
+                  <san:Disposition>?</san:Disposition>\r
+                  <san:Warranty>?</san:Warranty>\r
+                  <san:ESN>?</san:ESN>\r
+                  <san:Reason>?</san:Reason>\r
+                  <san:Notes>?</san:Notes>\r
+                  <san:LinkedPurchaseOrder>?</san:LinkedPurchaseOrder>\r
+                  <san:LinkedPOLineNumber>?</san:LinkedPOLineNumber>\r
+               </san:RMADetail>\r
+               <san:RmaNumber>?</san:RmaNumber>\r
+               <san:CustomerRmaNumber>?</san:CustomerRmaNumber>\r
+               <san:RmaDate>?</san:RmaDate>\r
+               <san:RmaContactName>?</san:RmaContactName>\r
+               <san:Email>?</san:Email>\r
+               <san:Phone>?</san:Phone>\r
+               <san:Address>?</san:Address>\r
+               <san:City>?</san:City>\r
+               <san:State>?</san:State>\r
+               <san:Zip>?</san:Zip>\r
+               <san:Comment>?</san:Comment>\r
+            </san:RMA>\r
+            <!--Optional:-->\r
+            <san:Authentication>\r
+               <!--Optional:-->\r
+               <san:UserName>?</san:UserName>\r
+               <!--Optional:-->\r
+               <san:Password>?</san:Password>\r
+            </san:Authentication>\r
+         </san:RMARequest>\r
+      </san:SetRMA>\r
+   </soapenv:Body>\r
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://sanvitti.com/SetRMA"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

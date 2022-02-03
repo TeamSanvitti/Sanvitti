@@ -1,0 +1,13 @@
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Admin\bin\Debug\netstandard2.0\SV.Framework.DAL.Admin.deps.json
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Admin\bin\Debug\netstandard2.0\SV.Framework.DAL.Admin.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Admin\bin\Debug\netstandard2.0\SV.Framework.DAL.Admin.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Admin\bin\Debug\netstandard2.0\SV.Framework.Models.Fulfillment.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Admin\bin\Debug\netstandard2.0\SV.Framework.Models.Fulfillment.pdb
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Admin\obj\Debug\netstandard2.0\SV.Framework.DAL.Admin.csproj.AssemblyReference.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Admin\obj\Debug\netstandard2.0\SV.Framework.DAL.Admin.GeneratedMSBuildEditorConfig.editorconfig
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Admin\obj\Debug\netstandard2.0\SV.Framework.DAL.Admin.AssemblyInfoInputs.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Admin\obj\Debug\netstandard2.0\SV.Framework.DAL.Admin.AssemblyInfo.cs
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Admin\obj\Debug\netstandard2.0\SV.Framework.DAL.Admin.csproj.CoreCompileInputs.cache
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Admin\obj\Debug\netstandard2.0\SV.Framework.DAL.Admin.csproj.CopyComplete
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Admin\obj\Debug\netstandard2.0\SV.Framework.DAL.Admin.dll
+D:\git\lan\jbhargava\SanvittiProjects\SV.Framework.DAL.Admin\obj\Debug\netstandard2.0\SV.Framework.DAL.Admin.pdb

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="clsGeneral.cs" />
+    <Compile Remove="Common.cs" />
+    <Compile Remove="DBConnect.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SV.Framework.Models.Fulfillment\SV.Framework.Models.Fulfillment\SV.Framework.Models.Fulfillment.csproj" />
+  </ItemGroup>
+
+</Project>
