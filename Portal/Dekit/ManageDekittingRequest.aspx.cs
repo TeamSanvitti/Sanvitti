@@ -117,6 +117,9 @@ namespace avii
             rptSKUs.DataSource = null;
             rptSKUs.DataBind();
 
+            btnSubmit.Visible = false;
+            btnCancel.Visible = false;
+            trUpload.Visible = true;
             gvEsn.DataSource = null;
             gvEsn.DataBind();
 
@@ -139,6 +142,14 @@ namespace avii
                                 if (skuInfo != null && skuInfo.Count > 0 && !string.IsNullOrEmpty(skuInfo[0].SKU))
                                 {
                                     lblCurrentStock.Text = skuInfo[0].CurrentStock.ToString();
+                                    if(skuInfo[0].IsKittedBox && !skuInfo[0].IsESNRequired)
+                                    {
+                                        trUpload.Visible = false;
+
+                                        btnSubmit.Visible = true;
+                                        btnCancel.Visible = true;
+
+                                    }
                                 }
                             }
                         }
@@ -279,6 +290,8 @@ namespace avii
             List<SV.Framework.Models.Catalog.CompanySKUno> skuList = FinishSKUOperations.GetCompanyFinalOrRawSKUList(companyID, true);
             if (skuList != null && skuList.Count > 0)
             {
+                //Session["kittedskulist"] = skuList;
+
                 ddlKitted.DataSource = skuList;
                 ddlKitted.DataValueField = "ItemcompanyGUID";
                 ddlKitted.DataTextField = "SKU";

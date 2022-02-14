@@ -1524,6 +1524,7 @@ namespace SV.Framework.LabelGenerator
                     table.AddCell(cell11);
 
                 }
+
                 addCellwithPaddingLeftSizeRowSpan(table, "SO", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 60, 3);
 
                 addCellwithborderPaddingSize(table, "Carton Qty: " + cartonInfo.CartonQty, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 15f, 18f, 0, 14);

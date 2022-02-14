@@ -90,7 +90,7 @@ namespace avii
                 }
                 else
                 {
-                    lblMsg.Text = "{Customer is required!";
+                    lblMsg.Text = "Customer is required!";
                 }
             }
             else

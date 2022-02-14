@@ -48,7 +48,10 @@ namespace avii.Classes
                             substring = substring + "<a class='nav-link' href='#' >" + objModulelist1[j].Title + "<i class='icon-arrow-right'></i></a> <ul class='dropdown-menu sub-menu'>";
                             for (int k = 0; k < objModulelist2.Count; k++)
                             {
-                                substring = substring + "<li class='nav-item'><a class='nav-link' href='" + objModulelist2[k].Url + "'" + "> " + objModulelist2[k].Title + "</a></li>";
+                                if (objModulelist2[k].IsLink)
+                                    substring = substring + "<li class='nav-item'><a target='_blank' class='nav-link' href='" + objModulelist2[k].Url + "'" + "> " + objModulelist2[k].Title + "</a></li>";
+                                else
+                                    substring = substring + "<li class='nav-item'><a class='nav-link' href='" + objModulelist2[k].Url + "'" + "> " + objModulelist2[k].Title + "</a></li>";
                             }
 
                             substring = substring + "</ul></li>";

@@ -2234,12 +2234,6 @@ namespace SV.Framework.LabelGenerator
 
                 PdfPCell cell1 = null;
                 cell1 = new PdfPCell();
-
-
-
-
-
-
                 //table = new PdfPTable(1);
                 //table.TotalWidth = 575f;
                 //table.LockedWidth = true;
@@ -2337,7 +2331,10 @@ namespace SV.Framework.LabelGenerator
                     table.AddCell(cell11);
 
                 }
-                addCellwithPaddingLeftSizeRowSpan(table, "SO", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 60, 3);
+              //  if (cartonInfo.ProductType.ToLower() == "h3")
+                //    addCellwithPaddingLeftSizeRowSpan(table, "SN", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 60, 3);
+                //else
+                    addCellwithPaddingLeftSizeRowSpan(table, "SO", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 60, 3);
 
                 addCellwithborderPaddingSize(table, "Carton Qty: " + cartonInfo.CartonQty, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 15f, 18f, 0, 14);
                 //pdfDoc.Add(table);
@@ -2396,63 +2393,126 @@ namespace SV.Framework.LabelGenerator
 
                 foreach (var item in cartonInfo.CartonItems)
                 {
-                    if (!string.IsNullOrEmpty(item.HEX))
+                    
+                    if (cartonInfo.ProductType.ToLower() == "h3")
                     {
-                        IMEIImage = GenerateBarCodeTarCode(item.HEX, 10f, 1.359f, 4f, 3f);
+                        if (!string.IsNullOrEmpty(item.IMEI))
+                        {
+                            IMEIImage = GenerateBarCodeTarCode(item.IMEI, 10f, 1.359f, 4f, 3f);
 
-                        //IMEIImage = GenerateBarCode(item.HEX);
+                            //IMEIImage = GenerateBarCode(item.HEX);
+                        }
+
+                        table = new PdfPTable(3);
+                        table.TotalWidth = 575f;
+                        table.LockedWidth = true;
+                        table.DefaultCell.Border = Rectangle.NO_BORDER;
+                        widths = new float[] { 120f, 260f, 120f };
+                        table.HorizontalAlignment = Element.ALIGN_LEFT;
+                        table.SetWidths(widths);
+                        addCellwithPaddingLeftPaddingBottomSize(table, "" , 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 2f, 25f, 14, 26f);
+
+                        addCellwithPaddingLeftPaddingBottomSize(table, "IMEI: " + item.IMEI, 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 2f, 75f, 14, 26f);
+                        addCellwithPaddingLeftPaddingBottomSize(table, "" , 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 2f, 25f, 14, 26f);
+
+                        pdfDoc.Add(table);
+
+                        table = new PdfPTable(3);
+                        table.TotalWidth = 575f;
+                        table.LockedWidth = true;
+                        table.DefaultCell.Border = Rectangle.NO_BORDER;
+                        widths = new float[] { 100f, 260f, 100f };
+                        table.HorizontalAlignment = Element.ALIGN_LEFT;
+                        table.SetWidths(widths);
+                        //PdfPCell cell11 = null;
+                        addCellwithPaddingLeftPaddingBottomSize(table, "", 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 2f, 25f, 14, 26f);
+
+                        //cell13 = new PdfPCell();
+
+                        //if (MEIDImage != null)
+                        //{
+                        //    cell13 = ImageCellNewLeft(MEIDImage, 220f, PdfPCell.ALIGN_LEFT, 28f, 10f, 2f);
+                        //    cell13.BorderWidthRight = 0.5f;
+                        //    cell13.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                        //    table.AddCell(cell13);
+
+                        //}
+                        cell3 = new PdfPCell();
+
+                        if (IMEIImage != null)
+                        {
+
+                            cell3 = ImageCellNewLeft(IMEIImage, 220f, PdfPCell.ALIGN_LEFT, 28f, 75f, 2f);
+                            cell3.BorderWidthRight = 0.5f;
+                            cell3.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                            table.AddCell(cell3);
+
+                        }
+                        addCellwithPaddingLeftPaddingBottomSize(table, "", 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 2f, 25f, 14, 26f);
+
+                        pdfDoc.Add(table);
+
                     }
-                    if (!string.IsNullOrEmpty(item.MEID))
+                    else
                     {
-                        MEIDImage = GenerateBarCodeTarCode(item.MEID, 12f, 1.359f, 4f, 3f);
+                        if (!string.IsNullOrEmpty(item.HEX))
+                        {
+                            IMEIImage = GenerateBarCodeTarCode(item.HEX, 10f, 1.359f, 4f, 3f);
 
-                       // MEIDImage = GenerateBarCode(item.MEID);
+                            //IMEIImage = GenerateBarCode(item.HEX);
+                        }
+                        if (!string.IsNullOrEmpty(item.MEID))
+                        {
+                            MEIDImage = GenerateBarCodeTarCode(item.MEID, 12f, 1.359f, 4f, 3f);
+
+                            // MEIDImage = GenerateBarCode(item.MEID);
+                        }
+                        table = new PdfPTable(2);
+                        table.TotalWidth = 575f;
+                        table.LockedWidth = true;
+                        table.DefaultCell.Border = Rectangle.NO_BORDER;
+                        widths = new float[] { 250f, 250f };
+                        table.HorizontalAlignment = Element.ALIGN_LEFT;
+                        table.SetWidths(widths);
+                        addCellwithPaddingLeftPaddingBottomSize(table, "DEC: " + item.MEID, 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 2f, 25f, 14, 26f);
+                        addCellwithPaddingLeftPaddingBottomSize(table, "HEX: " + item.HEX, 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 2f, 90f, 14, 26f);
+
+                        pdfDoc.Add(table);
+
+                        table = new PdfPTable(2);
+                        table.TotalWidth = 575f;
+                        table.LockedWidth = true;
+                        table.DefaultCell.Border = Rectangle.NO_BORDER;
+                        widths = new float[] { 260f, 260f };
+                        table.HorizontalAlignment = Element.ALIGN_LEFT;
+                        table.SetWidths(widths);
+                        //PdfPCell cell11 = null;
+                        cell13 = new PdfPCell();
+
+                        if (MEIDImage != null)
+                        {
+                            cell13 = ImageCellNewLeft(MEIDImage, 220f, PdfPCell.ALIGN_LEFT, 28f, 10f, 2f);
+                            cell13.BorderWidthRight = 0.5f;
+                            cell13.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                            table.AddCell(cell13);
+
+                        }
+                        cell3 = new PdfPCell();
+
+                        if (IMEIImage != null)
+                        {
+
+                            cell3 = ImageCellNewLeft(IMEIImage, 220f, PdfPCell.ALIGN_LEFT, 28f, 75f, 2f);
+                            cell3.BorderWidthRight = 0.5f;
+                            cell3.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                            table.AddCell(cell3);
+
+                        }
+
+                        pdfDoc.Add(table);
                     }
 
-                    table = new PdfPTable(2);
-                    table.TotalWidth = 575f;
-                    table.LockedWidth = true;
-                    table.DefaultCell.Border = Rectangle.NO_BORDER;
-                    widths = new float[] { 250f, 250f };
-                    table.HorizontalAlignment = Element.ALIGN_LEFT;
-                    table.SetWidths(widths);
-                    addCellwithPaddingLeftPaddingBottomSize(table, "DEC: " + item.MEID, 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 2f, 25f, 14, 26f);
-                    addCellwithPaddingLeftPaddingBottomSize(table, "HEX: " + item.HEX, 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 2f, 90f, 14, 26f);
 
-                    pdfDoc.Add(table);
-
-
-                    table = new PdfPTable(2);
-                    table.TotalWidth = 575f;
-                    table.LockedWidth = true;
-                    table.DefaultCell.Border = Rectangle.NO_BORDER;
-                    widths = new float[] { 260f, 260f };
-                    table.HorizontalAlignment = Element.ALIGN_LEFT;
-                    table.SetWidths(widths);
-                    //PdfPCell cell11 = null;
-                    cell13 = new PdfPCell();
-
-                    if (MEIDImage != null)
-                    {
-                        cell13 = ImageCellNewLeft(MEIDImage, 220f, PdfPCell.ALIGN_LEFT, 28f, 10f, 2f);
-                        cell13.BorderWidthRight = 0.5f;
-                        cell13.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
-                        table.AddCell(cell13);
-
-                    }
-                    cell3 = new PdfPCell();
-
-                    if (IMEIImage != null)
-                    {
-
-                        cell3 = ImageCellNewLeft(IMEIImage, 220f, PdfPCell.ALIGN_LEFT, 28f, 75f, 2f);
-                        cell3.BorderWidthRight = 0.5f;
-                        cell3.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
-                        table.AddCell(cell3);
-
-                    }
-
-                    pdfDoc.Add(table);
 
                 }
 
@@ -3396,7 +3456,12 @@ namespace SV.Framework.LabelGenerator
 
                 if (SKUCodeimage != null)
                 {
-                    cell11 = ImageCellNew22(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 1f, 28f); // ImageCellNew110(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 1f); // ImageCellNew2(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 0f);
+                    if (cartonInfo.ProductType.ToLower() == "h3")
+                        cell11 = ImageCellNew22(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 1f, 29f); // ImageCellNew110(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 1f); // ImageCellNew2(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 0f);
+                    else
+                        cell11 = ImageCellNew22(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 1f, 28f); // ImageCellNew110(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 1f); // ImageCellNew2(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 0f);
+
+                    //cell11 = ImageCellNew22(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 1f, 36f); // ImageCellNew110(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 1f); // ImageCellNew2(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 0f);
                     cell11.BorderWidthRight = 0.5f;
                     cell11.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
                     table.AddCell(cell11);
@@ -3445,9 +3510,12 @@ namespace SV.Framework.LabelGenerator
                 table.HorizontalAlignment = Element.ALIGN_LEFT;
                 table.SetWidths(widths);
                 //addCellwithPaddingLeftPaddingBottomSize(table, "SKU: " + cartonInfo.SKU, 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 15f);
-                
+
                 //addCellwithPaddingLeftPaddingBottomSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 14f);
-                addCellwithPaddingLeftBottomTopRightSize(table, "HEX: " + cartonInfo.HEX, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 4f, 1f, 12f, 16f);
+                if (cartonInfo.ProductType.ToLower() == "h3")
+                    addCellwithPaddingLeftBottomTopRightSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 4f, 1f, 12f, 16f);
+                else
+                    addCellwithPaddingLeftBottomTopRightSize(table, "HEX: " + cartonInfo.HEX, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 4f, 1f, 12f, 16f);
 
                 addCellwithPaddingLeftBottomTopRightSize(table, cartonInfo.ItemName, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK,10f, 0f,4f, 1f, 12f, 16f);
                 //addCellwithPaddingLeftPaddingBottomSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 14f);
@@ -3466,19 +3534,37 @@ namespace SV.Framework.LabelGenerator
 
                 table.HorizontalAlignment = Element.ALIGN_LEFT;
                 table.SetWidths(widths);
-                PdfPCell cell211 = null;
-                cell211 = new PdfPCell();
 
-                if (HEXImage != null)
+                if (cartonInfo.ProductType.ToLower() == "h3")
                 {
+                    //PdfPCell cell0221 = null;
+                    //cell0221 = new PdfPCell();
+                    //if (IMEIImage != null)
+                    //{
+                    //    cell0221 = ImageCellNew022(IMEIImage, 180f, PdfPCell.ALIGN_LEFT, 0f, 24f);
+                    //    //cell0221 = ImageCellNewLeft(IMEIImage, 180f, PdfPCell.ALIGN_LEFT, 24f, 0f, 3f);
+                    //    cell0221.BorderWidthRight = 0.5f;
+                    //    cell0221.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                    //    table.AddCell(cell0221);
 
-                    cell211 = ImageCellNew022(HEXImage, 170f, PdfPCell.ALIGN_LEFT, 0f, 24f);
-                    cell211.BorderWidthRight = 0.5f;
-                    cell211.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
-                    table.AddCell(cell211);
-
+                    //}
+                    addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
                 }
+                else
+                {
+                    PdfPCell cell211 = null;
+                    cell211 = new PdfPCell();
 
+                    if (HEXImage != null)
+                    {
+
+                        cell211 = ImageCellNew022(HEXImage, 170f, PdfPCell.ALIGN_LEFT, 0f, 24f);
+                        cell211.BorderWidthRight = 0.5f;
+                        cell211.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                        table.AddCell(cell211);
+
+                    }
+                }
                 PdfPCell cell12 = null;
                 cell12 = new PdfPCell();
 
@@ -3545,7 +3631,7 @@ namespace SV.Framework.LabelGenerator
                 // addCellwithPaddingLeftSize(table, "HW Version: " + cartonInfo.HWVersion, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
                 //addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 12f);
                 // addCellwithPaddingLeft(table, "Serial Num: " + cartonInfo.SerialNum, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK);
-               
+
                 //pdfDoc.Add(table);
 
                 //table = new PdfPTable(2);
@@ -3557,7 +3643,11 @@ namespace SV.Framework.LabelGenerator
                 //table.HorizontalAlignment = Element.ALIGN_LEFT;
                 //table.SetWidths(widths);
 
-                addCellwithPaddingLeftBottomTopRightSize(table, "DEC: " + cartonInfo.MEID, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 3f, 1f, 12f, 28f);
+
+                if (cartonInfo.ProductType.ToLower() == "h3")
+                    addCellwithPaddingLeftBottomTopRightSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 3f, 1f, 12f, 28f);
+                else
+                    addCellwithPaddingLeftBottomTopRightSize(table, "DEC: " + cartonInfo.MEID, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 3f, 1f, 12f, 28f);
                 //addCellwithPaddingLeftSize(table, "DEC: " + cartonInfo.MEID, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
                 //addCellwithPaddingLeftSize(table, "DEC: " + cartonInfo.MEID, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
                 addCellwithPaddingLeftBottomTopRightSize(table, "Date: " + cartonInfo.ShipDate, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 1f, 1f, 12f, 28f);
@@ -3566,29 +3656,33 @@ namespace SV.Framework.LabelGenerator
                 // addCellwithPaddingLeft(table, "Serial Num: " + cartonInfo.SerialNum, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK);
                 pdfDoc.Add(table);
 
-                table = new PdfPTable(2);
-                table.TotalWidth = 570f;
-                table.LockedWidth = true;
-                table.DefaultCell.Border = Rectangle.NO_BORDER;
-                widths = new float[] { 230f, 340f };
-
-                table.HorizontalAlignment = Element.ALIGN_LEFT;
-                table.SetWidths(widths);
-                PdfPCell cell331 = null;
-                cell331 = new PdfPCell();
-                if (MEIDImage != null)
+                if (cartonInfo.ProductType.ToLower() == "h3")
+                { }
+                else
                 {
+                    table = new PdfPTable(2);
+                    table.TotalWidth = 570f;
+                    table.LockedWidth = true;
+                    table.DefaultCell.Border = Rectangle.NO_BORDER;
+                    widths = new float[] { 230f, 340f };
 
-                    cell331 = ImageCellNewLeft(MEIDImage, 180f, PdfPCell.ALIGN_LEFT, 36f, 0f, 3f);
-                    cell331.BorderWidthRight = 0.5f;
-                    cell331.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
-                    table.AddCell(cell331);
+                    table.HorizontalAlignment = Element.ALIGN_LEFT;
+                    table.SetWidths(widths);
+                    PdfPCell cell331 = null;
+                    cell331 = new PdfPCell();
+                    if (MEIDImage != null)
+                    {
 
+                        cell331 = ImageCellNewLeft(MEIDImage, 180f, PdfPCell.ALIGN_LEFT, 36f, 0f, 3f);
+                        cell331.BorderWidthRight = 0.5f;
+                        cell331.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                        table.AddCell(cell331);
+
+                    }
+                    addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 12f);
+                    //addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 12f);
+                    pdfDoc.Add(table);
                 }
-                addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 12f);
-                //addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 12f);
-                pdfDoc.Add(table);
-
                 //if (ICCIDImage != null)
                 //{
                 //    table = new PdfPTable(3);
@@ -3877,7 +3971,12 @@ namespace SV.Framework.LabelGenerator
                 //addCellwithPaddingLeftPaddingBottomSize(table, "SKU: " + cartonInfo.SKU, 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 15f);
 
                 //addCellwithPaddingLeftPaddingBottomSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 14f);
-                addCellwithPaddingLeftBottomTopRightSize(table, "HEX: " + cartonInfo.HEX, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 4f, 1f, 12f, 16f);
+                //if (cartonInfo.ProductType.ToLower() == "h3")
+                //    addCellwithPaddingLeftBottomTopRightSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 4f, 1f, 12f, 16f);
+                if (cartonInfo.ProductType.ToLower() == "h3")
+                    addCellwithPaddingLeftBottomTopRightSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 4f, 1f, 12f, 16f);
+                else
+                    addCellwithPaddingLeftBottomTopRightSize(table, "HEX: " + cartonInfo.HEX, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 4f, 1f, 12f, 16f);
 
                 addCellwithPaddingLeftBottomTopRightSize(table, cartonInfo.ItemName, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 4f, 1f, 12f, 16f);
                 //addCellwithPaddingLeftPaddingBottomSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 14f);
@@ -3896,19 +3995,37 @@ namespace SV.Framework.LabelGenerator
 
                 table.HorizontalAlignment = Element.ALIGN_LEFT;
                 table.SetWidths(widths);
-                PdfPCell cell211 = null;
-                cell211 = new PdfPCell();
-
-                if (HEXImage != null)
+                
+                if (cartonInfo.ProductType.ToLower() == "h3")
                 {
+                    //PdfPCell cell0221 = null;
+                    //cell0221 = new PdfPCell();
+                    //if (IMEIImage != null)
+                    //{
+                    //    cell0221 = ImageCellNew022(IMEIImage, 180f, PdfPCell.ALIGN_LEFT, 0f, 24f);
+                    //    //cell0221 = ImageCellNewLeft(IMEIImage, 180f, PdfPCell.ALIGN_LEFT, 24f, 0f, 3f);
+                    //    cell0221.BorderWidthRight = 0.5f;
+                    //    cell0221.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                    //    table.AddCell(cell0221);
 
-                    cell211 = ImageCellNew022(HEXImage, 170f, PdfPCell.ALIGN_LEFT, 0f, 24f);
-                    cell211.BorderWidthRight = 0.5f;
-                    cell211.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
-                    table.AddCell(cell211);
-
+                    //}
+                    addCellwithPaddingLeftSize(table, "" , 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
                 }
+                else
+                {
+                    PdfPCell cell211 = null;
+                    cell211 = new PdfPCell();
 
+                    if (HEXImage != null)
+                    {
+
+                        cell211 = ImageCellNew022(HEXImage, 170f, PdfPCell.ALIGN_LEFT, 0f, 24f);
+                        cell211.BorderWidthRight = 0.5f;
+                        cell211.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                        table.AddCell(cell211);
+
+                    }
+                }
                 PdfPCell cell12 = null;
                 cell12 = new PdfPCell();
 
@@ -3938,10 +4055,15 @@ namespace SV.Framework.LabelGenerator
                 table.SetWidths(widths);
 
                 // addCellwithPaddingLeftBottomTopRightSize(table, "HEX: " + cartonInfo.HEX, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 26f, 1f, 10f, 36f);
-
-                addCellwithPaddingLeftBottomTopRightSize(table, "IMEI: " + cartonInfo.ESN, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 1f, 1f, 12f, 28f);
+                //if (cartonInfo.ProductType.ToLower() == "h3")
+                //    addCellwithPaddingLeftBottomTopRightSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 1f, 1f, 12f, 28f);
+                //else
+                    addCellwithPaddingLeftBottomTopRightSize(table, "IMEI: " + cartonInfo.ESN, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 1f, 1f, 12f, 28f);
                 addCellwithPaddingLeftBottomTopRightSize(table, "SW Version: " + cartonInfo.SWVersion, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 1f, 1f, 12f, 28f);
-                addCellwithPaddingLeftSizeRowSpan(table, "SO", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 60, 3);
+                //if (cartonInfo.ProductType.ToLower() == "h3")
+                //    addCellwithPaddingLeftSizeRowSpan(table, "SN", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 60, 3);
+                //else
+                    addCellwithPaddingLeftSizeRowSpan(table, "SO", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 60, 3);
 
 
                 //addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
@@ -3957,17 +4079,21 @@ namespace SV.Framework.LabelGenerator
 
                 //table.HorizontalAlignment = Element.ALIGN_LEFT;
                 //table.SetWidths(widths);
-
-                PdfPCell cell221 = null;
-                cell221 = new PdfPCell();
-                if (IMEIImage != null)
+                //if (cartonInfo.ProductType.ToLower() == "h3")
+                //    addCellwithPaddingLeftBottomTopRightSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 1f, 1f, 12f, 28f);
+                //else
                 {
+                    PdfPCell cell221 = null;
+                    cell221 = new PdfPCell();
+                    if (IMEIImage != null)
+                    {
 
-                    cell221 = ImageCellNewLeft(IMEIImage, 180f, PdfPCell.ALIGN_LEFT, 36f, 0f, 3f);
-                    cell221.BorderWidthRight = 0.5f;
-                    cell221.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
-                    table.AddCell(cell221);
+                        cell221 = ImageCellNewLeft(IMEIImage, 180f, PdfPCell.ALIGN_LEFT, 36f, 0f, 3f);
+                        cell221.BorderWidthRight = 0.5f;
+                        cell221.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                        table.AddCell(cell221);
 
+                    }
                 }
                 //addCellwithPaddingLeft(table, cartonInfo.UPC, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK);
                 addCellwithPaddingLeftBottomTopRightSize(table, "HW Version: " + cartonInfo.HWVersion, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 1f, 10f, 1f, 12f, 32f);
@@ -3986,8 +4112,11 @@ namespace SV.Framework.LabelGenerator
 
                 //table.HorizontalAlignment = Element.ALIGN_LEFT;
                 //table.SetWidths(widths);
+                if (cartonInfo.ProductType.ToLower() == "h3")
+                    addCellwithPaddingLeftBottomTopRightSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 3f, 1f, 12f, 28f);
+                else
+                    addCellwithPaddingLeftBottomTopRightSize(table, "DEC: " + cartonInfo.MEID, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 3f, 1f, 12f, 28f);
 
-                addCellwithPaddingLeftBottomTopRightSize(table, "DEC: " + cartonInfo.MEID, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 3f, 1f, 12f, 28f);
                 //addCellwithPaddingLeftSize(table, "DEC: " + cartonInfo.MEID, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
                 //addCellwithPaddingLeftSize(table, "DEC: " + cartonInfo.MEID, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
                 addCellwithPaddingLeftBottomTopRightSize(table, "Date: " + cartonInfo.ShipDate, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 1f, 1f, 12f, 28f);
@@ -3996,28 +4125,501 @@ namespace SV.Framework.LabelGenerator
                 // addCellwithPaddingLeft(table, "Serial Num: " + cartonInfo.SerialNum, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK);
                 pdfDoc.Add(table);
 
+                if (cartonInfo.ProductType.ToLower() == "h3")
+                { }
+                else
+                {
+                    table = new PdfPTable(2);
+                    table.TotalWidth = 570f;
+                    table.LockedWidth = true;
+                    table.DefaultCell.Border = Rectangle.NO_BORDER;
+                    widths = new float[] { 230f, 340f };
+
+                    table.HorizontalAlignment = Element.ALIGN_LEFT;
+                    table.SetWidths(widths);
+                    PdfPCell cell331 = null;
+                    cell331 = new PdfPCell();
+                    if (MEIDImage != null)
+                    {
+
+                        cell331 = ImageCellNewLeft(MEIDImage, 180f, PdfPCell.ALIGN_LEFT, 36f, 0f, 3f);
+                        cell331.BorderWidthRight = 0.5f;
+                        cell331.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                        table.AddCell(cell331);
+
+                    }
+                    addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 12f);
+                    //addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 12f);
+                    pdfDoc.Add(table);
+                }
+
+                //if (ICCIDImage != null)
+                //{
+                //    table = new PdfPTable(3);
+                //    table.TotalWidth = 524f;
+                //    table.LockedWidth = true;
+                //    table.DefaultCell.Border = Rectangle.NO_BORDER;
+                //    widths = new float[] { 170f, 174f, 170f };
+                //    table.HorizontalAlignment = Element.ALIGN_LEFT;
+                //    table.SetWidths(widths);
+                //    PdfPCell cell431 = null;
+                //    cell431 = new PdfPCell();
+                //    if (ICCIDImage != null)
+                //    {
+
+                //        cell431 = ImageCellNewLeft(ICCIDImage, 180f, PdfPCell.ALIGN_LEFT, 27f, 10f, 3f);
+                //        cell431.BorderWidthRight = 0.5f;
+                //        cell431.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                //        table.AddCell(cell431);
+
+                //    }
+                //    addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
+                //    addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
+                //    pdfDoc.Add(table);
+                //}
+
+
+                if (cartonInfo.KitBoxList.Count > 0)
+                {
+                    table = new PdfPTable(1);
+                    table.TotalWidth = 570f;
+                    table.LockedWidth = true;
+                    table.DefaultCell.Border = Rectangle.NO_BORDER;
+                    widths = new float[] { 570f };
+                    table.HorizontalAlignment = Element.ALIGN_LEFT;
+                    table.SetWidths(widths);
+                    addCellwithborderNormalHeightSize(table, "Phone " + cartonInfo.KitBoxList[0].OriginCountry + ", Accessories " + cartonInfo.KitBoxList[0].OriginCountry, 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 30, 1, 5f, 10, 11f);
+                    addCellwithborderNew(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK);
+                    pdfDoc.Add(table);
+
+
+                }
+
+                //System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                string contentsInclude = "";
+
+                //System.IO stringb  contentsInclude = "";
+                foreach (var item in cartonInfo.KitBoxList)
+                {
+                    //table = new PdfPTable(2);
+                    //table.TotalWidth = 500f;
+                    //table.LockedWidth = true;
+                    //table.DefaultCell.Border = Rectangle.NO_BORDER;
+                    //widths = new float[] { 250f, 250f };
+                    //table.HorizontalAlignment = Element.ALIGN_LEFT;
+                    //table.SetWidths(widths);
+
+                    //sb.Append(item.DisplayName + ",");
+
+                    if (string.IsNullOrEmpty(contentsInclude))
+                        contentsInclude = item.DisplayName;
+                    else
+                        contentsInclude = contentsInclude + "," + item.DisplayName;
+                }
+
+                //string contentsInclude = sb.ToString();
+                //if (contentsInclude.Length > 0)
+                //    contentsInclude = contentsInclude.Substring(0, contentsInclude.Length-1);
+
+                table = new PdfPTable(1);
+
+                table.TotalWidth = 524f;
+                table.LockedWidth = true;
+                table.DefaultCell.Border = Rectangle.NO_BORDER;
+                widths = new float[] { 500f };
+                table.HorizontalAlignment = Element.ALIGN_LEFT;
+                table.SetWidths(widths);
+
+                addCellwithPaddingTopPaddingLeft(table, "Contents include: " + contentsInclude, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 0, 11f);
+
+
+
+                pdfDoc.Add(table);
+
+
+
+                table = new PdfPTable(1);
+                table.TotalWidth = 500f;
+                table.LockedWidth = true;
+                table.DefaultCell.Border = Rectangle.NO_BORDER;
+                table.HorizontalAlignment = Element.ALIGN_CENTER;
+                addCellwithborderNormalHeightSize(table, "\n", 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 2, 0, 0, 0, 2);
+                //pdfDoc.Add(table);
+
+            }
+
+            // Close PDF document and send
+
+            pdfWriter.CloseStream = false;
+            pdfDoc.Close();
+
+            memoryStream.Position = 0;
+            return memoryStream;
+        }
+        public MemoryStream POSKITLabelPdfTarCodeNew2(IList<PosKitInfo> posKitS)
+        {
+            int bottomMargin = 0;
+            int topMargin = 10;
+            float LABELHEIGHTSIZE = 280;
+            float skuWarcodeWidth = 12.7f;
+            const int pageMargin = 3;
+            const int pageRows = 1;
+            const int pageCols = 1;
+
+            var memoryStream = new MemoryStream();
+            // ContainerModel ContainerInfo = new ContainerModel();
+
+            Document pdfDoc = new Document();
+            iTextSharp.text.Rectangle envelope = new iTextSharp.text.Rectangle(570, LABELHEIGHTSIZE);
+            pdfDoc.SetPageSize(envelope);
+            pdfDoc.SetMargins(pageMargin, pageMargin, 0, 0);
+
+            PdfPTable table;
+            PdfPCell cell = null;
+            PdfWriter pdfWriter = PdfWriter.GetInstance(pdfDoc, memoryStream);
+            //open the stream 
+            pdfDoc.Open();
+            string ContainerID = string.Empty;
+            foreach (var cartonInfo in posKitS)
+            {
+                pdfDoc.NewPage();
+
+                PdfPTable tablespace = new PdfPTable(1);
+                tablespace.TotalWidth = 550f;
+                tablespace.LockedWidth = true;
+                tablespace.SetWidths(new float[] { 0.2f });
+
+                if (!string.IsNullOrEmpty(cartonInfo.UPC))
+                {
+                    UPCImage = GenerateBarCodeUPCATarCode(cartonInfo.UPC, 220f, 52f);
+                }
+                if (!string.IsNullOrEmpty(cartonInfo.ESN))
+                {
+                    //IMEIImage = GenerateBarCode(cartonInfo.ESN);
+                    IMEIImage = GenerateBarCodeTarCode(cartonInfo.ESN, 9.3f, 1.359f, 3f, 2f);
+
+                }
+                if (!string.IsNullOrEmpty(cartonInfo.MEID))
+                {
+                    //MEIDImage = GenerateBarCode(cartonInfo.MEID);
+                    MEIDImage = GenerateBarCodeTarCode(cartonInfo.MEID, 9.3f, 1.359f, 3f, 2f);
+
+                }
+                if (!string.IsNullOrEmpty(cartonInfo.ICCID))
+                {
+                    ICCIDImage = GenerateBarCode(cartonInfo.ICCID);
+                }
+                if (!string.IsNullOrEmpty(cartonInfo.SerialNum))
+                {
+                    // SerialNumImage = GenerateMasterBarCode(cartonInfo.SerialNum, 30, 160);
+                    SerialNumImage = GenerateBarCodeTarCode(cartonInfo.SerialNum, 14f, 1.359f, 3f, 2f);
+
+                }
+                if (!string.IsNullOrEmpty(cartonInfo.HEX))
+                {
+                    HEXImage = GenerateBarCodeTarCode(cartonInfo.HEX, 8.3f, 1.359f, 3f, 2f);
+
+                    //HEXImage = GenerateBarCode(cartonInfo.HEX);
+                }
+                if (!string.IsNullOrEmpty(cartonInfo.SKU))
+                {
+                    if (cartonInfo.SKU.Length == 10)
+                        skuWarcodeWidth = 12.8f;
+                    else if (cartonInfo.SKU.Length == 11)
+                        skuWarcodeWidth = 13f;
+                    else if (cartonInfo.SKU.Length == 12)
+                        skuWarcodeWidth = 13.09f;
+                    else if (cartonInfo.SKU.Length == 13)
+                        skuWarcodeWidth = 13.2f;
+                    else if (cartonInfo.SKU.Length == 14)
+                        skuWarcodeWidth = 13.5f;
+                    else if (cartonInfo.SKU.Length == 15)
+                        skuWarcodeWidth = 13.7f;
+                    else if (cartonInfo.SKU.Length > 15)
+                        skuWarcodeWidth = 14f;
+
+                    SKUCodeimage = GenerateBarCodeTarCode(cartonInfo.SKU, skuWarcodeWidth, 1.359f, 3f, 3f);
+                    //SKUCodeimage = GenerateMasterBarCode(cartonInfo.SKU, 30, 220);
+                }
+
+
+                Paragraph p = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+                tablespace.AddCell(PhraseCell(new Phrase("\n", FontFactory.GetFont("Arial", 4, Font.BOLD, BaseColor.BLACK)), PdfPCell.ALIGN_LEFT));
+
+
+                PdfPCell cell1 = null;
+                cell1 = new PdfPCell();
+
+                table = new PdfPTable(1);
+                table.TotalWidth = 570f;
+                table.LockedWidth = true;
+                table.DefaultCell.Border = Rectangle.NO_BORDER;
+                table.HorizontalAlignment = Element.ALIGN_CENTER;
+                addCellwithborderNormalHeightSize(table, "\n", 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 3, 0, 0, 0, 3);
+                //pdfDoc.Add(table);
+
+
+
+                //
+                float[] widths = new float[] { 170f, 174, 170f };
+
+                table = new PdfPTable(3);
+                table.TotalWidth = 570f;
+                table.LockedWidth = true;
+                table.DefaultCell.Border = Rectangle.NO_BORDER;
+                widths = new float[] { 250f, 30f, 290f };
+                table.HorizontalAlignment = Element.ALIGN_LEFT;
+                table.SetWidths(widths);
+                //addCellwithPaddingLeftPaddingBottomSize(table, "SKU: " + cartonInfo.SKU, 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 15f);
+                addCellwithPaddingLeftBottomTopRightSizeBolD(table, "SKU: " + cartonInfo.SKU, 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 1, 1, 1, 18f, 24f);
+                addCellwithPaddingLeftPaddingBottomSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 14f);
+                addCellwithPaddingLeftBottomTopRightSize(table, "Serial Number - Scan for Activation", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 40f, 1f, 8f, 1f, 12f, 24f);
+                pdfDoc.Add(table);
+
+                table = new PdfPTable(3);
+                table.TotalWidth = 570f;
+                table.LockedWidth = true;
+                table.DefaultCell.Border = Rectangle.NO_BORDER;
+                widths = new float[] { 250f, 30f, 290f };
+
+                table.HorizontalAlignment = Element.ALIGN_LEFT;
+                table.SetWidths(widths);
+                PdfPCell cell11 = null;
+                cell11 = new PdfPCell();
+
+                if (SKUCodeimage != null)
+                {
+                    if (cartonInfo.ProductType.ToLower() == "h3")
+                        cell11 = ImageCellNew22(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 1f, 29f); // ImageCellNew110(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 1f); // ImageCellNew2(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 0f);
+                    else
+                        cell11 = ImageCellNew22(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 1f, 28f); // ImageCellNew110(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 1f); // ImageCellNew2(SKUCodeimage, 220f, PdfPCell.ALIGN_LEFT, 0f);
+                    cell11.BorderWidthRight = 0.5f;
+                    cell11.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                    table.AddCell(cell11);
+                }
+                addCellwithPaddingLeftPaddingBottomSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 10f);
+
+                // addCellwithPaddingLeftSize(table, cartonInfo.ItemName, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
+                //addCellwithPaddingLeftBottomTopRightSize(table, cartonInfo.ItemName, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 20f, 1f, 15f, 1f, 12f, 36f);
+
+                PdfPCell cell103 = null;
+                cell103 = new PdfPCell();
+
+                if (SerialNumImage != null)
+                {
+                    cell103 = ImageCellNew22(SerialNumImage, 220f, PdfPCell.ALIGN_LEFT, 25f, 28f);//ImageCellNew110(SerialNumImage, 220f, PdfPCell.ALIGN_LEFT, 1f); //ImageCellNew02(SerialNumImage, 200f, PdfPCell.ALIGN_LEFT, 0f, 3f);
+                    cell103.BorderWidthRight = 0.5f;
+                    cell103.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                    table.AddCell(cell103);
+
+                }
+                //addCellwithPaddingLeft(table, cartonInfo.ItemName, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK);
+                pdfDoc.Add(table);
+
+                table = new PdfPTable(3);
+                table.TotalWidth = 570f;
+                table.LockedWidth = true;
+                table.DefaultCell.Border = Rectangle.NO_BORDER;
+                widths = new float[] { 250f, 30f, 290f };
+                table.HorizontalAlignment = Element.ALIGN_LEFT;
+                table.SetWidths(widths);
+                //addCellwithPaddingLeftPaddingBottomSize(table, "SKU: " + cartonInfo.SKU, 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 15f);
+                addCellwithPaddingLeftPaddingBottomSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 14f);
+
+                addCellwithPaddingLeftPaddingBottomSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 14f);
+                addCellwithPaddingLeftBottomTopRightSize(table, cartonInfo.SerialNum, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 40f, 1f, 1f, 1f, 14f, 16f);
+
+                //addCellwithPaddingLeftPaddingBottomSize(table, cartonInfo.ItemName, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 16f);
+
+                pdfDoc.Add(table);
+
                 table = new PdfPTable(2);
                 table.TotalWidth = 570f;
                 table.LockedWidth = true;
                 table.DefaultCell.Border = Rectangle.NO_BORDER;
                 widths = new float[] { 230f, 340f };
+                table.HorizontalAlignment = Element.ALIGN_LEFT;
+                table.SetWidths(widths);
+                //addCellwithPaddingLeftPaddingBottomSize(table, "SKU: " + cartonInfo.SKU, 0f, 0f, 0.5f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 15f);
+
+                //addCellwithPaddingLeftPaddingBottomSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 14f);
+                //if (cartonInfo.ProductType.ToLower() == "h3")
+                //    addCellwithPaddingLeftBottomTopRightSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 4f, 1f, 12f, 16f);
+                if (cartonInfo.ProductType.ToLower() == "h3")
+                    addCellwithPaddingLeftBottomTopRightSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 4f, 1f, 12f, 16f);
+                else
+                    addCellwithPaddingLeftBottomTopRightSize(table, "HEX: " + cartonInfo.HEX, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 4f, 1f, 12f, 16f);
+
+                addCellwithPaddingLeftBottomTopRightSize(table, cartonInfo.ItemName, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 4f, 1f, 12f, 16f);
+                //addCellwithPaddingLeftPaddingBottomSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 1, 14f);
+
+                pdfDoc.Add(table);
+
+                table = new PdfPTable(2);
+                table.TotalWidth = 570f;
+                table.LockedWidth = true;
+                table.DefaultCell.Border = Rectangle.NO_BORDER;
+                widths = new float[] { 230f, 340 };
 
                 table.HorizontalAlignment = Element.ALIGN_LEFT;
                 table.SetWidths(widths);
-                PdfPCell cell331 = null;
-                cell331 = new PdfPCell();
-                if (MEIDImage != null)
+
+                if (cartonInfo.ProductType.ToLower() == "h3")
                 {
+                    //PdfPCell cell0221 = null;
+                    //cell0221 = new PdfPCell();
+                    //if (IMEIImage != null)
+                    //{
+                    //    cell0221 = ImageCellNew022(IMEIImage, 180f, PdfPCell.ALIGN_LEFT, 0f, 24f);
+                    //    //cell0221 = ImageCellNewLeft(IMEIImage, 180f, PdfPCell.ALIGN_LEFT, 24f, 0f, 3f);
+                    //    cell0221.BorderWidthRight = 0.5f;
+                    //    cell0221.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                    //    table.AddCell(cell0221);
 
-                    cell331 = ImageCellNewLeft(MEIDImage, 180f, PdfPCell.ALIGN_LEFT, 36f, 0f, 3f);
-                    cell331.BorderWidthRight = 0.5f;
-                    cell331.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
-                    table.AddCell(cell331);
-
+                    //}
+                    addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
                 }
-                addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 12f);
-                //addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 12f);
+                else
+                {
+                    PdfPCell cell211 = null;
+                    cell211 = new PdfPCell();
+
+                    if (HEXImage != null)
+                    {
+
+                        cell211 = ImageCellNew022(HEXImage, 170f, PdfPCell.ALIGN_LEFT, 0f, 24f);
+                        cell211.BorderWidthRight = 0.5f;
+                        cell211.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                        table.AddCell(cell211);
+
+                    }
+                }
+                PdfPCell cell12 = null;
+                cell12 = new PdfPCell();
+
+                //addCellwithPaddingLeftSize(table, "HEX: " + cartonInfo.HEX, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
+
+
+                if (UPCImage != null)
+                {
+                    cell12 = ImageCellNew22(UPCImage, 220f, PdfPCell.ALIGN_LEFT, 1f, 52f);
+                    cell12.BorderWidthRight = 0.5f;
+                    cell12.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                    table.AddCell(cell12);
+                }
+
+                // addCellwithPaddingLeft(table, "Serial Num: " + cartonInfo.SerialNum, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK);
                 pdfDoc.Add(table);
+
+                table = new PdfPTable(3);
+                table.TotalWidth = 570f;
+                table.LockedWidth = true;
+                table.DefaultCell.Border = Rectangle.NO_BORDER;
+
+                widths = new float[] { 230f, 180f, 160f };
+                //widths = new float[] { 230f, 340f };
+
+                table.HorizontalAlignment = Element.ALIGN_LEFT;
+                table.SetWidths(widths);
+
+                // addCellwithPaddingLeftBottomTopRightSize(table, "HEX: " + cartonInfo.HEX, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 26f, 1f, 10f, 36f);
+                //if (cartonInfo.ProductType.ToLower() == "h3")
+                //    addCellwithPaddingLeftBottomTopRightSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 1f, 1f, 12f, 28f);
+                //else
+                addCellwithPaddingLeftBottomTopRightSize(table, "IMEI: " + cartonInfo.ESN, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 1f, 1f, 12f, 28f);
+                addCellwithPaddingLeftBottomTopRightSize(table, "SW Version: " + cartonInfo.SWVersion, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 1f, 1f, 12f, 28f);
+                //if (cartonInfo.ProductType.ToLower() == "h3")
+                //    addCellwithPaddingLeftSizeRowSpan(table, "SN", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 60, 3);
+                //else
+                addCellwithPaddingLeftSizeRowSpan(table, "SO", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 60, 3);
+
+
+                //addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
+                // addCellwithPaddingLeft(table, "Serial Num: " + cartonInfo.SerialNum, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK);
+
+                //pdfDoc.Add(table);
+
+                //table = new PdfPTable(2);
+                //table.TotalWidth = 570f;
+                //table.LockedWidth = true;
+                //table.DefaultCell.Border = Rectangle.NO_BORDER;
+                //widths = new float[] { 230f, 340f };
+
+                //table.HorizontalAlignment = Element.ALIGN_LEFT;
+                //table.SetWidths(widths);
+                //if (cartonInfo.ProductType.ToLower() == "h3")
+                //    addCellwithPaddingLeftBottomTopRightSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 1f, 1f, 12f, 28f);
+                //else
+                {
+                    PdfPCell cell221 = null;
+                    cell221 = new PdfPCell();
+                    if (IMEIImage != null)
+                    {
+
+                        cell221 = ImageCellNewLeft(IMEIImage, 180f, PdfPCell.ALIGN_LEFT, 36f, 0f, 3f);
+                        cell221.BorderWidthRight = 0.5f;
+                        cell221.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                        table.AddCell(cell221);
+
+                    }
+                }
+                //addCellwithPaddingLeft(table, cartonInfo.UPC, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK);
+                addCellwithPaddingLeftBottomTopRightSize(table, "HW Version: " + cartonInfo.HWVersion, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 1f, 10f, 1f, 12f, 32f);
+
+                // addCellwithPaddingLeftSize(table, "HW Version: " + cartonInfo.HWVersion, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
+                //addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 12f);
+                // addCellwithPaddingLeft(table, "Serial Num: " + cartonInfo.SerialNum, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK);
+
+                //pdfDoc.Add(table);
+
+                //table = new PdfPTable(2);
+                //table.TotalWidth = 570f;
+                //table.LockedWidth = true;
+                //table.DefaultCell.Border = Rectangle.NO_BORDER;
+                //widths = new float[] { 230f, 340f };
+
+                //table.HorizontalAlignment = Element.ALIGN_LEFT;
+                //table.SetWidths(widths);
+                if (cartonInfo.ProductType.ToLower() == "h3")
+                    addCellwithPaddingLeftBottomTopRightSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 3f, 1f, 12f, 28f);
+                else
+                    addCellwithPaddingLeftBottomTopRightSize(table, "DEC: " + cartonInfo.MEID, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 3f, 1f, 12f, 28f);
+
+                //addCellwithPaddingLeftSize(table, "DEC: " + cartonInfo.MEID, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
+                //addCellwithPaddingLeftSize(table, "DEC: " + cartonInfo.MEID, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f);
+                addCellwithPaddingLeftBottomTopRightSize(table, "Date: " + cartonInfo.ShipDate, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 10f, 0f, 1f, 1f, 12f, 28f);
+                //  addCellwithPaddingLeftSize(table, "Date: " + cartonInfo.ShipDate, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 11f);
+                // addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 12f);
+                // addCellwithPaddingLeft(table, "Serial Num: " + cartonInfo.SerialNum, 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK);
+                pdfDoc.Add(table);
+
+                if (cartonInfo.ProductType.ToLower() == "h3")
+                { }
+                else
+                {
+                    table = new PdfPTable(2);
+                    table.TotalWidth = 570f;
+                    table.LockedWidth = true;
+                    table.DefaultCell.Border = Rectangle.NO_BORDER;
+                    widths = new float[] { 230f, 340f };
+
+                    table.HorizontalAlignment = Element.ALIGN_LEFT;
+                    table.SetWidths(widths);
+                    PdfPCell cell331 = null;
+                    cell331 = new PdfPCell();
+                    if (MEIDImage != null)
+                    {
+
+                        cell331 = ImageCellNewLeft(MEIDImage, 180f, PdfPCell.ALIGN_LEFT, 36f, 0f, 3f);
+                        cell331.BorderWidthRight = 0.5f;
+                        cell331.HorizontalAlignment = PdfPCell.ALIGN_LEFT;
+                        table.AddCell(cell331);
+
+                    }
+                    addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 12f);
+                    //addCellwithPaddingLeftSize(table, "", 0f, 0f, 0f, 0.5f, BaseColor.WHITE, BaseColor.BLACK, 12f);
+                    pdfDoc.Add(table);
+                }
 
                 //if (ICCIDImage != null)
                 //{

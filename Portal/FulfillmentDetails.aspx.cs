@@ -2011,7 +2011,7 @@ namespace avii
                     }
                     else
                     {
-                        var memSt = dishLabelOperation.POSKITLabelPdfTarCode2(posKITs);
+                        var memSt = dishLabelOperation.POSKITLabelPdfTarCodeNew2(posKITs);
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "stop loader", "StopProgress()", true);
                         //var memSt = slabel.ExportToPDF(models);
                         if (memSt != null)

@@ -312,7 +312,14 @@
                                                     
                                                 </ItemTemplate>
                                             </asp:TemplateField> 
+                                            <asp:TemplateField HeaderText="Assigned Quantity"   ItemStyle-HorizontalAlign="Right" ItemStyle-CssClass="copy10grey" ItemStyle-Width="9%">
+                                                <ItemTemplate>
+                                                            <%#Eval("AssignedQty")%>
+                                                    
+                                                </ItemTemplate>
+                                            </asp:TemplateField> 
                                             
+
                                             <asp:TemplateField HeaderText="Received By"   ItemStyle-HorizontalAlign="left" ItemStyle-CssClass="copy10grey" ItemStyle-Width="9%">
                                                 <ItemTemplate>
                                                             <%#Eval("UserName")%>
