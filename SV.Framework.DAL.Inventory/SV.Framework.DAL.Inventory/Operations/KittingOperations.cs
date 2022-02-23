@@ -92,8 +92,8 @@ namespace SV.Framework.DAL.Inventory
         }
         public  KittingInfo GetKittingInfoByESN(string ESN, int ItemCompanyGUID)
         {
-            KittingInfo kittingInfo = default;
-            List<PurchaseOrderKitting> poDetails = default;
+            KittingInfo kittingInfo = new KittingInfo();
+            List<PurchaseOrderKitting> poDetails = default;// new List<PurchaseOrderKitting>();
             List<KitRawSKU> skus = default;
             using (DBConnect db = new DBConnect())
             {
@@ -130,7 +130,7 @@ namespace SV.Framework.DAL.Inventory
 
         public KittingInfo GetPurchaseOrderKittingInfo(string poNumber, string ESN, string boxID, string palletID)
         {
-            KittingInfo kittingInfo = default;// new KittingInfo();
+            KittingInfo kittingInfo =  new KittingInfo();
             List<PurchaseOrderKitting> poDetails = default;
             List<KitRawSKU> skus = default;
             using (DBConnect db = new DBConnect())

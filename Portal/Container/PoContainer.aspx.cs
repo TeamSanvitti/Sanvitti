@@ -97,6 +97,11 @@ namespace avii.Container
                         PalletQuantity = item.PalletQuantity;
 
                     }
+                    if(casePackQuantity == 0)
+                    {
+                        lblMsg.Text = "Container quantity not assigned for this SKU#: " + skuList[0].SKU;
+                        return;
+                    }
                     hdPallets.Value = numberOfPallets.ToString();
                     ViewState["Code"] = Code;
                     ViewState["PalletQuantity"] = PalletQuantity;

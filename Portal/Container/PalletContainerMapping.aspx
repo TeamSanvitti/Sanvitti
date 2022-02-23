@@ -6,7 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Mapping</title>
+    <title>Container - Pallet Mapping</title>
    
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
@@ -55,7 +55,7 @@
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="95%">
 		<tr>
 			<td  bgcolor="#dee7f6" class="buttonlabel">
-            &nbsp;&nbsp;Mapping
+            &nbsp;&nbsp;Container - Pallet Mapping
 			</td>
 		</tr>
     

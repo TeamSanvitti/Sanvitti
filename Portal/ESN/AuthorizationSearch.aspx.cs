@@ -279,7 +279,7 @@ namespace avii.ESN
         private void DownloadAuth(int ESNAuthorizationID)
         {
             int SequenceNumber = 0;
-            string sku = "", SWVersion = "";
+            string sku = "", SWVersion = "", productType = "";
             string ESNData = "";
             //int ESNAuthorizationID = Convert.ToInt32(e.CommandArgument);
 
@@ -298,6 +298,7 @@ namespace avii.ESN
                     sku = newList[0].KittedSKU;
                     SWVersion = newList[0].SWVersion;
                     SequenceNumber = newList[0].SquenceNumber;
+                    productType = newList[0].ProductType;
                     
                     var xmlSer = new XmlSerializer(typeof(List<EsnUploadNew>), new XmlRootAttribute("ArrayOfEsnUploadNew"));
                     var stringReader = new StringReader(ESNData);
@@ -348,7 +349,7 @@ namespace avii.ESN
                             fileName = filePrefix + "_" + transDate + "_" + SequenceNumber.ToString() + ".xml";
                             filePath = filePath + fileName;
 
-                            XElement xmlElement = EsnAuthorizationOperation.CreateAuthorizationFile(ESNs, SequenceNumber.ToString(), transDate);
+                            XElement xmlElement = EsnAuthorizationOperation.CreateAuthorizationFile(ESNs, SequenceNumber.ToString(), transDate, productType);
 
                             xmlElement.Save(filePath);
 

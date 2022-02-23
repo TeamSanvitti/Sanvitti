@@ -67,6 +67,7 @@ namespace avii
             int poID = Convert.ToInt32(e.CommandArgument);
 
             Session["unpoid"] = poID;
+            Session["unporequest"] = poID;
             ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('FulfillmentDetails.aspx')</script>", false);
 
         }

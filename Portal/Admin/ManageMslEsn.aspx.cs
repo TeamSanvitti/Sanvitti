@@ -17,7 +17,6 @@ namespace avii.Admin
     public partial class ManageMslEsn : System.Web.UI.Page
     {
         // public bool EsnHeaderId { get; set; }
-
         private string fileStoreLocation = "~/UploadedData/ESNUpload/";
         private const char DELIMITER = ',';
         private MslOperation mslOperation = MslOperation.CreateInstance<MslOperation>();
@@ -55,7 +54,6 @@ namespace avii.Admin
                     }
                     // else
                     //   pnlDate.Visible = false;
-
                 }
                 //pnlDate.Visible = false;
 
@@ -117,6 +115,8 @@ namespace avii.Admin
                 txtCustOrderNumber.Text = esnHeader.CustomerOrderNumber;
                 txtOrderDate.Text = esnHeader.OrderDate;
                 txtOrderNumber.Text = esnHeader.OrderNumber;
+                txtReceiveDate.Text = esnHeader.OrderDate;
+                txtReceiveBy.Text = esnHeader.UserName;
                 //txtOrderQty.Text = esnHeader.OrderQty.ToString();
                 txtShipDate.Text = esnHeader.ShipDate;
                 txtShipQty.Text = esnHeader.ShipQty.ToString();
@@ -136,6 +136,7 @@ namespace avii.Admin
                 txtCustOrderNumber.Enabled = false;
                 ddlCategory.Enabled = false;
                 ddlSKU.Enabled = false;
+                trReceivedate.Visible = true;
 
                 List<EsnUploadNew> esnList = new List<EsnUploadNew>();
                 esnList = esnHeader.EsnList;
@@ -203,7 +204,6 @@ namespace avii.Admin
                 }
             }
         }
-
         protected void BindCustomer()
         {
             dpCompany.DataSource = avii.Classes.clsCompany.GetCompany(0, 0);
@@ -261,7 +261,6 @@ namespace avii.Admin
                 ddlSKU.DataBind();
             }
         }
-
         protected void ESNDelete_click(object sender, System.Web.UI.WebControls.CommandEventArgs e)
         {
             string esn = Convert.ToString(e.CommandArgument);
@@ -280,7 +279,6 @@ namespace avii.Admin
                 lblMsg.Text = "ESN cannot be deleted";
 
         }
-
         private void BindSKUs(int categoryGUID)
         {
             int parentCategoryGUID = 0;
@@ -308,7 +306,6 @@ namespace avii.Admin
 
 
         }
-
         protected void ddlCategory_SelectedIndexChanged(object sender, EventArgs e)
         {
             int categoryGUID = 0, parentCategoryGUID = 0;
@@ -866,7 +863,6 @@ namespace avii.Admin
             else
                 lblMsg.Text = "Please select SKU";
         }
-
         private void ClearForm()
         {
             txtCustOrderNumber.Text = string.Empty;
@@ -1539,7 +1535,6 @@ namespace avii.Admin
             else
                 lblMsg.Text = "Please select SKU";
         }
-
         private string UploadFile()
         {
             string actualFilename = string.Empty;
@@ -1580,7 +1575,6 @@ namespace avii.Admin
 
             return fileStoreLocation + actualFilename;
         }
-
         protected void gvMSL_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -1603,7 +1597,6 @@ namespace avii.Admin
             //    gvMSL.Columns[5].Visible = true;
             //}
         }
-
         protected void lnkDownload_Click(object sender, EventArgs e)
         {
             GenerateCSV();
@@ -1624,7 +1617,6 @@ namespace avii.Admin
             Response.End();
 
         }
-
         protected void btnDelete_Click(object sender, EventArgs e)
         {
             List<EsnUploadNew> esnList = new List<EsnUploadNew>();
@@ -1721,7 +1713,6 @@ namespace avii.Admin
                 }
             }
         }
-
         protected void lnkBox_Command(object sender, CommandEventArgs e)
         {
             string esn = Convert.ToString(e.CommandArgument);
@@ -1729,7 +1720,6 @@ namespace avii.Admin
             ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('../esn/esnboxidedit.aspx')</script>", false);
 
         }
-
         protected void btnLocation_Click(object sender, EventArgs e)
         {
             // int companyID = 0;

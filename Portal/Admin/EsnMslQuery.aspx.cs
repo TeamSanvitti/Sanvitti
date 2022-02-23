@@ -74,7 +74,7 @@ namespace avii.Admin
         {
             MslOperation mslOperation = MslOperation.CreateInstance<MslOperation>();
             int companyId = 0, categoryID = 0;
-            string custOrderNumber = string.Empty, shipFrpm = string.Empty, shipTo = string.Empty, ESN = string.Empty, trackingNumber = string.Empty, SKU = string.Empty;
+            string custOrderNumber = string.Empty, shipFrpm = string.Empty, shipTo = string.Empty, ESN = string.Empty, trackingNumber = string.Empty, SKU = string.Empty, location = "";
             custOrderNumber = txtCustOrderNumber.Text.Trim();
             shipFrpm = txtShipFrom.Text.Trim();
             shipTo = txtShipTo.Text.Trim();
@@ -83,7 +83,8 @@ namespace avii.Admin
             if (ddlCategoryFilter.SelectedIndex > 0)
                 categoryID = Convert.ToInt32(ddlCategoryFilter.SelectedValue);
 
-            trackingNumber = txtTrackingNo.Text.Trim();
+            location = txtLocation.Text.Trim();
+            //trackingNumber = txtTrackingNo.Text.Trim();
             lblCount.Text = string.Empty;
             lblTotalQty.Text = string.Empty;
             lblMsg.Text = string.Empty;
@@ -96,7 +97,7 @@ namespace avii.Admin
             if (dpCompany.SelectedIndex > 0)
                 companyId = Convert.ToInt32(dpCompany.SelectedValue);
 
-            if (companyId == 0 && categoryID == 0 && string.IsNullOrEmpty(custOrderNumber) && string.IsNullOrEmpty(SKU) && string.IsNullOrEmpty(shipFrpm) && string.IsNullOrEmpty(shipTo) && string.IsNullOrEmpty(ESN) && string.IsNullOrEmpty(trackingNumber))
+            if (companyId == 0 && categoryID == 0 && string.IsNullOrEmpty(custOrderNumber) && string.IsNullOrEmpty(SKU) && string.IsNullOrEmpty(shipFrpm) && string.IsNullOrEmpty(shipTo) && string.IsNullOrEmpty(ESN) && string.IsNullOrEmpty(trackingNumber) && string.IsNullOrEmpty(location))
             {
                 lblMsg.Text = "Please select the search criteria";
                 pnlSearch.Visible = false;
@@ -106,7 +107,7 @@ namespace avii.Admin
             }
             else
             {
-                List<EsnHeaders> esnHeadersList = mslOperation.GetESNwithHeaderList(companyId, custOrderNumber, shipFrpm, shipTo, ESN, trackingNumber, SKU, categoryID);
+                List<EsnHeaders> esnHeadersList = mslOperation.GetESNwithHeaderList(companyId, custOrderNumber, shipFrpm, shipTo, ESN, trackingNumber, SKU, categoryID, location);
                 if (esnHeadersList != null && esnHeadersList.Count > 0)
                 {
                     pnlSearch.Visible = true;
@@ -136,7 +137,7 @@ namespace avii.Admin
             txtShipFrom.Text = string.Empty;
             txtShipTo.Text = string.Empty;
             txtESN.Text = string.Empty;
-            txtTrackingNo.Text = string.Empty;
+            //txtTrackingNo.Text = string.Empty;
             dpCompany.SelectedIndex = 0;
             ddlCategoryFilter.SelectedIndex = 0;
             lblMsg.Text = string.Empty;

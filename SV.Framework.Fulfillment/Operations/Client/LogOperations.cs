@@ -10,7 +10,7 @@ namespace SV.Framework.Fulfillment
 {
     public class LogOperations : BaseCreateInstance
     {
-        SV.Framework.DAL.Fulfillment.LogOperations logOperations = SV.Framework.DAL.Fulfillment.LogOperations.CreateInstance<DAL.Fulfillment.LogOperations>();
+        //SV.Framework.DAL.Fulfillment.LogOperations logOperations = SV.Framework.DAL.Fulfillment.LogOperations.CreateInstance<DAL.Fulfillment.LogOperations>();
 
         public void FulfillmentLogInsert(FulfillmentLogModel request)
         {

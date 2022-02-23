@@ -263,13 +263,20 @@ namespace avii.Admin
 
             Session["esnheaderid"] = Convert.ToInt32(e.CommandArgument);
             Response.Redirect("~/admin/NonEsnInventory.aspx");
-
-
         }
-
         protected void imgDelete_Command(object sender, CommandEventArgs e)
         {
+            avii.Classes.UserInfo objUserInfo = Session["userInfo"] as avii.Classes.UserInfo;
+            SV.Framework.Inventory.NonEsnOperation nonEsnOperation = SV.Framework.Inventory.NonEsnOperation.CreateInstance<SV.Framework.Inventory.NonEsnOperation>();
+            string returnMessage = "";
+            int userID = 0;
+            if (objUserInfo != null)
+                userID = objUserInfo.UserGUID;
 
+            int esnHeaderID = Convert.ToInt32(e.CommandArgument);
+
+            int returnResult = nonEsnOperation.NonESNInventoryDelete(esnHeaderID, userID, out returnMessage);
+            lblMsg.Text = returnMessage;
         }
     }
 }

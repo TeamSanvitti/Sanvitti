@@ -42,15 +42,6 @@ namespace avii.DocUpload
         protected global::avii.Controls.Header menu1;
 
         /// <summary>
-        /// UpdatePanel1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
-
-        /// <summary>
         /// lblMsg control.
         /// </summary>
         /// <remarks>
@@ -67,6 +58,15 @@ namespace avii.DocUpload
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel Panel1;
+
+        /// <summary>
+        /// trCustomer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trCustomer;
 
         /// <summary>
         /// dpCompany control.
@@ -159,6 +159,42 @@ namespace avii.DocUpload
         protected global::System.Web.UI.WebControls.Label lblStatus;
 
         /// <summary>
+        /// pnlUpload control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlUpload;
+
+        /// <summary>
+        /// lblContentType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblContentType;
+
+        /// <summary>
+        /// fupDoc1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fupDoc1;
+
+        /// <summary>
+        /// lnkDocfile1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkDocfile1;
+
+        /// <summary>
         /// txtFile1Desc control.
         /// </summary>
         /// <remarks>
@@ -168,13 +204,40 @@ namespace avii.DocUpload
         protected global::System.Web.UI.WebControls.TextBox txtFile1Desc;
 
         /// <summary>
-        /// fupDocA1 control.
+        /// img1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fupDocA1;
+        protected global::System.Web.UI.WebControls.ImageButton img1;
+
+        /// <summary>
+        /// hdnDocID1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnDocID1;
+
+        /// <summary>
+        /// fupDoc2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fupDoc2;
+
+        /// <summary>
+        /// lnkDocfile2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkDocfile2;
 
         /// <summary>
         /// txtFile2Desc control.
@@ -186,13 +249,40 @@ namespace avii.DocUpload
         protected global::System.Web.UI.WebControls.TextBox txtFile2Desc;
 
         /// <summary>
-        /// fupDocA2 control.
+        /// img2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fupDocA2;
+        protected global::System.Web.UI.WebControls.ImageButton img2;
+
+        /// <summary>
+        /// hdnDocID2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnDocID2;
+
+        /// <summary>
+        /// fupDoc3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fupDoc3;
+
+        /// <summary>
+        /// lnkDocfile3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkDocfile3;
 
         /// <summary>
         /// txtFile3Desc control.
@@ -204,13 +294,40 @@ namespace avii.DocUpload
         protected global::System.Web.UI.WebControls.TextBox txtFile3Desc;
 
         /// <summary>
-        /// fupDocA3 control.
+        /// img3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fupDocA3;
+        protected global::System.Web.UI.WebControls.ImageButton img3;
+
+        /// <summary>
+        /// hdnDocID3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnDocID3;
+
+        /// <summary>
+        /// fupDoc4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fupDoc4;
+
+        /// <summary>
+        /// lnkDocfile4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkDocfile4;
 
         /// <summary>
         /// txtFile4Desc control.
@@ -222,13 +339,40 @@ namespace avii.DocUpload
         protected global::System.Web.UI.WebControls.TextBox txtFile4Desc;
 
         /// <summary>
-        /// fupDocA4 control.
+        /// img4 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fupDocA4;
+        protected global::System.Web.UI.WebControls.ImageButton img4;
+
+        /// <summary>
+        /// hdnDocID4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnDocID4;
+
+        /// <summary>
+        /// fupDoc5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload fupDoc5;
+
+        /// <summary>
+        /// lnkDocfile5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkDocfile5;
 
         /// <summary>
         /// txtFile5Desc control.
@@ -240,13 +384,22 @@ namespace avii.DocUpload
         protected global::System.Web.UI.WebControls.TextBox txtFile5Desc;
 
         /// <summary>
-        /// fupDocA5 control.
+        /// img5 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fupDocA5;
+        protected global::System.Web.UI.WebControls.ImageButton img5;
+
+        /// <summary>
+        /// hdnDocID5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnDocID5;
 
         /// <summary>
         /// btnDocUpload control.
@@ -265,5 +418,41 @@ namespace avii.DocUpload
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUloadCancel;
+
+        /// <summary>
+        /// upnlJsRunner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel upnlJsRunner;
+
+        /// <summary>
+        /// phrJsRunner control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phrJsRunner;
+
+        /// <summary>
+        /// UpdateProgress1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
+
+        /// <summary>
+        /// Menuheader2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::avii.Controls.footer Menuheader2;
     }
 }

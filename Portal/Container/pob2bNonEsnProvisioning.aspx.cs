@@ -58,6 +58,7 @@ namespace avii.Container
             rptSKU.Visible = false;
             trUpload.Visible = false;
             int companyID = 0;
+            bool IsKittedBox = false;
             if (dpCompany.SelectedIndex > 0)
             {
                 int.TryParse(dpCompany.SelectedValue, out companyID);
@@ -80,6 +81,7 @@ namespace avii.Container
                 List<ContainerInfo> skuList = containerOperation.GetContainerInfo(companyID, fulfillmentNumber, trackingNumber, out containers, out nonESNList, out trackingList);
                 if (skuList != null && skuList.Count > 0)
                 {
+                    IsKittedBox = skuList[0].IsKittedBox;
                     if (trackingList != null && trackingList.Count > 0)
                     {
                         ViewState["trackingNumberCount"] = trackingList.Count;
@@ -122,7 +124,7 @@ namespace avii.Container
                         // btnGenContainerID.Visible = false;
 
                     }
-                    if (nonESNList != null && nonESNList.Count > 0)
+                    if (nonESNList != null && nonESNList.Count > 0 && IsKittedBox)
                     {
                         lblNonEsn.Text = "Non ESN Items";
                         rptSKU.DataSource = nonESNList;
@@ -266,6 +268,7 @@ namespace avii.Container
             {
                 poid = Convert.ToInt32(ViewState["poid"]);
             }
+
             if (ViewState["casePackQuantity"] != null)
                 containerQty = Convert.ToInt32(ViewState["casePackQuantity"]);
 

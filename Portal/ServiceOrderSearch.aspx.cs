@@ -280,13 +280,13 @@ namespace avii
             int ESNHeaderID = 0, ItemCompanyGUID = 0;
             int ServiceOrderId = 0;
 
-            string SequenceNumber = "";
+            string SequenceNumber = "", producttype="";
 
             if (ViewState["ServiceOrderId"] != null)
             {
                 ServiceOrderId = Convert.ToInt32(ViewState["ServiceOrderId"]);
 
-                List<SV.Framework.Models.Inventory.ESNAuthorization> ESNs = esnAuthorizationOperation.GetESNAuthorizations(ESNHeaderID, ItemCompanyGUID, ServiceOrderId, out SequenceNumber);
+                List<SV.Framework.Models.Inventory.ESNAuthorization> ESNs = esnAuthorizationOperation.GetESNAuthorizations(ESNHeaderID, ItemCompanyGUID, ServiceOrderId, out SequenceNumber, out producttype);
 
                 //List<SV.Framework.Inventory.ESNAuthorization> ESNs = Session["ESNs"] as List<SV.Framework.Inventory.ESNAuthorization>;
                 var memoryStream = new MemoryStream();
@@ -311,7 +311,7 @@ namespace avii
                     fileName = filePrefix + "_" + transDate + "_" + SequenceNumber + ".xml";
                     filePath = filePath + fileName;
 
-                    XElement xmlElement = esnAuthorizationOperation.CreateAuthorizationFile(ESNs, SequenceNumber, currentDate);
+                    XElement xmlElement = esnAuthorizationOperation.CreateAuthorizationFile(ESNs, SequenceNumber, currentDate, producttype);
 
                     xmlElement.Save(filePath);
 

@@ -71,8 +71,6 @@ namespace avii
                     BindPO(poid, poQuery);
                     BindComments(poid);
                     BindFulfillmentLog(poid, 1);
-
-
                 }
                 if (Session["unpoid"] != null)
                 {
@@ -90,6 +88,11 @@ namespace avii
                     btnContainerSlip.Visible = false;
                     btnPckSlip.Visible = false;
                     pnlUnprovision.Visible = true;
+                    if(Session["unporequest"] != null)
+                    {
+                        Session["unporequest"] = null;
+                        btnSubmit.Visible = true;
+                    }
 
                 }
                 // int poid = 0;

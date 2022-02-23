@@ -428,6 +428,8 @@ namespace SV.Framework.DAL.Inventory
                     skuStock.StockAssigned = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "AssignedCount", 0, false));
                     skuStock.StockReassignment = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "Reassignment", 0, false));
                     skuStock.StockReceived = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ReceiveCount", 0, false));
+                    skuStock.DekitCount = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "DekitCount", 0, false));
+                    skuStock.UnProvisioningCount = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "UnProvisioningCount", 0, false));
                     skuStock.ClosingBalance = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ClosingBalance", 0, false));
                     skuStock.ItemName = clsGeneral.getColumnData(dataRow, "ItemName", string.Empty, false) as string;
                     skuStock.StockDate = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "StockDate", DateTime.Now, false));

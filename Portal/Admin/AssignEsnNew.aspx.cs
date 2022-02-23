@@ -478,7 +478,7 @@ namespace avii.Admin
                         }
                         catch (Exception e2)
                         {
-                            // sqlTrans.Rollback();
+                             sqlTrans.Rollback();
                         }
                         finally
                         {

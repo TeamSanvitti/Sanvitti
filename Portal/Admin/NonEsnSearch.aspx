@@ -65,15 +65,15 @@
 		</tr>
             </table>
         <table cellSpacing="0" cellPadding="0" align="center" width="95%" border="0">
-		<tr>
-			<td  bgcolor="#dee7f6" class="button">&nbsp;&nbsp;Accessory Receive Search
+		<tr class="buttonlabel">
+			<td  class="buttonlabel">&nbsp;&nbsp;Accessory Receive Search
 			</td>
 		</tr>
         </table>
         <table cellSpacing="0" cellPadding="0" align="center" width="95%" border="0">
     		<tr>                    
                 <td colspan="2">
-                    <asp:Label ID="lblMsg" runat="server" Width="100%" CssClass="errormessage"></asp:Label></td>
+                    <asp:Label ID="lblMsg" runat="server" CssClass="errormessage"></asp:Label></td>
             </tr>               
             
             <tr>
@@ -287,7 +287,7 @@
                                                 </ItemTemplate>
                                             </asp:TemplateField> 
                                             
-                                            <asp:TemplateField HeaderText="Receive Date" HeaderStyle-CssClass="buttonundlinelabel" SortExpression="OrderDate"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" ItemStyle-Width="8%">
+                                            <asp:TemplateField HeaderText="Receive Date" HeaderStyle-CssClass="buttonundlinelabel" SortExpression="ReceivedDate"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" ItemStyle-Width="8%">
                                                 <ItemTemplate>
                                                             <%#Eval("UploadDate")%>
                                                     
@@ -330,9 +330,10 @@
                                             
                                             <asp:TemplateField HeaderStyle-Width="3%" HeaderStyle-CssClass="buttonlabel" HeaderText="Action">
                                                 <ItemTemplate>
-
+                                                    
                                                     <asp:ImageButton ID="edit" runat="server" CommandArgument='<%# Eval("ESNHeaderId") %>' ImageUrl="~/images/edit.png" OnCommand="edit_Command" />
-                                                    <asp:ImageButton ID="imgDelete" runat="server" CommandArgument='<%# Eval("ESNHeaderId") %>' ImageUrl="~/images/delete.png" OnCommand="imgDelete_Command" />
+                                                    <asp:ImageButton ID="imgDelete" Visible='<%#  Convert.ToInt32(Eval("AssignedQty")) > 0 ? false : true %>' runat="server" OnClientClick="return confirm('Are you sure want to delete this record?')"
+                                                        CommandArgument='<%# Eval("ESNHeaderId") %>' ImageUrl="~/images/delete.png" OnCommand="imgDelete_Command" />
                                                     <%--<div runat="server" visible='<%#Eval("IsESN")%>' width="100%">
                                                     
 

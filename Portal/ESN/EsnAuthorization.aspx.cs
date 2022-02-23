@@ -99,7 +99,7 @@ namespace avii.ESN
         protected void btnDownload_Click(object sender, EventArgs e)
         {
             int ESNHeaderID = 0, ItemCompanyGUID = 0;
-            string SequenceNumber = "";
+            string SequenceNumber = "", productType = "";
             if (ViewState["ESNHeaderID"] != null)
             {
                 ESNHeaderID = Convert.ToInt32(ViewState["ESNHeaderID"]);
@@ -107,7 +107,7 @@ namespace avii.ESN
                 {
                     ItemCompanyGUID = Convert.ToInt32(ddlSKU.SelectedValue);
 
-                    List<ESNAuthorization> ESNs = esnAuthorizationOperation.GetESNAuthorizations(ESNHeaderID, ItemCompanyGUID, 0, out SequenceNumber);
+                    List<ESNAuthorization> ESNs = esnAuthorizationOperation.GetESNAuthorizations(ESNHeaderID, ItemCompanyGUID, 0, out SequenceNumber, out productType);
 
                 //List<ESNAuthorization> ESNs = Session["ESNs"] as List<ESNAuthorization>;
                 var memoryStream = new MemoryStream();
@@ -132,7 +132,7 @@ namespace avii.ESN
                         fileName = filePrefix + "_" + transDate + "_" + SequenceNumber.ToString() + ".xml";
                         filePath = filePath + fileName;
 
-                        XElement xmlElement = esnAuthorizationOperation.CreateAuthorizationFile(ESNs, SequenceNumber, currentDate);
+                        XElement xmlElement = esnAuthorizationOperation.CreateAuthorizationFile(ESNs, SequenceNumber, currentDate, productType);
 
                         xmlElement.Save(filePath);
 
@@ -207,7 +207,7 @@ namespace avii.ESN
             int itemCompanyGUID = 0;
             lblMsg.Text = string.Empty;
             Hashtable hshESN = new Hashtable();
-            string sku = "", SWVersion = "", ManufactureCode = "", DisplayName = "";
+            string sku = "", SWVersion = "", ManufactureCode = "", DisplayName = "", productType="";
             bool columnsIncorrectFormat = false;
             int esnLength = 0, decLength = 0;
             string runNumber = txtRunNumber.Text.Trim();
@@ -513,8 +513,9 @@ namespace avii.ESN
                                                         btnGenerateCSV.Visible = true;
                                                         btnUploadValidate.Visible = false;
                                                         int ESNAuthorizationID = 0;
-                                                        int SequenceNumber = esnAuthorizationOperation.ESNAuthorizationInsert(ESNs, esnauthList, itemCompanyGUID, userID, kittedItemCompanyGUID, runNumber, PlannedProvisioingDate, out ESNAuthorizationID);
+                                                        int SequenceNumber = esnAuthorizationOperation.ESNAuthorizationInsert(ESNs, esnauthList, itemCompanyGUID, userID, kittedItemCompanyGUID, runNumber, PlannedProvisioingDate, out ESNAuthorizationID, out productType);
                                                         ViewState["SequenceNumber"] = SequenceNumber;
+                                                        ViewState["productType"] = productType;
                                                         ViewState["ESNAuthorizationID"] = ESNAuthorizationID;
 
                                                     }
@@ -599,7 +600,7 @@ namespace avii.ESN
             int itemCompanyGUID = 0;
             lblMsg.Text = string.Empty;
             Hashtable hshESN = new Hashtable();
-            string sku = "", SWVersion = "", ManufactureCode = "", DisplayName = "";
+            string sku = "", SWVersion = "", ManufactureCode = "", DisplayName = "", PRODUCTtYPE="";
             bool columnsIncorrectFormat = false;
             int esnLength = 0, decLength = 0;
             string runNumber = txtRunNumber.Text.Trim();
@@ -909,7 +910,7 @@ namespace avii.ESN
                                                         btnGenerateCSV.Visible = true;
                                                         btnUploadValidate.Visible = false;
                                                         int ESNAuthorizationID = 0;
-                                                        int SequenceNumber = esnAuthorizationOperation.ESNAuthorizationInsert(ESNs, esnauthList, itemCompanyGUID, userID, kittedItemCompanyGUID, runNumber, PlannedProvisioingDate, out ESNAuthorizationID);
+                                                        int SequenceNumber = esnAuthorizationOperation.ESNAuthorizationInsert(ESNs, esnauthList, itemCompanyGUID, userID, kittedItemCompanyGUID, runNumber, PlannedProvisioingDate, out ESNAuthorizationID, out PRODUCTtYPE);
                                                         ViewState["SequenceNumber"] = SequenceNumber;
                                                         ViewState["ESNAuthorizationID"] = ESNAuthorizationID;
 
@@ -1188,6 +1189,7 @@ namespace avii.ESN
             lblMsg.Text = "";
             if (Session["Esns"] != null)
             {
+                string productType = "";
                 List<ESNAuthorization> ESNs = Session["Esns"] as List<ESNAuthorization>;
                 List<EsnUploadNew> esnauthList = Session["esnauthlist"] as List<EsnUploadNew>;
                 int ItemCompanyGUID = 0, userID = 0, KittedItemCompanyGUID=0;
@@ -1208,6 +1210,8 @@ namespace avii.ESN
 
                         if (ViewState["SequenceNumber"] != null)
                             SequenceNumber = Convert.ToInt32(ViewState["SequenceNumber"]);
+                        if (ViewState["productType"] != null)
+                            productType = Convert.ToString(ViewState["productType"]);
                         var memoryStream = new MemoryStream();
                         //   System.Xml.XmlWriter write =  new   ;
                         string fileName;
@@ -1235,7 +1239,7 @@ namespace avii.ESN
                                 fileName = filePrefix + "_" + transDate + "_" + SequenceNumber.ToString() + ".xml";
                                 filePath = filePath + fileName;
 
-                                XElement xmlElement = esnAuthorizationOperation.CreateAuthorizationFile(ESNs, SequenceNumber.ToString(), transDate);
+                                XElement xmlElement = esnAuthorizationOperation.CreateAuthorizationFile(ESNs, SequenceNumber.ToString(), transDate, productType);
 
                                 xmlElement.Save(filePath);
 

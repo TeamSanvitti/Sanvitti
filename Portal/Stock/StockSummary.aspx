@@ -249,34 +249,45 @@
                                         <%# Eval("ItemName")%>
                                         </ItemTemplate>
                                 </asp:TemplateField>  
-                                <asp:TemplateField HeaderText="Opening Balance" ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="copy10grey" ItemStyle-Width="8%">
+                                <asp:TemplateField HeaderText="Opening Balance" ItemStyle-HorizontalAlign="Right" ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                                     <ItemTemplate>                                                
                                          <%# Eval("OpeningBalance")%>
                                     </ItemTemplate>
                                 </asp:TemplateField> 
-                                <asp:TemplateField HeaderText="Stock Received" SortExpression="StockReceived" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="copy10grey" ItemStyle-Width="8%">
+                                <asp:TemplateField HeaderText="Stock Received" SortExpression="StockReceived" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                                     <ItemTemplate>                                                
                                          <%# Eval("StockReceived")%>
                                     </ItemTemplate>
                                 </asp:TemplateField> 
-                                <asp:TemplateField HeaderText="Stock Assigned" SortExpression="StockAssigned" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="copy10grey" ItemStyle-Width="8%">
+                                <asp:TemplateField HeaderText="Stock Assigned" SortExpression="StockAssigned" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                                     <ItemTemplate>                                                
                                          <%# Eval("StockAssigned")%>
                                     </ItemTemplate>
                                 </asp:TemplateField>                              
-                              <asp:TemplateField HeaderText="Reassignment" SortExpression="StockReassignment" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="copy10grey" ItemStyle-Width="7%">
+                              <asp:TemplateField HeaderText="Reassignment" SortExpression="StockReassignment" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" ItemStyle-CssClass="copy10grey" ItemStyle-Width="7%">
                                     <ItemTemplate>                                                
                                          <%# Eval("StockReassignment")%>
                                     </ItemTemplate>
                                 </asp:TemplateField> 
-                               <asp:TemplateField HeaderText="Closing Balance*" ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="copy10grey" ItemStyle-Width="9%">
+                              <asp:TemplateField HeaderText="Dekit Count" SortExpression="DekitCount" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" ItemStyle-CssClass="copy10grey" ItemStyle-Width="4%">
+                                    <ItemTemplate>                                                
+                                         <%# Eval("DekitCount")%>
+                                    </ItemTemplate>
+                                </asp:TemplateField> 
+                              <asp:TemplateField HeaderText="UnProvisioning Count" SortExpression="UnProvisioningCount" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" ItemStyle-CssClass="copy10grey" ItemStyle-Width="6%">
+                                    <ItemTemplate>                                                
+                                         <%# Eval("UnProvisioningCount")%>
+                                    </ItemTemplate>
+                                </asp:TemplateField> 
+                               <asp:TemplateField HeaderText="Closing Balance*" ItemStyle-HorizontalAlign="Right" ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                                     <ItemTemplate>
                                          <%# Eval("ClosingBalance")%>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                               <asp:TemplateField HeaderText="Last Refresh Date*" SortExpression="RefreshDate" HeaderStyle-CssClass="buttonundlinelabel" ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                                     <ItemTemplate>
-                                         <%# Eval("RefreshDate")%>
+                                         <%--<%# Eval("RefreshDate")%>--%>
+                                        <%# Convert.ToDateTime(Eval("RefreshDate")).ToString("MM/dd/yyyy H:mm:ss") %>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                               

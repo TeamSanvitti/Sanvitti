@@ -127,7 +127,7 @@ namespace SV.Framework.DAL.Fulfillment
                     edfHeader.phoneOwnership = "DISH";
                     edfHeader.poOrder = clsGeneral.getColumnData(dataRow, "PO_Num", string.Empty, false) as string;
 
-                    product.edfSerialType = "H";
+                    product.edfSerialType = clsGeneral.getColumnData(dataRow, "Code", string.Empty, false) as string; // "H";
                     product.entSerialType = "E";
 
                     skuInfo.equipType = "CP";

@@ -162,11 +162,11 @@ namespace SV.Framework.Inventory
             return esnList;
         }
 
-        public List<EsnHeaders> GetESNwithHeaderList(int companyID, string CustOrderNumber, string ShipFrom, string ShipTo, string ESN, string TrackingNumber, string SKU, int categoryID)
+        public List<EsnHeaders> GetESNwithHeaderList(int companyID, string CustOrderNumber, string ShipFrom, string ShipTo, string ESN, string TrackingNumber, string SKU, int categoryID, string location)
         {
             DAL.Inventory.MslOperation mslOperation = DAL.Inventory.MslOperation.CreateInstance<DAL.Inventory.MslOperation>();
 
-            List<EsnHeaders> headerList = mslOperation.GetESNwithHeaderList(companyID, CustOrderNumber, ShipFrom, ShipTo, ESN, TrackingNumber, SKU, categoryID);
+            List<EsnHeaders> headerList = mslOperation.GetESNwithHeaderList(companyID, CustOrderNumber, ShipFrom, ShipTo, ESN, TrackingNumber, SKU, categoryID, location);
             return headerList;
         }
         public EsnHeaders GetESNwithHeaderDetail(int ESNHeaderId)

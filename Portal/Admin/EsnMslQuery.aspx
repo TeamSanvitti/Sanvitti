@@ -63,10 +63,10 @@
         <tr>
 			<td><head:MenuHeader id="HeadAdmin" runat="server"></head:MenuHeader></td>
 		</tr>
-            </table>
+        </table>
         <table cellSpacing="0" cellPadding="0" align="center" width="95%" border="0">
-		<tr>
-			<td  bgcolor="#dee7f6" class="button">&nbsp;&nbsp;ESN Repository Receive Search
+		<tr class="buttonlabel">
+			<td  class="buttonlabel">&nbsp;&nbsp;ESN Receive Search
 			</td>
 		</tr>
         </table>
@@ -161,10 +161,11 @@
                                      
                                 </td>
                                 <td class="copy10grey" align="right" width="22%" >
-                                     &nbsp;
+                                    Location: &nbsp;
                                 </td>
                                 <td  align="left"  width="28%" >
-                                    <asp:TextBox ID="txtTrackingNo" Visible="false" runat="server"   CssClass="copy10grey" MaxLength="20"  Width="80%"></asp:TextBox>
+                                    <asp:TextBox ID="txtLocation" Visible="true" runat="server"   CssClass="copy10grey" MaxLength="20"  Width="80%"></asp:TextBox>
+                                    <%--<asp:TextBox ID="txtTrackingNo" Visible="false" runat="server"   CssClass="copy10grey" MaxLength="20"  Width="80%"></asp:TextBox>--%>
                                 </td>
                             </tr>
                             

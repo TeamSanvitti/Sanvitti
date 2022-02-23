@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -101,6 +102,11 @@ namespace avii.Warehouse
             Session["warehouseStorages"] = null;
             gvWHCode.DataSource = null;
             gvWHCode.DataBind();
+            string sortExpression = "CreatedDateTime";
+            string sortDirection = "DESC";
+            ViewState["SortDirection"] = sortDirection;
+            ViewState["SortExpression"] = sortExpression;
+
             string warehouseCity = ddlWarehouse.SelectedItem.Text.Trim();
             string warehouseLocation = txtWarehouseLocation.Text.Trim();
             int companyID = Convert.ToInt32(ddlCompany.SelectedValue);
@@ -172,5 +178,64 @@ namespace avii.Warehouse
             ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('/warehouse/ViewWarehouseLocation.aspx')</script>", false);
 
         }
+
+        private string GetSortDirection(string column)
+        {
+            string sortDirection = "ASC";
+            string sortExpression = ViewState["SortExpression"] as string;
+            if (sortExpression != null)
+            {
+                if (sortExpression == column)
+                {
+                    string lastDirection = ViewState["SortDirection"] as string;
+                    if ((lastDirection != null) && (lastDirection == "ASC"))
+                    {
+                        sortDirection = "DESC";
+                    }
+                }
+            }
+            ViewState["SortDirection"] = sortDirection;
+            ViewState["SortExpression"] = column;
+            return sortDirection;
+        }
+        public List<WarehouseStorage> Sort<TKey>(List<WarehouseStorage> list, string sortBy, SortDirection direction)
+        {
+            PropertyInfo property = list.GetType().GetGenericArguments()[0].GetProperty(sortBy);
+            if (direction == SortDirection.Ascending)
+            {
+                return list.OrderBy(e => property.GetValue(e, null)).ToList<WarehouseStorage>();
+            }
+            else
+            {
+                return list.OrderByDescending(e => property.GetValue(e, null)).ToList<WarehouseStorage>();
+            }
+        }
+        protected void gvgvWHCode_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            string Sortdir = GetSortDirection(e.SortExpression);
+            string SortExp = e.SortExpression;
+
+            if (Session["warehouseStorages"] != null)
+            {
+                List<WarehouseStorage> warehouseStorages = (List<WarehouseStorage>)Session["warehouseStorages"];
+
+                if (warehouseStorages != null && warehouseStorages.Count > 0)
+                {
+                    var list = warehouseStorages;
+                    if (Sortdir == "ASC")
+                    {
+                        list = Sort<WarehouseStorage>(list, SortExp, SortDirection.Ascending);
+                    }
+                    else
+                    {
+                        list = Sort<WarehouseStorage>(list, SortExp, SortDirection.Descending);
+                    }
+                    Session["warehouseStorages"] = list;
+                    gvWHCode.DataSource = list;
+                    gvWHCode.DataBind();
+                }
+            }
+        }
+
     }
 }

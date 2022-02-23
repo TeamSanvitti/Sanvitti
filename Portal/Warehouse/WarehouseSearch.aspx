@@ -142,7 +142,8 @@
         <td colspan="2" align="center">
         <asp:GridView ID="gvWHCode" AutoGenerateColumns="false"   
         Width="100%" ShowHeader="true"  ShowFooter="false" runat="server" GridLines="Both"
-        AllowPaging="true" OnPageIndexChanging="gvWHCode_PageIndexChanging" PageSize="50"    >                        
+        AllowPaging="true" OnPageIndexChanging="gvWHCode_PageIndexChanging" PageSize="50" 
+           AllowSorting="true" OnSorting="gvgvWHCode_Sorting" >                        
         <RowStyle BackColor="Gainsboro" />
         <AlternatingRowStyle BackColor="white" />
         <HeaderStyle  CssClass="buttongrid" ForeColor="white"/>
@@ -153,43 +154,43 @@
                         <%#  Container.DataItemIndex + 1%>               
                 </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Warehouse Location" HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
+                <asp:TemplateField HeaderText="Warehouse Location" SortExpression="WarehouseLocation"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="15%">
                     <ItemTemplate>
                         <%# Eval("WarehouseLocation")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
-                <asp:TemplateField HeaderText="Warehouse City" HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
+                <asp:TemplateField HeaderText="Warehouse City" SortExpression="WarehouseCity"  HeaderStyle-CssClass="buttonundlinelabel" ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="15%">
                     <ItemTemplate>
                         <%# Eval("WarehouseCity")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
-                <asp:TemplateField HeaderText="Aisle" HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
+                <asp:TemplateField HeaderText="Aisle" SortExpression="Aisle"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                     <ItemTemplate>
                         <%# Eval("Aisle")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
-                <asp:TemplateField HeaderText="Bay" HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
+                <asp:TemplateField HeaderText="Bay" SortExpression="Bay"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                     <ItemTemplate>
                         <%# Eval("Bay")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
-                <asp:TemplateField HeaderText="Level" HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
+                <asp:TemplateField HeaderText="Level" SortExpression="RowLevel"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                     <ItemTemplate>
                         <%# Eval("RowLevel")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
-                <asp:TemplateField HeaderText="Customer" HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
+                <asp:TemplateField HeaderText="Customer" SortExpression="CompanyName"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                     <ItemTemplate>
                         <%# Eval("CompanyName")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
-                <asp:TemplateField HeaderText="Create Date" HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
+                <asp:TemplateField HeaderText="Create Date" SortExpression="CreatedDateTime"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                     <ItemTemplate>
                         <%# Eval("CreateDate")%>

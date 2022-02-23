@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace avii.Admin {
-    
-    
-    public partial class EsnMslQuery {
-        
+namespace avii.Admin
+{
+
+
+    public partial class EsnMslQuery
+    {
+
         /// <summary>
         /// form1 control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
-        
+
         /// <summary>
         /// HeadAdmin control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::avii.Controls.Header HeadAdmin;
-        
+
         /// <summary>
         /// lblMsg control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMsg;
-        
+
         /// <summary>
         /// dpCompany control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList dpCompany;
-        
+
         /// <summary>
         /// txtCustOrderNumber control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCustOrderNumber;
-        
+
         /// <summary>
         /// txtShipFrom control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtShipFrom;
-        
+
         /// <summary>
         /// txtShipTo control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtShipTo;
-        
+
         /// <summary>
         /// ddlCategoryFilter control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCategoryFilter;
-        
+
         /// <summary>
         /// txtSKU control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtSKU;
-        
+
         /// <summary>
         /// txtESN control.
         /// </summary>
@@ -101,16 +103,16 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtESN;
-        
+
         /// <summary>
-        /// txtTrackingNo control.
+        /// txtLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtTrackingNo;
-        
+        protected global::System.Web.UI.WebControls.TextBox txtLocation;
+
         /// <summary>
         /// btnSearch control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSearch;
-        
+
         /// <summary>
         /// btnCancel control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
-        
+
         /// <summary>
         /// pnlSearch control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlSearch;
-        
+
         /// <summary>
         /// lblCount control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCount;
-        
+
         /// <summary>
         /// lblTotalQty control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace avii.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblTotalQty;
-        
+
         /// <summary>
         /// gvMSL control.
         /// </summary>

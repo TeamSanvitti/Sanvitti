@@ -261,8 +261,12 @@
         	<tr>
 				<td><head:MenuHeader id="HeadAdmin" runat="server"></head:MenuHeader></td>
 			</tr>
-			<tr>
-				<td  bgcolor="#dee7f6" class="button">&nbsp;&nbsp;Inventory Receive
+            
+        </table>
+        <table cellSpacing="0" cellPadding="0" align="center" width="95%" border="0">
+		
+			<tr class="buttonlabel">
+				<td  class="buttonlabel">&nbsp;&nbsp;Inventory Receive
 				</td>
 			</tr>            
         </table>
@@ -278,7 +282,7 @@
             <tr>
                 <td align="center">
 
-                    <table  cellSpacing="1" cellPadding="1" width="100%">
+                    <table  cellSpacing="1" cellPadding="1" width="95%">
                         <tr><td class="copy10grey" align="left">
                         <%--- Create/Update ESN(s) to Customer assigned SKU#(s).<br />&nbsp;--%>
                             <asp:Label ID="lblFilesize" runat="server" CssClass="copy10grey">&nbsp;- Upload file should be less than 3 MB. <br /></asp:Label>
@@ -344,6 +348,26 @@
                                      
                                 </td>
                             </tr>
+                            <tr id="trReceivedate" runat="server" visible="false">
+                                <td class="copy10grey" align="right" width="22%" >
+                                    Receive Date: &nbsp;
+
+                                </td>
+
+                                
+                                <td  align="left" width="28%" >
+                                     <asp:TextBox ID="txtReceiveDate" runat="server" Enabled="false" CssClass="copy10grey"   Width="80%"></asp:TextBox>
+                                        
+                                </td>
+                                <td class="copy10grey" align="right" width="22%" >
+                                    Received By: &nbsp;
+                                </td>
+                                <td  align="left"  width="28%" >
+                                     <asp:TextBox ID="txtReceiveBy" runat="server" Enabled="false" CssClass="copy10grey"   Width="80%"></asp:TextBox>
+                                            
+                                </td>
+                            </tr>
+                            
                             <tr style="display:none">
                                 <td class="copy10grey" align="right" width="22%" >
                                     Order Date: &nbsp;

@@ -97,13 +97,14 @@ namespace SV.Framework.Fulfillment
                     {
                         XElement device = new XElement(tns + "device");
                         XElement serialization = new XElement(tns + "serialization");
+                        if (edfFileInfo.edfData.product.edfSerialType.ToUpper() == "H")
+                        {
+                            XElement meidHex = new XElement(tns + "meidHex", device1.meidHex);
+                            serialization.Add(meidHex);
 
-                        XElement meidHex = new XElement(tns + "meidHex", device1.meidHex);
-                        serialization.Add(meidHex);
-
-                        XElement meidDec = new XElement(tns + "meidDec", device1.meidDec);
-                        serialization.Add(meidDec);
-
+                            XElement meidDec = new XElement(tns + "meidDec", device1.meidDec);
+                            serialization.Add(meidDec);
+                        }
                         XElement imeiDec = new XElement(tns + "imeiDec", device1.imeiDec);
                         serialization.Add(imeiDec);
 

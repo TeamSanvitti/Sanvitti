@@ -170,6 +170,7 @@ namespace avii
             UnprovisionPORequest request = new UnprovisionPORequest();
             request.UnprovisioningID = UnprovisioningID;
             request.ApprovedBy = userID;
+            request.CreatedBy = userID;
             request.Status = status;
 
             string returnMessage = unprovisioningOperation.UnprovisioingRequestInsert(request);

@@ -957,7 +957,6 @@ namespace SV.Framework.DAL.Fulfillment
                     containerSKUs = new List<ContainerInfo>();
                     foreach (DataRow dRowItem in dt.Rows)
                     {
-
                         skuItem = new ContainerInfo();
                         skuItem.ErrorMessage = (string)clsGeneral.getColumnData(dRowItem, "ErrorMessage", string.Empty, false);
                         skuItem.Code = (string)clsGeneral.getColumnData(dRowItem, "Code", string.Empty, false);
@@ -974,14 +973,9 @@ namespace SV.Framework.DAL.Fulfillment
                         skuItem.POID = Convert.ToInt32(clsGeneral.getColumnData(dRowItem, "PO_ID", 0, false));
                         skuItem.StatusID = Convert.ToInt32(clsGeneral.getColumnData(dRowItem, "StatusID", 0, false));
                         skuItem.CurrentStock = Convert.ToInt32(clsGeneral.getColumnData(dRowItem, "Stock_in_hand", 0, false));
-
-
-
+                        skuItem.IsKittedBox = Convert.ToBoolean(clsGeneral.getColumnData(dRowItem, "IsKittedBox", 0, false));
                         containerSKUs.Add(skuItem);
                     }
-
-
-
                 }
             }
             catch (Exception ex)

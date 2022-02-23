@@ -552,7 +552,7 @@ namespace SV.Framework.DAL.Inventory
             return esnList;
         }
 
-        public List<EsnHeaders> GetESNwithHeaderList(int companyID, string CustOrderNumber, string ShipFrom, string ShipTo, string ESN, string TrackingNumber, string SKU, int categoryID)
+        public List<EsnHeaders> GetESNwithHeaderList(int companyID, string CustOrderNumber, string ShipFrom, string ShipTo, string ESN, string TrackingNumber, string SKU, int categoryID, string location)
         {
             List<EsnHeaders> headerList = default;
             using (DBConnect db = new DBConnect())
@@ -570,10 +570,12 @@ namespace SV.Framework.DAL.Inventory
                     objCompHash.Add("@TrackingNumber", TrackingNumber);
                     objCompHash.Add("@SKU", SKU);
                     objCompHash.Add("@CategoryID", categoryID);
+                    objCompHash.Add("@Location", location);
                     // objCompHash.Add("@ESNHeaderId", 0);
 
 
-                    arrSpFieldSeq = new string[] { "@CompanyID", "@CustOrderNumber", "@ShipFrom", "@ShipTo", "@ESN", "@TrackingNumber", "@SKU", "@CategoryID" };
+                    arrSpFieldSeq = new string[] { "@CompanyID", "@CustOrderNumber", "@ShipFrom", "@ShipTo", "@ESN", "@TrackingNumber", "@SKU", 
+                        "@CategoryID", "@Location" };
                     dt = db.GetTableRecords(objCompHash, "AV_EsnMslSelect", arrSpFieldSeq);
                     headerList = PopulateESNwithHeaders(dt);
 
@@ -648,6 +650,7 @@ namespace SV.Framework.DAL.Inventory
                     objESN.OrderNumber = clsGeneral.getColumnData(dataRow, "OrderNumber", string.Empty, false) as string;
                     objESN.OrderQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "OrderQty", 0, false));
                     objESN.ShipQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ShipQty", 0, false));
+                    objESN.AssignedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "AssignedQuantity", 0, false));
 
                     objESN.ShipDate = clsGeneral.getColumnData(dataRow, "ShipDate", string.Empty, false) as string;
                     //objESN.ICC_ID = clsGeneral.getColumnData(dataRow, "icc_id", string.Empty, false) as string;
@@ -697,8 +700,7 @@ namespace SV.Framework.DAL.Inventory
                     headerDetail.CategoryName = clsGeneral.getColumnData(dataRow, "CategoryName", string.Empty, false) as string;
                     headerDetail.ReceivedAs = clsGeneral.getColumnData(dataRow, "ReceivedAs", string.Empty, false) as string;
                     headerDetail.IsInspection = Convert.ToBoolean(clsGeneral.getColumnData(dataRow, "IsInspection", false, false));
-
-
+                    headerDetail.UserName = clsGeneral.getColumnData(dataRow, "UserName", string.Empty, false) as string;
                     headerDetail.SKU = clsGeneral.getColumnData(dataRow, "SKU", string.Empty, false) as string;
                     headerDetail.TrackingNumber = clsGeneral.getColumnData(dataRow, "TrackingNumber", string.Empty, false) as string;
 

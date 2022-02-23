@@ -178,9 +178,10 @@ namespace SV.Framework.DAL.Inventory
 
 
         public  int ESNAuthorizationInsert(List<ESNAuthorization> esnList, List<EsnUploadNew> esnauthList, int ItemCompanyGUID, int userID, 
-            int KittedItemCompanyGUID, string RunNumber, string PlannedProvisioingDate, out int ESNAuthorizationID)
+            int KittedItemCompanyGUID, string RunNumber, string PlannedProvisioingDate, out int ESNAuthorizationID, out string productType)
         {
             ESNAuthorizationID = 0;
+            productType = "";
             int sequenceNumber = 0;
             using (DBConnect db = new DBConnect())
             {
@@ -207,6 +208,7 @@ namespace SV.Framework.DAL.Inventory
                     {
                         foreach (DataRow row in dt.Rows)
                         {
+                            productType = Convert.ToString(clsGeneral.getColumnData(row, "CODE", "", false)); ;
                             sequenceNumber = Convert.ToInt32(clsGeneral.getColumnData(row, "SquenceNumber", 0, false)); ;
                             ESNAuthorizationID = Convert.ToInt32(clsGeneral.getColumnData(row, "ESNAuthorizationID", 0, false)); ;
                         }
@@ -278,9 +280,10 @@ namespace SV.Framework.DAL.Inventory
             }
             return esnList;
         }
-        public  List<ESNAuthorization> GetESNAuthorizations(int ESNHeaderID, int ItemCompanyGUID, int ServiceOrderID, out string SequenceNumber)
+        public  List<ESNAuthorization> GetESNAuthorizations(int ESNHeaderID, int ItemCompanyGUID, int ServiceOrderID, out string SequenceNumber, out string productType)
         {
             SequenceNumber = "";
+            productType = "";
             List<ESNAuthorization> esnList = default;//new List<ESNAuthorization>();
             using (DBConnect db = new DBConnect())
             {
@@ -305,6 +308,7 @@ namespace SV.Framework.DAL.Inventory
                         {
                             esnAuthorization = new ESNAuthorization();
                             SequenceNumber = Convert.ToString(clsGeneral.getColumnData(row, "SequenceNumber", string.Empty, false));
+                            productType = Convert.ToString(clsGeneral.getColumnData(row, "Code", string.Empty, false));
                             //esnAuthorization.RowID = Convert.ToInt32(clsGeneral.getColumnData(row, "ROWID", string.Empty, false)); ;
                             esnAuthorization.SKU = Convert.ToString(clsGeneral.getColumnData(row, "SKU", string.Empty, false));
                             esnAuthorization.ESN = Convert.ToString(clsGeneral.getColumnData(row, "ESN", string.Empty, false));
@@ -712,6 +716,7 @@ namespace SV.Framework.DAL.Inventory
                             eSNAuthorizatedInfo.ESNAuthorizationID = Convert.ToInt32(clsGeneral.getColumnData(row, "ESNAuthorizationID", string.Empty, false)); ;
                             eSNAuthorizatedInfo.RunNumber = Convert.ToString(clsGeneral.getColumnData(row, "RunNumber", string.Empty, false));
                             eSNAuthorizatedInfo.SKU = Convert.ToString(clsGeneral.getColumnData(row, "SKU", string.Empty, false));
+                            eSNAuthorizatedInfo.ProductType = Convert.ToString(clsGeneral.getColumnData(row, "Code", string.Empty, false));
                             // eSNAuthorizatedInfo.SKU = Convert.ToString(clsGeneral.getColumnData(row, "SKU", string.Empty, false));
                             eSNAuthorizatedInfo.KittedSKU = Convert.ToString(clsGeneral.getColumnData(row, "KittedSKU", string.Empty, false));
                             eSNAuthorizatedInfo.EsnCount = Convert.ToInt32(clsGeneral.getColumnData(row, "EsnCount", string.Empty, false));

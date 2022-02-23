@@ -267,6 +267,7 @@ namespace SV.Framework.DAL.Inventory
                         warehouseInfo.RowLevel = clsGeneral.getColumnData(dataRow, "RowLevel", string.Empty, false) as string;
                         warehouseInfo.CompanyName = clsGeneral.getColumnData(dataRow, "CompanyName", string.Empty, false) as string;
                         warehouseInfo.CreateDate = clsGeneral.getColumnData(dataRow, "CreateDate", string.Empty, false) as string;
+                        warehouseInfo.CreatedDateTime = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "CreatedDateTime", DateTime.Now, false));
                         warehouseInfo.CreatedBy = clsGeneral.getColumnData(dataRow, "UserName", string.Empty, false) as string;
                        // warehouseInfo.Specialinstructions = clsGeneral.getColumnData(dataRow, "Specialinstructions", string.Empty, false) as string;
 

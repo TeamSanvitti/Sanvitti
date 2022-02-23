@@ -127,8 +127,6 @@ namespace SV.Framework.DAL.Inventory
                     "@CartonCount","@PiecesPerBox", "@ItemCompanyGUID", "@UserID", "@Comment", "@ReceivedAs", "@avNonESNUpload" };
                     db.ExecCommand(objCompHash, "Av_NonESN_InsertUpdate", arrSpFieldSeq, "@poInsertCount", out insertCout, "@poUpdateCount", out updateCount, "@poErrorMessage", out errorMessage, "@InvalidStock", out returnResult);
 
-
-
                 }
                 catch (Exception objExp)
                 {
@@ -187,7 +185,7 @@ namespace SV.Framework.DAL.Inventory
                     StorageList = new List<NonEsnStorage>();
 
                     //objESN.ESN = clsGeneral.getColumnData(dataRow, "ESN", string.Empty, false) as string;
-                    headerDetail.UploadDate = clsGeneral.getColumnData(dataRow, "UploadDate", string.Empty, false) as string;
+                    headerDetail.UploadDate = clsGeneral.getColumnData(dataRow, "OrderDate", string.Empty, false) as string;
                     headerDetail.CustomerOrderNumber = clsGeneral.getColumnData(dataRow, "CustOrderNumber", string.Empty, false) as string;
                     headerDetail.ESNHeaderId = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ESNHeaderId", 0, false));
                    // headerDetail.OrderDate = clsGeneral.getColumnData(dataRow, "OrderDate", string.Empty, false) as string;
@@ -214,6 +212,7 @@ namespace SV.Framework.DAL.Inventory
 
                     headerDetail.CategoryWithProductAllowed = clsGeneral.getColumnData(dataRow, "CategoryWithProductAllowed", string.Empty, false) as string;
                     headerDetail.SKU = clsGeneral.getColumnData(dataRow, "SKU", string.Empty, false) as string;
+                    headerDetail.UserName = clsGeneral.getColumnData(dataRow, "UserName", string.Empty, false) as string;
                     //headerDetail.TrackingNumber = clsGeneral.getColumnData(dataRow, "TrackingNumber", string.Empty, false) as string;
 
                     if (dataset.Tables.Count > 1 && dataset.Tables[1].Rows.Count > 0)
@@ -255,13 +254,14 @@ namespace SV.Framework.DAL.Inventory
                     objESN.SKU = clsGeneral.getColumnData(dataRow, "SKU", string.Empty, false) as string;
                     objESN.CategoryName = clsGeneral.getColumnData(dataRow, "CategoryName", string.Empty, false) as string;
                     objESN.ProductName = clsGeneral.getColumnData(dataRow, "ItemName", string.Empty, false) as string;
+                    objESN.ReceivedDate = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "UploadDate", DateTime.Now, false));
                     objESN.UploadDate = clsGeneral.getColumnData(dataRow, "OrderDate", string.Empty, false) as string;
                     objESN.CustomerOrderNumber = clsGeneral.getColumnData(dataRow, "CustOrderNumber", string.Empty, false) as string;
                     objESN.ESNHeaderId = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ESNHeaderId", 0, false));
                    // objESN.OrderDate = clsGeneral.getColumnData(dataRow, "OrderDate", string.Empty, false) as string;
                     objESN.OrderNumber = clsGeneral.getColumnData(dataRow, "OrderNumber", string.Empty, false) as string;
                    objESN.TotalQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "OrderQty", 0, false));
-                    //objESN.ShipQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ShipQty", 0, false));
+                    objESN.AssignedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "AssignedQty", 0, false));
 
                     //objESN.ShipDate = clsGeneral.getColumnData(dataRow, "ShipDate", string.Empty, false) as string;
                     //objESN.ICC_ID = clsGeneral.getColumnData(dataRow, "icc_id", string.Empty, false) as string;

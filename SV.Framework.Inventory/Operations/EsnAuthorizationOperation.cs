@@ -15,7 +15,7 @@ namespace SV.Framework.Inventory
     public class EsnAuthorizationOperation : BaseCreateInstance
     {
         
-        public  XElement CreateAuthorizationFile(List<ESNAuthorization> esnList, string file_Sequence, string currentDate)
+        public  XElement CreateAuthorizationFile(List<ESNAuthorization> esnList, string file_Sequence, string currentDate, string edfProductType)
         {
             //string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
             //Int64 ticks = DateTime.Now.Ticks;
@@ -62,7 +62,7 @@ namespace SV.Framework.Inventory
 
             XElement product = new XElement(tns + "product");
 
-            XElement edfSerialType = new XElement(tns + "edfSerialType", "H");
+            XElement edfSerialType = new XElement(tns + "edfSerialType", edfProductType);// "H");
             product.Add(edfSerialType);
 
             //XElement entSerialType = new XElement(tns + "entSerialType", edfFileInfo.edfData.product.entSerialType);
@@ -105,13 +105,14 @@ namespace SV.Framework.Inventory
                     {
                         XElement device = new XElement(tns + "device");
                         XElement serialization = new XElement(tns + "serialization");
+                        if (edfProductType.ToUpper() == "H")
+                        {
+                            XElement meidHex = new XElement(tns + "meidHex", device1.MeidHex);
+                            serialization.Add(meidHex);
 
-                        XElement meidHex = new XElement(tns + "meidHex", device1.MeidHex);
-                        serialization.Add(meidHex);
-
-                        XElement meidDec = new XElement(tns + "meidDec", device1.MeidDec);
-                        serialization.Add(meidDec);
-
+                            XElement meidDec = new XElement(tns + "meidDec", device1.MeidDec);
+                            serialization.Add(meidDec);
+                        }
                         XElement imeiDec = new XElement(tns + "imeiDec", device1.ESN);
                         serialization.Add(imeiDec);
 
@@ -158,12 +159,12 @@ namespace SV.Framework.Inventory
 
 
         public  int ESNAuthorizationInsert(List<ESNAuthorization> esnList, List<EsnUploadNew> esnauthList, int ItemCompanyGUID, int userID, 
-            int KittedItemCompanyGUID, string RunNumber, string PlannedProvisioingDate, out int ESNAuthorizationID)
+            int KittedItemCompanyGUID, string RunNumber, string PlannedProvisioingDate, out int ESNAuthorizationID, out string productType)
         {
             SV.Framework.DAL.Inventory.EsnAuthorizationOperation esnAuthorizationOperation = SV.Framework.DAL.Inventory.EsnAuthorizationOperation.CreateInstance<SV.Framework.DAL.Inventory.EsnAuthorizationOperation>();
 
             ESNAuthorizationID = 0;
-            int sequenceNumber = esnAuthorizationOperation.ESNAuthorizationInsert(esnList, esnauthList, ItemCompanyGUID, userID, KittedItemCompanyGUID, RunNumber, PlannedProvisioingDate, out ESNAuthorizationID);
+            int sequenceNumber = esnAuthorizationOperation.ESNAuthorizationInsert(esnList, esnauthList, ItemCompanyGUID, userID, KittedItemCompanyGUID, RunNumber, PlannedProvisioingDate, out ESNAuthorizationID, out productType);
             
             
             return sequenceNumber;
@@ -177,12 +178,13 @@ namespace SV.Framework.Inventory
 
             return esnList;
         }
-        public  List<ESNAuthorization> GetESNAuthorizations(int ESNHeaderID, int ItemCompanyGUID, int ServiceOrderID, out string SequenceNumber)
+        public  List<ESNAuthorization> GetESNAuthorizations(int ESNHeaderID, int ItemCompanyGUID, int ServiceOrderID, out string SequenceNumber, out string productType)
         {
             SV.Framework.DAL.Inventory.EsnAuthorizationOperation esnAuthorizationOperation = SV.Framework.DAL.Inventory.EsnAuthorizationOperation.CreateInstance<SV.Framework.DAL.Inventory.EsnAuthorizationOperation>();
 
             SequenceNumber = "";
-            List<ESNAuthorization> esnList = esnAuthorizationOperation.GetESNAuthorizations(ESNHeaderID, ItemCompanyGUID, ServiceOrderID, out SequenceNumber);
+            productType = "";
+            List<ESNAuthorization> esnList = esnAuthorizationOperation.GetESNAuthorizations(ESNHeaderID, ItemCompanyGUID, ServiceOrderID, out SequenceNumber, out productType);
 
             return esnList;
         }

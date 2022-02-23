@@ -66,12 +66,16 @@ namespace avii.Admin
             {
                 tblUpload.Visible = false;
                 pnlHeader.Visible = true;
+                trReceivedate.Visible = true;
 
                 txtBoxQty.Text = nonEsnHeader.PiecesPerBox.ToString();
                 txtCarton.Text = nonEsnHeader.CartonCount.ToString();
                 txtPallet.Text = nonEsnHeader.PalletCount.ToString();
                 txtTotalQty.Text = nonEsnHeader.TotalQty.ToString();
                 txtCustOrderNumber.Text = nonEsnHeader.CustomerOrderNumber;
+                txtReceiveBy.Text = nonEsnHeader.UserName;
+                txtReceiveDate.Text = nonEsnHeader.UploadDate;
+
                 txtOrderNumber.Text = nonEsnHeader.OrderNumber;
                 ddlCategory.SelectedValue = nonEsnHeader.CategoryWithProductAllowed;
                 dpCompany.SelectedValue = nonEsnHeader.CompanyID.ToString();
