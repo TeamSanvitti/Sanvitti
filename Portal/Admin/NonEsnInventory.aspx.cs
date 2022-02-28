@@ -17,7 +17,7 @@ namespace avii.Admin
         private string fileStoreLocation = "~/UploadedData/ESNUpload/";
         private const char DELIMITER = ',';
         private MslOperation mslOperation = MslOperation.CreateInstance<MslOperation>();
-        private NonEsnOperation nonEsnOperation = NonEsnOperation.CreateInstance<NonEsnOperation>();
+        
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -59,6 +59,7 @@ namespace avii.Admin
 
         private void GetNonEsnDetail()
         {
+            NonEsnOperation nonEsnOperation = NonEsnOperation.CreateInstance<NonEsnOperation>();
             int esnHeaderID = Convert.ToInt32(Session["esnheaderid"]);
             Session["esnheaderid"] = null;
             NonEsnHeader nonEsnHeader = nonEsnOperation.GetNonESNwithHeaderDetails(esnHeaderID);
@@ -242,10 +243,7 @@ namespace avii.Admin
         protected void btnBack2Search_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/admin/nonesnsearch.aspx");
-
-        }
-
-        
+        }        
 
         protected void btnUpload_Click(object sender, EventArgs e)
         {
@@ -254,6 +252,7 @@ namespace avii.Admin
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
+            NonEsnOperation nonEsnOperation = NonEsnOperation.CreateInstance<NonEsnOperation>();
             List<NonEsnStorage> nonesnList = Session["nonesnList"] as  List<NonEsnStorage>;
             NonESNInventory nonESNInventory = new NonESNInventory();
             int cartonCount = 0, palletCount = 0, PiecesPerBox = 0, totalQuantity = 0, CompanyID = 0, itemCompanyGUID = 0, userID=0;
@@ -305,23 +304,29 @@ namespace avii.Admin
                             if (!string.IsNullOrEmpty(errorMessage))
                             {
                                 lblMsg.Text = errorMessage;
+                                btnUpload.Visible = true;
+                                btnSubmit.Visible = false;
+
                             }
                             else
                             {
                                 if (insertCount > 0 && updateCount > 0)
                                 { lblMsg.Text = insertCount + " records  successfully inserted. <br />" + updateCount + " records  successfully updated.";
                                     Session["nonesnList"] = null;
+                                    btnSubmit.Enabled = false;
                                 }
 
                                 if (insertCount > 0 && updateCount == 0)
                                 {
                                     lblMsg.Text = insertCount + " records  successfully inserted.";
                                     Session["nonesnList"] = null;
+                                    btnSubmit.Enabled = false;
                                 }
                                 if (insertCount == 0 && updateCount > 0)
                                 {
                                     lblMsg.Text = updateCount + " records  successfully updated.";
                                     Session["nonesnList"] = null;
+                                    btnSubmit.Enabled = false;
                                 }
 
                             }
@@ -341,7 +346,6 @@ namespace avii.Admin
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-
         }
         protected void lnkDownload_Click(object sender, EventArgs e)
         {
@@ -574,6 +578,7 @@ namespace avii.Admin
                                             // lblConfirm.Text = "ESN file is ready to upload";
                                             btnUpload.Visible = false;
                                             btnSubmit.Visible = true;
+                                            btnSubmit.Enabled = true;
 
                                         }
                                         else

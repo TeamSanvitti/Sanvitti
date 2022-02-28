@@ -384,7 +384,7 @@ namespace SV.Framework.DAL.Inventory
                         objCmd.Parameters.AddWithValue(strField, HshParameters[strField]);
 					}
 				}
-				objCmd.Parameters.Add(sOutParam,SqlDbType.VarChar,20);
+				objCmd.Parameters.Add(sOutParam,SqlDbType.VarChar,500);
 				objCmd.Parameters[sOutParam].Direction = ParameterDirection.Output ;
 				objCmd.ExecuteNonQuery();
 				sCode = objCmd.Parameters[sOutParam].Value.ToString();

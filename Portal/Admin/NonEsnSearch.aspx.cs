@@ -276,7 +276,11 @@ namespace avii.Admin
             int esnHeaderID = Convert.ToInt32(e.CommandArgument);
 
             int returnResult = nonEsnOperation.NonESNInventoryDelete(esnHeaderID, userID, out returnMessage);
-            lblMsg.Text = returnMessage;
+            BindSearch();
+            if (!string.IsNullOrEmpty(returnMessage))
+                lblMsg.Text = returnMessage;
+            else
+            { lblMsg.Text = "Deleted successfully!"; }
         }
     }
 }

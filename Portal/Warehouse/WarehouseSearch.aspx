@@ -140,6 +140,7 @@
     </tr>
     <tr>
         <td colspan="2" align="center">
+
         <asp:GridView ID="gvWHCode" AutoGenerateColumns="false"   
         Width="100%" ShowHeader="true"  ShowFooter="false" runat="server" GridLines="Both"
         AllowPaging="true" OnPageIndexChanging="gvWHCode_PageIndexChanging" PageSize="50" 
