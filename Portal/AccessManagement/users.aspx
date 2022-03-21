@@ -19,9 +19,8 @@
     rel="stylesheet" type="text/css" />--%>
 	<%--<script type="text/javascript" src="../JQuery/jquery.min.js"></script>
     <script type="text/javascript" src="../JQuery/jquery-ui.min.js"></script>--%>
-	<script type="text/javascript" src="../JQuery/jquery.blockUI.js"></script>
-	
-     <link href="../../aerostyle.css" type="text/css" rel="stylesheet"/>
+	<script type="text/javascript" src="../JQuery/jquery.blockUI.js"></script>	
+    <link href="../../aerostyle.css" type="text/css" rel="stylesheet"/>
     
     <script type="text/javascript">
         function display(obj) {
@@ -134,7 +133,7 @@
     </script>
 </head>
 <body bgcolor="#ffffff" leftmargin="0" rightmargin="0" topmargin="0" >
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" autocomplete="off">
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="100%">
     <tr>
         <td>
@@ -213,6 +212,8 @@
             </td>
             <td >
                 <%--<asp:TextBox ID="txtCompanyAccount" runat="server" Width="215px" class="copy10grey"></asp:TextBox>--%>
+                <input style="display:none" type="text" name="fakeusernameremembered"/>
+<input style="display:none" type="password" name="fakepasswordremembered"/>
             </td>
        
             
@@ -220,9 +221,8 @@
         <tr valign="top">
             <td class="copy10grey" width="15%">User:&nbsp;<span class="errormessage">*</span></td><td  width="35%">
              
-            <asp:TextBox ID="txt_user" AutoComplete="Off"
-                runat="server" Width="85%"  class="copy10grey" AutoPostBack="false" 
-                ontextchanged="txt_user_TextChanged" 
+            <asp:TextBox ID="txt_user" AutoComplete="Off" AutoCompleteType="Disabled"
+                runat="server" Width="85%"  class="copy10grey" AutoPostBack="false"                  
                 onkeypress="return isAlfaNumberKey(event);"></asp:TextBox>
                
             </td><td class="copy10grey"  width="15%">E-mail:&nbsp;<span class="errormessage">*</span></td><td  width="35%">
@@ -232,7 +232,7 @@
         <tr valign="top">
             <td class="copy10grey">Password:&nbsp;<span class="errormessage">*</span></td><td >
             <asp:TextBox ID="txt_pwd"  MaxLength="16"
-                runat="server" Width="85%" class="copy10grey" TextMode="Password" AutoComplete="Off"
+                runat="server" Width="85%" class="copy10grey" TextMode="Password" AutoComplete="Off" AutoCompleteType="Disabled"
                 onchange="return range();"></asp:TextBox>
             </td>
        
@@ -366,7 +366,7 @@
                  trCustomer.style.display = "none";
                               }
 
-</script>
+         </script>
       
         
     </form>

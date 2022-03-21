@@ -574,7 +574,7 @@
             </tr>
             <tr>
                 <td colspan="5" align="right" class="copy10grey">
-                    <asp:LinkButton ID="lnkDownload" runat="server"  Visible="false"   Text="Download file format" OnClick="lnkDownload_Click"></asp:LinkButton>
+                    <asp:LinkButton ID="lnkDownload" runat="server"  Visible="false"   Text="Download container(s) file" OnClick="lnkDownload_Click"></asp:LinkButton>
                     &nbsp;
                      <asp:Button ID="btnUpload" Visible="false"  Width="190px" CssClass="button" runat="server" OnClick="btnValidateUploadedFile_Click" Text="Validate Uploaded file" />
                                 &nbsp;

@@ -168,9 +168,17 @@ namespace avii
                 txtOrderQty.Text = serviceOrder.Quantity.ToString();
                 txtSONumber.Text = serviceOrder.ServiceOrderNumber;
                 ddlKitted.SelectedValue = serviceOrder.KittedSKUId.ToString();
-
+                ViewState["nonesnkit"] = null;
                 BindRawSKUs(serviceOrder.CompanyId, serviceOrder.KittedSKUId);
                 List<ServiceOrderDetail> esnList = serviceOrder.SODetail;
+                if(esnList != null && esnList.Count > 0)
+                {
+                    if(string.IsNullOrEmpty( esnList[0].ESN))
+                    {
+                        ViewState["nonesnkit"] = 1;
+                    }
+                }
+
                 var esnStartlist = (from item in esnList where item.Id.Equals(1) select item).ToList();
 
                 int ItemCompanyGUID = 0;
@@ -227,116 +235,158 @@ namespace avii
         {
             //List<ServiceOrderCSV> soList = new List<ServiceOrderCSV>();
             //ServiceOrderCSV serviceOrderCSV = null;
-            int itr = 1;
-            bool isSim = false;
-            string ESN = string.Empty, ICCID = string.Empty;
-            if (Session["serviceOrder"] != null)
+            if (ViewState["nonesnkit"] != null)
             {
-                ServiceOrders serviceOrders = Session["serviceOrder"] as ServiceOrders;
-                using (StringWriter sw = new StringWriter())
-                using (HtmlTextWriter htw = new HtmlTextWriter(sw))
+                DownloadToCSVNonESNKit();
+            }
+            else
+            {
+                int itr = 1;
+                bool isSim = false;
+                string ESN = string.Empty, ICCID = string.Empty;
+                if (Session["serviceOrder"] != null)
                 {
-                    //  Create a table to contain the grid
-                    Table table = new Table();
+                    ServiceOrders serviceOrders = Session["serviceOrder"] as ServiceOrders;
 
-                    //  Gridline to box the cells
-                    table.GridLines = System.Web.UI.WebControls.GridLines.Both;
-
-                    string[] columns = { "ServiceOrderNumber", "IMEI", "ICCID", "CustomerOrderNumber", "KittedSKU", "Customer", "Date", "Qty", "QtyPerOrder" };
-
-                    TableRow tRow = new TableRow();
-                    TableCell tCell;
-                    foreach (string name in columns)
+                    using (StringWriter sw = new StringWriter())
+                    using (HtmlTextWriter htw = new HtmlTextWriter(sw))
                     {
-                        tCell = new TableCell();
-                        tCell.Text = name;
-                        tRow.Cells.Add(tCell);
-                    }
+                        //  Create a table to contain the grid
+                        Table table = new Table();
 
-                    table.Rows.Add(tRow);
+                        //  Gridline to box the cells
+                        table.GridLines = System.Web.UI.WebControls.GridLines.Both;
 
-                    //foreach (avii.Classes.BasePurchaseOrder po in serviceOrders.SODetail)
-                    {
-                        foreach (ServiceOrderDetail sodetail in serviceOrders.SODetail)
+                        string[] columns = { "ServiceOrderNumber", "IMEI", "ICCID", "CustomerOrderNumber", "KittedSKU", "Customer", "Date", "Qty", "QtyPerOrder" };
+
+                        TableRow tRow = new TableRow();
+                        TableCell tCell;
+                        foreach (string name in columns)
                         {
-                            isSim = sodetail.IsSim;
-                            if (sodetail.IsSim)
+                            tCell = new TableCell();
+                            tCell.Text = name;
+                            tRow.Cells.Add(tCell);
+                        }
+
+                        table.Rows.Add(tRow);
+
+                        //foreach (avii.Classes.BasePurchaseOrder po in serviceOrders.SODetail)
+                        {
+                            foreach (ServiceOrderDetail sodetail in serviceOrders.SODetail)
                             {
-                                ESN = "";
-                                ICCID = "#" + sodetail.ESN;
-                                //ICCID = string.Format("{0}",ICCID);
+                                isSim = sodetail.IsSim;
+                                if (sodetail.IsSim)
+                                {
+                                    ESN = "";
+                                    ICCID = "#" + sodetail.ESN;
+                                    //ICCID = string.Format("{0}",ICCID);
+                                }
+                                else
+                                {
+                                    ESN = "#" + sodetail.ESN;
+                                    ICCID = "#" + sodetail.ICCID;
+                                }
+
+                                tRow = new TableRow();
+                                tCell = new TableCell();
+                                //tCell.
+                                tCell.Text = serviceOrders.ServiceOrderNumber;
+                                tRow.Cells.Add(tCell);
+
+                                tCell = new TableCell();
+                                tCell.Text = ESN;
+                                tRow.Cells.Add(tCell);
+
+                                tCell = new TableCell();
+                                tCell.Text = ICCID;
+                                tRow.Cells.Add(tCell);
+
+                                tCell = new TableCell();
+                                tCell.Text = serviceOrders.CustomerOrderNumber;
+                                tRow.Cells.Add(tCell);
+
+                                tCell = new TableCell();
+                                tCell.Text = serviceOrders.SKU;
+                                tRow.Cells.Add(tCell);
+
+                                tCell = new TableCell();
+                                tCell.Text = serviceOrders.CompanyName;
+                                tRow.Cells.Add(tCell);
+
+                                tCell = new TableCell();
+                                tCell.Text = serviceOrders.OrderDate;
+                                tRow.Cells.Add(tCell);
+
+                                tCell = new TableCell();
+                                tCell.Text = sodetail.Qty.ToString();
+                                tRow.Cells.Add(tCell);
+
+                                tCell = new TableCell();
+                                if (itr == 1)
+                                    tCell.Text = serviceOrders.Quantity.ToString();
+                                else
+                                    tCell.Text = "";
+                                tRow.Cells.Add(tCell);
+
+                                table.Rows.Add(tRow);
+                                itr = itr + 1;
                             }
-                            else
-                            {
-                                ESN = "#" + sodetail.ESN;
-                                ICCID = "#" + sodetail.ICCID;
-                            }
+                        }
 
-                            tRow = new TableRow();
-                            tCell = new TableCell();
-                            //tCell.
-                            tCell.Text = serviceOrders.ServiceOrderNumber;
-                            tRow.Cells.Add(tCell);
+                        //  Htmlwriter into the table
+                        table.RenderControl(htw);
 
-                            tCell = new TableCell();
-                            tCell.Text = ESN;
-                            tRow.Cells.Add(tCell);
 
-                            tCell = new TableCell();
-                            tCell.Text = ICCID;
-                            tRow.Cells.Add(tCell);
+                        //if (soList != null && soList.Count > 0)
+                        {
 
-                            tCell = new TableCell();
-                            tCell.Text = serviceOrders.CustomerOrderNumber;
-                            tRow.Cells.Add(tCell);
+                            //string string2CSV = soList.ToCSV();
 
-                            tCell = new TableCell();
-                            tCell.Text = serviceOrders.SKU;
-                            tRow.Cells.Add(tCell);
-
-                            tCell = new TableCell();
-                            tCell.Text = serviceOrders.CompanyName;
-                            tRow.Cells.Add(tCell);
-
-                            tCell = new TableCell();
-                            tCell.Text = serviceOrders.OrderDate;
-                            tRow.Cells.Add(tCell);
-
-                            tCell = new TableCell();
-                            tCell.Text = sodetail.Qty.ToString();
-                            tRow.Cells.Add(tCell);
-
-                            tCell = new TableCell();
-                            if (itr == 1)
-                                tCell.Text = serviceOrders.Quantity.ToString();
-                            else
-                                tCell.Text = "";
-                            tRow.Cells.Add(tCell);
-
-                            table.Rows.Add(tRow);
-                            itr = itr + 1;
+                            Response.Clear();
+                            Response.Buffer = true;
+                            Response.AddHeader("content-disposition", "attachment;filename=ServiceOrderReport.xls");
+                            Response.Charset = "";
+                            //Response.ContentType = "application/text";
+                            Response.ContentType = "application/vnd.ms-excel";
+                            Response.Output.Write(sw);
+                            Response.Flush();
+                            Response.End();
                         }
                     }
+                }
+            }
+        }
+        private void DownloadToCSVNonESNKit()
+        {
+            List<NonESNKitCSV> kitList = default;
+            NonESNKitCSV nonESNKitCSV = default;
 
-                    //  Htmlwriter into the table
-                    table.RenderControl(htw);
+            if (Session["serviceOrder"] != null)
+            {
+                kitList = new List<NonESNKitCSV>();
+                ServiceOrders serviceOrders = Session["serviceOrder"] as ServiceOrders;
+                foreach (ServiceOrderDetail sodetail in serviceOrders.SODetail)
+                {
+                    nonESNKitCSV = new NonESNKitCSV();
+                    nonESNKitCSV.SKU = sodetail.SKU;
+                    nonESNKitCSV.KitID = sodetail.KitID;
 
+                    
+                    kitList.Add(nonESNKitCSV);
+                }
+                if (kitList != null && kitList.Count > 0)
+                {
 
-                    //if (soList != null && soList.Count > 0)
-                    {
+                    string string2CSV = kitList.ToCSV();
 
-                        //string string2CSV = soList.ToCSV();
-
-                        Response.Clear();
-                        Response.Buffer = true;
-                        Response.AddHeader("content-disposition", "attachment;filename=ServiceOrderReport.xls");
-                        Response.Charset = "";
-                        //Response.ContentType = "application/text";
-                        Response.ContentType = "application/vnd.ms-excel";
-                        Response.Output.Write(sw);
-                        Response.Flush();
-                        Response.End();
-                    }
+                    Response.Clear();
+                    Response.Buffer = true;
+                    Response.AddHeader("content-disposition", "attachment;filename=NonESNKit.csv");
+                    Response.Charset = "";
+                    Response.ContentType = "application/text";
+                    Response.Output.Write(string2CSV);
+                    Response.Flush();
+                    Response.End();
                 }
             }
 

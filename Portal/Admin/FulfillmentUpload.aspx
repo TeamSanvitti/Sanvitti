@@ -22,6 +22,9 @@
     
 	<script type="text/javascript" src="../JQuery/jquery.min.js"></script>
     <script type="text/javascript" src="../JQuery/jquery-ui.min.js"></script>
+      <link rel="stylesheet"  type="text/css" href="../fullfillment/calendar/dhtmlgoodies_calendar.css" media="screen" />
+	<script type="text/javascript" src="../fullfillment/calendar/dhtmlgoodies_calendar.js"></script>  
+	
 	<script type="text/javascript" src="../JQuery/jquery.blockUI.js"></script
 	
 <!-- fix for 1.1em default font size in Jquery UI -->
@@ -178,17 +181,22 @@
 	    </script>
     <script language="javascript" type="text/javascript">
 
+        function set_focus3() {
+            var img = document.getElementById("img1");
+            //var st = document.getElementById("dpStatusList");
+            //st.focus();
+            img.click();
+        }
 
 
         function KeyDownHandler(btn) {
-
             if (event.keyCode == 13) {
                 event.returnValue = false;
                 event.cancel = true;
                 btn.click();
             }
         }
-			</script>
+    </script>
 
 </head>
 <body>
@@ -200,26 +208,25 @@
         	<tr>
 				<td><head:MenuHeader id="HeadAdmin" runat="server"></head:MenuHeader></td>
 			</tr>
-			<tr><td>&nbsp;</td></tr>
-			<tr>
-				<td  bgcolor="#dee7f6" class="button">&nbsp;&nbsp;Fulfillment Orders Upload
+        </table>
+	    <table align="center" style="text-align:left" width="95%" border="0">
+			<tr class="buttonlabel">
+				<td   class="buttonlabel">&nbsp;&nbsp;Fulfillment Orders Upload
 				</td>
 			</tr>
-            <tr><td>&nbsp;</td></tr>
-            </table>
-	
-    <asp:UpdatePanel ID="UpdatePanel1"  runat="server" UpdateMode="Conditional" >
+        </table>	
+        <asp:UpdatePanel ID="UpdatePanel1"  runat="server" UpdateMode="Conditional" >
             <ContentTemplate>
-            <table cellSpacing="0" cellPadding="0" align="center" width="100%" border="0">
+            <table cellSpacing="0" cellPadding="0" align="center" width="95%" border="0">
     		<tr>                    
                 <td colspan="2">
                     <asp:Label ID="lblMsg" runat="server" Width="100%" CssClass="errormessage"></asp:Label></td>
-            </tr>               
-            
+            </tr>
+            </table>
+            <table cellSpacing="0" cellPadding="0" align="center" width="100%" border="0">    		
             <tr>
                 <td align="center">
-
-                    <table  cellSpacing="1" cellPadding="1" width="100%">
+                    <table  cellSpacing="1" cellPadding="1" width="95%">
                         <tr><td class="copy10grey" align="left">
                         
 	                    - Upload file should be less than 3 MB. <br />
@@ -236,46 +243,75 @@
                     <td>
 			            <table id="Table2" cellSpacing="5" cellPadding="5" width="100%" border="0">
                             <tr id="trCustomer" runat="server">
-                                <td  class="copy10grey" align="right" >
-                                    Customer: &nbsp;</td>
-                                <td align="left" >
-                                    <asp:DropDownList ID="dpCompany" CssClass="copy10grey" runat="server"  AutoPostBack="true" Width="45%"
+                                <td  class="copy10grey" align="right" width="15%" >
+                                   <b> Customer:</b> &nbsp;</td>
+                                <td align="left"  width="35%" >
+                                    <asp:DropDownList ID="dpCompany" CssClass="copy10grey" runat="server"  AutoPostBack="true" Width="65%"
                                          onselectedindexchanged="ddlCustomer_SelectedIndexChanged">
 									</asp:DropDownList>
                                 </td>
-                            </tr>
-                            <%--<tr id="trStore" runat="server">
-                                <td  class="copy10grey" align="right" >
-                                    Store ID: &nbsp;</td>
-                                <td align="left" >
-                                    <asp:DropDownList ID="ddlStoreID" CssClass="copy10grey" runat="server" Width="50%" >
-									</asp:DropDownList>
+                                <td   ></td>
+                                <td  width="35%" >
+
                                 </td>
                             </tr>
-                            <tr>
+                            <tr >
+                                <td  class="copy10grey" align="right"  width="15%">
+                                    <b>Ship Via:</b> &nbsp;</td>
+                                <td align="left" width="35%">
+                                    <asp:DropDownList ID="dpShipBy" CssClass="copy10grey" runat="server" Width="65%" >
+									</asp:DropDownList>
+                                </td>
+                                <td  class="copy10grey" align="right" >
+                                    <asp:Label ID="lblStore" runat="server" CssClass="copy10grey" Text="Store ID:"></asp:Label> &nbsp;</td>
+                                <td align="left" >
+                                    <asp:DropDownList ID="ddlStoreID" CssClass="copy10grey" runat="server" Width="65%" >
+									</asp:DropDownList>
+                                </td>
+                                 
+                            </tr>
+                            
+                            <tr >
+                                <td  class="copy10grey" align="right" >
+                                   <b>Fulfillment Type</b> &nbsp;</td>
+                                <td align="left" >
+                                     
+                                    <asp:DropDownList ID="ddlPOType" CssClass="copy10grey" runat="server" Width="65%" >
+                                        <asp:ListItem Text="" Value=""> </asp:ListItem>
+                                        <asp:ListItem Text="B2B" Value="B2B"> </asp:ListItem>
+                                        <asp:ListItem Text="B2C" Value="B2C"> </asp:ListItem>
+									</asp:DropDownList>
+                                </td>
                                 <td  class="copy10grey" align="right"  >
-                                    Ship Via: &nbsp;</td>
+                                    <b> Requested ship date:</b> &nbsp;</td>
                                 <td align="left" >
-                                    <asp:DropDownList ID="dpShipBy" CssClass="copy10grey" runat="server" Width="50%" >
-									</asp:DropDownList>
+                                    &nbsp;<asp:TextBox ID="txtReqShipDate" onfocus="set_focus3();" runat="server" CssClass="copy10grey" Width="60%"></asp:TextBox>&nbsp;
+                                    <%--<img id="imgReq" alt=""  src="/fullfillment/calendar/sscalendar.jpg" runat="server"/>
+                                    <asp:TextBox ID="txtShipFrom" runat="server" onfocus="set_focus3();" CssClass="copy10grey" MaxLength="15"  Width="80%"></asp:TextBox>--%>
+                                    <img id="img1" alt="" onclick="document.getElementById('<%=txtReqShipDate.ClientID%>').value = ''; displayCalendar(document.getElementById('<%=txtReqShipDate.ClientID%>'),'mm/dd/yyyy',this,true);" src="../fullfillment/calendar/sscalendar.jpg" />
+                
                                 </td>
-                            </tr>--%>
+                            </tr>
+                            <tr>
+                                
+                            </tr>
+
                             <tr>
                                 <td  class="copy10grey" align="right" >
-                                    Upload Fulfillment file: &nbsp;</td>
-                                <td align="left" >
+                                   <b> Upload Fulfillment file:</b> &nbsp;</td>
+                                <td align="left" colspan="3" >
                                     <asp:FileUpload ID="flnUpload" runat="server" CssClass="txfield1" Width="45%" /></td>
                            </tr>
                            <tr valign="top" id="trShipFile" >
                                 <td class="copy10grey" align="right">
                                     File format sample: &nbsp;
                                          </td>
-                                <td class="copy10grey" align="left">
-                                   <b>FulfillmentOrderType,Fulfillment#,SKU#,Quantity</b>,
-                                    StoreID,
+                                <td class="copy10grey" align="left" colspan="3">
+                                   <b>Fulfillment#,SKU#,Quantity</b>,
+                                     
                                     <b>ShipToName,ShipToAddress1</b>,
                                     ShipToAddress2,
-                                    <b>ShipToCity,ShipToState,ShipToZip,ShipToPhone,ShipmentThrough,RequestedShipDate</b>
+                                    <b>ShipToCity,ShipToState,ShipToZip,ShipToPhone</b> <%--FulfillmentOrderType,StoreID,ShipmentThrough,RequestedShipDate--%>
                                     <br />
                                     <asp:LinkButton ID="lnkDownload" runat="server"   Text="Download file format" OnClick="lnkDownload_Click"></asp:LinkButton>
                                 </td>
@@ -284,13 +320,13 @@
                                 <td class="copy10grey" align="right">
                                     Comment: &nbsp;
                                          </td>
-                                <td class="copy10grey" align="left">
-                                    <asp:TextBox ID="txtComment" runat="server" CssClass="copy10grey" Width="70%" Height="50px" TextMode="MultiLine"></asp:TextBox>
+                                <td class="copy10grey" align="left" colspan="3">
+                                    <asp:TextBox ID="txtComment" runat="server" CssClass="copy10grey" Width="80%" Height="50px" TextMode="MultiLine"></asp:TextBox>
 
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="2">
+                                <td colspan="4">
                                     <asp:Panel ID="pnlSubmit" runat="server" Visible="false">
                                     <table cellpadding="0" cellspacing="0" width="100%">
                                         <tr><td>
@@ -321,7 +357,7 @@
                                     </asp:Panel>
                                 </td>
                             </tr>
-                             <tr><td colspan="2">
+                             <tr><td colspan="4">
                             
                             <table cellpadding="0" cellspacing="0" width="100%">
                              <tr>
@@ -496,12 +532,12 @@
                             </table>
                             </td></tr>                            
                             
-                            <tr><td colspan="2">
+                            <tr><td colspan="4">
                             <hr style="width:100%" />
                             
                             </td></tr>                            
                              <tr>
-                                <td colspan="2" align="center">
+                                <td colspan="4" align="center">
                                 
                                 <asp:Button ID="btnUpload"  Width="190px" CssClass="button" runat="server" OnClick="btnValidateUploadedFile_Click" Text="Validate Uploaded file" />
                                 &nbsp;<asp:Button ID="btnValidate" Visible="false" Width="190px"  CssClass="button" runat="server" OnClick="btnValidatePOs_Click" Text="Validate" />

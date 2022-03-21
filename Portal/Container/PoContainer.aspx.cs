@@ -60,7 +60,7 @@ namespace avii.Container
             rptPallets.DataSource = null;
             rptPallets.DataBind();
             string Code = "";
-            int companyID = 0, contanierToGenrate=0, StatusID = 0, PalletQuantity = 0;
+            int companyID = 0,  StatusID = 0, PalletQuantity = 0;
             if (dpCompany.SelectedIndex > 0)
             {
                 int.TryParse(dpCompany.SelectedValue, out companyID);
@@ -91,13 +91,28 @@ namespace avii.Container
                         Code = item.Code;
                         StatusID = item.StatusID;
                         numberOfContainers += item.ContainerRequired;
-                        numberOfPallets += item.PalletRequired;
+                       // numberOfPallets += item.PalletRequired;
                         poid = item.POID;
                         casePackQuantity = item.ContainerQuantity;
                         PalletQuantity = item.PalletQuantity;
+                        //ContainersPerPallet = item.PalletQuantity;
 
                     }
-                    if(casePackQuantity == 0)
+                    var n1 = 0;
+                    var d1 = 0;
+                    if (PalletQuantity > 0)
+                    {
+                        n1 = numberOfContainers / PalletQuantity;
+                        d1 = numberOfContainers % PalletQuantity;
+                        if (n1 == 0 && d1 > 0)
+                            d1 = 1;
+                        if (n1 > 0 && d1 > 1)
+                            d1 = 1;
+                    }
+
+                    //numberOfPallets =  (numberOfContainers / PalletQuantity) + (numberOfContainers % PalletQuantity);
+                    numberOfPallets = n1 + d1;
+                    if (casePackQuantity == 0)
                     {
                         lblMsg.Text = "Container quantity not assigned for this SKU#: " + skuList[0].SKU;
                         return;

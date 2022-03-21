@@ -1470,11 +1470,55 @@ namespace avii
                     }                    
                 }
                 lblPO.Text = poInfoList[0].PurchaseOrderNumber;
+                int ItemsPerContainer = 0, ContainersPerPallet = 0, requiredContainers=0;
+                var totalContainers = 0;
+                var totalPallets = 0;
+                var n2 = 0;
+                var d2 = 0;
+                foreach(BasePurchaseOrderItem item in purchaseOrderItemList)
+                {
+                    if (item.ItemsPerContainer > 0)
+                    {
+                        ItemsPerContainer = item.ItemsPerContainer;
+                        n2 = Convert.ToInt32(item.Quantity) / ItemsPerContainer;
+                        d2 = Convert.ToInt32(item.Quantity) % ItemsPerContainer;
+                        if (n2 == 0 && d2 > 0)
+                            d2 = 1;
+                        if (n2 > 0 && d2 > 1)
+                            d2 = 1;
+
+                        //requiredContainers = Convert.ToInt32(item.Quantity) / ItemsPerContainer + Convert.ToInt32(item.Quantity) % ItemsPerContainer;
+                        //totalContainers = totalContainers + requiredContainers;
+                        totalContainers = n2 + d2;
+                    }
+                    if (item.ContainersPerPallet > 0)
+                    {
+                        ContainersPerPallet = item.ContainersPerPallet;
+                        //totalPallets = totalPallets + requiredContainers / ContainersPerPallet + requiredContainers % ContainersPerPallet;
+                    }                   
+                }
+                if (ContainersPerPallet > 0)
+                {
+                    int n1 = totalContainers / ContainersPerPallet;
+                    var d1 = totalContainers % ContainersPerPallet;
+                    if (n1 == 0 && d1 > 0)
+                        d1 = 1;
+                    if (n1 > 0 && d1 > 1)
+                        d1 = 1;
+
+                    //numberOfPallets =  (numberOfContainers / PalletQuantity) + (numberOfContainers % PalletQuantity);
+                    totalPallets = n1 + d1;
+
+                }
+                lblItemsPerContainer.Text = totalContainers == 0 ? "Not assigned": totalContainers.ToString();
+                lblContainersPerPallet.Text = totalPallets == 0 ? "Not assigned" : totalPallets.ToString();
+
                 lblvPODate.Text = poInfoList[0].PurchaseOrderDate.ToShortDateString();
                 lblReqShipDate.Text = poInfoList[0].RequestedShipDate.ToShortDateString();
 
                 lblAddress.Text = poInfoList[0].Shipping.ShipToAddress + " " + poInfoList[0].Shipping.ShipToAddress2;
                 //lblvAvso.Text = poInfoList[0].AerovoiceSalesOrderNumber;
+                lblTpye.Text = poInfoList[0].POType;
                 lblContactName.Text = poInfoList[0].Shipping.ContactName;
                 lblCustName.Text = poInfoList[0].CustomerName;
                 //new tracking

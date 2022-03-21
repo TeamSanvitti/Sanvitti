@@ -52,6 +52,7 @@ namespace avii.SO
                     btnSubmit.Visible = false;
                     btnCancel.Visible = true;
                     pnlSearch.Visible = true;
+                    btnDownload.Visible = true;
                     
                 }
                 else
@@ -104,7 +105,7 @@ namespace avii.SO
             ServiceOrders serviceOrder = serviceOrderOperation.GetServiceOrderDetail(soid);
             if (serviceOrder != null)
             {
-                Session["serviceOrder"] = serviceOrder;
+                Session["serviceOrdernonesn"] = serviceOrder;
                 dpCompany.Enabled = false;
                 ddlKitted.Enabled = false;
                 
@@ -118,6 +119,12 @@ namespace avii.SO
 
                 BindRawSKUs(serviceOrder.CompanyId, serviceOrder.KittedSKUId);
                 List<ServiceOrderDetail> esnList = serviceOrder.SODetail;
+                if(esnList != null && esnList.Count > 0)
+                {
+                    gvSOSKU.Visible = true;
+                    gvSOSKU.DataSource = esnList;
+                    gvSOSKU.DataBind();
+                }
                 var esnStartlist = (from item in esnList where item.Id.Equals(1) select item).ToList();
 
                 int ItemCompanyGUID = 0;
@@ -475,6 +482,54 @@ namespace avii.SO
 
             rptESN.DataSource = null;
             rptESN.DataBind();
+        }
+
+        private void DownloadToCSVNonESNKit()
+        {
+           // List<NonESNKitCSV> kitList = default;
+           // NonESNKitCSV nonESNKitCSV = default;
+
+            if (Session["serviceOrdernonesn"] != null)
+            {
+                string string2CSV = "SKU,KitID" + Environment.NewLine;
+                int itr = 1;
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(string2CSV);
+                string newLine = "";
+                // kitList = new List<NonESNKitCSV>();
+                ServiceOrders serviceOrders = Session["serviceOrdernonesn"] as ServiceOrders;
+                foreach (ServiceOrderDetail sodetail in serviceOrders.SODetail)
+                {
+                    newLine = serviceOrders.SODetail.Count == itr ? "" : Environment.NewLine;
+                    sb.Append(sodetail.SKU + "," + sodetail.KitID.ToString() + newLine);
+
+                    //string2CSV = string2CSV + sodetail.SKU + "," + sodetail.KitID.ToString() + Environment.NewLine;
+                    itr = itr + 1;
+                    //nonESNKitCSV = new NonESNKitCSV();
+                    //nonESNKitCSV.SKU = sodetail.SKU;
+                    //nonESNKitCSV.KitID = sodetail.KitID;
+                    //kitList.Add(nonESNKitCSV);
+                }
+                
+                if (sb.Length > 0)
+                {
+                    //string string2CSV = kitList.ToCSV();
+                    Response.Clear();
+                    Response.Buffer = true;
+                    Response.AddHeader("content-disposition", "attachment;filename=NonESNKit.csv");
+                    //Response.Charset = "";
+                    Response.ContentType = "application/text";
+                    Response.Output.Write(sb.ToString());
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+
+        }
+
+        protected void btnDownload_Click(object sender, EventArgs e)
+        {
+            DownloadToCSVNonESNKit();
         }
     }
 }

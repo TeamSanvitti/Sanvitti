@@ -654,6 +654,24 @@ namespace avii
         protected global::System.Web.UI.WebControls.TextBox txtZip;
 
         /// <summary>
+        /// txtItemsPerContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtItemsPerContainer;
+
+        /// <summary>
+        /// txtContainersPerPallet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtContainersPerPallet;
+
+        /// <summary>
         /// txtCommments control.
         /// </summary>
         /// <remarks>

@@ -59,6 +59,11 @@ namespace SV.Framework.Models.Fulfillment
 
 
         [XmlIgnore]
+        public int ItemsPerContainer { get; set; }
+        [XmlIgnore]
+        public int ContainersPerPallet { get; set; }
+
+        [XmlIgnore]
         public string ProductName
         {
             get

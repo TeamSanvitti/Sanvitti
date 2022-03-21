@@ -253,7 +253,7 @@
         <tr valign="top">
             <td>
                 <table align="center" style="text-align:left" width="100%" border="0">
-                <tr  align="left" style="vertical-align:baseline; height:20px" >
+                <tr align="left" style="vertical-align:baseline; height:20px" >
                 <td >
                     <asp:Label ID="lblHeader" runat="server" Width="100%" Height="20px" CssClass="buttonlabel" Text="Fulfillment Detail"></asp:Label>
                     </td></tr>
@@ -304,34 +304,19 @@
                             Fulfillment#:
                         </td>
                         <td width="1%">&nbsp;</td>
-                        <td  align="left" width="32%" >
-                            <asp:Label ID="lblPO" CssClass="copy10grey" runat="server" ></asp:Label>
+                        <td  align="left" width="32%" class="copy10grey" >
+                            <asp:Label ID="lblTpye" CssClass="copy10grey" runat="server" ></asp:Label> - <asp:Label ID="lblPO" CssClass="copy10grey" runat="server" ></asp:Label>(<asp:Label ID="lblvStatus" CssClass="copy10grey" runat="server" ></asp:Label>)
                         </td>
                         <td class="copy10grey" width="15%" align="right">
-                       <strong>  Status:</strong>
-                        </td>
-                        <td width="1%">&nbsp;</td>
-                        <td  align="left" width="29%" >
-                             <asp:Label ID="lblvStatus" CssClass="copy10grey" runat="server" ></asp:Label>
-                            <%--<asp:Label ID="lblvAvso" CssClass="copy10grey" runat="server" ></asp:Label>--%>
-                        </td>
-                   
-                    </tr>
-                    <tr>
-                        <td class="copy10grey" width="22%" align="left">
+                       <%--<strong>  Status:</strong>--%>
                             Fulfillment Date:
                         </td>
                         <td width="1%">&nbsp;</td>
-                        <td  align="left" width="32%" >
-                            <asp:Label ID="lblvPODate" CssClass="copy10grey" runat="server" ></asp:Label>
-                        </td>
-                        <td class="copy10grey" width="15%" align="right">
-                          Store ID:
-                        </td>
-                        <td width="1%">&nbsp;</td>
                         <td  align="left" width="29%" >
-                           <asp:Label ID="lblvStoreID" CssClass="copy10grey" runat="server" ></asp:Label>
+                              <asp:Label ID="lblvPODate" CssClass="copy10grey" runat="server" ></asp:Label>
+                            
                         </td>
+                   
                     </tr>
                     <tr>
                         <td class="copy10grey" width="22%" align="left">
@@ -339,16 +324,15 @@
                         </td>
                         <td width="1%">&nbsp;</td>
                         <td  align="left" width="32%" >
-                            <asp:Label ID="lblCustName" CssClass="copy10grey" runat="server" ></asp:Label>                        
+                           <asp:Label ID="lblCustName" CssClass="copy10grey" runat="server" ></asp:Label>                        
                         </td>
-                        <td class="copy10grey" width="15%" align="right" rowspan="2">
-                           Requested Shipping Date:
+                        <td class="copy10grey" width="22%" align="right">
+                          Store ID:
                         </td>
-                        <td width="1%" rowspan="2">&nbsp;</td>
-                        <td  align="left" width="29%" rowspan="2">
-                            <asp:Label ID="lblReqShipDate" CssClass="copy10grey" runat="server" ></asp:Label>
+                        <td width="1%">&nbsp;</td>
+                        <td  align="left" width="22%" >
+                           <asp:Label ID="lblvStoreID" CssClass="copy10grey" runat="server" ></asp:Label>
                         </td>
-                        
                     </tr>
                     <tr>
                         <td class="copy10grey" width="22%" align="left">
@@ -356,15 +340,34 @@
                         </td>
                         <td width="1%">&nbsp;</td>
                         <td  align="left" width="32%" >
-                            <asp:Label ID="lblShipViaCode" CssClass="copy10grey" runat="server" ></asp:Label>
+                             <asp:Label ID="lblShipViaCode" CssClass="copy10grey" runat="server" ></asp:Label>
                         
                         </td>
-                        <td class="copy10grey" width="15%" align="right">
-                            
+                        <td class="copy10grey" width="22%" align="right" >
+                           Requested Shipping Date:
+                        </td>
+                        <td width="1%" >&nbsp;</td>
+                        <td  align="left" width="22%" >
+                            <asp:Label ID="lblReqShipDate" CssClass="copy10grey" runat="server" ></asp:Label>
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td class="copy10grey" width="22%" align="left">
+                            Total Containers:
                         </td>
                         <td width="1%">&nbsp;</td>
-                        <td  align="left" width="29%" >
-                            
+                        <td  align="left" width="32%" >
+                           <asp:Label ID="lblItemsPerContainer"  CssClass="copy10grey" runat="server"></asp:Label>
+                
+                        </td>
+                        <td class="copy10grey" width="22%" align="right">
+                            Total Pallets:
+                        </td>
+                        <td width="1%" >&nbsp;</td>
+                        <td  align="left" width="22%" >
+                            <asp:Label ID="lblContainersPerPallet"  CssClass="copy10grey" runat="server"></asp:Label>
+                
                         </td>
                         
                     </tr>
@@ -958,7 +961,7 @@ OnRowDeleting = "gvTracking_RowDeleting" OnRowDeleted = "gvTracking_RowDeleted"
                 </ItemTemplate> 
                 
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="SKU#"  ItemStyle-CssClass="copy10grey"  HeaderStyle-Width="7%" ItemStyle-Wrap="false"  ItemStyle-width="10%">
+            <asp:TemplateField HeaderText="SKU#"  ItemStyle-CssClass="copy10grey"  HeaderStyle-Width="7%" ItemStyle-Wrap="false"  ItemStyle-width="20%">
                 <ItemTemplate>
                     <%# Convert.ToString(Eval("ItemCode")).ToUpper()%>
                 </ItemTemplate> 
@@ -972,16 +975,24 @@ OnRowDeleting = "gvTracking_RowDeleting" OnRowDeleted = "gvTracking_RowDeleted"
                     <asp:TextBox ID="txtQty" CssClass="copy10grey" MaxLength="5" onkeypress="return isNumberKey(event);" onchange="return isQuantity(this);" 
                     Enabled='<%# Convert.ToInt32(Eval("StatusID")) == 1?true:false %>' Width="99%" Text='<%# Eval("Quantity") %>' runat="server"></asp:TextBox>
                 </EditItemTemplate>
-            </asp:TemplateField>
-                 
-                                                                                                                                        
+            </asp:TemplateField>                 
+            <asp:TemplateField HeaderText="Items/Container"  ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                <ItemTemplate>
+                    <%# Convert.ToInt32(Eval("ItemsPerContainer")) == 0 ? "Not assigned" : Eval("ItemsPerContainer")%>
+                </ItemTemplate>
+            </asp:TemplateField> 
+            <asp:TemplateField HeaderText="Containers/Pallet"  ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%" ItemStyle-HorizontalAlign="Center">
+                <ItemTemplate> 
+                    <%# Convert.ToInt32(Eval("ContainersPerPallet")) == 0 ? "Not assigned" : Eval("ContainersPerPallet")%>
+                    <%--<%#Eval("ContainersPerPallet")%>--%>
+                </ItemTemplate>
+            </asp:TemplateField>                                                                                                                             
            
             <asp:TemplateField HeaderText="Status"   ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                 <ItemTemplate>
                 <%# Convert.ToInt32(Eval("StatusID")) == 1 ? "Pending" : Convert.ToInt32(Eval("StatusID")) == 2 ? "Processed" : Convert.ToInt32(Eval("StatusID")) == 3 ? "Shipped" : Convert.ToInt32(Eval("StatusID")) == 4 ? "Closed" : Convert.ToInt32(Eval("StatusID")) == 5 ? "Return" : Convert.ToInt32(Eval("StatusID")) == 9 ? "Cancel" : Convert.ToInt32(Eval("StatusID")) == 6 ? "On Hold" : Convert.ToInt32(Eval("StatusID")) == 7 ? "Out of Stock" : Convert.ToInt32(Eval("StatusID")) == 8 ? "In Process" : Convert.ToInt32(Eval("StatusID")) == 10 ? "Partial Processed" : Convert.ToInt32(Eval("StatusID")) == 11 ? "Partial Shipped" : "Pending"%>
                 <%-- <br /> <%#Eval("PODStatus")%>--%>
-                    <asp:HiddenField ID="hdnStatus" Value='<%# Eval("StatusID") %>' runat="server" />
-                   
+                    <asp:HiddenField ID="hdnStatus" Value='<%# Eval("StatusID") %>' runat="server" />                   
                                                 
                 </ItemTemplate>
             </asp:TemplateField> 

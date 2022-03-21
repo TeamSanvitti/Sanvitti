@@ -93,6 +93,8 @@ namespace avii.Admin
         protected void ddlCustomer_SelectedIndexChanged(object sender, EventArgs e)
         {
             string CompanyAccountNumber = string.Empty;
+            ddlStoreID.Items.Clear();
+
             if (dpCompany.SelectedIndex > 0)
             {
                 CompanyAccountNumber = dpCompany.SelectedValue;
@@ -106,15 +108,18 @@ namespace avii.Admin
         }
         private void BindUserStores(string CompanyAccountNumber)
         {
-            List<SV.Framework.Admin.StoreLocation> storeList = SV.Framework.Admin.UserStoreOperation.GetUserStoreLocationList(CompanyAccountNumber);           
-
+            List<SV.Framework.Admin.StoreLocation> storeList = SV.Framework.Admin.UserStoreOperation.GetUserStoreLocationList(CompanyAccountNumber);
+            
             if (storeList != null && storeList.Count > 0)
             {
                 Session["userstore"] = storeList;
-                //ddlStoreID.DataSource = storeList;
-                //ddlStoreID.DataValueField = "StoreID";
-                //ddlStoreID.DataTextField = "CompositeKeyStoreIdStoreName";
-                //ddlStoreID.DataBind();
+                ddlStoreID.DataSource = storeList;
+                ddlStoreID.DataValueField = "StoreID";
+                ddlStoreID.DataTextField = "CompositeKeyStoreIdStoreName";
+                ddlStoreID.DataBind();
+                System.Web.UI.WebControls.ListItem item = new System.Web.UI.WebControls.ListItem("", "");
+                ddlStoreID.Items.Insert(0, item);
+
                 //trStore.Visible = true;
             }
             else
@@ -128,10 +133,12 @@ namespace avii.Admin
             PurchaseOrder purchaseOrderOperation = PurchaseOrder.CreateInstance<PurchaseOrder>();
             List<ShipBy> shipViaList = purchaseOrderOperation.GetShipByList();
             Session["shipViaList"] = shipViaList;
-            //dpShipBy.DataSource = avii.Classes.PurchaseOrder.GetShipByList();
-            //dpShipBy.DataTextField = "ShipByText";
-            //dpShipBy.DataValueField = "ShipByCode";
-            //dpShipBy.DataBind();
+            dpShipBy.DataSource = avii.Classes.PurchaseOrder.GetShipByList();
+            dpShipBy.DataTextField = "ShipByText";
+            dpShipBy.DataValueField = "ShipByCode";
+            dpShipBy.DataBind();
+            System.Web.UI.WebControls.ListItem item = new System.Web.UI.WebControls.ListItem("", "");
+            dpShipBy.Items.Insert(0, item);
 
         }
         //protected void btnShipVia_Click(object sender, EventArgs e)
@@ -558,6 +565,25 @@ namespace avii.Admin
             }
             else
             {
+                if (ddlPOType.SelectedIndex < 1)
+                {
+                    lblMsg.Text = "Please select fulfillment type";
+                    return;
+                }
+
+                if(ddlPOType.SelectedValue == "B2B")
+                {
+                    if (ddlStoreID.SelectedIndex < 1)
+                    {
+                        lblMsg.Text = "Please select StoreID";
+                        return;
+                    }
+                }
+                if (dpShipBy.SelectedIndex < 1)
+                {
+                    lblMsg.Text = "Please select ship via";
+                    return;
+                }
                 //bool saved = false;
                 if (flnUpload.HasFile)
                 {
@@ -721,12 +747,140 @@ namespace avii.Admin
         {
             bool columnsIncorrectFormat = false;
             invalidColumns = string.Empty;
-            if (headerArray[0].Trim().ToLower() != "fulfillmentordertype")
+            //if (headerArray[0].Trim().ToLower() != "fulfillmentordertype")
+            //{
+            //    invalidColumns = headerArray[0];
+            //    columnsIncorrectFormat = true;
+            //}
+            if (headerArray[0].Trim().ToLower() != "fulfillment#")
             {
                 invalidColumns = headerArray[0];
                 columnsIncorrectFormat = true;
             }
-            if (headerArray[1].Trim().ToLower() != "fulfillment#")
+            if (headerArray[1].Trim().ToLower() != "sku#")
+            {
+                if (string.IsNullOrEmpty(invalidColumns))
+                    invalidColumns = headerArray[1];
+                else
+                    invalidColumns = invalidColumns + ", " + headerArray[1];
+                columnsIncorrectFormat = true;
+            }
+            if (headerArray[2].Trim().ToLower() != "quantity")
+            {
+                if (string.IsNullOrEmpty(invalidColumns))
+                    invalidColumns = headerArray[2];
+                else
+                    invalidColumns = invalidColumns + ", " + headerArray[2];
+                columnsIncorrectFormat = true;
+            }
+
+            //if (headerArray[4].Trim().ToLower() != "storeid")
+            //{
+            //    if (string.IsNullOrEmpty(invalidColumns))
+            //        invalidColumns = headerArray[4];
+            //    else
+            //        invalidColumns = invalidColumns + ", " + headerArray[4];
+            //    columnsIncorrectFormat = true;
+            //}
+            if (headerArray[3].Trim().ToLower() != "shiptoname")
+            {
+                if (string.IsNullOrEmpty(invalidColumns))
+                    invalidColumns = headerArray[3];
+                else
+                    invalidColumns = invalidColumns + ", " + headerArray[3];
+                columnsIncorrectFormat = true;
+            }
+
+            //,,,,,,,,,
+            if (headerArray[4].Trim() != "shiptoaddress1")
+            {
+                if (string.IsNullOrEmpty(invalidColumns))
+                    invalidColumns = headerArray[4];
+                else
+                    invalidColumns = invalidColumns + ", " + headerArray[4];
+                columnsIncorrectFormat = true;
+            }
+            if (headerArray[5].Trim() != "shiptoaddress2")
+            {
+                if (string.IsNullOrEmpty(invalidColumns))
+                    invalidColumns = headerArray[5];
+                else
+                    invalidColumns = invalidColumns + ", " + headerArray[5];
+                columnsIncorrectFormat = true;
+            }
+
+            if (headerArray[6].Trim() != "shiptocity")
+            {
+                if (string.IsNullOrEmpty(invalidColumns))
+                    invalidColumns = headerArray[6];
+                else
+                    invalidColumns = invalidColumns + ", " + headerArray[6];
+                columnsIncorrectFormat = true;
+            }
+            if (headerArray[7].Trim() != "shiptostate")
+            {
+                if (string.IsNullOrEmpty(invalidColumns))
+                    invalidColumns = headerArray[7];
+                else
+                    invalidColumns = invalidColumns + ", " + headerArray[7];
+                columnsIncorrectFormat = true;
+            }
+            if (headerArray[8].Trim() != "shiptozip")
+            {
+                if (string.IsNullOrEmpty(invalidColumns))
+                    invalidColumns = headerArray[8];
+                else
+                    invalidColumns = invalidColumns + ", " + headerArray[8];
+                columnsIncorrectFormat = true;
+            }
+            if (headerArray[9].Trim() != "shiptophone")
+            {
+                if (string.IsNullOrEmpty(invalidColumns))
+                    invalidColumns = headerArray[9];
+                else
+                    invalidColumns = invalidColumns + ", " + headerArray[9];
+
+                columnsIncorrectFormat = true;
+            }
+            //if (headerArray[12].Trim() != "shipmentthrough")
+            //{
+            //    if (string.IsNullOrEmpty(invalidColumns))
+            //        invalidColumns = headerArray[12];
+            //    else
+            //        invalidColumns = invalidColumns + ", " + headerArray[12];
+            //    columnsIncorrectFormat = true;
+            //}
+            //if (headerArray[13].Trim() != "requestedshipdate")
+            //{
+            //    if (string.IsNullOrEmpty(invalidColumns))
+            //        invalidColumns = headerArray[13];
+            //    else
+            //        invalidColumns = invalidColumns + ", " + headerArray[13];
+            //    columnsIncorrectFormat = true;
+            //}
+
+            //if (headerArray[11].Trim() != "zip")
+            //{
+            //    if (string.IsNullOrEmpty(invalidColumns))
+            //        invalidColumns = headerArray[11];
+            //    else
+            //        invalidColumns = invalidColumns + ", " + headerArray[11];
+            //    columnsIncorrectFormat = true;
+            //}
+            return columnsIncorrectFormat;
+
+        }
+
+        private bool ValidateColumnsold(string[] headerArray, out string invalidColumns)
+        {
+            bool columnsIncorrectFormat = false;
+            invalidColumns = string.Empty;
+            //if (headerArray[0].Trim().ToLower() != "fulfillmentordertype")
+            //{
+            //    invalidColumns = headerArray[0];
+            //    columnsIncorrectFormat = true;
+            //}
+            if (headerArray[0].Trim().ToLower() != "fulfillment#")
             {
                 invalidColumns = headerArray[1];
                 columnsIncorrectFormat = true;
@@ -748,7 +902,15 @@ namespace avii.Admin
                 columnsIncorrectFormat = true;
             }
 
-            if (headerArray[4].Trim().ToLower() != "storeid")
+            //if (headerArray[4].Trim().ToLower() != "storeid")
+            //{
+            //    if (string.IsNullOrEmpty(invalidColumns))
+            //        invalidColumns = headerArray[4];
+            //    else
+            //        invalidColumns = invalidColumns + ", " + headerArray[4];
+            //    columnsIncorrectFormat = true;
+            //}
+            if (headerArray[4].Trim().ToLower() != "shiptoname")
             {
                 if (string.IsNullOrEmpty(invalidColumns))
                     invalidColumns = headerArray[4];
@@ -756,7 +918,9 @@ namespace avii.Admin
                     invalidColumns = invalidColumns + ", " + headerArray[4];
                 columnsIncorrectFormat = true;
             }
-            if (headerArray[5].Trim().ToLower() != "shiptoname")
+
+            //,,,,,,,,,
+            if (headerArray[5].Trim() != "shiptoaddress1")
             {
                 if (string.IsNullOrEmpty(invalidColumns))
                     invalidColumns = headerArray[5];
@@ -764,9 +928,7 @@ namespace avii.Admin
                     invalidColumns = invalidColumns + ", " + headerArray[5];
                 columnsIncorrectFormat = true;
             }
-
-            //,,,,,,,,,
-            if (headerArray[6].Trim() != "shiptoaddress1")
+            if (headerArray[6].Trim() != "shiptoaddress2")
             {
                 if (string.IsNullOrEmpty(invalidColumns))
                     invalidColumns = headerArray[6];
@@ -774,7 +936,8 @@ namespace avii.Admin
                     invalidColumns = invalidColumns + ", " + headerArray[6];
                 columnsIncorrectFormat = true;
             }
-            if (headerArray[7].Trim() != "shiptoaddress2")
+
+            if (headerArray[7].Trim() != "shiptocity")
             {
                 if (string.IsNullOrEmpty(invalidColumns))
                     invalidColumns = headerArray[7];
@@ -782,8 +945,7 @@ namespace avii.Admin
                     invalidColumns = invalidColumns + ", " + headerArray[7];
                 columnsIncorrectFormat = true;
             }
-
-            if (headerArray[8].Trim() != "shiptocity")
+            if (headerArray[8].Trim() != "shiptostate")
             {
                 if (string.IsNullOrEmpty(invalidColumns))
                     invalidColumns = headerArray[8];
@@ -791,7 +953,7 @@ namespace avii.Admin
                     invalidColumns = invalidColumns + ", " + headerArray[8];
                 columnsIncorrectFormat = true;
             }
-            if (headerArray[9].Trim() != "shiptostate")
+            if (headerArray[9].Trim() != "shiptozip")
             {
                 if (string.IsNullOrEmpty(invalidColumns))
                     invalidColumns = headerArray[9];
@@ -799,39 +961,32 @@ namespace avii.Admin
                     invalidColumns = invalidColumns + ", " + headerArray[9];
                 columnsIncorrectFormat = true;
             }
-            if (headerArray[10].Trim() != "shiptozip")
+            if (headerArray[10].Trim() != "shiptophone")
             {
                 if (string.IsNullOrEmpty(invalidColumns))
                     invalidColumns = headerArray[10];
                 else
                     invalidColumns = invalidColumns + ", " + headerArray[10];
-                columnsIncorrectFormat = true;
-            }
-            if (headerArray[11].Trim() != "shiptophone")
-            {
-                if (string.IsNullOrEmpty(invalidColumns))
-                    invalidColumns = headerArray[11];
-                else
-                    invalidColumns = invalidColumns + ", " + headerArray[11];
 
                 columnsIncorrectFormat = true;
             }
-            if (headerArray[12].Trim() != "shipmentthrough")
-            {
-                if (string.IsNullOrEmpty(invalidColumns))
-                    invalidColumns = headerArray[12];
-                else
-                    invalidColumns = invalidColumns + ", " + headerArray[12];
-                columnsIncorrectFormat = true;
-            }
-            if (headerArray[13].Trim() != "requestedshipdate")
-            {
-                if (string.IsNullOrEmpty(invalidColumns))
-                    invalidColumns = headerArray[13];
-                else
-                    invalidColumns = invalidColumns + ", " + headerArray[13];
-                columnsIncorrectFormat = true;
-            }
+            //if (headerArray[12].Trim() != "shipmentthrough")
+            //{
+            //    if (string.IsNullOrEmpty(invalidColumns))
+            //        invalidColumns = headerArray[12];
+            //    else
+            //        invalidColumns = invalidColumns + ", " + headerArray[12];
+            //    columnsIncorrectFormat = true;
+            //}
+            //if (headerArray[13].Trim() != "requestedshipdate")
+            //{
+            //    if (string.IsNullOrEmpty(invalidColumns))
+            //        invalidColumns = headerArray[13];
+            //    else
+            //        invalidColumns = invalidColumns + ", " + headerArray[13];
+            //    columnsIncorrectFormat = true;
+            //}
+
             //if (headerArray[11].Trim() != "zip")
             //{
             //    if (string.IsNullOrEmpty(invalidColumns))
@@ -851,12 +1006,14 @@ namespace avii.Admin
             invalidColumns = string.Empty;
             columnsIncorrectFormat = false;
             clsPurchaseOrder po = null;
-            //   string storeID = ddlStoreID.SelectedValue;
-            //   string shipVia = dpShipBy.SelectedValue;
-            string poType, contactName, address1, address2, city, state, zip, phoneNumber, storeID, shipVia;
-            contactName = address1 = address2 = city = state = zip = poType = phoneNumber = shipVia = storeID = string.Empty;
+               string storeID = ddlStoreID.SelectedValue;
+               string shipVia = dpShipBy.SelectedValue;
+            string poType, contactName, address1, address2, city, state, zip, phoneNumber;//, storeID, shipVia;
+            contactName = address1 = address2 = city = state = zip = poType = phoneNumber  = string.Empty; //= shipVia = storeID
             Hashtable hshPoList = new Hashtable();
-            //DateTime RequestedShipDate = DateTime.Now;
+            poType = ddlPOType.SelectedValue;
+            //DateTime RequestedShipDate = Convert.ToDateTime(txtReqShipDate.Text.Trim());
+            DateTime requestedShipDate = DateTime.Now;// Convert.ToDateTime(txtReqShipDate.Text.Trim());
 
 
             //List<avii.Classes.StoreLocation> userStoreList = (List<avii.Classes.StoreLocation>)Session["userstore"];
@@ -886,7 +1043,7 @@ namespace avii.Admin
                         string sku = string.Empty;
                         string poNumber = string.Empty;
                         string poNum;//, contactName, address1, address2, city, state, zip, shipVia;
-                        poNum = contactName = address1 = address2 = city = state = zip = shipVia = poType = phoneNumber = shipVia = storeID = string.Empty;
+                        poNum = contactName = address1 = address2 = city = state = zip =  phoneNumber = string.Empty; //= shipVia = storeID = poType 
                         int qty = 0;
                         string line;
                         string[] tempData;
@@ -895,15 +1052,14 @@ namespace avii.Admin
                         while ((line = sr.ReadLine()) != null)
                         {
                             qty = 0;
-                            contactName = address1 = address2 = city = state = zip = shipVia = poType = phoneNumber = shipVia = storeID = string.Empty;
-
+                            contactName = address1 = address2 = city = state = zip =   phoneNumber = string.Empty; ///= shipVia = storeID 
 
                             if (!string.IsNullOrEmpty(line) && i == 0)
                             {
                                 line = line.ToLower();
                                 line = line.Trim();
                                 string[] headerArray = line.Split(',');
-                                if (headerArray.Length < 14)
+                                if (headerArray.Length < 10)
                                 {
                                     lblMsg.Text = "File format not matching missing required columns";
                                     columnsIncorrectFormat = true;
@@ -923,11 +1079,13 @@ namespace avii.Admin
                                 tempData = line.Split(',');
                                 //if (tempData.Length <= 14)
                                 {
-                                    if ((int.TryParse(tempData[3], out qty)))
+                                    if ((int.TryParse(tempData[2], out qty)))
                                     {
-                                        if (!string.IsNullOrEmpty(tempData[1]) && tempData[1].Trim().Length > 0)
+                                        if (!string.IsNullOrEmpty(tempData[0]) && tempData[0].Trim().Length > 0)
                                         {
-                                            poNumber = tempData[1].Trim();
+                                            poNumber = tempData[0].Trim();
+                                            poNumber = poNumber.Replace("@", "");
+
                                             //storeID = tempData[2].Trim();
                                             if (!hshPoList.ContainsKey(poNumber))
                                             {
@@ -941,10 +1099,12 @@ namespace avii.Admin
                                             {
                                                 po.PurchaseOrderNumber = poNumber;
                                                 po.Comments = "None";
-                                                DateTime requestedShipDate = DateTime.Now;
-                                                if (!string.IsNullOrEmpty(tempData[13]))
+                                                if(txtReqShipDate.Text.Length == 0)
+                                                    txtReqShipDate.Text = DateTime.Now.ToShortDateString();
+
+                                                if (!string.IsNullOrEmpty(txtReqShipDate.Text))
                                                 {
-                                                    if (DateTime.TryParse(tempData[13], out requestedShipDate))
+                                                    if (DateTime.TryParse(txtReqShipDate.Text, out requestedShipDate))
                                                     {
                                                         DateTime currentDate = DateTime.Now;
                                                         TimeSpan diffResult = currentDate - requestedShipDate;
@@ -982,18 +1142,18 @@ namespace avii.Admin
 
                                                // if (poNum != poNumber)
                                                 {
-                                                    poType = tempData.Length > 0 ? tempData[0].ToUpper() : string.Empty;
-                                                    poType = poType.Replace("@", "");
+                                                   // poType = tempData.Length > 0 ? tempData[0].ToUpper() : string.Empty;
+                                                   // poType = poType.Replace("@", "");
 
-                                                    storeID = tempData.Length > 4 ? tempData[4] : string.Empty;
-                                                    contactName = tempData.Length > 5 ? tempData[5] : string.Empty;
-                                                    address1 = tempData.Length > 6 ? tempData[6] : string.Empty;
-                                                    address2 = tempData.Length > 7 ? tempData[7] : string.Empty;
-                                                    city = tempData.Length > 8 ? tempData[8] : string.Empty;
-                                                    state = tempData.Length > 9 ? tempData[9] : string.Empty;
-                                                    zip = tempData.Length > 10 ? tempData[10] : string.Empty;
-                                                    phoneNumber = tempData.Length > 11 ? tempData[11] : string.Empty;
-                                                    shipVia = tempData.Length > 12 ? tempData[12] : string.Empty;
+                                                    //storeID = tempData.Length > 4 ? tempData[4] : string.Empty;
+                                                    contactName = tempData.Length > 3 ? tempData[3] : string.Empty;
+                                                    address1 = tempData.Length > 4 ? tempData[4] : string.Empty;
+                                                    address2 = tempData.Length > 5 ? tempData[5] : string.Empty;
+                                                    city = tempData.Length > 6 ? tempData[6] : string.Empty;
+                                                    state = tempData.Length > 7 ? tempData[7] : string.Empty;
+                                                    zip = tempData.Length > 8 ? tempData[8] : string.Empty;
+                                                    phoneNumber = tempData.Length > 9 ? tempData[9] : string.Empty;
+                                                    //shipVia = tempData.Length > 12 ? tempData[12] : string.Empty;
 
                                                     if(!ValidateShipVia(shipVia, out returnMessage))
                                                     {
@@ -1023,12 +1183,14 @@ namespace avii.Admin
                                                         {
                                                             isRequired = true;
                                                         }
+                                                        
                                                     }
                                                 }
+                                                //if (poType.ToUpper() != "B2B")
+                                                //{
+                                                //    storeID = string.Empty;
+                                                //}
 
-
-                                                
-                                                
                                                 poNum = poNumber;
                                                 //shipVia = tempData[5].Trim();
                                                 po.Shipping.ContactName = contactName.Trim();// sltemp.StoreContact.ContactName;
@@ -1039,11 +1201,11 @@ namespace avii.Admin
                                                 po.Shipping.ShipToZip = zip.Trim();
                                                 po.Shipping.ContactPhone = phoneNumber.Trim();
                                                 po.Shipping.ShipToAttn = contactName.Trim();//sltemp.StoreContact.ContactName;
-                                                po.StoreID = storeID;
+                                                po.StoreID = poType.ToUpper() == "B2C" ? "" : storeID;
                                                 po.POType = poType;
 
                                                 po.ShipThrough = shipVia;
-                                                sku = tempData[2].Trim();
+                                                sku = tempData[1].Trim();
                                                 if (sku != string.Empty)
                                                 {
                                                     if (qty > 0)
@@ -1420,7 +1582,11 @@ namespace avii.Admin
                 dpCompany.SelectedIndex = 0;
             else
                 trCustomer.Visible = false;
-            //dpShipBy.SelectedIndex = 0;
+            dpShipBy.SelectedIndex = 0;
+            ddlStoreID.SelectedIndex = 0;
+            ddlStoreID.Items.Clear();
+            ddlPOType.SelectedIndex = 0;
+            txtReqShipDate.Text = "";
             //trStore.Visible = false;
 
         }
@@ -1500,9 +1666,6 @@ namespace avii.Admin
                     }
                 }
             }
-
-
-
             return fileStoreLocation + actualFilename;
         }
 
@@ -1514,6 +1677,27 @@ namespace avii.Admin
         {
             lblMsg.Text = string.Empty;
             
+            {
+                string string2CSV = "Fulfillment#,SKU#,Quantity,ShipToName,ShipToAddress1,ShipToAddress2,ShipToCity,ShipToState,ShipToZip,ShipToPhone" + Environment.NewLine;
+
+                //esnList.ToCSV();
+
+                Response.Clear();
+                Response.Buffer = true;
+                Response.AddHeader("content-disposition", "attachment;filename=FulfillmentUpload.csv");
+                Response.Charset = "";
+                Response.ContentType = "application/text";
+                Response.Output.Write(string2CSV);
+                Response.Flush();
+                Response.End();
+
+            }
+            
+        }
+        private void GenerateCSVOld()
+        {
+            lblMsg.Text = string.Empty;
+
             {
                 string string2CSV = "FulfillmentOrderType,Fulfillment#,SKU#,Quantity,StoreID,ShipToName,ShipToAddress1,ShipToAddress2,ShipToCity,ShipToState,ShipToZip,ShipToPhone,ShipmentThrough,RequestedShipDate" + Environment.NewLine;
 
@@ -1529,7 +1713,7 @@ namespace avii.Admin
                 Response.End();
 
             }
-            
+
         }
 
     }

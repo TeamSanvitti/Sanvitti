@@ -295,7 +295,7 @@
              
 <%--     <br />--%>
       <table align="center" style="text-align:left" width="80%">
-      <tr>
+      
      <tr>
                 <td  align="center"  colspan="5">
                     <%--<asp:Panel ID="pnlPO" runat="server">--%>
@@ -310,7 +310,9 @@
                                 <asp:Button ID="btnSubmit" Visible="false" Width="190px"  CssClass="button" runat="server" OnClick="btnSubmit_Click" Text="Submit" />
                                
                                 &nbsp;<asp:Button ID="btnCancel" Visible="false" runat="server"  CssClass="button" Text="Cancel" OnClick="btnCancel_Click" />
-                                                              
+                                
+                                &nbsp;<asp:Button ID="btnDownload" Visible="false" runat="server"  CssClass="button" Text="Download" OnClick="btnDownload_Click" />
+                                    
 
                                <%-- &nbsp;<a id="lnk_Print"  href="#" style="height:30px !important; line-height:40px !important; width:150px" class="button" Visible="false" target="_blank" runat="server"><span style="height:30px !important; line-height:40px !important; width:150px" class="button"> Print </span></a>--%>
 
@@ -323,9 +325,53 @@
                 </td>
                 </tr>
             </table>
+         <table align="center" style="text-align:left" width="80%">
+      <tr>
+     <td>
+         <asp:GridView ID="gvSOSKU"   AutoGenerateColumns="false" Visible="false" 
+                        Width="100%" ShowHeader="true"  ShowFooter="false" runat="server" GridLines="Both" 
+                        PageSize="50" AllowPaging="false" AllowSorting="false"  >
+                        <RowStyle BackColor="Gainsboro" />
+                        <AlternatingRowStyle BackColor="white" />
+                        <HeaderStyle  CssClass="buttongrid" ForeColor="white"/>
+                          <PagerStyle ForeColor="#636363" CssClass="copy10grey" HorizontalAlign="Left" />
+                          <Columns>
+                              <asp:TemplateField HeaderText="S.No." ItemStyle-CssClass="copy10grey"  ItemStyle-Width="1%" HeaderStyle-CssClass="buttongrid">
+                                <ItemTemplate>
+
+                                        <%# Container.DataItemIndex + 1%>
+                                </ItemTemplate>
+                            </asp:TemplateField> 
+                              <asp:TemplateField HeaderText="SKU" ItemStyle-CssClass="copy10grey"  ItemStyle-Width="50%">
+                                <ItemTemplate>
+
+                                      <%# Eval("SKU")%>
+                  
+                                </ItemTemplate>
+                            </asp:TemplateField> 
+                                
+                              <asp:TemplateField HeaderText="KitID" ItemStyle-CssClass="copy10grey"  ItemStyle-Width="40%">
+                                <ItemTemplate>
+                                        
+                                      <%# Eval("KitID")%>
+                  
+                                </ItemTemplate>
+                            </asp:TemplateField> 
+
+
+                                
+                            </Columns>
+                        </asp:GridView>
+                </td>
+                </tr>
+            </table>        
         </ContentTemplate>
+         <Triggers>
+            <asp:PostBackTrigger ControlID="btnDownload" />             
+           
+        </Triggers>
         <%--<Triggers>
-            <asp:PostBackTrigger ControlID="btnCancel" />             
+            <asp:PostBackTrigger ControlID="btnDownload" />             
             <asp:PostBackTrigger ControlID="btnSubmit"/> 
         </Triggers>--%>
        </asp:UpdatePanel>

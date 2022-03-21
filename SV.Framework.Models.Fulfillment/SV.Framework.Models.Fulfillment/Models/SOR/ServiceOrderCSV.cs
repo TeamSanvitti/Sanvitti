@@ -18,4 +18,11 @@ namespace SV.Framework.Models.SOR
 
     }
 
+    public class NonESNKitCSV
+    {
+        public string SKU { get; set; }
+        public Int64 KitID { get; set; }
+
+
+    }
 }

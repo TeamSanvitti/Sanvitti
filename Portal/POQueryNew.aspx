@@ -1512,7 +1512,7 @@ function ValidateRecievedStatus(obj) {
 
 		    function set_focus3() {
 		        var img = document.getElementById("img1");
-		        var st = document.getElementById("dpStatusList");
+                var st = document.getElementById("txtComment"); //flnUpload
 		        st.focus();
 		        img.click();
 		    }
@@ -1524,7 +1524,7 @@ function ValidateRecievedStatus(obj) {
 		    }
 
  
-    </script>
+        </script>
 
      <script type="text/javascript" >
          
@@ -2878,29 +2878,43 @@ OnRowDeleting = "gvTracking_RowDeleting" OnRowDeleted = "gvTracking_RowDeleted"
 
                     </td>
                 </tr>
-                <%--<tr>
-                    <td class="copy10grey" align="right" width="40%">
-                        Sent ESN:    
-                    </td>
-                    <td>
-
-                       &nbsp;  <asp:Label ID="lblSentESN" runat="server" CssClass="copy10grey"></asp:Label>   
-                    </td>
-                </tr>
-                <tr>
-                    <td class="copy10grey" align="right" width="40%">
-                        Sent ASN:    
-                    </td>
-                    <td>
-
-                       &nbsp;  <asp:Label ID="lblSentASN" runat="server" CssClass="copy10grey"></asp:Label>   
-                    </td>
-                </tr>--%>
+                
                 </table>
                 </td>
                 </tr>
                 </table>
+                 <br />
+                <table bordercolor="#839abf" border="1" cellSpacing="0" cellPadding="0" width="99%" align="center">
+                <tr bordercolor="#839abf">
+                <td>
+                <table width="100%" align="center" cellpadding="3" cellspacing="3" border="0">
+                <tr>
+                    <td class="copy10grey" align="right" width="17%">
+                        Items/Container:    
+                    </td>
+                    <td width="32%">
 
+                       &nbsp; <asp:TextBox ID="txtItemsPerContainer" onkeypress="return isNumberKey(event);" Width="200" MaxLength="5" CssClass="copy10grey" runat="server"></asp:TextBox>
+                
+                    </td>
+                    <td width="2%">
+                    &nbsp;
+                    </td>
+                    <td class="copy10grey" align="right" width="17%">
+                        Container/Pallets:    
+                    </td>
+                    <td width="32%">
+
+                       &nbsp; <asp:TextBox ID="txtContainersPerPallet"  onkeypress="return isNumberKey(event);"  MaxLength="5" Width="200" CssClass="copy10grey" runat="server"></asp:TextBox>
+                
+                    </td>
+
+
+                </tr>
+               </table>
+                    </td>
+                    </tr>
+                    </table>
                  <br />   
                    <table bordercolor="#839abf" border="1" cellSpacing="0" cellPadding="0" width="99%"  align="center">
                    <tr bordercolor="#839abf">
@@ -4108,12 +4122,10 @@ onkeydown="checkTextAreaMaxLength(this,event,'5000');" onkeyup="checkTextAreaMax
                             <%# Container.DataItemIndex + 1%> &nbsp;
                   
                     </ItemTemplate>
-                    </asp:TemplateField>
-                <%--<asp:TemplateField HeaderText="AVSO#" SortExpression="AerovoiceSalesOrderNumber"  ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="copy10grey" ItemStyle-Width="7%">
-                    <ItemTemplate>
-                    <%# Eval("AerovoiceSalesOrderNumber") %>
-                    </ItemTemplate>
-                </asp:TemplateField>  --%>             
+                    </asp:TemplateField>          
+                <asp:TemplateField HeaderText="Type"  ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="copy10grey" ItemStyle-Width="2%">
+                    <ItemTemplate><%#Eval("POType")%></ItemTemplate>
+                </asp:TemplateField>
                 
                 <asp:TemplateField HeaderText="Fulfillment#" HeaderStyle-CssClass="buttonundlinelabel" SortExpression="PurchaseOrderNumber"  ItemStyle-CssClass="copy10grey" 
                     ItemStyle-Width="8%">
@@ -4231,8 +4243,7 @@ onkeydown="checkTextAreaMaxLength(this,event,'5000');" onkeyup="checkTextAreaMax
 --%>
                 <asp:TemplateField HeaderText="Status" HeaderStyle-CssClass="buttonundlinelabel"  SortExpression="PurchaseOrderStatus"  ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="3%">
-                    <ItemTemplate>
-                    
+                    <ItemTemplate>                    
                     <table cellpadding="3" cellspacing="3" style="width:100%; background-color:<%#Eval("StatusColor")%>; height:100%">
                     <tr>
                     <td>
@@ -4244,13 +4255,13 @@ onkeydown="checkTextAreaMaxLength(this,event,'5000');" onkeyup="checkTextAreaMax
                     <asp:HiddenField ID="hdnStatus" Value='<%#Eval("PurchaseOrderStatusID")%>' runat="server" />
                     </ItemTemplate>
                 </asp:TemplateField>   
-                 <asp:TemplateField HeaderText="Source"  ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="copy10grey" ItemStyle-Width="2%">
-                    <ItemTemplate><%#Eval("POSource")%></ItemTemplate>
-                </asp:TemplateField>
+                
                 <asp:TemplateField HeaderText="Line Item Count"  ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                     <ItemTemplate><%#Eval("LineItemCount")%></ItemTemplate>
                 </asp:TemplateField>
-               
+                <asp:TemplateField HeaderText="Source"  ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="copy10grey" ItemStyle-Width="2%">
+                    <ItemTemplate><%#Eval("POSource")%></ItemTemplate>
+                </asp:TemplateField>
                 <%--
                 <asp:TemplateField HeaderText="Sent ESN" SortExpression="sentesn"  ItemStyle-HorizontalAlign="Center" ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                     <ItemTemplate><%#Eval("sentesn")%></ItemTemplate>

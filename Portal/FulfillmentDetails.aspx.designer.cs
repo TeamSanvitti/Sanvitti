@@ -105,6 +105,15 @@ namespace avii
         protected global::System.Web.UI.WebControls.Label lblpoid;
 
         /// <summary>
+        /// lblTpye control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblTpye;
+
+        /// <summary>
         /// lblPO control.
         /// </summary>
         /// <remarks>
@@ -132,6 +141,15 @@ namespace avii
         protected global::System.Web.UI.WebControls.Label lblvPODate;
 
         /// <summary>
+        /// lblCustName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCustName;
+
+        /// <summary>
         /// lblvStoreID control.
         /// </summary>
         /// <remarks>
@@ -141,13 +159,13 @@ namespace avii
         protected global::System.Web.UI.WebControls.Label lblvStoreID;
 
         /// <summary>
-        /// lblCustName control.
+        /// lblShipViaCode control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblCustName;
+        protected global::System.Web.UI.WebControls.Label lblShipViaCode;
 
         /// <summary>
         /// lblReqShipDate control.
@@ -159,13 +177,22 @@ namespace avii
         protected global::System.Web.UI.WebControls.Label lblReqShipDate;
 
         /// <summary>
-        /// lblShipViaCode control.
+        /// lblItemsPerContainer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblShipViaCode;
+        protected global::System.Web.UI.WebControls.Label lblItemsPerContainer;
+
+        /// <summary>
+        /// lblContainersPerPallet control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblContainersPerPallet;
 
         /// <summary>
         /// lblContactName control.

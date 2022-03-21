@@ -87,6 +87,51 @@ namespace avii.Admin
         protected global::System.Web.UI.WebControls.DropDownList dpCompany;
 
         /// <summary>
+        /// dpShipBy control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dpShipBy;
+
+        /// <summary>
+        /// lblStore control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblStore;
+
+        /// <summary>
+        /// ddlStoreID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlStoreID;
+
+        /// <summary>
+        /// ddlPOType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlPOType;
+
+        /// <summary>
+        /// txtReqShipDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtReqShipDate;
+
+        /// <summary>
         /// flnUpload control.
         /// </summary>
         /// <remarks>

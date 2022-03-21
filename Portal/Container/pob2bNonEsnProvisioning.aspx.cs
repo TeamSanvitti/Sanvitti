@@ -81,6 +81,24 @@ namespace avii.Container
                 List<ContainerInfo> skuList = containerOperation.GetContainerInfo(companyID, fulfillmentNumber, trackingNumber, out containers, out nonESNList, out trackingList);
                 if (skuList != null && skuList.Count > 0)
                 {
+                    int ItemsPerContainer = 1, ContainersPerPallet = 1, requiredContainers = 0;
+                    var totalContainers = 0;
+                    var totalPallets = 0;
+                    //foreach (ContainerInfo item in skuList)
+                    //{
+                    //    if (item.ContainerQuantity > 0)
+                    //    {
+                    //        ItemsPerContainer = item.ContainerQuantity;
+                    //        requiredContainers = Convert.ToInt32(item.Quantity) / ItemsPerContainer + Convert.ToInt32(item.Quantity) % ItemsPerContainer;
+                    //        totalContainers = totalContainers + requiredContainers;
+                    //    }
+                    //    if (item.PalletQuantity > 0)
+                    //    {
+                    //        ContainersPerPallet = item.PalletQuantity;
+                    //        totalPallets = totalPallets + requiredContainers / ContainersPerPallet + requiredContainers % ContainersPerPallet;
+                    //    }
+                    //}
+
                     IsKittedBox = skuList[0].IsKittedBox;
                     if (trackingList != null && trackingList.Count > 0)
                     {
@@ -113,7 +131,11 @@ namespace avii.Container
                         poid = item.POID;
                         casePackQuantity = item.ContainerQuantity;
 
+                        
+
                     }
+                    //totalPallets = totalPallets + numberOfContainers / ContainersPerPallet + numberOfContainers % ContainersPerPallet;
+
                     ViewState["casePackQuantity"] = casePackQuantity;
                     if (containers != null && containers.Count > 0)
                     {

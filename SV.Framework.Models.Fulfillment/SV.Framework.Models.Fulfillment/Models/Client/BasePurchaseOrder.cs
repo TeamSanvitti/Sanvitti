@@ -76,6 +76,9 @@ namespace SV.Framework.Models.Fulfillment
             }
         }
         [XmlIgnore]
+        public string POType { get; set; }
+
+        [XmlIgnore]
         public string POSource { get; set; }
 
         [XmlIgnore]

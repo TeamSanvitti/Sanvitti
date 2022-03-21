@@ -174,7 +174,7 @@ body>#modelprogress
             <menu:Menu ID="menu1" runat="server" ></menu:Menu>
         </td>
     </tr>
-    </table><br />
+    </table>
 
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="95%">        
         <tr valign="top">           

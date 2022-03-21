@@ -995,7 +995,7 @@ namespace avii
                     //ImageButton imgHistory = (ImageButton)e.Row.FindControl("imgHistory");
                     //imgHistory.OnClientClick = "openHistoryDialogAndBlock('Fulfillment History', '" + imgHistory.ClientID + "')";
                     ImageButton imgEdit = (ImageButton)e.Row.FindControl("imgEdit");
-                    imgEdit.OnClientClick = "openEditDialogAndBlock('Edit Fulfillment', '" + imgEdit.ClientID + "')";
+                    //imgEdit.OnClientClick = "openEditDialogAndBlock('Edit Fulfillment', '" + imgEdit.ClientID + "')";
 
                     LinkButton lnkStore = (LinkButton)e.Row.FindControl("lnkStore");
                     lnkStore.OnClientClick = "openStoreDialogAndBlock('Store Address', '" + lnkStore.ClientID + "')";
@@ -1104,144 +1104,150 @@ namespace avii
         
         protected void imgEditPO_OnCommand(object sender, CommandEventArgs e)
         {
-            lblMsg.Text = string.Empty;
-            lblEditPO.Text = string.Empty;
             int poID = Convert.ToInt32(e.CommandArgument);
-            ViewState["poid"] = poID;
-            btnSubmit.Visible = false;
-            PurchaseOrders purchaseOrders = Session["POS"] as PurchaseOrders;
-            List<BasePurchaseOrder> purchaseOrderList = purchaseOrders.PurchaseOrderList;
+            Session["poid"] = poID;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('FulfillmentEdit.aspx')</script>", false);
 
-            var poInfoList = (from item in purchaseOrderList where item.PurchaseOrderID.Equals(poID) select item).ToList();
-            if (poInfoList.Count > 0)
-            {
-                chkShipRequired.Checked = poInfoList[0].IsShipmentRequired;
-                lblPONo.Text = poInfoList[0].PurchaseOrderNumber;
-                //lblPoDate.Text = poInfoList[0].PurchaseOrderDate.ToShortDateString();
-                txtPODate.Text = poInfoList[0].PurchaseOrderDate.ToShortDateString();
-                lblCustomer.Text = poInfoList[0].CustomerName;
-                txtContactName.Text = poInfoList[0].Shipping.ContactName;
-                txtContactPhone.Text = poInfoList[0].Shipping.ContactPhone;
-                txtReqShipDate.Text = poInfoList[0].RequestedShipDate.ToString("MM/dd/yyyy");
+            //lblMsg.Text = string.Empty;
+            //lblEditPO.Text = string.Empty;
+            //int poID = Convert.ToInt32(e.CommandArgument);
+            //ViewState["poid"] = poID;
+            //btnSubmit.Visible = false;
+            //PurchaseOrders purchaseOrders = Session["POS"] as PurchaseOrders;
+            //List<BasePurchaseOrder> purchaseOrderList = purchaseOrders.PurchaseOrderList;
 
-                //txtShipBy.Text = poInfoList[0].Tracking.ShipToBy;
-                if (Session["adm"] == null)
-                {
-                    if (poInfoList[0].PurchaseOrderStatusID == 1)
-                    {
-                        btnSubmit.Visible = true;
-                    }
-                }
-                else
-                    btnSubmit.Visible = true;
+            //var poInfoList = (from item in purchaseOrderList where item.PurchaseOrderID.Equals(poID) select item).ToList();
+            //if (poInfoList.Count > 0)
+            //{
+            //    chkShipRequired.Checked = poInfoList[0].IsShipmentRequired;
+            //    lblPONo.Text = poInfoList[0].PurchaseOrderNumber;
+            //    //lblPoDate.Text = poInfoList[0].PurchaseOrderDate.ToShortDateString();
+            //    txtPODate.Text = poInfoList[0].PurchaseOrderDate.ToShortDateString();
+            //    lblCustomer.Text = poInfoList[0].CustomerName;
+            //    txtContactName.Text = poInfoList[0].Shipping.ContactName;
+            //    txtContactPhone.Text = poInfoList[0].Shipping.ContactPhone;
+            //    txtReqShipDate.Text = poInfoList[0].RequestedShipDate.ToString("MM/dd/yyyy");
 
-                if (poInfoList[0].PurchaseOrderStatusID == 1 || poInfoList[0].PurchaseOrderStatusID == 2 || poInfoList[0].PurchaseOrderStatusID == 8 || poInfoList[0].PurchaseOrderStatusID == 10)
-                {
-                    lblDShipvia.Visible = false;
-                    dpShipVia.Visible = true;
-                }
-                else
-                {
-                    lblDShipvia.Visible = true;
-                    dpShipVia.Visible = false;
+            //    txtContainersPerPallet.Text = poInfoList[0].PurchaseOrderItems[0].ContainersPerPallet.ToString();
+            //    txtItemsPerContainer.Text = poInfoList[0].PurchaseOrderItems[0].ItemsPerContainer.ToString();
+            //    //txtShipBy.Text = poInfoList[0].Tracking.ShipToBy;
+            //    if (Session["adm"] == null)
+            //    {
+            //        if (poInfoList[0].PurchaseOrderStatusID == 1)
+            //        {
+            //            btnSubmit.Visible = true;
+            //        }
+            //    }
+            //    else
+            //        btnSubmit.Visible = true;
 
-                    //dpShipVia.SelectedIndex = 0;
+            //    if (poInfoList[0].PurchaseOrderStatusID == 1 || poInfoList[0].PurchaseOrderStatusID == 2 || poInfoList[0].PurchaseOrderStatusID == 8 || poInfoList[0].PurchaseOrderStatusID == 10)
+            //    {
+            //        lblDShipvia.Visible = false;
+            //        dpShipVia.Visible = true;
+            //    }
+            //    else
+            //    {
+            //        lblDShipvia.Visible = true;
+            //        dpShipVia.Visible = false;
 
-                }
-                string poShipBy = poInfoList[0].Tracking.ShipToBy;
+            //        //dpShipVia.SelectedIndex = 0;
 
-                if (!string.IsNullOrEmpty(poShipBy))
-                {
+            //    }
+            //    string poShipBy = poInfoList[0].Tracking.ShipToBy;
 
-                    List<ShipBy> shipViaList = (List<ShipBy>)Session["shipby"];
-                    var shipVia = (from item in shipViaList where item.ShipByCode.Equals(poShipBy) select item).ToList();
-                    //DataRow[] drs = null;
-                    //drs = dt.Select("[shipby] ='" + poShipBy + "'");
+            //    if (!string.IsNullOrEmpty(poShipBy))
+            //    {
 
-                    if (shipVia != null && shipVia.Count > 0)
-                    {
-                        dpShipVia.SelectedValue = poShipBy;
-                        lblDShipvia.Text = poShipBy;
-                    }
-                    else
-                    {
-                        dpShipVia.SelectedIndex = 0;
-                        lblEditPO.Text = "Invalid Shipvia: " + poShipBy;
-                    }
-                }
-                else
-                    dpShipVia.SelectedIndex = 0;
+            //        List<ShipBy> shipViaList = (List<ShipBy>)Session["shipby"];
+            //        var shipVia = (from item in shipViaList where item.ShipByCode.Equals(poShipBy) select item).ToList();
+            //        //DataRow[] drs = null;
+            //        //drs = dt.Select("[shipby] ='" + poShipBy + "'");
+
+            //        if (shipVia != null && shipVia.Count > 0)
+            //        {
+            //            dpShipVia.SelectedValue = poShipBy;
+            //            lblDShipvia.Text = poShipBy;
+            //        }
+            //        else
+            //        {
+            //            dpShipVia.SelectedIndex = 0;
+            //            lblEditPO.Text = "Invalid Shipvia: " + poShipBy;
+            //        }
+            //    }
+            //    else
+            //        dpShipVia.SelectedIndex = 0;
 
                 
 
-                //lblAVSO.Text = poInfoList[0].AerovoiceSalesOrderNumber;
-                //txtTrackingNo.Text = poInfoList[0].Tracking.ShipToTrackingNumber;
-                // COMMENTED BECAUSE WE POPUP NOT TO VIEW COMMENTS
-                //txtCommments.Text = poInfoList[0].Comments;
-                txtCommments.Text = string.Empty;
-                if (Session["adm"] == null)
-                {
-                    //txtTrackingNo.ReadOnly = true;
-                    //lblPOStatus.Visible = true;
-                    ddlStatus.Visible = false;
-                    lblStatus.Text = poInfoList[0].PurchaseOrderStatus.ToString();
-                    ddlStatus.SelectedValue = poInfoList[0].PurchaseOrderStatusID.ToString();
-                }
-                else
-                {
-                    ddlStatus.SelectedValue = poInfoList[0].PurchaseOrderStatusID.ToString();
-                    lblStatus.Visible = false;
-                }
+            //    //lblAVSO.Text = poInfoList[0].AerovoiceSalesOrderNumber;
+            //    //txtTrackingNo.Text = poInfoList[0].Tracking.ShipToTrackingNumber;
+            //    // COMMENTED BECAUSE WE POPUP NOT TO VIEW COMMENTS
+            //    //txtCommments.Text = poInfoList[0].Comments;
+            //    txtCommments.Text = string.Empty;
+            //    if (Session["adm"] == null)
+            //    {
+            //        //txtTrackingNo.ReadOnly = true;
+            //        //lblPOStatus.Visible = true;
+            //        ddlStatus.Visible = false;
+            //        lblStatus.Text = poInfoList[0].PurchaseOrderStatus.ToString();
+            //        ddlStatus.SelectedValue = poInfoList[0].PurchaseOrderStatusID.ToString();
+            //    }
+            //    else
+            //    {
+            //        ddlStatus.SelectedValue = poInfoList[0].PurchaseOrderStatusID.ToString();
+            //        lblStatus.Visible = false;
+            //    }
                 
-                //if ("1/1/0001" != poInfoList[0].Tracking.ShipToDate.ToShortDateString())
-                //    lblShipDate.Text = poInfoList[0].Tracking.ShipToDate.ToShortDateString();
+            //    //if ("1/1/0001" != poInfoList[0].Tracking.ShipToDate.ToShortDateString())
+            //    //    lblShipDate.Text = poInfoList[0].Tracking.ShipToDate.ToShortDateString();
 
-                lblStoreID.Text = poInfoList[0].StoreID;
-                txtStreetAdd.Text = poInfoList[0].Shipping.ShipToAddress;
-                txtAddress2.Text = poInfoList[0].Shipping.ShipToAddress2;
+            //    lblStoreID.Text = poInfoList[0].StoreID;
+            //    txtStreetAdd.Text = poInfoList[0].Shipping.ShipToAddress;
+            //    txtAddress2.Text = poInfoList[0].Shipping.ShipToAddress2;
 
-                txtCity.Text = poInfoList[0].Shipping.ShipToCity;
-                string poState = poInfoList[0].Shipping.ShipToState.ToUpper();
+            //    txtCity.Text = poInfoList[0].Shipping.ShipToCity;
+            //    string poState = poInfoList[0].Shipping.ShipToState.ToUpper();
 
-                if (!string.IsNullOrEmpty(poState))
-                {
-                    try
-                    {
-                        //poState = 
-                        DataTable dt = ViewState["state"] as DataTable;
+            //    if (!string.IsNullOrEmpty(poState))
+            //    {
+            //        try
+            //        {
+            //            //poState = 
+            //            DataTable dt = ViewState["state"] as DataTable;
 
-                        DataRow[] drs = null;
-                        drs = dt.Select("[statecode] ='" + poState + "'" );
+            //            DataRow[] drs = null;
+            //            drs = dt.Select("[statecode] ='" + poState + "'" );
 
-                        if (drs != null && drs.Length > 0)
-                        {
-                            dpState.SelectedValue = poState;
-                        }
-                        else
-                        {
-                            dpState.SelectedIndex = 0;
-                            lblEditPO.Text = "Invalid StateCode: " + poState;
-                        }
+            //            if (drs != null && drs.Length > 0)
+            //            {
+            //                dpState.SelectedValue = poState;
+            //            }
+            //            else
+            //            {
+            //                dpState.SelectedIndex = 0;
+            //                lblEditPO.Text = "Invalid StateCode: " + poState;
+            //            }
 
-                    }
-                    catch (Exception ex)
-                    {
-                        lblEditPO.Text = ex.Message;
-                    }
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            lblEditPO.Text = ex.Message;
+            //        }
                     
-                }
-                //txtState.Text = poInfoList[0].Shipping.ShipToState;
-                txtZip.Text = poInfoList[0].Shipping.ShipToZip;
-                //lblStatus.Text = poInfoList[0].PurchaseOrderStatus.ToString();
-                //lblSentESN.Text = poInfoList[0].SentESN;
-                //lblSentASN.Text = poInfoList[0].SentASN;
-                lblPONo.Text = poInfoList[0].PurchaseOrderNumber;
+            //    }
+            //    //txtState.Text = poInfoList[0].Shipping.ShipToState;
+            //    txtZip.Text = poInfoList[0].Shipping.ShipToZip;
+            //    //lblStatus.Text = poInfoList[0].PurchaseOrderStatus.ToString();
+            //    //lblSentESN.Text = poInfoList[0].SentESN;
+            //    //lblSentASN.Text = poInfoList[0].SentASN;
+            //    lblPONo.Text = poInfoList[0].PurchaseOrderNumber;
 
 
 
 
-            }
-            RegisterStartupScript("jsUnblockDialog", "unblockEditDialog();");
+            //}
+            //RegisterStartupScript("jsUnblockDialog", "unblockEditDialog();");
             //ModalPopupExtender2.Show();
         }
 
@@ -6344,6 +6350,7 @@ namespace avii
             ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('AddNewItem.aspx')</script>", false);
 
         }
+        
 
         protected void btnASN_Click(object sender, EventArgs e)
         {
