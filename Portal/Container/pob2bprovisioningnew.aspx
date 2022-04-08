@@ -368,7 +368,7 @@
                                         Current Stock 
                                     </td>
                                     
-                                    <td class="buttongrid" width="5%">
+                                    <td class="buttongrid" width="5%" style="display:none">
                                         Assign
                                     </td>
                                     <td class="buttongrid" width="5%">
@@ -408,7 +408,7 @@
                                             </span>
                                         </td>
                                        
-                                        <td valign="bottom" class="copy10grey"  >
+                                        <td valign="bottom" class="copy10grey"  style="display:none">
                                         <span width="100%">
                                             <asp:CheckBox ID="chkAssign" Enabled='<%# Eval("IsAssign")%>' runat="server" Checked='<%# Eval("IsAssign")%>' />
                                             

@@ -279,6 +279,12 @@
                                          <%# Eval("UnProvisioningCount")%>
                                     </ItemTemplate>
                                 </asp:TemplateField> 
+                              <asp:TemplateField HeaderText="Discarded SKU" SortExpression="DiscardedSKU" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" ItemStyle-CssClass="copy10grey" ItemStyle-Width="6%">
+                                    <ItemTemplate>                                                
+                                         <%# Eval("DiscardedSKU")%>
+                                    </ItemTemplate>
+                                </asp:TemplateField> 
+                              
                                <asp:TemplateField HeaderText="Closing Balance*" ItemStyle-HorizontalAlign="Right" ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                                     <ItemTemplate>
                                          <%# Eval("ClosingBalance")%>

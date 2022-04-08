@@ -135,7 +135,7 @@ namespace avii.Admin
             Session["shipViaList"] = shipViaList;
             dpShipBy.DataSource = avii.Classes.PurchaseOrder.GetShipByList();
             dpShipBy.DataTextField = "ShipByText";
-            dpShipBy.DataValueField = "ShipByCode";
+            dpShipBy.DataValueField = "ShipByText";
             dpShipBy.DataBind();
             System.Web.UI.WebControls.ListItem item = new System.Web.UI.WebControls.ListItem("", "");
             dpShipBy.Items.Insert(0, item);

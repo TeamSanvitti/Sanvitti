@@ -113,20 +113,21 @@ namespace avii
             pnlPO.Controls.Clear();
             ctlPOStatus.ReloadData();
             //load RMA from session
-            Control tmp = LoadControl("./controls/RMAStatus.ascx");
-            avii.Controls.RMAStatus ctlRMAStatus = tmp as avii.Controls.RMAStatus;
-            //pnlRMA.Controls.Clear();
-            ctlRMAStatus.ReloadData();
+            //Control tmp = LoadControl("./controls/RMAStatus.ascx");
+            //avii.Controls.RMAStatus ctlRMAStatus = tmp as avii.Controls.RMAStatus;
+            ////pnlRMA.Controls.Clear();
+            //ctlRMAStatus.ReloadData();
+
             pnlPO.Controls.Add(ctlPOStatus);
             //pnlRMA.Controls.Add(ctlRMAStatus);
 
 
             //load PO sku stock from session
-            Control poSKUStock = LoadControl("./controls/PoSKUStock.ascx");
-            avii.Controls.PoSKUStock ctlPoSKUStock = poSKUStock as avii.Controls.PoSKUStock;
-            pnlPoSkuStock.Controls.Clear();
-            ctlPoSKUStock.ReloadData();
-            pnlPoSkuStock.Controls.Add(ctlPoSKUStock);
+            //Control poSKUStock = LoadControl("./controls/PoSKUStock.ascx");
+            //avii.Controls.PoSKUStock ctlPoSKUStock = poSKUStock as avii.Controls.PoSKUStock;
+            //pnlPoSkuStock.Controls.Clear();
+            //ctlPoSKUStock.ReloadData();
+            //pnlPoSkuStock.Controls.Add(ctlPoSKUStock);
 
 
             
@@ -187,19 +188,19 @@ namespace avii
         
         private void ReloadPOSKUStock(int companyID)
         {
-            Control tmpStock = LoadControl("./controls/PoSKUStock.ascx");
+            //Control tmpStock = LoadControl("./controls/PoSKUStock.ascx");
 
 
-            avii.Controls.PoSKUStock ctlSKUStocks = tmpStock as avii.Controls.PoSKUStock;
-            pnlPoSkuStock.Controls.Clear();
+            //avii.Controls.PoSKUStock ctlSKUStocks = tmpStock as avii.Controls.PoSKUStock;
+            //pnlPoSkuStock.Controls.Clear();
 
-            if (tmpStock != null)
-            {
-                ctlSKUStocks.CompanyID = companyID;
-                ctlSKUStocks.PopulateData();
-            }
+            //if (tmpStock != null)
+            //{
+            //    ctlSKUStocks.CompanyID = companyID;
+            //    ctlSKUStocks.PopulateData();
+            //}
 
-            pnlPoSkuStock.Controls.Add(ctlSKUStocks);
+            //pnlPoSkuStock.Controls.Add(ctlSKUStocks);
         }
         private void ReloadPoStockInDemand(int companyID, string sku, string fromDate, string toDate)
         {
@@ -237,12 +238,12 @@ namespace avii
                 }
 
             }
+            ReloadPOStatus(companyID, fromDate, toDate);
 
             ReloadPOSKUStock(companyID);
             ReloadPoStockInDemand(companyID, sku, fromDate, toDate);
             //ReloadStock(companyID, sku, IsDisable, IsKitted);
-            //ReloadSOR(companyID, sku, "");
-            ReloadPOStatus(companyID, fromDate, toDate);
+            ////ReloadSOR(companyID, sku, "");
             //ReloadRMAStatus(companyID, fromDate, toDate);
             
         }

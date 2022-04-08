@@ -76,6 +76,7 @@ namespace SV.Framework.DAL.Inventory
                         foreach (DataRow dRowItem in dt.Rows)
                         {
                             eSNReplacedInfo = new ESNReplacedInfo();
+                            eSNReplacedInfo.ESN = Convert.ToString(clsGeneral.getColumnData(dRowItem, "ESN", string.Empty, false));
                             eSNReplacedInfo.SKU = Convert.ToString(clsGeneral.getColumnData(dRowItem, "SKU", string.Empty, false));
                             eSNReplacedInfo.CategoryName = Convert.ToString(clsGeneral.getColumnData(dRowItem, "CategoryName", string.Empty, false));
                             eSNReplacedInfo.ErrorMessage = Convert.ToString(clsGeneral.getColumnData(dRowItem, "ErrorMessage", string.Empty, false));
@@ -83,7 +84,12 @@ namespace SV.Framework.DAL.Inventory
                             eSNReplacedInfo.Location = Convert.ToString(clsGeneral.getColumnData(dRowItem, "Location", string.Empty, false));
                             eSNReplacedInfo.MeidDec = Convert.ToString(clsGeneral.getColumnData(dRowItem, "MeidDec", string.Empty, false));
                             eSNReplacedInfo.MeidHex = Convert.ToString(clsGeneral.getColumnData(dRowItem, "MeidHex", string.Empty, false));
-                            eSNReplacedInfo.SerialNumber = Convert.ToString(clsGeneral.getColumnData(dRowItem, "MeidHex", string.Empty, false));
+                            eSNReplacedInfo.BOXID = Convert.ToString(clsGeneral.getColumnData(dRowItem, "BOXID", string.Empty, false));
+                            eSNReplacedInfo.ESNType = Convert.ToString(clsGeneral.getColumnData(dRowItem, "ESNType", string.Empty, false));
+                            eSNReplacedInfo.UploadDate = Convert.ToDateTime(clsGeneral.getColumnData(dRowItem, "UploadDate", string.Empty, false)).ToString("MM-dd-yyyy");
+                            eSNReplacedInfo.KitID = Convert.ToInt64(clsGeneral.getColumnData(dRowItem, "KitID", 0, false));
+                            //eSNReplacedInfo.SerialNumber = Convert.ToString(clsGeneral.getColumnData(dRowItem, "MeidHex", string.Empty, false));
+                            //eSNReplacedInfo.SerialNumber = Convert.ToString(clsGeneral.getColumnData(dRowItem, "MeidHex", string.Empty, false));
                             ESNInfo.Add(eSNReplacedInfo);
                         }
                     }
@@ -167,12 +173,30 @@ namespace SV.Framework.DAL.Inventory
                             fulfillemntInfo.ContactName = Convert.ToString(clsGeneral.getColumnData(row, "ContactName", string.Empty, false));
                             fulfillemntInfo.PoType = Convert.ToString(clsGeneral.getColumnData(row, "PoType", string.Empty, false));
                             fulfillemntInfo.FulfillemntDate = Convert.ToDateTime(clsGeneral.getColumnData(row, "PODate", DateTime.Now, false)).ToString("MM/dd/yyyy");
+
+                            if (ds.Tables.Count > 2)
+                            {
+                                foreach (DataRow row2 in ds.Tables[2].Rows)
+
+                                {
+                                    fulfillemntInfo.Location = Convert.ToString(clsGeneral.getColumnData(row2, "Location", string.Empty, false));
+                                    fulfillemntInfo.MeidDec = Convert.ToString(clsGeneral.getColumnData(row2, "MeidDec", string.Empty, false));
+                                    fulfillemntInfo.MeidHex = Convert.ToString(clsGeneral.getColumnData(row2, "MeidHex", string.Empty, false));
+                                    fulfillemntInfo.BOXID = Convert.ToString(clsGeneral.getColumnData(row2, "BOXID", string.Empty, false));
+                                    fulfillemntInfo.ESNType = Convert.ToString(clsGeneral.getColumnData(row2, "ESNType", string.Empty, false));
+                                    fulfillemntInfo.UploadDate = Convert.ToString(clsGeneral.getColumnData(row2, "UploadDate", string.Empty, false));
+                                    fulfillemntInfo.AssignmentDate = Convert.ToString(clsGeneral.getColumnData(row2, "UploadDate", string.Empty, false));
+                                    fulfillemntInfo.KitID = Convert.ToInt64(clsGeneral.getColumnData(row2, "KitID", string.Empty, false));
+                                }
+                            }
                         }
                         if (ds != null && ds.Tables.Count > 1)
                         {
                             lineItems = PopulateLineItems(ds.Tables[1]);
                             fulfillemntInfo.LineItems = lineItems;
                         }
+
+
                     }
                 }
                 catch (Exception objExp)

@@ -117,7 +117,7 @@ namespace avii.Admin
                 txtOrderNumber.Text = esnHeader.OrderNumber;
                 txtReceiveDate.Text = esnHeader.OrderDate;
                 txtReceiveBy.Text = esnHeader.UserName;
-                //txtOrderQty.Text = esnHeader.OrderQty.ToString();
+                txtOrderQty.Text = esnHeader.OrderQty.ToString();
                 txtShipDate.Text = esnHeader.ShipDate;
                 txtShipQty.Text = esnHeader.ShipQty.ToString();
                 txtShipvia.Text = esnHeader.Shipvia;
@@ -150,7 +150,7 @@ namespace avii.Admin
                     gvMSL.DataSource = esnList;
                     gvMSL.DataBind();
                     lblCount.Text = "Total count: " + esnList.Count;
-                    txtShipQty.Text = "" + esnList.Count;
+                    txtShipQty.Text =  esnList.Count.ToString();
 
                     Session["mslesn"] = esnList;
                     // trQty.Visible = false;
@@ -182,6 +182,8 @@ namespace avii.Admin
                     gvMSL.DataSource = esnList;
                     gvMSL.DataBind();
                     lblCount.Text = "Total count: " + esnList.Count;
+                    txtShipQty.Text = esnList.Count.ToString();
+
                     Session["mslesn"] = esnList;
                     //trQty.Visible = false;
 
@@ -243,6 +245,8 @@ namespace avii.Admin
             btnSubmit2.Visible = false;
             pnlSubmit.Visible = false;
             lblCount.Text = string.Empty;
+            txtShipQty.Text = "";
+
             string CustInfo = string.Empty;
             //  trSKU.Visible = true;
             if (dpCompany.SelectedIndex > 0)
@@ -614,10 +618,11 @@ namespace avii.Admin
             shipVia = txtShipvia.Text.Trim();
             trackingNumber = txtTrackingNo.Text.Trim();
 
-            // if (!string.IsNullOrEmpty(txtOrderQty.Text))
-            //     orderQty = Convert.ToInt32(txtOrderQty.Text);
-            // else
-            // { lblMsg.Text = "Order quantity is required"; return; }
+            if (!string.IsNullOrEmpty(txtOrderQty.Text))
+                orderQty = Convert.ToInt32(txtOrderQty.Text);
+
+            //else
+            //{ lblMsg.Text = "Order quantity is required"; return; }
 
             if (!string.IsNullOrEmpty(txtShipQty.Text))
                 shipQty = Convert.ToInt32(txtShipQty.Text);
@@ -628,7 +633,7 @@ namespace avii.Admin
                     lblMsg.Text = "Received quantity is required";
                     return;
                 }
-            }
+            }  
 
             if (!string.IsNullOrEmpty(txtUnitPrice.Text))
                 unitPrice = Convert.ToDecimal(txtUnitPrice.Text);
@@ -788,10 +793,10 @@ namespace avii.Admin
             shipVia = txtShipvia.Text.Trim();
             trackingNumber = txtTrackingNo.Text.Trim();
 
-            //if (!string.IsNullOrEmpty(txtOrderQty.Text))
-            //    orderQty = Convert.ToInt32(txtOrderQty.Text);
-            //else
-            //{ lblMsg.Text = "Order quantity is required"; return; }
+            if (!string.IsNullOrEmpty(txtOrderQty.Text))
+                orderQty = Convert.ToInt32(txtOrderQty.Text);
+            else
+            { lblMsg.Text = "Order quantity is required"; return; }
 
             if (!string.IsNullOrEmpty(txtShipQty.Text))
                 shipQty = Convert.ToInt32(txtShipQty.Text);
@@ -868,7 +873,7 @@ namespace avii.Admin
             txtCustOrderNumber.Text = string.Empty;
             // txtOrderDate.Text = string.Empty;
             txtOrderNumber.Text = mslOperation.GenerateOrderNumber();
-            //txtOrderQty.Text = string.Empty;
+            txtOrderQty.Text = string.Empty;
             // txtShipDate.Text = string.Empty;
             txtShipQty.Text = string.Empty;
             //   txtShipvia.Text = string.Empty;
@@ -891,6 +896,7 @@ namespace avii.Admin
             btnSubmit2.Visible = false;
             pnlSubmit.Visible = false;
             lblCount.Text = string.Empty;
+            txtShipQty.Text = "";
             pnlHeader.Visible = false;
             pnlESN.Visible = true;
 
@@ -939,7 +945,7 @@ namespace avii.Admin
             bool IsOrderNumber = false;            
             string dateErrorMessage = string.Empty;            
             lblConfirm.Text = string.Empty;
-
+            txtShipQty.Text = "";
             lblCount.Text = string.Empty;
             lblMsg.Text = string.Empty;
             Hashtable hshESN = new Hashtable();
@@ -1361,6 +1367,7 @@ namespace avii.Admin
                                         gvMSL.DataSource = esnList;
                                         gvMSL.DataBind();
                                         lblCount.Text = "Total count: " + esnList.Count;
+                                        txtShipQty.Text = esnList.Count.ToString();
                                         Session["mslesn"] = esnList;
 
                                         int n = 0;

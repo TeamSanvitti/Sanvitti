@@ -89,11 +89,20 @@ namespace avii
                         model.SKU = item.SKU;
                         OrderCount = OrderCount + 1;
                         model.OrderCount = OrderCount;
-                        if (string.IsNullOrEmpty(ServiceOrderIds))
-                            ServiceOrderIds = "<a href='javascript: InitializeRequest(" + item.ServiceOrderId.ToString() + ")' >" + item.ServiceOrderNumber + "</a>";
+                        if (item.CategoryName.ToLower() == "kitted box")
+                        {
+                            if (string.IsNullOrEmpty(ServiceOrderIds))
+                                ServiceOrderIds = "<a href='javascript: InitializeRequest(" + item.ServiceOrderId.ToString() + ")' >" + item.ServiceOrderNumber + "</a>";
+                            else
+                                ServiceOrderIds = ServiceOrderIds + ", " + "<a href='javascript: InitializeRequest(" + item.ServiceOrderId.ToString() + ")' >" + item.ServiceOrderNumber + "</a>";
+                        }
                         else
-                            ServiceOrderIds = ServiceOrderIds + ", " + "<a href='javascript: InitializeRequest(" + item.ServiceOrderId.ToString() + ")' >" + item.ServiceOrderNumber + "</a>";
-
+                        {
+                            if (string.IsNullOrEmpty(ServiceOrderIds))
+                                ServiceOrderIds = "<a href='javascript: InitializeRequest2(" + item.ServiceOrderId.ToString() + ")' >" + item.ServiceOrderNumber + "</a>";
+                            else
+                                ServiceOrderIds = ServiceOrderIds + ", " + "<a href='javascript: InitializeRequest2(" + item.ServiceOrderId.ToString() + ")' >" + item.ServiceOrderNumber + "</a>";
+                        }
                         model.ServiceRequestIDs = ServiceOrderIds;
                     }
                 }

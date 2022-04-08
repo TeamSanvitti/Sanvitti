@@ -48,7 +48,7 @@
 								<ul>
 									<%--<li><img src="img/logo_1.jpg"></li>--%>
 									<li><img width="59" height="86" src="img/logo_2.jpg"></li>
-									<li><a target="_blank" href="http://sustainableelectronics.org/"><img src="img/logo_3.jpg"></a></li>
+									<li><a target="_blank" href="http://sustainableelectronics.org/"><img src="img/R2V3_certified_logo_ccexpress.jpeg"></a></li>
 								</ul>
 							</div>
                         </div>
@@ -197,7 +197,7 @@
                                     </p>
                                   <div class="compliance_li_inner chng_list_style">
 									  <ul>
-										<li> addressing clients’ security and privacy issues through the destruction of e-Waste data contained in e-Waste in accordance with the R2:2013 standard throughout the recycling chain.</li>
+										<li> addressing clients’ security and privacy issues through the destruction of e-Waste data contained in e-Waste in accordance with the R2v3 standard throughout the recycling chain.</li>
 										<li>ensuring accountability for all focus materials and hazardous e-waste.</li>
 										<li>managing used and end-of-life electronics equipment based on a "reuse, refurbish, recover, dispose" hierarchy of responsible management strategies. </li>
 									  </ul>
@@ -215,7 +215,7 @@
                           <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
                               <div class="panel-body">
                                   <p>
-                                      LAN Global maintains ISO 14001:2015, ISO 45001:2018 and R2:2013 certifications, adhering to a strict zero e-waste policy, which ensures that none of the equipment collected through our reuse and recycling programs, including accessories, enter the waste stream. LAN is an EPA Waste Handler approved agency as well as a Waste Wise Endorser. All of these processes are audited regularly by certified 3rd party registrars to ensure that the company remains in compliance with all industry requirements. As industry leaders, LAN Global is dedicated to maintaining 100 percent green processes throughout our production facility.
+                                      LAN Global maintains ISO 14001:2015, ISO 45001:2018 and R2v3 certifications, adhering to a strict zero e-waste policy, which ensures that none of the equipment collected through our reuse and recycling programs, including accessories, enter the waste stream. LAN is an EPA Waste Handler approved agency as well as a Waste Wise Endorser. All of these processes are audited regularly by certified 3rd party registrars to ensure that the company remains in compliance with all industry requirements. As industry leaders, LAN Global is dedicated to maintaining 100 percent green processes throughout our production facility.
                                   </p>
                                   <div class="panel_inner_txt">
                                       <%--<div class="Programming">
@@ -235,11 +235,11 @@
                                               ISO 14001:2015 is the international specification for an environmental management system (EMS). It specifies requirements for establishing an environmental policy, determining environmental aspects and impacts of products/activities/services, planning environmental objectives and measurable targets, implementation and operation of programs to meet objectives and targets, checking and corrective action and management review.
 
                                           </p>
-										  <img src="img/list_in.jpg">
+										  <img src="img/R2V3_certified_logo_ccexpress.jpeg">
                                       </div>
                                       <div class="LabTesting">
                                           <div class="heading">
-                                          <h3>R2:2013 Certification</h3>
+                                          <h3>R2v3 Certification</h3>
                                           </div>
                                           <p>
                                               R2 Certification, also known as Responsible Recycling Certification, provides verification of LAN’s environmentally responsible, safe, and transparent management of cell phone batteries, and other consumer electronics.

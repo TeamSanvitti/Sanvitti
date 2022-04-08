@@ -123,6 +123,7 @@ namespace SV.Framework.DAL.Fulfillment
             TrackingDetail tracking = default;//null;
             if (dt != null && dt.Rows.Count > 0)
             {
+                trackingList = new List<TrackingDetail>();
                 foreach (DataRow dataRow in dt.Rows)
                 {
                     tracking = new TrackingDetail();

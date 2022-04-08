@@ -958,6 +958,7 @@ namespace SV.Framework.DAL.Fulfillment
                     foreach (DataRow dRowItem in dt.Rows)
                     {
                         skuItem = new ContainerInfo();
+                        skuItem.KitType = (string)clsGeneral.getColumnData(dRowItem, "KitType", string.Empty, false);
                         skuItem.ErrorMessage = (string)clsGeneral.getColumnData(dRowItem, "ErrorMessage", string.Empty, false);
                         skuItem.Code = (string)clsGeneral.getColumnData(dRowItem, "Code", string.Empty, false);
                         skuItem.CategoryName = (string)clsGeneral.getColumnData(dRowItem, "CategoryName", string.Empty, false);

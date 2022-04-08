@@ -25,8 +25,14 @@ namespace SV.Framework.Inventory
             List<WarehouseStorage> warehouseList = warehouseOperation.GetWarehouseStorage(warehouseCity, warehouseLocation, companyID);// new List<Carriers>();
             return warehouseList;
         }
+        public List<WhLocationInfo> GetWarehouseLocationReport(string warehouseCity, string warehouseLocation, int companyID, string SKU, string ReceiveFromDate, string ReceiveToDate)
+        {
+            SV.Framework.DAL.Inventory.WarehouseOperation warehouseOperation = SV.Framework.DAL.Inventory.WarehouseOperation.CreateInstance<SV.Framework.DAL.Inventory.WarehouseOperation>();
 
-        public WarehouseStorage GetWarehouseStorageInfo(int warehouseStorageID)
+            List<WhLocationInfo> warehouseList = warehouseOperation.GetWarehouseLocationReport(warehouseCity, warehouseLocation, companyID, SKU, ReceiveFromDate, ReceiveToDate);
+            return warehouseList;
+        }
+            public WarehouseStorage GetWarehouseStorageInfo(int warehouseStorageID)
         {
             SV.Framework.DAL.Inventory.WarehouseOperation warehouseOperation = SV.Framework.DAL.Inventory.WarehouseOperation.CreateInstance<SV.Framework.DAL.Inventory.WarehouseOperation>();
 

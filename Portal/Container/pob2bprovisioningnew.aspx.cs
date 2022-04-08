@@ -61,6 +61,7 @@ namespace avii.Container
             lblEsn.Text = string.Empty;
             rptSKU.Visible = false;
             trUpload.Visible = false;
+            string KitType = "";
             int companyID = 0;
             if (dpCompany.SelectedIndex > 0)
             {
@@ -83,6 +84,14 @@ namespace avii.Container
                 List<ContainerInfo> skuList = containerOperation.GetContainerInfo(companyID, fulfillmentNumber, trackingNumber, out containers, out nonESNList, out trackingList);
                 if (skuList != null && skuList.Count > 0)
                 {
+                    if (skuList[0].StatusID == 3)
+                    {
+                        btnSubmit.Visible = false;
+                        btnUpload.Visible = false;
+                        lblMsg.Text = "Fulfillment number already Shipped!";
+                        return;
+                    }
+
                     if (trackingList != null && trackingList.Count > 0)
                     {
                         ViewState["trackingNumberCount"] = trackingList.Count;
@@ -106,7 +115,7 @@ namespace avii.Container
                     Session["poskulist"] = skuList;
                     gvPOSKUs.DataSource = skuList;
                     gvPOSKUs.DataBind();
-                    lblEsn.Text = "ESN Items";
+                    lblEsn.Text = "Ordered Line Item(s)";
                     //btnSubmit.Visible = true;
                     btnCancel1.Visible = true;
                     btnGenContainerID.Visible = true;
@@ -114,11 +123,32 @@ namespace avii.Container
 
                     foreach (ContainerInfo item in skuList)
                     {
+                        KitType = item.KitType;
                         quantity += item.PoQuantity;
                         numberOfContainers += item.ContainerRequired;
                         poid = item.POID;
                         casePackQuantity = item.ContainerQuantity;
 
+                    }
+                    if("NON ESN KIT" == KitType)
+                    {
+                        lblMsg.Text = "This form is used for ESN KIT(s). Please use fulfillment provisioning B2B(NON ESN) form";
+                        btnUpload.Visible = false;
+                        btnSubmit.Visible = false;
+                        rptESN.DataSource = null;
+                        rptESN.DataBind();
+
+                        return;
+                    }
+                    if ("NON KIT" == KitType)
+                    {
+                        lblMsg.Text = "Please use fulfillment provisioning B2C form";
+                        btnUpload.Visible = false;
+                        btnSubmit.Visible = false;
+                        rptESN.DataSource = null;
+                        rptESN.DataBind();
+
+                        return;
                     }
                     ViewState["casePackQuantity"] = casePackQuantity;
                     if (containers != null && containers.Count > 0)
@@ -132,7 +162,7 @@ namespace avii.Container
                     }
                     if (nonESNList != null && nonESNList.Count > 0)
                     {
-                        lblNonEsn.Text = "Non ESN Items";
+                        lblNonEsn.Text = "Accessories Raw SKU(s)";
                         rptSKU.DataSource = nonESNList;
                         rptSKU.DataBind();
                         rptSKU.Visible = true;

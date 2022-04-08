@@ -14,6 +14,12 @@
             var url = "../ManageServiceOrder.aspx";
             window.open(url);
         }
+        function InitializeRequest2(requestID) {
+            // call server side method
+            PageMethods.SetSession(requestID);
+            var url = "../so/ServiceOrderManage.aspx";
+            window.open(url);
+        }
         
     </script>
 </head>

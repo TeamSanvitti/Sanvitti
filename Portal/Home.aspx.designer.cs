@@ -132,24 +132,6 @@ namespace avii
         protected global::avii.Controls.POStatus POStatus1;
 
         /// <summary>
-        /// pnlPoSkuStock control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlPoSkuStock;
-
-        /// <summary>
-        /// PoSkuStock1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::avii.Controls.PoSKUStock PoSkuStock1;
-
-        /// <summary>
         /// pnlSIDSearch control.
         /// </summary>
         /// <remarks>

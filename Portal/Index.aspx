@@ -104,7 +104,7 @@
                                     <ul>
                                         <%--<li><img src="img/logo_1.jpg"></li>--%>
 									<li><img width="59" height="86" src="img/logo_2.jpg"></li>
-									<li><a target="_blank" href="http://sustainableelectronics.org/"><img src="img/logo_3.jpg"></a></li>
+									<li><a target="_blank" href="http://sustainableelectronics.org/"><img src="img/R2V3_certified_logo_ccexpress.jpeg"></a></li>
 								</ul>
                                 </div>
                             </div>
@@ -232,7 +232,7 @@
                     <%--<a href="compliance.aspx#headingThree">ISO 9001:2008</a>, --%>
                     <a href="compliance.aspx#headingThree">ISO 14001:2015</a>, 
                     <a href="compliance.aspx#headingThree">ISO 45001:2018 </a>, and 
-                    <a href="compliance.aspx#headingThree">R2:2013</a> certifications. These adhere us to a strict zero e-waste policy.
+                    <a href="compliance.aspx#headingThree">R2v3</a> certifications. These adhere us to a strict zero e-waste policy.
                 </p>
                 <p>
                     As industry leaders, LAN Global is dedicated to maintaining 100 percent green processes throughout our production facility. We are an EPA Waste Handler approved agency as well as a Waste Wise Endorser. 

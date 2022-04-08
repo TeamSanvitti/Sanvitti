@@ -57,10 +57,12 @@ namespace avii.Container
             rptMapping.DataSource = null;
             rptMapping.DataBind();
             lblMsg.Text = "";
-            btnSubmit.Visible = true;
+            btnSubmit.Visible = false;
             btnSubmit.Enabled = true;
             btnDelete.Visible = false;
             btnMapping.Visible = false;
+            btnBoxID.Visible = true;
+
             int companyID = 0, poid = 0;//, contanierToGenrate = 0, StatusID = 0;
             if (dpCompany.SelectedIndex > 0)
             {
@@ -99,14 +101,17 @@ namespace avii.Container
                         btnSubmit.Enabled = true;
                     }
 
-                        btnCancel1.Visible = true;
-                    
+                        btnCancel1.Visible = true;                    
                     
 
                     if(!string.IsNullOrEmpty(palletID) )
                     {
-                        btnMapping.Visible = true;
-                        btnBoxID.Visible = true;
+
+                        if (companyID == 470)
+                        {
+                            btnBoxID.Visible = true;
+                            btnMapping.Visible = true;
+                        }
                         if (poid > 1)
                             btnDelete.Visible = true;                        
                     }
@@ -156,6 +161,7 @@ namespace avii.Container
             rptMapping.DataBind();
             dpCompany.SelectedIndex = 0;
             btnMapping.Visible = false;
+            btnBoxID.Visible = false;
 
         }
         protected void rptMapping_ItemDataBound(object sender, RepeaterItemEventArgs e)

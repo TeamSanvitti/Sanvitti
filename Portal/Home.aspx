@@ -2,7 +2,7 @@
 <%@ Register TagPrefix="foot" TagName="MenuFooter" Src="~/Controls/Footer.ascx" %>
 <%@ Register TagPrefix="head" TagName="MenuHeader" Src="~/Controls/Header.ascx" %>
 <%@ Register TagPrefix="PO" TagName="POStatus" Src="~/Controls/POStatus.ascx" %>
-<%@ Register TagPrefix="SKU" TagName="PoSkuStock" Src="~/Controls/PoSKUStock.ascx" %>
+<%--<%@ Register TagPrefix="SKU" TagName="PoSkuStock" Src="~/Controls/PoSKUStock.ascx" %>--%>
 <%@ Register TagPrefix="PO" TagName="StockInDemand" Src="~/Controls/PoStockInDemand.ascx" %>
 
 <!DOCTYPE html>
@@ -231,7 +231,7 @@
         <td width="100%">
             <table width="100%"   border="0" cellpadding="0" cellspacing="0" >
             <tr valign="top">
-            <td width="24%">
+            <td width="43%">
             <table width="100%">
             <tr>
                 <td class="buttonlabel" style="font-size:14px; height:18px">
@@ -259,7 +259,7 @@
             <td width="1px">
             
             </td>
-            <td width="35%">
+            <%--<td width="35%">
             <table width="100%" border="0">
             <tr>
                 <td class="buttonlabel" style="font-size:14px; height:18px">
@@ -283,11 +283,12 @@
             </table>
             
             </td>
+
                 <td width="1px">
             
-            </td>
-                <td  width="40%">
-                      <table width="100%">
+            </td>--%>
+                <td  width="56%">
+                     <table width="100%">
             <tr>
                 <td class="buttonlabel" style="font-size:14px; height:18px">
                 
@@ -332,6 +333,17 @@
                     </td>
                 </tr>
                 </table>
+ 
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    
+                </td>
+                <td>
+
+                </td>
+                <td>
 
                 </td>
             </tr>

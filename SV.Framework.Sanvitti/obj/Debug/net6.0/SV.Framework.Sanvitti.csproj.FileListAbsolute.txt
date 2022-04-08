@@ -1,0 +1,12 @@
+C:\git\lan\Sanvittijbhargava\Sanvitti\SV.Framework.Sanvitti\bin\Debug\net6.0\SV.Framework.Sanvitti.deps.json
+C:\git\lan\Sanvittijbhargava\Sanvitti\SV.Framework.Sanvitti\bin\Debug\net6.0\SV.Framework.Sanvitti.dll
+C:\git\lan\Sanvittijbhargava\Sanvitti\SV.Framework.Sanvitti\bin\Debug\net6.0\SV.Framework.Sanvitti.pdb
+C:\git\lan\Sanvittijbhargava\Sanvitti\SV.Framework.Sanvitti\obj\Debug\net6.0\SV.Framework.Sanvitti.csproj.AssemblyReference.cache
+C:\git\lan\Sanvittijbhargava\Sanvitti\SV.Framework.Sanvitti\obj\Debug\net6.0\SV.Framework.Sanvitti.GeneratedMSBuildEditorConfig.editorconfig
+C:\git\lan\Sanvittijbhargava\Sanvitti\SV.Framework.Sanvitti\obj\Debug\net6.0\SV.Framework.Sanvitti.AssemblyInfoInputs.cache
+C:\git\lan\Sanvittijbhargava\Sanvitti\SV.Framework.Sanvitti\obj\Debug\net6.0\SV.Framework.Sanvitti.AssemblyInfo.cs
+C:\git\lan\Sanvittijbhargava\Sanvitti\SV.Framework.Sanvitti\obj\Debug\net6.0\SV.Framework.Sanvitti.csproj.CoreCompileInputs.cache
+C:\git\lan\Sanvittijbhargava\Sanvitti\SV.Framework.Sanvitti\obj\Debug\net6.0\SV.Framework.Sanvitti.dll
+C:\git\lan\Sanvittijbhargava\Sanvitti\SV.Framework.Sanvitti\obj\Debug\net6.0\refint\SV.Framework.Sanvitti.dll
+C:\git\lan\Sanvittijbhargava\Sanvitti\SV.Framework.Sanvitti\obj\Debug\net6.0\SV.Framework.Sanvitti.pdb
+C:\git\lan\Sanvittijbhargava\Sanvitti\SV.Framework.Sanvitti\obj\Debug\net6.0\ref\SV.Framework.Sanvitti.dll

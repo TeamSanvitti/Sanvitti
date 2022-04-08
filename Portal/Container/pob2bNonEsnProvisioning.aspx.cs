@@ -51,6 +51,8 @@ namespace avii.Container
         }
         private void BindPO()
         {
+            SV.Framework.Fulfillment.ContainerProvisioningOperation containerProvisioningOperation = SV.Framework.Fulfillment.ContainerProvisioningOperation.CreateInstance<SV.Framework.Fulfillment.ContainerProvisioningOperation>();
+
             SV.Framework.Fulfillment.ContainerOperation containerOperation = SV.Framework.Fulfillment.ContainerOperation.CreateInstance<SV.Framework.Fulfillment.ContainerOperation>();
             lblMsg.Text = string.Empty;
             lblNonEsn.Text = string.Empty;
@@ -59,6 +61,7 @@ namespace avii.Container
             trUpload.Visible = false;
             int companyID = 0;
             bool IsKittedBox = false;
+            string KitType = "";
             if (dpCompany.SelectedIndex > 0)
             {
                 int.TryParse(dpCompany.SelectedValue, out companyID);
@@ -84,6 +87,16 @@ namespace avii.Container
                     int ItemsPerContainer = 1, ContainersPerPallet = 1, requiredContainers = 0;
                     var totalContainers = 0;
                     var totalPallets = 0;
+                    if(skuList[0].StatusID == 3)
+                    {
+                        //btnSubmit.Visible = false;
+                        //btnUpload.Visible = false;
+                        ClrearForm();
+                        lblMsg.Text = "Fulfillment number already Shipped!";
+                        
+                        return;
+                    }
+
                     //foreach (ContainerInfo item in skuList)
                     //{
                     //    if (item.ContainerQuantity > 0)
@@ -106,7 +119,9 @@ namespace avii.Container
                         Session["trackingList"] = trackingList;
                         rptUpload.DataSource = trackingList;
                         rptUpload.DataBind();
-                        trUpload.Visible = true;
+                        //trUpload.Visible = true;
+                        
+
                     }
                     else
                     {
@@ -118,7 +133,7 @@ namespace avii.Container
                     Session["poskulist"] = skuList;
                     gvPOSKUs.DataSource = skuList;
                     gvPOSKUs.DataBind();
-                    lblEsn.Text = "Line Item(s)";
+                    lblEsn.Text = "Ordered Line Item(s)";
                     //btnSubmit.Visible = true;
                     btnCancel1.Visible = true;
                     btnGenContainerID.Visible = true;
@@ -126,13 +141,34 @@ namespace avii.Container
 
                     foreach (ContainerInfo item in skuList)
                     {
+                        KitType = item.KitType;
                         quantity += item.PoQuantity;
                         numberOfContainers += item.ContainerRequired;
                         poid = item.POID;
                         casePackQuantity = item.ContainerQuantity;
 
-                        
 
+
+                    }
+                    if ("ESN KIT" == KitType)
+                    {
+                        lblMsg.Text = "This form is used for NON ESN KIT(s). Please use fulfillment provisioning B2B form";
+                        btnUpload.Visible = false;
+                        btnSubmit.Visible = false;
+                        rptESN.DataSource = null;
+                        rptESN.DataBind();
+
+                        return;
+                    }
+                    if ("NON KIT" == KitType)
+                    {
+                        lblMsg.Text = "Please use fulfillment provisioning B2C form";
+                        btnUpload.Visible = false;
+                        btnSubmit.Visible = false;
+                        rptESN.DataSource = null;
+                        rptESN.DataBind();
+
+                        return;
                     }
                     //totalPallets = totalPallets + numberOfContainers / ContainersPerPallet + numberOfContainers % ContainersPerPallet;
 
@@ -144,26 +180,77 @@ namespace avii.Container
                         Session["containerList"] = containers;
                         // btnSubmit.Visible = false;
                         // btnGenContainerID.Visible = false;
+                        List<ContainerNonESN> poContainers = new List<ContainerNonESN>();
+                        ContainerNonESN containerNonESN = default;
+                        //containers = new List<ContainerNonESN>();
+                        // string trackingNumber = "";
+                        DropDownList ddlTracking = rptUpload.FindControl("ddlTrackingNo") as DropDownList;
+                        if (ddlTracking != null)
+                            ddlTracking.SelectedIndex = 1;
+
+                        foreach (POTracking item in trackingList)
+                        {
+                            foreach (FulfillmentContainer item2 in containers)
+                            {
+                                containerNonESN = new ContainerNonESN();
+                                containerNonESN.ContainerID = item2.ContainerID;
+                                containerNonESN.TrackingNumber = item.TrackingNumber;
+                                poContainers.Add(containerNonESN);
+                            }
+                        }
+                        if (poContainers != null && poContainers.Count > 0)
+                        {
+                            Session["nonesncontainers"] = poContainers;
+                            string errorMessage = string.Empty;
+                            try
+                            {
+                                List<ContainerESNInfo> containerEsnList = containerProvisioningOperation.GetNonESNContainer(poid, poContainers, casePackQuantity);
+                                if (containerEsnList != null && containerEsnList.Count > 0)
+                                {
+                                    Session["containerEsnList"] = containerEsnList;
+                                    rptESN.DataSource = containerEsnList;
+                                    rptESN.DataBind();
+                                    btnSubmit.Visible = true;
+                                    btnUpload.Visible = false;
+                                    lnkDownload.Visible = false;
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                lblMsg.Text = ex.Message;
+                                errorMessage = ex.Message;
+                            }
+                            if (!string.IsNullOrEmpty(errorMessage))
+                            {
+                                lblMsg.Text = errorMessage;
+                                btnSubmit.Visible = false;
+                               // btnUpload.Visible = true;
+                               // lnkDownload.Visible = true;
+                                // returnResult = false;
+                            }
+                        }
 
                     }
-                    if (nonESNList != null && nonESNList.Count > 0 && IsKittedBox)
-                    {
-                        lblNonEsn.Text = "Non ESN Items";
-                        rptSKU.DataSource = nonESNList;
-                        rptSKU.DataBind();
-                        rptSKU.Visible = true;
-                        //Session["containerList"] = containers;
-                        // btnSubmit.Visible = false;
-                        // btnGenContainerID.Visible = false;
+                
+                    //if (nonESNList != null && nonESNList.Count > 0 && IsKittedBox)
+                    //{
+                    //    // lblNonEsn.Text = "Accessories Raw SKU(s)";
+                    //    //rptSKU.DataSource = nonESNList;
+                    //    //rptSKU.DataBind();
+                    //    // rptSKU.Visible = true;
 
-                    }
-                    else
-                    {
-                        rptSKU.DataSource = null;
-                        rptSKU.DataBind();
+                    //    ////Session["containerList"] = containers;
+                    //    //// btnSubmit.Visible = false;
+                    //    //// btnGenContainerID.Visible = false;
 
-                    }
-                    // txtContainers.Text = numberOfContainers.ToString();
+                    //}
+                    //else
+                    //{
+                    //    rptSKU.DataSource = null;
+                    //    rptSKU.DataBind();
+
+                    //}
+                    //// txtContainers.Text = numberOfContainers.ToString();
                     ViewState["quantity"] = quantity;
                     ViewState["poid"] = poid;
 
@@ -172,8 +259,8 @@ namespace avii.Container
                     //trFormat.Visible = true;
                     //trUpload.Visible = true;
 
-                    btnUpload.Visible = true;
-                    lnkDownload.Visible = true;
+                    //btnUpload.Visible = true;
+                    //lnkDownload.Visible = true;
 
                     var Errors = (from item in skuList where (item.ErrorMessage != "") select item).ToList();
                     if (Errors != null && Errors.Count > 0)
@@ -208,14 +295,10 @@ namespace avii.Container
             }
 
         }
-
-        protected void btnCancel_Click(object sender, EventArgs e)
+        private void ClrearForm()
         {
             lblNonEsn.Text = string.Empty;
             lblEsn.Text = string.Empty;
-            lblMsg.Text = string.Empty;
-            txtPoNum.Text = string.Empty;
-            txtTrackingNo.Text = string.Empty;
             gvPOSKUs.DataSource = null;
             gvPOSKUs.DataBind();
             rptESN.DataSource = null;
@@ -227,7 +310,6 @@ namespace avii.Container
             btnSubmit.Visible = false;
             btnGenContainerID.Visible = false;
             btnCancel1.Visible = false;
-            dpCompany.SelectedIndex = 0;
             rptUpload.DataSource = null;
             rptUpload.DataBind();
             trUpload.Visible = false;
@@ -239,6 +321,14 @@ namespace avii.Container
             lnkDownload.Visible = false;
             // txtContainers.Visible = false;
 
+        }
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            dpCompany.SelectedIndex = 0;
+            lblMsg.Text = string.Empty;
+            txtPoNum.Text = string.Empty;
+            txtTrackingNo.Text = string.Empty;
+            ClrearForm();
         }
         protected void btnCancel1_Click(object sender, EventArgs e)
         {
@@ -341,12 +431,55 @@ namespace avii.Container
                     ddlTrackingNo.DataBind();
                     System.Web.UI.WebControls.ListItem item = new System.Web.UI.WebControls.ListItem("", "");
                     ddlTrackingNo.Items.Insert(0, item);
+
+                    ddlTrackingNo.SelectedIndex = 1;
                 }
             }
         }
         protected void btnValidateUploadedFile_Click(object sender, EventArgs e)
         {
             UploadESNInfo();
+        }
+        protected bool GetContainerWithKitIDs(List<FulfillmentContainer> poContainers, int containerQty, out List<ContainerNonESN> containers)
+        {
+            bool returnResult = false;
+            int POID = 0;
+            if (ViewState["poid"] != null)
+                POID = Convert.ToInt32(ViewState["poid"]);
+
+            containers = new List<ContainerNonESN>();
+            string trackingNumber = "";
+            ContainerNonESN containerNonESN = default;
+            foreach (RepeaterItem item in rptUpload.Items)
+            {
+                if (item.ItemType == ListItemType.Item || item.ItemType == ListItemType.AlternatingItem)
+                {
+                    //FileUpload fu = (FileUpload)item.FindControl("fu");
+                    DropDownList ddlTrackingNo = (DropDownList)item.FindControl("ddlTrackingNo");
+                    if (ddlTrackingNo != null)
+                    {
+                        if (ddlTrackingNo.SelectedIndex > 0)
+                        {
+                            trackingNumber = ddlTrackingNo.SelectedValue;
+                            foreach (FulfillmentContainer item2 in poContainers)
+                            {
+                                containerNonESN = new ContainerNonESN();
+                                containerNonESN.ContainerID = item2.ContainerID;
+                                containerNonESN.TrackingNumber = trackingNumber;
+                                containers.Add(containerNonESN);
+                            }
+                            returnResult = true;
+                        }
+                        else
+                        {
+                            returnResult= false; 
+                        }
+                    }                    
+                }
+            }
+            
+
+            return returnResult;
         }
         private void UploadESNInfo()
         {
@@ -559,8 +692,8 @@ namespace avii.Container
                             {
                                 lblMsg.Text = errorMessage;
                                 btnSubmit.Visible = false;
-                                btnUpload.Visible = true;
-                                lnkDownload.Visible = true;
+                               // btnUpload.Visible = true;
+                              //  lnkDownload.Visible = true;
                                 return;
                             }
                             

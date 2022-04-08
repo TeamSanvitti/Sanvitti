@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sanvitti", "Sanvitti.csproj", "{67709E87-9E93-4B24-86F0-BB9138E6BE96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SV.Framework.Sanvitti", "..\SV.Framework.Sanvitti\SV.Framework.Sanvitti.csproj", "{DA710479-6042-4A15-A95F-4596FED8FB8D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{67709E87-9E93-4B24-86F0-BB9138E6BE96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67709E87-9E93-4B24-86F0-BB9138E6BE96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67709E87-9E93-4B24-86F0-BB9138E6BE96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67709E87-9E93-4B24-86F0-BB9138E6BE96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA710479-6042-4A15-A95F-4596FED8FB8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA710479-6042-4A15-A95F-4596FED8FB8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA710479-6042-4A15-A95F-4596FED8FB8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA710479-6042-4A15-A95F-4596FED8FB8D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA2CCA20-8F83-497F-81F5-6BD83E081B92}
+	EndGlobalSection
+EndGlobal

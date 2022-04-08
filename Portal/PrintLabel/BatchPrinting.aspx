@@ -320,7 +320,8 @@
             <asp:CheckBox ID="allchk"  runat="server"  />
         </HeaderTemplate>
         <ItemTemplate>
-            <asp:CheckBox ID="chkPO" runat="server" CssClass="copy10grey" />
+            <asp:CheckBox ID="chkPO" runat="server" CssClass="copy10grey" Visible='<%# Convert.ToString(Eval("ShipMethod")).ToLower() == "truckload" ? false : true %>' />
+            
             </ItemTemplate>
         </asp:TemplateField>        
         <asp:TemplateField HeaderText="S.No." ItemStyle-CssClass="copy10grey"  ItemStyle-Width="1%" HeaderStyle-CssClass="buttongrid">

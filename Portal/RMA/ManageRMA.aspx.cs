@@ -158,6 +158,8 @@ namespace avii.RMA
                 txtPhone.Text = RmaInfo.ContactNumber;
                 txtEmail.Text = RmaInfo.Email;
 
+                if(ddlStatus.SelectedItem.Text.ToLower() == "completed")
+                    btnSubmit.Enabled = false;
                 if (RmaInfo.ReceiveStatusID > 0)
                     ddlReceive.SelectedValue = RmaInfo.ReceiveStatusID.ToString();
                 if (RmaInfo.TriageStatusID > 0)
