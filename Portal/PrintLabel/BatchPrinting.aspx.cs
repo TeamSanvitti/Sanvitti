@@ -162,7 +162,8 @@ namespace avii.PrintLabel
                             {
                                 btnCancel2.Visible = true;
                                 btnGeneratePDF.Visible = true;
-                                btnGenLable.Visible = true;
+                                if (Session["adm"] != null)
+                                    btnGenLable.Visible = true;
                             }
                             if (Session["userInfo"] != null)
                             {

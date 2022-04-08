@@ -462,14 +462,15 @@
                                
                                     </td>
                                 <td class="copy10grey" align="right" width="22%" >
-                                   <%--<b>Order quantity:</b> &nbsp;--%>
+                                   Order quantity: &nbsp;
                                    <%-- Inspection Required: &nbsp;--%>
                                     
                                 </td>
                                 <td  align="left"  width="28%" >
+                                        <asp:TextBox ID="txtOrderQty" runat="server" onkeypress="return isNumberKey(event);"  CssClass="copy10grey" MaxLength="5"  Width="80%"></asp:TextBox>
+                               
                                     <asp:CheckBox ID="chkInspection" Visible="false" runat="server" CssClass="copy10grey" />
-                               <%--     <asp:TextBox ID="txtOrderQty" runat="server" onkeypress="return isNumberKey(event);"  CssClass="copy10grey" MaxLength="20"  Width="80%"></asp:TextBox>
-                               --%>     
+                                   
                                 </td>
                             </tr>
                             
@@ -485,9 +486,9 @@
                     </td>
                     </tr>
                 <tr>
-                        <td align="center">
-                            <asp:Panel ID="pnlESN" runat="server">
-                 <table   bordercolor="#839abf" border="1" cellSpacing="0" cellPadding="0" width="90%">
+                    <td align="center">
+                    <asp:Panel ID="pnlESN" runat="server">
+                    <table   bordercolor="#839abf" border="1" cellSpacing="0" cellPadding="0" width="90%">
                     <tr>
                     <td>
 			            <table  cellSpacing="5" cellPadding="5" width="100%" border="0">

@@ -316,12 +316,6 @@ body>#modelprogress
                                                    <%-- <td class="buttonlabel">
                                                         &nbsp;Request Data
                                                     </td>--%>
-
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    
                                                 </tr>
                             
                                             </HeaderTemplate>

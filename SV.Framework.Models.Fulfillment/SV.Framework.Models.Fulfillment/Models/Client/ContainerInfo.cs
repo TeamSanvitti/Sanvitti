@@ -24,6 +24,8 @@ namespace SV.Framework.Models.Fulfillment
         [XmlIgnore]
         public string ErrorMessage { get; set; }
         [XmlIgnore]
+        public string KitType { get; set; }
+        [XmlIgnore]
         public bool IsKittedBox { get; set; }
         public List<FulfillmentContainer> Containers { get; set; }
     }

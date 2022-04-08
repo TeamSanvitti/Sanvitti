@@ -267,6 +267,7 @@ namespace SV.Framework.DAL.RMA
 
                     if (dataTable != null && dataTable.Rows.Count > 0)
                     {
+                        historyList = new List<RmaHistory>();
                         foreach (DataRow dataRow in dataTable.Rows)
                         {
                             model = new RmaHistory();

@@ -16,6 +16,7 @@ namespace SV.Framework.Models.Inventory
         public int DekitCount { get; set; }
         public int UnProvisioningCount { get; set; }
         public int ClosingBalance { get; set; }
+        public int DiscardedSKU { get; set; }
 
     }
     public class StockCountCSV

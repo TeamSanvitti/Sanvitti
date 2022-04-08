@@ -314,17 +314,147 @@ $(document).ready(function() {
                                 <td  align="center">
                                 
                                     <table bordercolor="#839abf" border="0" width="100%" cellpadding="1" cellspacing="1">
-                                         <%--<tr>
-		                            <td colspan="4" bgcolor="#dee7f6" class="buttonlabel">&nbsp;&nbsp;ESN
-		                            </td>
-                                </tr>--%>
-                           
                                     <tr>
+		                                <td colspan="2" bgcolor="#dee7f6" class="buttonlabel">&nbsp;&nbsp;Assigned ESN
+		                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <table bordercolor="#839abf" border="1" width="100%" cellpadding="1" cellspacing="1">
+                                                <tr>
+                                                    <td width="10%" class="buttonlabel">
+                                                        ESN
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        MEID
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        HEX
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        Receive Date
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        Assignment Date
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        ESN Type
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        kit ID
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        BOXID
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        Warehouse Location
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblESN" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblMEID" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblHEX" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblReceiveDate" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblAssignmentDate" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblESNType" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblKitID" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblBOXID" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblWhLocation" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                    
+                                        <%--<tr>
+                                            <td colspan="2">
+                                                <table bordercolor="#839abf" border="1" width="100%" cellpadding="1" cellspacing="1">
+                                                <tr>
+                                                    <td width="10%" class="buttonlabel">
+                                                        ESN
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        MEID
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        HEX
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        Receive Date
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        Assignment Date
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        ESN Type
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        kit ID
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        BOXID
+                                                    </td>
+                                                    <td width="10%" class="buttonlabel">
+                                                        Warehouse Location
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblESN2" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblMEID2" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblHEX2" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblReceiveDate2" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblAssignmentDate2" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblESNType2" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblKitID2" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblBOXID2" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                    <td width="10%" class="copy10grey">
+                                                        <asp:Label ID="lblWhLocation2" CssClass="copy10grey" runat="server"></asp:Label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            </td>
+                                        </tr>--%>
+
+                                    <%--<tr>
                                         <td class="copy10grey"  with="15%"  align="right">
                                             <b>Assigned ESN/ICCID:</b>
                                         </td>
                                         <td class="copy10grey"  with="35%">
-                                            &nbsp;&nbsp;<asp:Label ID="lblESN" CssClass="copy10grey" runat="server"></asp:Label>
+                                            &nbsp;&nbsp;
                                         </td>
                                         <td class="copy10grey"  with="15%"  align="right">
                                             <b>Replaced ESN/ICCID:</b>
@@ -332,13 +462,32 @@ $(document).ready(function() {
                                         <td class="copy10grey"  with="35%">
                                             &nbsp;&nbsp;<asp:TextBox ID="txtReplacedESN"  onkeypress="return isNumberKey(event);" MaxLength="20" Width="80%" CssClass="copy10grey" runat="server"></asp:TextBox>
                                         </td>
-                                    </tr>
+                                    </tr>--%>
                                     </table>
                                 </td>
                                 </tr>
                                         </table>
                                 </td>
                             </tr>
+                                <tr>
+                                    <td>
+                                        <br />
+                                        <table bordercolor="#839abf" border="1" width="100%" cellpadding="1" cellspacing="1">
+                                    <tr>
+		                                <td colspan="2" bgcolor="#dee7f6" class="buttonlabel">&nbsp;&nbsp;Replaced ESN
+		                            </td>
+                                    </tr>
+                                    <tr>                                        
+                                        <td class="copy10grey"  width="10%"  align="left">
+                                            <b>Replaced ESN/ICCID:</b>
+                                        </td>
+                                        <td class="copy10grey"  width="85%">
+                                            &nbsp;&nbsp;<asp:TextBox ID="txtReplacedESN"  onkeypress="return isNumberKey(event);" MaxLength="20" Width="35%" CssClass="copy10grey" runat="server"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    </table>
+                                    </td>
+                                </tr>
                             <tr>
                                 <td>
                                     <br />
@@ -354,7 +503,7 @@ $(document).ready(function() {
                                             <HeaderTemplate>
                                             <table bordercolor="#839abf" border="1" width="100%" cellpadding="1" cellspacing="1">
                                             <tr>
-                                                <td class="buttonlabel" width="10%">
+<%--                                                <td class="buttonlabel" width="10%">
                                                     Category Name
                                                 </td>                                    
                                                 <td class="buttonlabel"  width="20%">
@@ -362,24 +511,40 @@ $(document).ready(function() {
                                                 </td>
                                                 <td class="buttonlabel" width="15%">
                                                     SKU
+                                                </td>--%>
+                                                <td class="buttonlabel"  width="10%">
+                                                    ESN
                                                 </td>
+                                                <td class="buttonlabel"  width="10%">
+                                                    MEID DEC
+                                                </td>
+                                                
                                                 <td class="buttonlabel"  width="10%">
                                                     HEX
                                                 </td>
                                                 <td class="buttonlabel" width="10%">
-                                                   DEC
+                                                   Receive Date
+                                                </td>
+                                                <%--<td class="buttonlabel" width="10%">
+                                                   Assignment Date
+                                                </td>--%>
+                                                <td class="buttonlabel" width="10%">
+                                                   ESN Type
                                                 </td>
                                                 <td class="buttonlabel" width="10%">
-                                                   Location
-                                                </td>
+                                                   KIT ID
+                                                </td>    
                                                 <td class="buttonlabel" width="10%">
-                                                   SerialNumber
-                                                </td>                                    
+                                                   BOX ID
+                                                </td> 
+                                                <td class="buttonlabel" width="10%">
+                                                   Warehouse location
+                                                </td>    
                                             </tr>
                                             </HeaderTemplate>
                                             <ItemTemplate>    
                                                 <tr valign="bottom"  class="<%# Container.ItemIndex % 2 == 0 ? "alternaterow" : "" %>">                                        
-                                                    <td valign="bottom" class="copy10grey"  >
+                                                    <%--<td valign="bottom" class="copy10grey"  >
                                                     <span width="100%">
                                                         <%# Eval("CategoryName")%>    
                                                         </span>
@@ -393,25 +558,50 @@ $(document).ready(function() {
                                                     <span width="100%">
                                                         <%# Eval("SKU")%>    
                                                         </span>
+                                                    </td>--%>
+                                                    <td valign="bottom" class="copy10grey"  >
+                                                    <span width="100%">
+                                                        <%# Eval("ESN")%>    
+                                                        </span>
                                                     </td>
-                                                     <td valign="bottom" class="copy10grey"  >
+                                                    <td valign="bottom" class="copy10grey"  >
+                                                    <span width="100%">
+                                                        <%# Eval("MeidDec")%>    
+                                                        </span>
+                                                    </td>
+                                                    <td valign="bottom" class="copy10grey"  >
                                                     <span width="100%">
                                                         <%# Eval("MeidHex")%>    
                                                         </span>
                                                     </td>
                                                      <td valign="bottom" class="copy10grey"  >
                                                     <span width="100%">
-                                                        <%# Eval("MeidDec")%>    
+                                                        <%# Eval("UploadDate")%>    
+                                                        </span>
+                                                    </td>
+                                                     <%--<td valign="bottom" class="copy10grey"  >
+                                                    <span width="100%">
+                                                        <%# Eval("UploadDate")%>    
+                                                        </span>
+                                                    </td>--%>
+                                                     <td valign="bottom" class="copy10grey"  >
+                                                    <span width="100%">
+                                                        <%# Eval("ESNType")%>    
                                                         </span>
                                                     </td>
                                                      <td valign="bottom" class="copy10grey"  >
+                                                    <span width="100%">
+                                                        <%# Eval("KitID")%>    
+                                                        </span>
+                                                    </td>
+                                                     <td valign="bottom" class="copy10grey"  >
+                                                    <span width="100%">
+                                                        <%# Eval("BOXID")%>    
+                                                        </span>
+                                                    </td>
+                                                    <td valign="bottom" class="copy10grey"  >
                                                     <span width="100%">
                                                         <%# Eval("Location")%>    
-                                                        </span>
-                                                    </td>
-                                                     <td valign="bottom" class="copy10grey"  >
-                                                    <span width="100%">
-                                                        <%# Eval("SerialNumber")%>    
                                                         </span>
                                                     </td>
                                         
@@ -442,7 +632,7 @@ $(document).ready(function() {
                                 
                                     <tr valign="top">
                                         <td class="copy10grey"  width="10%"  align="right">
-                                            <b>Approved By:</b>
+                                            <b>Requested By:</b>
                                         </td>
                                         <td class="copy10grey"  width="25%">
                                             &nbsp;&nbsp;

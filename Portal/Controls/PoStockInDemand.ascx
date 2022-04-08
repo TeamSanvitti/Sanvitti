@@ -38,7 +38,7 @@
                  <%# Eval("ProductName")%>
             </ItemTemplate>
         </asp:TemplateField>
-        <asp:TemplateField HeaderText="Order Quantity" SortExpression="RequiredQunatity"  ItemStyle-Width="5%" ItemStyle-CssClass="copy10grey" ItemStyle-HorizontalAlign="Right"  HeaderStyle-CssClass="buttonundlinelabel">
+        <asp:TemplateField HeaderText="Ordered Quantity" SortExpression="RequiredQunatity"  ItemStyle-Width="5%" ItemStyle-CssClass="copy10grey" ItemStyle-HorizontalAlign="Right"  HeaderStyle-CssClass="buttonundlinelabel">
             <ItemTemplate>
                 <%# Eval("RequiredQunatity") %>
             </ItemTemplate>

@@ -47,8 +47,8 @@
 							<div class="other_logos">
 								<ul>
 									<%--<li><img src="img/logo_1.jpg"></li>--%>
-									<li><img src="img/logo_2.jpg"></li>
-									<li><a target="_blank" href="http://sustainableelectronics.org/"><img src="img/logo_3.jpg"></a></li>
+									<li><img width="59" height="86"  src="img/logo_2.jpg"></li>
+									<li><a target="_blank" href="http://sustainableelectronics.org/"><img src="img/R2V3_certified_logo_ccexpress.jpeg"></a></li>
 								</ul>
 							</div>
                         </div>

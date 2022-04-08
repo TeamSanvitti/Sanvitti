@@ -763,7 +763,7 @@ OnRowDeleting = "gvTracking_RowDeleting" OnRowDeleted = "gvTracking_RowDeleted"
                 </ItemTemplate>
             </asp:TemplateField>  --%> 
             
-            <asp:TemplateField HeaderText=""  ItemStyle-CssClass="copy10grey" ItemStyle-Width="2%" ItemStyle-HorizontalAlign="Center">
+            <asp:TemplateField HeaderText="" Visible="false"  ItemStyle-CssClass="copy10grey" ItemStyle-Width="2%" ItemStyle-HorizontalAlign="Center">
                 <ItemTemplate>
                     <asp:HiddenField ID="hdTN" Value='<%# Eval("TrackingNumber") %>' runat="server" />
                      <asp:ImageButton ID="imgPrint" runat="server" CausesValidation="false" 

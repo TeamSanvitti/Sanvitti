@@ -9,7 +9,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-using avii.Classes;
+using SV.Framework.Models.Fulfillment;
 using System.Linq;
 
 namespace avii.Controls
@@ -20,8 +20,8 @@ namespace avii.Controls
         {
             if (!IsPostBack)
             {
-                avii.Classes.PurchaseOrders pos = new avii.Classes.PurchaseOrders();
-                pos = Session["POS"] as  avii.Classes.PurchaseOrders;
+                PurchaseOrders pos = new PurchaseOrders();
+                pos = Session["POS"] as  PurchaseOrders;
                 if (pos != null && pos.PurchaseOrderList.Count > 0)
                 {
                     GenerateSummary(pos);
@@ -30,20 +30,22 @@ namespace avii.Controls
         }
 
 
-        private void GenerateSummary(avii.Classes.PurchaseOrders pos)
+        private void GenerateSummary(PurchaseOrders pos)
         {
             SortedList hshItems = new SortedList(); 
             //Hashtable hshItems = new Hashtable();
             int countItems = 0;
             int pendingCount, shippedCount, processedCount, closeCount, cancelledCount, returnCount, onHoldCount, inProcessCount, OutOfStockCount;
             pendingCount = shippedCount = processedCount = closeCount = cancelledCount = returnCount = onHoldCount = inProcessCount = OutOfStockCount = 0;
-            string poNum, fromDate, toDate, contactName, storeID, statusID, esn, avOrder, mslNumber, phoneCategory, itemCode, fmUPC, zoneGUID, shipFrom, shipTo;
-            poNum = fromDate = toDate = shipFrom = shipTo = null;
+            string poNum, fromDate, toDate, contactName, storeID, statusID, esn, mslNumber, phoneCategory, itemCode, shipFrom, shipTo, trackingNumber, customerOrderNumber, POType, sku;
+            poNum = fromDate = toDate = shipFrom = shipTo = trackingNumber = null;
             int userID = 0, companyID = 0;
             List<FulfillmentStatus> statusList = new List<FulfillmentStatus>();
             List<BasePurchaseOrderItem> itemlist = null;
             //Session["posearchcriteria"] = poNum + "~" + contactName + "~" + fromDate + "~" + toDate + "~" + userID + "~" + statusID + "~" + companyID 
             //+ "~" + esn + "~" + avOrder + "~" + mslNumber + "~" + phoneCategory + "~" + itemCode + "~" + storeID + "~" + fmUPC + "~" + zoneGUID + "~" + shipFrom + "~" + shipTo;
+            //poNum + "~" +  fromDate + "~" + toDate + "~" + userID + "~" + statusID + "~" + companyID + "~" + esn + "~" +  mslNumber + "~" +  storeID + "~" + shipFrom + "~" + shipTo + "~" +
+            //trackingNumber + "~"+ customerOrderNumber + "~" + contactName + "~" + POType + "~" + sku;
             if (Session["posearchcriteria"] != null)
             {
                 string searchString = (string)Session["posearchcriteria"];
@@ -65,11 +67,16 @@ namespace avii.Controls
                 //zoneGUID = searchArr[14].Length > 0 ? searchArr[14] : null;
                 shipFrom = searchArr[9].Length > 0 ? searchArr[9] : null;
                 shipTo = searchArr[10].Length > 0 ? searchArr[10] : null;
+                trackingNumber = searchArr[11].Length > 0 ? searchArr[11] : null;
+                customerOrderNumber = searchArr[12].Length > 0 ? searchArr[12] : null;
+                contactName = searchArr[13].Length > 0 ? searchArr[13] : null;
+                POType = searchArr[14].Length > 0 ? searchArr[14] : null;
+
                 itemCode = searchArr[15].Length > 0 ? searchArr[15] : null;
+                SV.Framework.Fulfillment.PurchaseOrder purchaseOrderOperation = SV.Framework.Fulfillment.PurchaseOrder.CreateInstance<SV.Framework.Fulfillment.PurchaseOrder>();
+                //   +"~" + customerOrderNumber + "~" + contactName + "~" + POType + "~" + sku;
 
-             //   +"~" + customerOrderNumber + "~" + contactName + "~" + POType + "~" + sku;
-
-                itemlist = avii.Classes.PurchaseOrder.GetPurchaseOrderInventorySummary(poNum, null, fromDate, toDate, userID, statusID, companyID, esn, null, mslNumber, null, null, storeID, null, null, shipFrom, shipTo, 0, out statusList);
+                itemlist = purchaseOrderOperation.GetPurchaseOrderInventorySummary(poNum, contactName, fromDate, toDate, userID, statusID, companyID, esn, trackingNumber, mslNumber, null, itemCode, storeID, POType, customerOrderNumber, shipFrom, shipTo, 0, out statusList);
                 if (itemlist != null && itemlist.Count > 0)
                 {
                     int totalNumberOfUnits = itemlist.Sum((item) => item.LineNo);

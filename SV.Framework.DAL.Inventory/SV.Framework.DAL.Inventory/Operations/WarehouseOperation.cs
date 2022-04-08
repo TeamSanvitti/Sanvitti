@@ -218,6 +218,88 @@ namespace SV.Framework.DAL.Inventory
             return returnMessage;
         }
 
+        public List<WhLocationInfo> GetWarehouseLocationReport(string warehouseCity, string warehouseLocation, int companyID, string SKU, string ReceiveFromDate, string ReceiveToDate)
+        {
+            List<WhLocationInfo> warehouseList = default;
+            using (DBConnect db = new DBConnect())
+            {
+                DataTable dataTable = default;
+                string[] arrSpFieldSeq;
+                Hashtable objCompHash = new Hashtable();
+                try
+                {
+                    objCompHash.Add("@WarehouseCity", warehouseCity);
+                    objCompHash.Add("@WarehouseLocation", warehouseLocation);
+                    objCompHash.Add("@CompanyID", companyID);
+                    objCompHash.Add("@SKU", SKU);
+                    objCompHash.Add("@FromDate", string.IsNullOrEmpty(ReceiveFromDate) ? null : ReceiveFromDate);
+                    objCompHash.Add("@ToDate", string.IsNullOrEmpty(ReceiveToDate) ? null : ReceiveToDate);
+                    
+
+                    arrSpFieldSeq = new string[] { "@WarehouseCity", "@WarehouseLocation", "@CompanyID", "@SKU", "@FromDate", "@ToDate" };
+
+                    dataTable = db.GetTableRecords(objCompHash, "av_WharehouseLocation_Report", arrSpFieldSeq);
+
+                    if (dataTable != null && dataTable.Rows.Count > 0)
+                    {
+                        warehouseList = PopulateWhLocationReport(dataTable);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogMessage(ex, this);   //throw ex;
+                }
+                finally
+                {
+                    //db = null;
+                    objCompHash = null;
+                    arrSpFieldSeq = null;
+                }
+            }
+            return warehouseList;
+        }
+
+        private List<WhLocationInfo> PopulateWhLocationReport(DataTable dataTable)
+        {
+            List<WhLocationInfo> warehouseList = default;// new List<Carriers>();
+
+            try
+            {
+                if (dataTable != null && dataTable.Rows.Count > 0)
+                {
+                    warehouseList = new List<WhLocationInfo>();
+                    foreach (DataRow dataRow in dataTable.Rows)
+                    {
+                        WhLocationInfo warehouseInfo = new WhLocationInfo();
+                        //warehouseInfo.WarehouseID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "WarehouseID", 0, false));
+                        //warehouseInfo.CompanyID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "CompanyID", 0, false));
+                        //warehouseInfo.WarehouseStorageID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "WarehouseStorageID", 0, false));
+                        warehouseInfo.WarehouseLocation = clsGeneral.getColumnData(dataRow, "WarehouseLocation", string.Empty, false) as string;
+                        warehouseInfo.WarehouseCity = clsGeneral.getColumnData(dataRow, "WarehouseCity", string.Empty, false) as string;
+                        warehouseInfo.Aisle = clsGeneral.getColumnData(dataRow, "Aisle", string.Empty, false) as string;
+                        warehouseInfo.Bay = clsGeneral.getColumnData(dataRow, "Bay", string.Empty, false) as string;
+                        warehouseInfo.RowLevel = clsGeneral.getColumnData(dataRow, "RowLevel", string.Empty, false) as string;
+                        warehouseInfo.CategoryName = clsGeneral.getColumnData(dataRow, "CategoryName", string.Empty, false) as string;
+                        warehouseInfo.CompanyName = clsGeneral.getColumnData(dataRow, "CompanyName", string.Empty, false) as string;
+                        warehouseInfo.ItemName = clsGeneral.getColumnData(dataRow, "ItemName", string.Empty, false) as string;
+                        warehouseInfo.SKU = clsGeneral.getColumnData(dataRow, "SKU", string.Empty, false) as string;
+                        warehouseInfo.Quantity = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "Qty", 0, false));
+                        warehouseInfo.LastReceivedDate = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "LastReceivedDate", DateTime.Now, false));
+
+
+                        warehouseList.Add(warehouseInfo);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogMessage(ex, this);   //throw ex;
+            }
+            return warehouseList;
+        }
+
+
         private List<WarehouseInfo> PopulateWarehouse(DataTable dataTable)
         {
             List<WarehouseInfo> warehouseList = default;// new List<Carriers>();

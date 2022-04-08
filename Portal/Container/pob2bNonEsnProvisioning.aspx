@@ -6,7 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
- <title>Provisioning</title>
+ <title>Provisioning  B2B (Accessories)</title>
    
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
@@ -184,7 +184,7 @@
  <table cellspacing="0" cellpadding="0" border="0" align="center" width="95%">
 		<tr>
 			<td  bgcolor="#dee7f6" class="buttonlabel">
-            &nbsp;&nbsp;Provisioning - B2B
+            &nbsp;&nbsp;Provisioning - B2B (Accessories)
 			</td>
 		</tr>
     </table>
@@ -324,13 +324,13 @@
      </tr>
      </table>  
         <br />
-        <table align="center" style="text-align:left" width="100%">
-        <tr>
+        <table align="center" style="text-align:left" width="100%" >
+        <tr id="trAccessory" runat="server" visible="false">
             <td colspan="3" align="left">
 
                 <asp:Label ID="lblNonEsn" runat="server" Width="100%" CssClass="buttonlabel"></asp:Label>
 
-                                <asp:Repeater ID="rptSKU" runat="server" Visible="true" >
+                                <asp:Repeater ID="rptSKU" runat="server" Visible="false" >
                                 <HeaderTemplate>
                                 <table bordercolor="#839abf" border="1" width="100%" cellpadding="1" cellspacing="1">
                                 <tr>
@@ -340,12 +340,13 @@
                                     <td class="buttongrid"  width="10%">
                                         Category Name
                                     </td>
-                                    <td class="buttongrid"  width="25%">
-                                        Product Name
-                                    </td>
                                     <td class="buttongrid" width="23%">
                                         SKU
                                     </td>
+                                    <td class="buttongrid"  width="25%">
+                                        Product Name
+                                    </td>
+                                    
                                     <td class="buttongrid" width="15%">
                                         Qty 
                                     </td>
@@ -354,7 +355,7 @@
                                         Current Stock 
                                     </td>
                                     
-                                    <td class="buttongrid" width="5%">
+                                    <td class="buttongrid" width="5%" style="display:none">
                                         Assign
                                     </td>
                                     <td class="buttongrid" width="5%">
@@ -375,12 +376,13 @@
                                         </td>
                                         <td valign="bottom" class="copy10grey"  >
                                         <span width="100%">
-                                            <%# Eval("ProductName")%>    
+                                            <%# Eval("SKU")%>    
                                             </span>
                                         </td>
+                                        
                                         <td valign="bottom" class="copy10grey"  >
                                         <span width="100%">
-                                            <%# Eval("SKU")%>    
+                                            <%# Eval("ProductName")%>    
                                             </span>
                                         </td>
                                          <td valign="bottom" class="copy10grey"  >
@@ -394,7 +396,7 @@
                                             </span>
                                         </td>
                                        
-                                        <td valign="bottom" class="copy10grey"  >
+                                        <td valign="bottom" class="copy10grey" style="display:none"  >
                                         <span width="100%">
                                             <asp:CheckBox ID="chkAssign" Enabled='<%# Eval("IsAssign")%>' runat="server" Checked='<%# Eval("IsAssign")%>' />
                                             
@@ -538,19 +540,22 @@
 									        </asp:DropDownList>
                                     
                                         </td>
-                                        <td  class="copy10grey" align="right" width="20%">
+                                        <td width="50%">
+                                            &nbsp;
+                                        </td>
+                                        <td  class="copy10grey" align="right" width="20%" style="display:none">
                                             Upload ESN file: &nbsp;
                                         </td>
-                                        <td align="left"  width="30%">
+                                        <td align="left"  width="30%" style="display:none">
                                             <asp:FileUpload ID="fu" runat="server" CssClass="txfield1" Width="80%" /></td>
-                                        </td>
+                                        
                                         
                                         
                                     </tr>
                                     
                                 </ItemTemplate>
                                 <FooterTemplate>
-                                    <tr>
+                                <%--    <tr>
                                         
                                         <td></td>
                                         <td></td>
@@ -560,7 +565,7 @@
                                         <td class="copy10grey" align="left" colspan="4">
                                             <b>ContainerID</b>
                                         </td>
-                                    </tr>
+                                    </tr>--%>
                                 </table>
                                 </FooterTemplate>
                                 </asp:Repeater>

@@ -58,6 +58,16 @@ namespace avii.EsnReplacement
                     Table5.Visible = true;
                     rptESN.DataSource = esnReplacedInfo;
                     rptESN.DataBind();
+
+                    //lblAssignmentDate.Text = fulfillemntInfo.AssignmentDate;
+                    //lblBOXID.Text = fulfillemntInfo.BOXID;
+                    //lblESNType.Text = fulfillemntInfo.ESNType;
+                    //lblHEX.Text = fulfillemntInfo.MeidHex;
+                    //lblKitID.Text = fulfillemntInfo.KitID.ToString();
+                    //lblMEID.Text = fulfillemntInfo.MeidDec;
+                    //lblReceiveDate.Text = fulfillemntInfo.UploadDate;
+                    //lblWhLocation.Text = fulfillemntInfo.Location;
+
                 }
                 else
                     lblMsg.Text = esnReplacedInfo[0].ErrorMessage;
@@ -174,7 +184,19 @@ namespace avii.EsnReplacement
                             lblPODate.Text = fulfillemntInfo.FulfillemntDate;
                             lblFulfillmentNo.Text = fulfillemntInfo.FulfillemntNumber;
                             lblStatus.Text = fulfillemntInfo.PoStatus;
-                            if(!string.IsNullOrEmpty(fulfillemntInfo.ESN))
+
+                            lblAssignmentDate.Text = fulfillemntInfo.AssignmentDate;
+                            lblBOXID.Text = fulfillemntInfo.BOXID;
+                            lblESNType.Text = fulfillemntInfo.ESNType;
+                            lblHEX.Text = fulfillemntInfo.MeidHex;
+                            lblKitID.Text = fulfillemntInfo.KitID.ToString();
+                            lblMEID.Text = fulfillemntInfo.MeidDec;
+                            lblReceiveDate.Text = fulfillemntInfo.UploadDate;
+                            lblWhLocation.Text = fulfillemntInfo.Location;
+
+                            //lblReceiveDate.Text = fulfillemntInfo.UploadDate;
+
+                            if (!string.IsNullOrEmpty(fulfillemntInfo.ESN))
                             {
 
                                 BindUser();

@@ -593,13 +593,13 @@
                                 <td class="buttongrid" align="left" width="23%">
                                 Product Name
                                 </td>
-                                     <td class="buttongrid" align="left" width="12%">
+                                     <td class="buttongrid" align="left" width="12%" style="display:none">
                                 Mapped Category Name
                                 </td>
-                                <td class="buttongrid" align="left" width="10%">
+                                <td class="buttongrid" align="left" width="10%" style="display:none">
                                Mapped SKU
                                 </td>
-                                <td class="buttongrid" align="left" width="20%">
+                                <td class="buttongrid" align="left" width="20%" style="display:none">
                                 Mapped Product Name
                                 </td>
                                 <td class="buttongrid" align="left" width="4%">
@@ -644,21 +644,21 @@
                                         
 													
                                     </td>
-                                      <td align="left" class="copy10grey">
+                                      <td align="left" class="copy10grey" style="display:none">
                                     
                                        <%# Eval("MappedCategoryName") %>
 
                                         
 													
                                     </td>
-                                      <td align="left" class="copy10grey">
+                                      <td align="left" class="copy10grey" style="display:none">
                                     
                                        <%# Eval("MappedSKU") %>
 
                                         
 													
                                     </td>
-                                      <td align="left" class="copy10grey">
+                                      <td align="left" class="copy10grey" style="display:none">
                                     
                                        <%# Eval("MappedProductName") %>
 
