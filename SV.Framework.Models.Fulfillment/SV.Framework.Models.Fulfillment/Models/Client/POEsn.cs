@@ -17,6 +17,7 @@ namespace SV.Framework.Models.Fulfillment
 
         public string BoxID { get; set; }
         public string ICCID { get; set; }
+        public string Location { get; set; }
 
     }
     public class POEsnCsv

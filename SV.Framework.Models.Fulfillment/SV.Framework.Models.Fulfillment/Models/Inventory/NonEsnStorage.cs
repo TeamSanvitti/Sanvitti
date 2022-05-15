@@ -9,8 +9,16 @@ namespace SV.Framework.Models.Inventory
         public int SequenceNumber { get; set; }
         public string WareHouseLocation { get; set; }
         public string BoxID { get; set; }
+        public string CategoryName { get; set; }
+        public string SKU { get; set; }
+        public string ProductName { get; set; }
+        public string Aisle { get; set; }
+        public string Bay { get; set; }
+        public string RowLevel { get; set; }
         public int Quantity { get; set; }
         public bool Inspected { get; set; }
+        public DateTime UploadDate { get; set; }
+
     }
 
     public class NonESNInventory

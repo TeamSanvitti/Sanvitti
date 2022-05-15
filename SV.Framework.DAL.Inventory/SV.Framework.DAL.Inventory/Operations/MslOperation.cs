@@ -167,7 +167,7 @@ namespace SV.Framework.DAL.Inventory
 
             using (DBConnect db = new DBConnect())
             {
-                DataTable dt = ESNData(mslEsnList);
+                DataTable dt = ESNDataNEW(mslEsnList);
                 //string esnXML = clsGeneral.SerializeObject(mslEsnList);
                 string[] arrSpFieldSeq;
                 Hashtable objCompHash = new Hashtable();
@@ -519,7 +519,7 @@ namespace SV.Framework.DAL.Inventory
             List<EsnUploadNew> esnList = default;
             using (DBConnect db = new DBConnect())
             {
-                DataTable esnTable = ESNData(mslEsnList);
+                DataTable esnTable = ESNDataNEW(mslEsnList);
 
                 string[] arrSpFieldSeq;
                 DataTable dt = default;//new DataTable();
@@ -710,6 +710,7 @@ namespace SV.Framework.DAL.Inventory
                         {
                             esnInfo = new EsnUploadNew();
                             esnInfo.ESN = clsGeneral.getColumnData(row, "ESN", string.Empty, false) as string;
+                            esnInfo.IMEI2 = clsGeneral.getColumnData(row, "IMEI2", string.Empty, false) as string;
                             esnInfo.MslNumber = clsGeneral.getColumnData(row, "BatchNumber", string.Empty, false) as string;
                             esnInfo.ICC_ID = clsGeneral.getColumnData(row, "icc_id", string.Empty, false) as string;
                             esnInfo.BoxID = clsGeneral.getColumnData(row, "BoxID", string.Empty, false) as string;
@@ -826,6 +827,7 @@ namespace SV.Framework.DAL.Inventory
                     objInventoryItem.ItemcompanyGUID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ItemCompanyGUID", 0, false));
                     objInventoryItem.CategoryID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "CategoryID", 0, false));
                     objInventoryItem.ParentCategoryGUID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ParentCategoryGUID", 0, false));
+                    objInventoryItem.CurrentStock = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "Stock_in_Hand", 0, false));
 
                     objInventoryItem.AllowESN = Convert.ToBoolean(clsGeneral.getColumnData(dataRow, "AllowESN", false, false));
                     skuList.Add(objInventoryItem);
@@ -858,7 +860,47 @@ namespace SV.Framework.DAL.Inventory
             return esnList;
 
         }
-        private  DataTable ESNData(List<EsnUploadNew> mslEsnList)
+        private DataTable ESNDataNEW(List<EsnUploadNew> mslEsnList)
+        {
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("ESN", typeof(System.String));
+            dt.Columns.Add("BatchNumber", typeof(System.String));
+            dt.Columns.Add("ICC_ID", typeof(System.String));
+            dt.Columns.Add("MeidHex", typeof(System.String));
+            dt.Columns.Add("MeidDec", typeof(System.String));
+            dt.Columns.Add("Location", typeof(System.String));
+            dt.Columns.Add("MSL", typeof(System.String));
+            dt.Columns.Add("OTKSL", typeof(System.String));
+            dt.Columns.Add("SerialNumber", typeof(System.String));
+            dt.Columns.Add("BoxID", typeof(System.String));
+            dt.Columns.Add("IMEI2", typeof(System.String));
+            DataRow row;
+
+            if (mslEsnList != null && mslEsnList.Count > 0)
+            {
+                foreach (EsnUploadNew item in mslEsnList)
+                {
+                    row = dt.NewRow();
+                    row["ESN"] = item.ESN;
+                    row["BatchNumber"] = item.MslNumber;
+                    row["ICC_ID"] = item.ICC_ID;
+                    row["MeidHex"] = item.MeidHex;
+                    row["MeidDec"] = item.MeidDec;
+                    row["Location"] = item.Location;
+                    row["MSL"] = item.MSL;
+                    row["OTKSL"] = item.OTKSL;
+                    row["SerialNumber"] = item.SerialNumber;
+                    row["BoxID"] = item.BoxID;
+                    row["IMEI2"] = item.IMEI2;
+
+                    dt.Rows.Add(row);
+                }
+            }
+            return dt;
+        }
+
+        private DataTable ESNData(List<EsnUploadNew> mslEsnList)
         {
             DataTable dt = new DataTable();
 

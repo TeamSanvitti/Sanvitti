@@ -10,6 +10,7 @@ namespace SV.Framework.Models.SOR
         public string ESN { get; set; }
         public string MappedSKU { get; set; }
         public string ICCID { get; set; }
+        public string WhLocation { get; set; }
 
     }
 }

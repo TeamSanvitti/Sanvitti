@@ -1,7 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="ManageServiceOrderNew.aspx.cs" Inherits="avii.ManageServiceOrderNew" %>
 <%@ Register TagPrefix="foot" TagName="MenuFooter" Src="~/Controls/Footer.ascx" %>
 <%@ Register TagPrefix="menu" TagName="Menu" Src="~/Controls/Header.ascx" %>
-
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -390,7 +389,7 @@
                                     File format sample: &nbsp;
                                           </td>
                                 <td class="copy10grey" align="left" width="60%">
-                                   <b>SKU,ESN</b>,ICCID <asp:LinkButton ID="lnkButton" runat="server"   Text="Download file format" OnClick="btnCSV_Click"></asp:LinkButton>
+                                   <b>ESN(SKU),Location</b> <asp:LinkButton ID="lnkButton" runat="server"   Text="Download file format" OnClick="btnCSV_Click"></asp:LinkButton>
                     
                                 </td>
                            
@@ -399,9 +398,7 @@
                             <td class="copy10grey" align="right" width="40%">
                                      &nbsp;
                                          </td>
-                                <td class="copy10grey" align="left" width="60%">
-
-                                    
+                                <td class="copy10grey" align="left" width="60%">                                    
                                     <asp:Button ID="btnUploadValidate"  runat="server" Text="Validate Uploaded File" CssClass="button" OnClick="btnUploadValidate_Click" />       
        
                                     
@@ -497,6 +494,9 @@
                                              <asp:TextBox ID="txtESN" CssClass="copy10grey" Width="100%" onkeypress="return isNumberKey(event);"  runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "ESN")%>'></asp:TextBox>
                                             
                                         </td>
+                                           <%-- <td>
+                                                 <%# Eval("WhLocation") %>
+                                            </td>--%>
                                             <td>
                                                 <span class="errormessage">
                                                    <%# Eval("ValidationMsg") %>
@@ -506,7 +506,16 @@
                                         </table>                                               
                                        
                                     </ItemTemplate>
+                                </asp:TemplateField>
+                              <asp:TemplateField HeaderText="Location" ItemStyle-CssClass="copy10grey"  ItemStyle-Width="5%">
+                                <ItemTemplate>
+                                    <asp:Label ID="hdWhLocation"  Text='<%# Eval("WhLocation")%>' runat="server" CssClass="copy10grey" />
+                                        
+                                      <%--<%# Eval("WhLocation")%>--%>
+                  
+                                    </ItemTemplate>
                                 </asp:TemplateField> 
+
                               <asp:TemplateField HeaderText="Mapped SKU" ItemStyle-CssClass="copy10grey"  ItemStyle-Width="19%">
                                 <ItemTemplate>
 

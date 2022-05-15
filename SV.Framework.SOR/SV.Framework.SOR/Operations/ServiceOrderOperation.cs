@@ -91,6 +91,17 @@ namespace SV.Framework.SOR
             return esnList;
 
         }
+        public List<ServiceOrderDetail> Validate_ServiceOrder_New4(ServiceOrders serviceOrder, out string errorMessage, out bool IsValidate)
+        {
+            SV.Framework.DAL.SOR.ServiceOrderOperation serviceOrderOperation = SV.Framework.DAL.SOR.ServiceOrderOperation.CreateInstance<SV.Framework.DAL.SOR.ServiceOrderOperation>();
+
+            IsValidate = true;
+            List<ServiceOrderDetail> esnList = default;
+            errorMessage = string.Empty;
+            esnList = serviceOrderOperation.Validate_ServiceOrder_New4(serviceOrder, out errorMessage, out IsValidate);
+            return esnList;
+
+        }
         public  List<ServiceOrderDetail> Validate_ServiceOrder_New(ServiceOrders serviceOrder, out string errorMessage, out bool IsValidate)
         {
             SV.Framework.DAL.SOR.ServiceOrderOperation serviceOrderOperation = SV.Framework.DAL.SOR.ServiceOrderOperation.CreateInstance<SV.Framework.DAL.SOR.ServiceOrderOperation>();
@@ -113,13 +124,23 @@ namespace SV.Framework.SOR
             return returnValue;
 
         }
-        public int ServiceOrder_NonESN_InsertUpdate(ServiceOrders serviceOrder, int userId, out string errorMessage)
+        public int ServiceOrder_InsertUpdate_New2(ServiceOrders serviceOrder, int userId, out string errorMessage)
         {
             SV.Framework.DAL.SOR.ServiceOrderOperation serviceOrderOperation = SV.Framework.DAL.SOR.ServiceOrderOperation.CreateInstance<SV.Framework.DAL.SOR.ServiceOrderOperation>();
 
             int returnValue = 0;
             errorMessage = string.Empty;
-            returnValue = serviceOrderOperation.ServiceOrder_NonESN_InsertUpdate(serviceOrder, userId, out errorMessage);
+            returnValue = serviceOrderOperation.ServiceOrder_InsertUpdate_New2(serviceOrder, userId, out errorMessage);
+            return returnValue;
+
+        }
+        public int ServiceOrder_NonESN_InsertUpdate(ServiceOrders serviceOrder, int userId, string whLocation, out string errorMessage)
+        {
+            SV.Framework.DAL.SOR.ServiceOrderOperation serviceOrderOperation = SV.Framework.DAL.SOR.ServiceOrderOperation.CreateInstance<SV.Framework.DAL.SOR.ServiceOrderOperation>();
+
+            int returnValue = 0;
+            errorMessage = string.Empty;
+            returnValue = serviceOrderOperation.ServiceOrder_NonESN_InsertUpdate(serviceOrder, userId, whLocation, out errorMessage);
             return returnValue;
 
         }

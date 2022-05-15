@@ -103,7 +103,7 @@ namespace avii.Reports
         {
             SV.Framework.Inventory.ProductController productController = SV.Framework.Inventory.ProductController.CreateInstance<SV.Framework.Inventory.ProductController>();
 
-            ProductController objProductController = new ProductController();
+           // ProductController objProductController = new ProductController();
             List<ItemCategory> categoryList = productController.GetItemCategoryTree(0, 0, 1, true, -1, -1, true, true, false, false);
             ViewState["categoryList"] = categoryList;
             ddlCategory.DataSource = categoryList;

@@ -73,6 +73,7 @@ namespace SV.Framework.Fulfillment
                     asnInfo.SupplierCity = clsGeneral.getColumnData(dataRow, "SupplierCity", string.Empty, false) as string;
                     asnInfo.SupplierState = clsGeneral.getColumnData(dataRow, "SupplierState", string.Empty, false) as string;
                     asnInfo.Pallets = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "TotalPallets", 0, false));
+                    asnInfo.FileSequence = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "FileSequence", 1, false));
 
                     asnInfo.Weight = Convert.ToDecimal(clsGeneral.getColumnData(dataRow, "ShippingWeight", 0, false));
                     asnInfo.UEDF_FileName = clsGeneral.getColumnData(dataRow, "UEDF_FileName", string.Empty, false) as string;
@@ -87,6 +88,7 @@ namespace SV.Framework.Fulfillment
     }
     public class FulfillmentOrderASN
     {
+        public int FileSequence { get; set; }
         public string ARZM { get; set; }
         public string PO { get; set; }
         public string FO { get; set; }

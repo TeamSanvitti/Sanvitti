@@ -1030,6 +1030,67 @@ OnRowDeleting = "gvTracking_RowDeleting" OnRowDeleted = "gvTracking_RowDeleted"
     </tr>
 
 </table>
+                <br />
+
+                <asp:PlaceHolder ID="phDoc" runat="server">
+                <table align="center" style="text-align:left" width="100%">
+                                <tr class="buttonlabel" align="left">
+                                <td>&nbsp;Fulfillment Documents</td></tr>
+                             </table>
+                   <table bordercolor="#839abf" border="0" width="100%" align="center" cellpadding="0" cellspacing="0">
+                    <tr>
+                    <td>
+                        <asp:Label ID="lblDoc" runat="server" CssClass="errormessage" ></asp:Label>
+                        <asp:Repeater ID="rptDoc" runat="server" >
+                            <HeaderTemplate>
+                            <table width="100%" align="center" cellpadding="2" cellspacing="2">
+                                <tr >
+                                    <td class="buttongrid" width="1%">
+                                        &nbsp;S.No.
+                                    </td>
+                                    <td class="buttongrid" width="30%">
+                                        &nbsp;Fulfillment Document
+                                    </td>
+                                    <td class="buttongrid" width="60%">
+                                        &nbsp;Document Description
+                                    </td>
+                                                    
+                                </tr>
+                            
+                            </HeaderTemplate>
+                            <ItemTemplate>
+                            <tr class="<%# Container.ItemIndex % 2 == 0 ? "alternaterow" : "" %>">
+                                                
+                                <td class="copy10grey">
+                                        &nbsp;<%# Container.ItemIndex + 1 %>
+                                </td>
+                                
+                                <td class="copy10grey">
+
+                                        &nbsp;
+                                        <asp:LinkButton ID="lnkDoc" CssClass="copy10grey" ForeColor="#4092D1" Font-Underline="true"  Font-Size="12px" 
+                                            OnClick="lnkDoc_Click" Text='<%# Eval("FileName")%>' runat="server"></asp:LinkButton>  
+                        
+                                                    
+                                </td>
+                                <td class="copy10grey">
+                                        &nbsp;<%# Eval("FileDescription")%>
+                                </td>
+                                                
+                            </tr>
+                            </ItemTemplate>
+                            <FooterTemplate>
+                                </table>    
+                            </FooterTemplate>
+                            </asp:Repeater>
+                        
+                        </td>
+                    </tr>
+                    </table>
+
+
+		                </asp:PlaceHolder>
+						
 <br />
                 
                 <asp:UpdatePanel ID="upnlView" runat="server" ChildrenAsTriggers="true">

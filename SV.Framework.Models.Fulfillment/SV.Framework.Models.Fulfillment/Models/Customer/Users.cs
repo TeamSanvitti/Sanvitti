@@ -12,6 +12,8 @@ namespace SV.Framework.Models.Customer
         private string email;
         private string status;
         private string rolesAssigned;
+        [XmlIgnore]
+        public int UserID { get; set; }
 
         [XmlElement(ElementName = "UserName", IsNullable = true)]
         public string UserName

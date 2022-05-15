@@ -6,6 +6,7 @@ namespace SV.Framework.Models.Fulfillment
 {
     public class UnprovisioingInfo
     {
+        public int POID { get; set; }
         public int UnprovisioningID { get; set; }
         public int TotalQty { get; set; }
         public string FulfillmentNumber { get; set; }

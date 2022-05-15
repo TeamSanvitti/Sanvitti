@@ -238,7 +238,126 @@ namespace SV.Framework.DAL.Inventory
 
                     arrSpFieldSeq = new string[] { "@WarehouseCity", "@WarehouseLocation", "@CompanyID", "@SKU", "@FromDate", "@ToDate" };
 
-                    dataTable = db.GetTableRecords(objCompHash, "av_WharehouseLocation_Report", arrSpFieldSeq);
+                    dataTable = db.GetTableRecords(objCompHash, "av_WarehouseLocation_Report", arrSpFieldSeq);
+
+                    if (dataTable != null && dataTable.Rows.Count > 0)
+                    {
+                        warehouseList = PopulateWhLocationReport(dataTable);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogMessage(ex, this);   //throw ex;
+                }
+                finally
+                {
+                    //db = null;
+                    objCompHash = null;
+                    arrSpFieldSeq = null;
+                }
+            }
+            return warehouseList;
+        }
+        
+        public List<EsnInfo> GetWarehouseLocationDetail(int ItemCompanyGUID, string warehouseLocation, string ReceiveFromDate, string ReceiveToDate, out List<NonEsnStorage> accessoryLoactionList)
+        {
+            List<EsnInfo> esnWarehouseList = default;
+            accessoryLoactionList = default;
+            using (DBConnect db = new DBConnect())
+            {
+                DataSet ds = default;
+                string[] arrSpFieldSeq;
+                Hashtable objCompHash = new Hashtable();
+                try
+                {
+                    objCompHash.Add("@WarehouseLocation", warehouseLocation);
+                    objCompHash.Add("@ItemCompanyGUID", ItemCompanyGUID);
+                    objCompHash.Add("@FromDate", string.IsNullOrEmpty(ReceiveFromDate) ? null : ReceiveFromDate);
+                    objCompHash.Add("@ToDate", string.IsNullOrEmpty(ReceiveToDate) ? null : ReceiveToDate);
+
+                    arrSpFieldSeq = new string[] { "@WarehouseLocation", "@ItemCompanyGUID", "@FromDate", "@ToDate" };
+
+                    ds = db.GetDataSet(objCompHash, "av_WhLocation_EsnOrNonEsn_Select", arrSpFieldSeq);
+
+                    if (ds != null && ds.Tables.Count > 0)
+                    {
+                        esnWarehouseList = PopulateWhLocationDetail(ds, out accessoryLoactionList); 
+                    }
+                    //{
+                    //    warehouseList = PopulateWhLocationReport(dataTable);
+                    //}
+
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogMessage(ex, this);   //throw ex;
+                }
+                finally
+                {
+                    //db = null;
+                    objCompHash = null;
+                    arrSpFieldSeq = null;
+                }
+            }
+            return esnWarehouseList;
+        }
+
+        public List<WhLocationInfo> GetWarehouseLocationHistory(string warehouseLocation, int companyID)
+        {
+            List<WhLocationInfo> warehouseList = default;
+            using (DBConnect db = new DBConnect())
+            {
+                DataTable dataTable = default;
+                string[] arrSpFieldSeq;
+                Hashtable objCompHash = new Hashtable();
+                try
+                {
+                    objCompHash.Add("@WarehouseLocation", warehouseLocation);
+                    objCompHash.Add("@CompanyID", companyID);
+                    
+
+                    arrSpFieldSeq = new string[] { "@WarehouseLocation", "@CompanyID" };
+
+                    dataTable = db.GetTableRecords(objCompHash, "av_WharehouseLocation_History", arrSpFieldSeq);
+
+                    if (dataTable != null && dataTable.Rows.Count > 0)
+                    {
+                        warehouseList = PopulateWhLocationHistory(dataTable);
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogMessage(ex, this);   //throw ex;
+                }
+                finally
+                {
+                    //db = null;
+                    objCompHash = null;
+                    arrSpFieldSeq = null;
+                }
+            }
+            return warehouseList;
+        }
+
+        public List<WhLocationInfo> GetWarehouseLocationReplacement(string warehouseLocation, int companyID, string SKU)
+        {
+            List<WhLocationInfo> warehouseList = default;
+            using (DBConnect db = new DBConnect())
+            {
+                DataTable dataTable = default;
+                string[] arrSpFieldSeq;
+                Hashtable objCompHash = new Hashtable();
+                try
+                {
+                    objCompHash.Add("@CompanyID", companyID);
+                    objCompHash.Add("@WarehouseLocation", warehouseLocation);
+                    objCompHash.Add("@SKU", SKU);                    
+
+                    arrSpFieldSeq = new string[] { "@CompanyID", "@WarehouseLocation", "@SKU" };
+
+                    dataTable = db.GetTableRecords(objCompHash, "av_WarehouseLocation_Replacement", arrSpFieldSeq);
 
                     if (dataTable != null && dataTable.Rows.Count > 0)
                     {
@@ -260,6 +379,271 @@ namespace SV.Framework.DAL.Inventory
             return warehouseList;
         }
 
+        public List<EsnInfo> WarehouseLocationEsnValidate(List<EsnInfo> ESNs, int companyID, string whLocation)
+        {
+            List<EsnInfo> esnList = default;
+            using (DBConnect db = new DBConnect())
+            {
+                
+                string[] arrSpFieldSeq;
+                DataTable dt = default;//new DataTable();
+                Hashtable objCompHash = new Hashtable();
+                DataTable esnTable = ESNData(ESNs);
+                //int rowID = 1;
+                try
+                {
+                    objCompHash.Add("@CompanyID", companyID);
+                    objCompHash.Add("@WarehouseLocation", whLocation);
+                    objCompHash.Add("@ESNTable", esnTable);
+
+
+                    arrSpFieldSeq = new string[] { "@CompanyID", "@WarehouseLocation", "@ESNTable" };
+                    dt = db.GetTableRecords(objCompHash, "av_WhLocationESN_Validate", arrSpFieldSeq);
+                    esnList = populateESNList(dt);
+                }
+                catch (Exception objExp)
+                {
+                    Logger.LogMessage(objExp, this); // throw new Exception(objExp.Message.ToString());
+                }
+                finally
+                {
+                    // db = null;
+                    objCompHash = null;
+                    arrSpFieldSeq = null;
+                }
+            }
+            return esnList;
+        }
+
+        public int WarehouseLocationESNUpdate(List<EsnInfo> ESNs,int userId, int ItemCompanyGUID, string whLocationOld, string whLocationNew, int qty, int loginUserID, string Comment, out string errorMessage)
+        {
+            errorMessage = "";
+            int returnValue = 0;
+            using (DBConnect db = new DBConnect())
+            {
+                string[] arrSpFieldSeq;
+                Hashtable objCompHash = new Hashtable();
+                DataTable esnTable = ESNData(ESNs);
+                
+                try
+                {
+                    objCompHash.Add("@UserID", userId);
+                    objCompHash.Add("@ItemCompanyGUID", ItemCompanyGUID);
+                    objCompHash.Add("@WarehouseLocationOld", whLocationOld);
+                    objCompHash.Add("@WarehouseLocationNew", whLocationNew);
+                    objCompHash.Add("@Qty", qty);
+                    objCompHash.Add("@loginUserID", loginUserID);
+                    objCompHash.Add("@Comment", Comment);
+                    objCompHash.Add("@ESNTable", esnTable);
+
+
+                    arrSpFieldSeq = new string[] { "@UserID", "@ItemCompanyGUID", "@WarehouseLocationOld", "@WarehouseLocationNew", "@Qty", "@loginUserID", "@Comment", "@ESNTable" };
+                    returnValue = db.ExecuteNonQuery(objCompHash, "av_WhLocationESN_Update", arrSpFieldSeq);
+
+                    
+                }
+                catch (Exception objExp)
+                {
+                    errorMessage = objExp.Message;
+                    Logger.LogMessage(objExp, this); // throw new Exception(objExp.Message.ToString());
+                }
+                finally
+                {
+                    // db = null;
+                    objCompHash = null;
+                    arrSpFieldSeq = null;
+                }
+            }
+            return returnValue;
+        }
+        public int WarehouseLocationNonEsnUpdate(int storageID, int userId, int ItemCompanyGUID, string whLocationOld, string whLocationNew, int qty, int oldQty, int loginUserID, string Comment, out string errorMessage)
+        {
+            errorMessage = "";
+            int returnValue = 0;
+            using (DBConnect db = new DBConnect())
+            {
+
+                string[] arrSpFieldSeq;
+                Hashtable objCompHash = new Hashtable();
+                try
+                {
+                    objCompHash.Add("@StorageID", storageID);
+                    objCompHash.Add("@UserID", userId);
+                    objCompHash.Add("@ItemCompanyGUID", ItemCompanyGUID);
+                    objCompHash.Add("@WarehouseLocationOld", whLocationOld);
+                    objCompHash.Add("@WarehouseLocationNew", whLocationNew);
+                    objCompHash.Add("@Qty", qty);
+                    objCompHash.Add("@OldQty", oldQty);
+                    objCompHash.Add("@loginUserID", loginUserID);
+                    objCompHash.Add("@Comment", Comment);
+
+
+                    arrSpFieldSeq = new string[] { "@StorageID", "@UserID", "@ItemCompanyGUID", "@WarehouseLocationOld", "@WarehouseLocationNew", "@Qty", 
+                        "@OldQty", "@loginUserID","Comment" };
+                    returnValue = db.ExecuteNonQuery(objCompHash, "av_WhLocationNonESN_Update", arrSpFieldSeq);
+
+                }
+                catch (Exception objExp)
+                {
+                    errorMessage = objExp.Message;
+
+                    Logger.LogMessage(objExp, this); // throw new Exception(objExp.Message.ToString());
+                }
+                finally
+                {
+                    // db = null;
+                    objCompHash = null;
+                    arrSpFieldSeq = null;
+                }
+            }
+            return returnValue;
+        }
+
+        private List<EsnInfo> populateESNList(DataTable dt)
+        {
+            List<EsnInfo> esnList = default;
+            EsnInfo esnInfo = default;
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                esnList = new List<EsnInfo>();
+                foreach (DataRow row in dt.Rows)
+                {
+                    esnInfo = new EsnInfo();
+                    esnInfo.Location = Convert.ToString(clsGeneral.getColumnData(row, "Location", string.Empty, false));
+                    esnInfo.ESN = Convert.ToString(clsGeneral.getColumnData(row, "ESN", string.Empty, false));
+                    esnInfo.ErrorMessage = Convert.ToString(clsGeneral.getColumnData(row, "ErrorMessage", string.Empty, false));
+                    esnList.Add(esnInfo);
+                }
+
+            }
+            return esnList;
+        }
+        private List<EsnInfo> PopulateWhLocationDetail(DataSet ds, out List<NonEsnStorage> accessoryLocationList)
+        {
+            List<EsnInfo> esnWarehouseList = default;// new List<Carriers>();
+            accessoryLocationList = default;
+            try
+            {
+                if (ds != null && ds.Tables.Count > 0)
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        esnWarehouseList = new List<EsnInfo>();
+                        foreach (DataRow dataRow in ds.Tables[0].Rows)
+                        {
+                            EsnInfo warehouseInfo = new EsnInfo();
+                            warehouseInfo.Location = clsGeneral.getColumnData(dataRow, "Location", string.Empty, false) as string;
+
+                            warehouseInfo.ESN = clsGeneral.getColumnData(dataRow, "ESN", string.Empty, false) as string;
+                            warehouseInfo.MEID = clsGeneral.getColumnData(dataRow, "MeidDec", string.Empty, false) as string;
+                            warehouseInfo.HEX = clsGeneral.getColumnData(dataRow, "MeidHex", string.Empty, false) as string;
+                            warehouseInfo.BoxID = clsGeneral.getColumnData(dataRow, "BoxID", string.Empty, false) as string;
+                            warehouseInfo.SKU = clsGeneral.getColumnData(dataRow, "SKU", string.Empty, false) as string;
+                            warehouseInfo.CategoryName = clsGeneral.getColumnData(dataRow, "CategoryName", string.Empty, false) as string;
+                            warehouseInfo.ProductName = clsGeneral.getColumnData(dataRow, "ItemName", string.Empty, false) as string;
+                            warehouseInfo.Aisle = clsGeneral.getColumnData(dataRow, "Aisle", string.Empty, false) as string;
+                            warehouseInfo.Bay = clsGeneral.getColumnData(dataRow, "Bay", string.Empty, false) as string;
+                            warehouseInfo.RowLevel = clsGeneral.getColumnData(dataRow, "RowLevel", string.Empty, false) as string;
+
+                            warehouseInfo.BatchNumber = clsGeneral.getColumnData(dataRow, "BatchNumber", string.Empty, false) as string;
+                            //warehouseInfo.Quantity = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "Qty", 0, false));
+                            warehouseInfo.UploadDate = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "UploadDate", DateTime.Now, false));
+
+                            esnWarehouseList.Add(warehouseInfo);
+                        }
+                    }
+                    if (ds.Tables.Count > 1 && ds.Tables[1].Rows.Count > 0)
+                    {
+                        accessoryLocationList = new List<NonEsnStorage>();
+                        foreach (DataRow dataRow in ds.Tables[1].Rows)
+                        {
+                            NonEsnStorage nonEsnStorage = new NonEsnStorage();
+                            nonEsnStorage.WareHouseLocation = clsGeneral.getColumnData(dataRow, "WareHouseLocation", string.Empty, false) as string;
+                            nonEsnStorage.CategoryName = clsGeneral.getColumnData(dataRow, "CategoryName", string.Empty, false) as string;
+                            nonEsnStorage.SKU = clsGeneral.getColumnData(dataRow, "SKU", string.Empty, false) as string;
+                            nonEsnStorage.ProductName = clsGeneral.getColumnData(dataRow, "ItemName", string.Empty, false) as string;
+                            nonEsnStorage.Aisle = clsGeneral.getColumnData(dataRow, "Aisle", string.Empty, false) as string;
+                            nonEsnStorage.Bay = clsGeneral.getColumnData(dataRow, "Bay", string.Empty, false) as string;
+                            nonEsnStorage.RowLevel = clsGeneral.getColumnData(dataRow, "RowLevel", string.Empty, false) as string;
+
+                            nonEsnStorage.BoxID = clsGeneral.getColumnData(dataRow, "BoxID", string.Empty, false) as string;
+                            nonEsnStorage.Quantity = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "Quantity", 0, false));
+                            nonEsnStorage.UploadDate = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "UploadDate", DateTime.Now, false));
+
+                            accessoryLocationList.Add(nonEsnStorage);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogMessage(ex, this);   //throw ex;
+            }
+            return esnWarehouseList;
+        }
+
+        private List<WhLocationInfo> PopulateWhLocationHistory(DataTable dataTable)
+        {
+            List<WhLocationInfo> warehouseList = default;// new List<Carriers>();
+
+            try
+            {
+                if (dataTable != null && dataTable.Rows.Count > 0)
+                {
+                    warehouseList = new List<WhLocationInfo>();
+                    foreach (DataRow dataRow in dataTable.Rows)
+                    {
+                        WhLocationInfo warehouseInfo = new WhLocationInfo();
+                        warehouseInfo.ItemCompanyGUID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ItemCompanyGUID", 0, false));
+                        warehouseInfo.CompanyID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "CompanyID", 0, false));
+                        //warehouseInfo.WarehouseStorageID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "WarehouseStorageID", 0, false));
+                        warehouseInfo.WarehouseLocation = clsGeneral.getColumnData(dataRow, "WhLocation", string.Empty, false) as string;
+                     //   warehouseInfo.WarehouseCity = clsGeneral.getColumnData(dataRow, "WarehouseCity", string.Empty, false) as string;
+                        warehouseInfo.Aisle = clsGeneral.getColumnData(dataRow, "Aisle", string.Empty, false) as string;
+                        warehouseInfo.Bay = clsGeneral.getColumnData(dataRow, "Bay", string.Empty, false) as string;
+                        warehouseInfo.RowLevel = clsGeneral.getColumnData(dataRow, "RowLevel", string.Empty, false) as string;
+                        warehouseInfo.CategoryName = clsGeneral.getColumnData(dataRow, "CategoryName", string.Empty, false) as string;
+                        warehouseInfo.CompanyName = clsGeneral.getColumnData(dataRow, "CompanyName", string.Empty, false) as string;
+                        warehouseInfo.ItemName = clsGeneral.getColumnData(dataRow, "ItemName", string.Empty, false) as string;
+                        warehouseInfo.SKU = clsGeneral.getColumnData(dataRow, "SKU", string.Empty, false) as string;
+                        warehouseInfo.LogSource = clsGeneral.getColumnData(dataRow, "LogSource", string.Empty, false) as string;
+                        warehouseInfo.Quantity = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "Qty", 0, false));
+                        warehouseInfo.LastReceivedDate = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "CreateDate", DateTime.Now, false));
+
+
+                        warehouseList.Add(warehouseInfo);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogMessage(ex, this);   //throw ex;
+            }
+            return warehouseList;
+        }
+        private DataTable ESNData(List<EsnInfo> EsnList)
+        {
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("ROWID", typeof(System.Int32));
+            dt.Columns.Add("ESN", typeof(System.String));
+            int rowID = 1;
+            DataRow row;
+
+            if (EsnList != null && EsnList.Count > 0)
+            {
+                foreach (EsnInfo item in EsnList)
+                {
+                    row = dt.NewRow();
+                    row["ROWID"] = rowID;
+                    row["ESN"] = item.ESN;
+                    dt.Rows.Add(row);
+                    rowID = rowID + 1;
+                }
+            }
+            return dt;
+        }
+
         private List<WhLocationInfo> PopulateWhLocationReport(DataTable dataTable)
         {
             List<WhLocationInfo> warehouseList = default;// new List<Carriers>();
@@ -272,10 +656,12 @@ namespace SV.Framework.DAL.Inventory
                     foreach (DataRow dataRow in dataTable.Rows)
                     {
                         WhLocationInfo warehouseInfo = new WhLocationInfo();
-                        //warehouseInfo.WarehouseID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "WarehouseID", 0, false));
-                        //warehouseInfo.CompanyID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "CompanyID", 0, false));
-                        //warehouseInfo.WarehouseStorageID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "WarehouseStorageID", 0, false));
+                        warehouseInfo.ItemCompanyGUID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ItemCompanyGUID", 0, false));
+                        warehouseInfo.CompanyID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "CompanyID", 0, false));
+                        warehouseInfo.WarehouseStorageID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "WarehouseStorageID", 0, false));
+                        warehouseInfo.StorageID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "StorageID", 0, false));
                         warehouseInfo.WarehouseLocation = clsGeneral.getColumnData(dataRow, "WarehouseLocation", string.Empty, false) as string;
+                        warehouseInfo.InventoryType = clsGeneral.getColumnData(dataRow, "InventoryType", string.Empty, false) as string;
                         warehouseInfo.WarehouseCity = clsGeneral.getColumnData(dataRow, "WarehouseCity", string.Empty, false) as string;
                         warehouseInfo.Aisle = clsGeneral.getColumnData(dataRow, "Aisle", string.Empty, false) as string;
                         warehouseInfo.Bay = clsGeneral.getColumnData(dataRow, "Bay", string.Empty, false) as string;
@@ -286,7 +672,6 @@ namespace SV.Framework.DAL.Inventory
                         warehouseInfo.SKU = clsGeneral.getColumnData(dataRow, "SKU", string.Empty, false) as string;
                         warehouseInfo.Quantity = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "Qty", 0, false));
                         warehouseInfo.LastReceivedDate = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "LastReceivedDate", DateTime.Now, false));
-
 
                         warehouseList.Add(warehouseInfo);
                     }

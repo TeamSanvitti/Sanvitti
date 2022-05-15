@@ -6356,6 +6356,9 @@ namespace avii
         {
             bool IsSeleted = false;
             string poIDs = "";
+            int fileSequence = 0;
+            string fileSufix = "";
+
             try
             {
                 List<TrackingDetail> trackingList = new List<TrackingDetail>();
@@ -6388,6 +6391,8 @@ namespace avii
                         sbcsv.Append("ARZM,PO,FO,Line,Model,Product Description,Qty,Cartons,Date Shipped,City,State,Carrier,Tracking/Pro Number,Supplier Name,Supplier AddressSupplier City,Supplier City,Supplier State,Pallets,Weight,UEDF File Name,UEDF Date Time" + Environment.NewLine);
                         foreach (SV.Framework.Fulfillment.FulfillmentOrderASN item in fulfillmentOrderASNs)
                         {
+                            fileSequence = item.FileSequence;
+
                             sbcsv.Append(item.ARZM + "," + item.PO + "," + item.FO + "," + item.Line + "," + item.Model + "," + 
                                 item.ProductDescription + "," + item.Qty + "," + item.Cartons + "," + item.DateShipped + "," +
                                 item.City + "," +item.State + "," +item.Carrier + "," +item.TrackingNumber + "," + 
@@ -6397,10 +6402,21 @@ namespace avii
                         }
 
                         string string2CSV = sbcsv.ToString();
+                        if (fileSequence < 1000)
+                        {
+                            fileSufix = fileSequence.ToString();
+                            if (fileSufix.Length == 1)
+                                fileSufix = "000" + fileSufix;
+                            else if (fileSufix.Length == 2)
+                                fileSufix = "00" + fileSufix;
+                            else if (fileSufix.Length == 3)
+                                fileSufix = "0" + fileSufix;
 
+                        }
+                        string filename = "ASN-1LAN" + fileSufix + ".csv";
                         Response.Clear();
                         Response.Buffer = true;
-                        Response.AddHeader("content-disposition", "attachment;filename=ASN-1.csv");
+                        Response.AddHeader("content-disposition", "attachment;filename= " + filename);
                         Response.Charset = "";
                         Response.ContentType = "application/text";
                         Response.Output.Write(string2CSV);
@@ -6421,6 +6437,16 @@ namespace avii
             {
                 lblMsg.Text = ex.Message;
             }
+        }
+
+        protected void imgDoc_Command(object sender, CommandEventArgs e)
+        {
+            string poinfo = Convert.ToString(e.CommandArgument);
+
+
+            Session["poinfo"] = poinfo;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('../docupload/DocumentUpload.aspx')</script>", false);
+
         }
     }
 }

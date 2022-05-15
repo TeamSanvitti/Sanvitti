@@ -348,8 +348,38 @@ namespace SV.Framework.DAL.SOR
             }
             return dt;
         }
+        private DataTable ESNData4(List<ServiceOrderDetail> mslEsnList)
+        {
+            DataTable dt = new DataTable();
 
-        public  List<ServiceOrderDetail> Validate_ServiceOrder_New3(ServiceOrders serviceOrder, out string errorMessage, out bool IsValidate)
+            dt.Columns.Add("RowID", typeof(System.Int32));
+            dt.Columns.Add("SKU", typeof(System.String));
+            dt.Columns.Add("ESN", typeof(System.String));
+            dt.Columns.Add("ICCID", typeof(System.String));
+            dt.Columns.Add("WhLocation", typeof(System.String));
+
+
+            DataRow row;
+            int rowID = 1;
+            if (mslEsnList != null && mslEsnList.Count > 0)
+            {
+                foreach (ServiceOrderDetail item in mslEsnList)
+                {
+                    row = dt.NewRow();
+                    row["RowID"] = item.RowNumber;
+                    row["SKU"] = item.SKU.Replace("ESN(", "").Replace(")", "");
+                    row["ESN"] = item.ESN;
+                    row["ICCID"] = item.ICCID.Replace("ICCID(", "").Replace(")", "");
+                    row["WhLocation"] = item.WhLocation;
+
+                    dt.Rows.Add(row);
+                    rowID += rowID;
+                }
+            }
+            return dt;
+        }
+
+        public List<ServiceOrderDetail> Validate_ServiceOrder_New3(ServiceOrders serviceOrder, out string errorMessage, out bool IsValidate)
         {
             IsValidate = true;
             List<ServiceOrderDetail> esnList = default;
@@ -392,7 +422,51 @@ namespace SV.Framework.DAL.SOR
             return esnList;
 
         }
-        public  List<ServiceOrderDetail> Validate_ServiceOrder_New(ServiceOrders serviceOrder, out string errorMessage, out bool IsValidate)
+        public List<ServiceOrderDetail> Validate_ServiceOrder_New4(ServiceOrders serviceOrder, out string errorMessage, out bool IsValidate)
+        {
+            IsValidate = true;
+            List<ServiceOrderDetail> esnList = default;
+            errorMessage = string.Empty;
+            using (DBConnect db = new DBConnect())
+            {
+                string[] arrSpFieldSeq;
+                DataTable dt = default;// new DataTable();
+                Hashtable objCompHash = new Hashtable();
+
+                DataTable esnDT = ESNData4(serviceOrder.SODetail);
+
+
+
+                try
+                {
+                    objCompHash.Add("@CompanyId", serviceOrder.CompanyId);
+                    objCompHash.Add("@CustOrderNo", serviceOrder.CustomerOrderNumber);
+                    //objCompHash.Add("@EsnXML", esnXML);
+                    objCompHash.Add("@KittedSKUId", serviceOrder.KittedSKUId);
+                    objCompHash.Add("@NumberOfKits", serviceOrder.Quantity);
+                    objCompHash.Add("@esnTable", esnDT);
+
+                    arrSpFieldSeq = new string[] { "@CompanyId", "@CustOrderNo", "@KittedSKUId", "@NumberOfKits", "@esnTable" };
+                    dt = db.GetTableRecords(objCompHash, "av_ServiceOrder_Validate_New4", arrSpFieldSeq, "@soErrorMessage", out errorMessage);
+                    esnList = PopulateEsnInfo(dt, out IsValidate);
+
+                }
+                catch (Exception objExp)
+                {
+                    errorMessage = objExp.Message;
+                    Logger.LogMessage(objExp, this);
+                    //throw new Exception(objExp.Message.ToString());
+                }
+                finally
+                {
+                    // db = null;
+                }
+            }
+            return esnList;
+
+        }
+
+        public List<ServiceOrderDetail> Validate_ServiceOrder_New(ServiceOrders serviceOrder, out string errorMessage, out bool IsValidate)
         {
             IsValidate = true;
             List<ServiceOrderDetail> esnList = default;
@@ -439,7 +513,7 @@ namespace SV.Framework.DAL.SOR
             return esnList;
 
         }
-        public  int ServiceOrder_InsertUpdate_New(ServiceOrders serviceOrder, int userId, out string errorMessage)
+        public int ServiceOrder_InsertUpdate_New(ServiceOrders serviceOrder, int userId, out string errorMessage)
         {
             int returnValue = 0;
             errorMessage = string.Empty;
@@ -482,7 +556,51 @@ namespace SV.Framework.DAL.SOR
             return returnValue;
 
         }
-        public int ServiceOrder_NonESN_InsertUpdate(ServiceOrders serviceOrder, int userId, out string errorMessage)
+
+        public int ServiceOrder_InsertUpdate_New2(ServiceOrders serviceOrder, int userId, out string errorMessage)
+        {
+            int returnValue = 0;
+            errorMessage = string.Empty;
+            using (DBConnect db = new DBConnect())
+            {
+                string[] arrSpFieldSeq;
+                //DataTable dt = default;// new DataTable();
+                Hashtable objCompHash = new Hashtable();
+                DataTable esnDT = ESNDataNew2(serviceOrder.SODetail);
+                //string esnXML = clsGeneral.SerializeObject(serviceOrder.SODetail);
+                string reqestData = clsGeneral.SerializeObject(serviceOrder);
+                try
+                {
+                    objCompHash.Add("@ServiceOrderId", serviceOrder.ServiceOrderId);
+                    objCompHash.Add("@ServiceOrderNo", serviceOrder.ServiceOrderNumber);
+                    objCompHash.Add("@CustOrderNo", serviceOrder.CustomerOrderNumber);
+                    objCompHash.Add("@OrderDate", DateTime.Now);
+                    objCompHash.Add("@KittedSKUId", serviceOrder.KittedSKUId);
+                    objCompHash.Add("@Qty", serviceOrder.Quantity);
+                    objCompHash.Add("@UserId", userId);
+                    // objCompHash.Add("@EsnXML", esnXML);
+                    objCompHash.Add("@av_ServiceOrderDetail", esnDT);
+
+                    arrSpFieldSeq = new string[] { "@ServiceOrderId", "@ServiceOrderNo", "@CustOrderNo", "@OrderDate", "@KittedSKUId", "@Qty", "@UserId", "@av_ServiceOrderDetail" };
+                    returnValue = db.ExCommand(objCompHash, "av_ServiceOrder_InsertUpdate_New2", arrSpFieldSeq, "@soErrorMessage", out errorMessage);
+                    ServiceOrderLogInsert(returnValue, reqestData, userId, errorMessage);
+
+                }
+                catch (Exception objExp)
+                {
+                    errorMessage = objExp.Message;// "Technical error!";
+                    Logger.LogMessage(objExp, this);
+                    //throw new Exception(objExp.Message.ToString());
+                }
+                finally
+                {
+                    // db = null;
+                }
+            }
+            return returnValue;
+
+        }
+        public int ServiceOrder_NonESN_InsertUpdate(ServiceOrders serviceOrder, int userId, string whLocation, out string errorMessage)
         {
             int returnValue = 0;
             errorMessage = string.Empty;
@@ -503,8 +621,9 @@ namespace SV.Framework.DAL.SOR
                     objCompHash.Add("@KittedSKUId", serviceOrder.KittedSKUId);
                     objCompHash.Add("@Qty", serviceOrder.Quantity);
                     objCompHash.Add("@UserId", userId);
+                    objCompHash.Add("@WhLocation", whLocation);
                     
-                    arrSpFieldSeq = new string[] { "@ServiceOrderId", "@ServiceOrderNo", "@CustOrderNo", "@OrderDate", "@KittedSKUId", "@Qty", "@UserId" };
+                    arrSpFieldSeq = new string[] { "@ServiceOrderId", "@ServiceOrderNo", "@CustOrderNo", "@OrderDate", "@KittedSKUId", "@Qty", "@UserId", "@WhLocation" };
                     returnValue = db.ExCommand(objCompHash, "av_ServiceOrder_NonESN_InsertUpdate", arrSpFieldSeq, "@soErrorMessage", out errorMessage);
                     ServiceOrderLogInsert(returnValue, reqestData, userId, errorMessage);
 
@@ -665,6 +784,38 @@ namespace SV.Framework.DAL.SOR
 
         }
 
+        private static DataTable ESNDataNew2(List<ServiceOrderDetail> EsnList)
+        {
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("ItemCompanyGUID", typeof(System.Int32));
+            dt.Columns.Add("Esn", typeof(System.String));
+            dt.Columns.Add("IsPrinted", typeof(System.Boolean));
+            dt.Columns.Add("MappedItemCompanyGUID", typeof(System.Int32));
+            dt.Columns.Add("ICCID", typeof(System.String));
+            dt.Columns.Add("RowNumber", typeof(System.Int32));
+            dt.Columns.Add("WhLocation", typeof(System.String));
+
+            DataRow row;
+
+            if (EsnList != null && EsnList.Count > 0)
+            {
+                foreach (ServiceOrderDetail item in EsnList)
+                {
+                    row = dt.NewRow();
+                    row["ItemCompanyGUID"] = item.ItemCompanyGUID;
+                    row["Esn"] = item.ESN;
+                    row["IsPrinted"] = item.IsPrint;
+                    row["MappedItemCompanyGUID"] = item.MappedItemCompanyGUID;
+                    row["ICCID"] = item.ICCID;
+                    row["RowNumber"] = item.RowNumber;
+                    row["WhLocation"] = item.WhLocation;
+
+                    dt.Rows.Add(row);
+                }
+            }
+            return dt;
+        }
 
         private static DataTable ESNData(List<ServiceOrderDetail> EsnList)
         {
@@ -706,6 +857,7 @@ namespace SV.Framework.DAL.SOR
                 {
                     ServiceOrderDetail esnDetail = new ServiceOrderDetail();
 
+                    esnDetail.WhLocation = clsGeneral.getColumnData(dataRow, "WhLocation", string.Empty, false) as string;
                     esnDetail.ESN = clsGeneral.getColumnData(dataRow, "ESN", string.Empty, false) as string;
                     esnDetail.IsPrint = Convert.ToBoolean(clsGeneral.getColumnData(dataRow, "IsPrint", false, false));
                     esnDetail.ValidationMsg = clsGeneral.getColumnData(dataRow, "ValidationMsg", string.Empty, false) as string;

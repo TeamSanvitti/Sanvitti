@@ -7,9 +7,61 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Warehouse Location Report</title>
+     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+    <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css"
+    rel="stylesheet" type="text/css" />
+<%--<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/jquery-ui.js" type="text/javascript"></script>
+<link href="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.9/themes/start/jquery-ui.css"
+    rel="stylesheet" type="text/css" />--%>
+	<%--<script type="text/javascript" src="../JQuery/jquery.min.js"></script>
+    <script type="text/javascript" src="../JQuery/jquery-ui.min.js"></script>--%>
+	<script type="text/javascript" src="../JQuery/jquery.blockUI.js"></script>
+	
+
     <link rel="stylesheet"  type="text/css" href="../fullfillment/calendar/dhtmlgoodies_calendar.css" media="screen" />
 	<script type="text/javascript" src="../fullfillment/calendar/dhtmlgoodies_calendar.js"></script>  
+    
+         <script type="text/javascript">
+             function ShowSendingProgress() {
+                 var modal = $('<div  />');
+                 modal.addClass("modal");
+                 modal.attr("id", "modalSending");
+                 $('body').append(modal);
+                 var loading = $("#modalSending.loadingcss");
+                 //alert(loading);
+                 loading.show();
+                 var top = '300px';
+                 var left = '820px';
+                 loading.css({ top: top, left: left, color: '#ffffff' });
+
+                 var tb = $("maintbl");
+                 tb.addClass("progresss");
+                 // alert(tb);
+
+                 return true;
+             }
+             //background-color:#CF4342;
+
+             function StopProgress() {
+
+                 $("div.modal").hide();
+
+                 var tb = $("maintbl");
+                 tb.removeClass("progresss");
+
+
+                 var loading = $(".loadingcss");
+                 loading.hide();
+             }
+         </script>
     <script>
+        function OpenNewPage(url) {
+            window.open(url);
+        }
+
         function set_focus1() {
             var img = document.getElementById("img1");
             var st = document.getElementById("btnSearch");
@@ -37,11 +89,52 @@
 
         }
     </script>
+
+    <style>
+.progresss {
+          position: fixed !important;
+          z-index: 9999 !important;
+          top: 0px !important;
+          left: 0px !important;
+          background-color: #EEEEEE !important;
+          width: 100% !important;
+          height: 100% !important;
+          filter: Alpha(Opacity=80) !important;
+          opacity: 0.80 !important;
+          -moz-cpacity: 0.80 !important;
+      }
+.modal
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: black;
+    z-index: 100000000;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.8;
+    min-height: 100%;
+    width: 100%;
+}
+.loadingcss
+{    
+    font-size: 18px;
+    /*border: 1px solid red;*/
+    /*width: 200px;
+    height: 100px;*/
+    display: none;
+    position: fixed;
+    /*background-color: White;*/
+    z-index: 100000001;
+    background-color:#CF4342;
+}
+
+  </style>
 </head>
 <body bgcolor="#ffffff" leftmargin="0" rightmargin="0" topmargin="0">
 
     <form id="form1" runat="server">
-        <asp:ScriptManager ID="ScriptManager1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
     
     <table cellSpacing="0" cellPadding="0" align="center" width="100%" border="0">
@@ -49,15 +142,16 @@
 			<td><head:MenuHeader id="HeadAdmin" runat="server"></head:MenuHeader></td>
 		</tr>
      </table>
+
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="95%">
 		<tr>
 			<td  bgcolor="#dee7f6" class="buttonlabel">
             &nbsp;&nbsp;Warehouse Location Report
 			</td>
-		</tr>
-    
+		</tr>    
     </table>
-<table cellSpacing="0" cellPadding="0" align="center" width="95%" border="0" id="maintbl">
+
+    <table cellSpacing="0" cellPadding="0" align="center" width="95%" border="0" id="maintbl">
         <tr>
 	        <td>
             <asp:UpdatePanel ID="upnlCode" UpdateMode="Conditional" runat="server">
@@ -101,10 +195,7 @@
                       Customer:
                 </td>
                 <td width="30%" >
-                    <asp:DropDownList ID="dpCompany" TabIndex="2" runat="server" CssClass="copy10grey" Width="60%"
-                        
-                                    AutoPostBack="false">
-									
+                    <asp:DropDownList ID="dpCompany" TabIndex="2" runat="server" CssClass="copy10grey" Width="60%" AutoPostBack="false">									
                     </asp:DropDownList>
                     <%--OnSelectedIndexChanged="dpCompany_SelectedIndexChanged"  --%>
                 </td>
@@ -155,10 +246,13 @@
                  </tr>
                 <tr>
                 <td colspan="5">
-                     <table width="100%" align="center" >
+                <table width="100%" align="center" >
                 <tr>
 			        <td align="center" >
-			            <asp:Button ID="btnSearch" runat="server" TabIndex="18"  CssClass="buybt" Text="   Search   " onclick="btnSearch_Click" />&nbsp;&nbsp;
+                        <div class="loadingcss" align="center" id="modalSending">
+                        <img src="/Images/ajax-loaders.gif" alt=""  /> Loading...
+                    </div>
+			            <asp:Button ID="btnSearch" runat="server" TabIndex="18"  CssClass="buybt" Text="   Search   " onclick="btnSearch_Click" OnClientClick="return ShowSendingProgress();" />&nbsp;&nbsp;
                         <asp:Button ID="btnCancel" runat="server" TabIndex="19" CssClass="buybt" CausesValidation="false"  Text="   Cancel   " onclick="btnCancel_Click" />
                         
 			        </td>
@@ -176,18 +270,19 @@
             </table>   
              <br />
             <table cellSpacing="0" cellPadding="0" align="center" width="100%" border="0">
-    <tr>
-        <td align="left">
-                                
-        </td>
-        <td align="right">
-          <strong> <asp:Label ID="lblCount" CssClass="copy10grey" runat="server" ></asp:Label></strong>
-            
-            
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2" align="center">
+        <tr>
+            <td align="left">
+              <strong> <asp:Label ID="lblCount" CssClass="copy10grey" runat="server" ></asp:Label></strong>
+                               
+            </td>
+            <td align="right">
+             
+            <asp:Button ID="btnDownload" runat="server" TabIndex="19" CssClass="buybt" CausesValidation="false"  Text="   Download   " onclick="btnDownload_Click" />
+                        
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
 
         <asp:GridView ID="gvWHCode" AutoGenerateColumns="false"   
         Width="100%" ShowHeader="true"  ShowFooter="false" runat="server" GridLines="Both"
@@ -203,7 +298,7 @@
                         <%#  Container.DataItemIndex + 1%>               
                 </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Company Name" SortExpression="CompanyName"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
+                <asp:TemplateField HeaderText="Customer" SortExpression="CompanyName"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                     <ItemTemplate>
                         <%# Eval("CompanyName")%>
@@ -219,7 +314,12 @@
                 <asp:TemplateField HeaderText="Warehouse Location" SortExpression="WarehouseLocation"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                     <ItemTemplate>
-                        <%# Eval("WarehouseLocation")%>
+                        <%--<%# Eval("WarehouseLocation")%>--%>
+                         <asp:LinkButton  ToolTip="View location history" CausesValidation="false" Height="18" OnCommand="lnkHistory_Command" 
+                                                CommandArgument='<%# Convert.ToString(Eval("WarehouseLocation")) + ","+ Convert.ToString(Eval("CompanyID")) %>'  
+                                             ID="lnkHistory"  runat="server"  ><%# Eval("WarehouseLocation")%>
+                                 </asp:LinkButton>                                           
+                                
                         </ItemTemplate>
                 </asp:TemplateField>  
                 <asp:TemplateField HeaderText="Aisle" SortExpression="Aisle"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
@@ -262,13 +362,18 @@
                 <asp:TemplateField HeaderText="Quantity" SortExpression="Quantity"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Right" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="4%">
                     <ItemTemplate>
-                        <%# Eval("Quantity")%>
+                        
+                                 <asp:LinkButton  ToolTip="View detail" Visible='<%# Convert.ToInt32(Eval("Quantity")) > 0 ? true : false %>' CausesValidation="false" Height="18" OnCommand="lnkView_Command" 
+                                                CommandArgument='<%# Convert.ToString(Eval("WarehouseLocation")) + ","+ Convert.ToString(Eval("ItemCompanyGUID")) %>'  
+                                             ID="lnkView"  runat="server"  ><%# Eval("Quantity")%>
+                                 </asp:LinkButton>                                           
+                                   
                         </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Last Received Date" SortExpression="LastReceivedDate"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="6%">
                     <ItemTemplate>
-                        <%# Convert.ToDateTime( Eval("LastReceivedDate")).ToString("MM-dd-yyyy")%>
+                        <%# Convert.ToDateTime( Eval("LastReceivedDate")).ToString("MM/dd/yyyy")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
                

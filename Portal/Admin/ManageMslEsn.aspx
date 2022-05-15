@@ -266,7 +266,7 @@
         <table cellSpacing="0" cellPadding="0" align="center" width="95%" border="0">
 		
 			<tr class="buttonlabel">
-				<td  class="buttonlabel">&nbsp;&nbsp;Inventory Receive
+				<td  class="buttonlabel">&nbsp;&nbsp;Inventory Receive - ESN
 				</td>
 			</tr>            
         </table>
@@ -320,7 +320,7 @@
                                 </td>
                                 <td  align="left"  width="28%" >
                                      <asp:DropDownList ID="ddlReceivedAs" runat="server" class="copy10grey" Width="80%">
-                                         <asp:ListItem Text="None" Value="None"></asp:ListItem>
+                                         <%--<asp:ListItem Text="None" Value="None"></asp:ListItem>--%>
                                          <asp:ListItem Text="Product without ASN" Value="Product without ASN"></asp:ListItem>
                                          <asp:ListItem Text="Product with ASN" Value="Product with ASN"></asp:ListItem>
                                          <asp:ListItem Text="Others" Value="Others"></asp:ListItem>
@@ -511,7 +511,7 @@
                                                 File format sample: &nbsp;
                                                      </td>
                                             <td class="copy10grey" align="left">
-                                              <b>BATCH,ESN</b>,MeidHex,MeidDec,<b>Location,SerialNumber,BoxID</b> <asp:LinkButton ID="lnkDownload" runat="server"   Text="Download file format" OnClick="lnkDownload_Click"></asp:LinkButton>
+                                              <b>BATCH,ESN1</b>,ESN2,MeidHex,MeidDec,<b>Location,SerialNumber,BoxID</b> <asp:LinkButton ID="lnkDownload" runat="server"   Text="Download file format" OnClick="lnkDownload_Click"></asp:LinkButton>
                                                 <%--<asp:Label ID="lblUploadDate" runat="server" Text=",uploaddate"></asp:Label>--%>
                                             </td>
                                             <td></td>
@@ -628,15 +628,25 @@
                                             </asp:TemplateField> 
 
                                             <asp:TemplateField HeaderText="BATCH#" SortExpression="MSLNumber"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" 
-                                                ItemStyle-Width="12%">
+                                                ItemStyle-Width="10%">
                                                 <ItemTemplate><%#Eval("MSLNumber")%></ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="ESN/IMEI" HeaderStyle-CssClass="buttonundlinelabel" 
+                                            <asp:TemplateField HeaderText="ESN1/IMEI1" HeaderStyle-CssClass="buttonundlinelabel" 
                                                 SortExpression="ESN"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" 
-                                                ItemStyle-Width="12%">
+                                                ItemStyle-Width="10%">
                                                 <ItemTemplate>
                                                             <%#Eval("esn")%>
                                                     <span class="errormessage"><%#Eval("ErrorMessage")%></span>        
+                                                    
+                                                    
+                                                </ItemTemplate>
+                                            </asp:TemplateField> 
+                                            
+                                            <asp:TemplateField HeaderText="ESN2/IMEI2" HeaderStyle-CssClass="buttonundlinelabel" 
+                                                SortExpression="IMEI2"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" 
+                                                ItemStyle-Width="10%">
+                                                <ItemTemplate>
+                                                            <%#Eval("IMEI2")%>
                                                     
                                                     
                                                 </ItemTemplate>
@@ -650,23 +660,23 @@
                                             </asp:TemplateField> 
                                             --%>
 
-                                            <asp:TemplateField HeaderText="MeidHex" Visible="true"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" ItemStyle-Width="12%">
+                                            <asp:TemplateField HeaderText="MeidHex" Visible="true"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                                                 <ItemTemplate>
                                                 <%# DataBinder.Eval(Container.DataItem, "MeidHex")%>
                                                 </ItemTemplate>
                                             </asp:TemplateField> 
-                                            <asp:TemplateField HeaderText="MeidDec" Visible="true"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" ItemStyle-Width="12%">
+                                            <asp:TemplateField HeaderText="MeidDec" Visible="true"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                                                 <ItemTemplate>
                                                 <%# DataBinder.Eval(Container.DataItem, "MeidDec")%>
                                                 </ItemTemplate>
                                             </asp:TemplateField>
-                                            <asp:TemplateField HeaderText="Location" Visible="true"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" ItemStyle-Width="12%">
+                                            <asp:TemplateField HeaderText="Location" Visible="true"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                                                 <ItemTemplate>
                                                 <%# DataBinder.Eval(Container.DataItem, "Location")%>
                                                 </ItemTemplate>
                                             </asp:TemplateField> 
                                             <asp:TemplateField HeaderText="Serial#" HeaderStyle-CssClass="buttonundlinelabel" 
-                                                SortExpression="SerialNumber" Visible="true"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" ItemStyle-Width="12%">
+                                                SortExpression="SerialNumber" Visible="true"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                                                 <ItemTemplate>
                                                 <%# DataBinder.Eval(Container.DataItem, "SerialNumber")%>
                                                 </ItemTemplate>

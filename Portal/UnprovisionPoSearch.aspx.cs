@@ -229,5 +229,24 @@ namespace avii
                 }
             }
         }
+
+        protected void imgView_Command(object sender, CommandEventArgs e)
+        {
+            int poID = Convert.ToInt32(e.CommandArgument);
+
+            Session["poid"] = poID;
+            Session["unrep"] = 1;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('FulfillmentDetails.aspx')</script>", false);
+
+        }
+
+        protected void imgPOA_Command(object sender, CommandEventArgs e)
+        {
+            int poID = Convert.ToInt32(e.CommandArgument);
+
+            Session["poid"] = poID;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('UnProvisionEsns.aspx')</script>", false);
+
+        }
     }
 }

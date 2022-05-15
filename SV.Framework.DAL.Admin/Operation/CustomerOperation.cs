@@ -143,7 +143,52 @@ namespace SV.Framework.DAL.Admin
             return companyInfo;
         }
 
-        private  List<CompanyStore> GetCompanyStoreList(DataTable dataTable)
+        public List<Users> GetInternalUsers(int companyID)
+        {
+            List<Users> userList = default;
+            Users users = default;
+            using (DBConnect db = new DBConnect())
+            {
+
+                string[] arrSpFieldSeq;
+                DataTable dt = default;//new DataTable();
+
+                Hashtable objCompHash = new Hashtable();
+                try
+                {
+                    objCompHash.Add("@CompanyID", companyID);
+                    
+
+                    arrSpFieldSeq = new string[] { "@CompanyID" };
+                    dt = db.GetTableRecords(objCompHash, "av_Internal_user_Select", arrSpFieldSeq);
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        userList = new List<Users>();
+                        foreach (DataRow row in dt.Rows)
+                        {
+                            users = new Users();
+                            users.UserName = clsGeneral.getColumnData(row, "UserName", string.Empty, false) as string;
+                            users.UserID = Convert.ToInt32( clsGeneral.getColumnData(row, "UserID", 0, false));
+                            userList.Add(users);
+                        }
+                    }
+
+                }
+                catch (Exception objExp)
+                {
+                    Logger.LogMessage(objExp, this); // throw new Exception(objExp.Message.ToString());
+                }
+                finally
+                {
+                    // db = null;
+                    objCompHash = null;
+                    arrSpFieldSeq = null;
+                }
+            }
+            return userList;
+        }
+
+        private List<CompanyStore> GetCompanyStoreList(DataTable dataTable)
         {
             List<CompanyStore> stroeLocationList = default; ; new List<CompanyStore>();
             if (dataTable != null && dataTable.Rows.Count > 0)

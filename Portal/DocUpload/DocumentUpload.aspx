@@ -195,8 +195,7 @@
                         </td>
                         <td class="copy10grey">
                             <asp:TextBox ID="txtFile2Desc" runat="server" CssClass="copy10grey" Width="90%" TextMode="MultiLine" Rows="2"></asp:TextBox>
-                        </td>
-                        
+                        </td>                        
                         <td>
                             <asp:ImageButton ID="img2" ImageUrl="~/images/delete.png" OnClientClick="return confirm('Are you sure want to delete this file?');"  OnClick="lnkDocfile2_Click" runat="server"></asp:ImageButton>  
                             
@@ -218,8 +217,7 @@
                             <asp:HiddenField ID="hdnDocID3" runat="server"></asp:HiddenField>
                         </td>
                     </tr>                                    
-                    <tr  class="alternaterow">
-                        
+                    <tr  class="alternaterow">                        
                         <td>
                             <asp:FileUpload ID="fupDoc4" runat="server" CssClass="copy10grey" /> 
                             <asp:LinkButton ID="lnkDocfile4" CssClass="copy10grey" Font-Size="12px"  ForeColor="#4092D1" Font-Underline="true" OnClick="lnkDownload4_Click" runat="server"></asp:LinkButton>
@@ -260,7 +258,7 @@
                 <td align="center">                                        
                     <asp:Button ID="btnDocUpload" runat="server" Text="Upload" CssClass="button" OnClick="btnDocUpload_Click"   
                         />
-                    <asp:Button ID="btnUloadCancel" runat="server" Text="Cancel" CssClass="button" OnClick="btnUloadCancel_Click"/>
+                    <asp:Button ID="btnUloadCancel" runat="server" Text="Cancel" CssClass="button" OnClick="btnCancel_Click"/>
                 </td>
             </tr>
             </table>

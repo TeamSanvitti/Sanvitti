@@ -19,6 +19,7 @@ namespace SV.Framework.Models.Inventory
         public string OTKSL { get; set; }
         public string SerialNumber { get; set; }
         public string BoxID { get; set; }
+        public string IMEI2 { get; set; }
         public string SNo { get; set; }
         [XmlIgnore]
         public bool InUse { get; set; }

@@ -420,6 +420,33 @@ namespace avii
         protected global::avii.Controls.FulfillmentComments c1;
 
         /// <summary>
+        /// phDoc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder phDoc;
+
+        /// <summary>
+        /// lblDoc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDoc;
+
+        /// <summary>
+        /// rptDoc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rptDoc;
+
+        /// <summary>
         /// upnlView control.
         /// </summary>
         /// <remarks>

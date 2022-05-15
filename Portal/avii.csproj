@@ -28,7 +28,7 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
@@ -815,6 +815,26 @@
     <Compile Include="Dekit\ManageDekittingRequest.aspx.designer.cs">
       <DependentUpon>ManageDekittingRequest.aspx</DependentUpon>
     </Compile>
+    <Compile Include="DiscardedSKU\DiscartedSKUSearch.aspx.cs">
+      <DependentUpon>DiscartedSKUSearch.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DiscardedSKU\DiscartedSKUSearch.aspx.designer.cs">
+      <DependentUpon>DiscartedSKUSearch.aspx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DiscardedSKU\ManageDiscartedSKU.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DiscardedSKU\ManageDiscartedSKU.aspx.designer.cs">
+      <DependentUpon>ManageDiscartedSKU.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="DocUpload\DocumentUpload.aspx.cs">
+      <DependentUpon>DocumentUpload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DocUpload\DocumentUpload.aspx.designer.cs">
+      <DependentUpon>DocumentUpload.aspx</DependentUpon>
+    </Compile>
     <Compile Include="DownloadLabel.aspx.cs">
       <DependentUpon>DownloadLabel.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -885,6 +905,13 @@
     <Compile Include="FulfillmentDetails.aspx.designer.cs">
       <DependentUpon>FulfillmentDetails.aspx</DependentUpon>
     </Compile>
+    <Compile Include="FulfillmentEdit.aspx.cs">
+      <DependentUpon>FulfillmentEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="FulfillmentEdit.aspx.designer.cs">
+      <DependentUpon>FulfillmentEdit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="FulfillmentEsnAssigned.aspx.cs">
       <DependentUpon>FulfillmentEsnAssigned.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -905,6 +932,13 @@
     </Compile>
     <Compile Include="integration.aspx.designer.cs">
       <DependentUpon>integration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InternalInventory\TransferOrderRequest.aspx.cs">
+      <DependentUpon>TransferOrderRequest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InternalInventory\TransferOrderRequest.aspx.designer.cs">
+      <DependentUpon>TransferOrderRequest.aspx</DependentUpon>
     </Compile>
     <Compile Include="Kitting\KittingByESN.aspx.cs">
       <DependentUpon>KittingByESN.aspx</DependentUpon>
@@ -1680,6 +1714,13 @@
     <Compile Include="Tracking\POTrackingToBeSent.aspx.designer.cs">
       <DependentUpon>POTrackingToBeSent.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UnProvisionEsns.aspx.cs">
+      <DependentUpon>UnProvisionEsns.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UnProvisionEsns.aspx.designer.cs">
+      <DependentUpon>UnProvisionEsns.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UnprovisionPoRequest.aspx.cs">
       <DependentUpon>UnprovisionPoRequest.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1742,6 +1783,41 @@
     </Compile>
     <Compile Include="Warehouse\WarehouseSearch.aspx.designer.cs">
       <DependentUpon>WarehouseSearch.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\WhLocationDetail.aspx.cs">
+      <DependentUpon>WhLocationDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Warehouse\WhLocationDetail.aspx.designer.cs">
+      <DependentUpon>WhLocationDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\Whlocationhistory.aspx.cs">
+      <DependentUpon>Whlocationhistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Warehouse\Whlocationhistory.aspx.designer.cs">
+      <DependentUpon>Whlocationhistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\WhlocationRelocate.aspx.cs">
+      <DependentUpon>WhlocationRelocate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Warehouse\WhlocationRelocate.aspx.designer.cs">
+      <DependentUpon>WhlocationRelocate.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\Whlocationreplacement.aspx.cs">
+      <DependentUpon>Whlocationreplacement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Warehouse\Whlocationreplacement.aspx.designer.cs">
+      <DependentUpon>Whlocationreplacement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Warehouse\WhLocationReport.aspx.cs">
+      <DependentUpon>WhLocationReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Warehouse\WhLocationReport.aspx.designer.cs">
+      <DependentUpon>WhLocationReport.aspx</DependentUpon>
     </Compile>
     <Compile Include="whatwedo.aspx.cs">
       <DependentUpon>whatwedo.aspx</DependentUpon>
@@ -1813,6 +1889,7 @@
     <Content Include="Admin\UploadPOData.aspx" />
     <Content Include="Admin\UploadTracking.aspx" />
     <Content Include="Admin\ViewESNLog.aspx" />
+    <Content Include="adnstyle.css" />
     <Content Include="API.html" />
     <Content Include="BlockESN\BlockEsnSearch.aspx" />
     <Content Include="Category\CategorySearch.aspx" />
@@ -1845,6 +1922,8 @@
     <Content Include="Dekit\DekittingRequestSearch.aspx" />
     <Content Include="Dekit\DekittingView.aspx" />
     <Content Include="Dekit\ManageDekittingRequest.aspx" />
+    <Content Include="DiscardedSKU\DiscartedSKUSearch.aspx" />
+    <Content Include="DiscardedSKU\ManageDiscartedSKU.aspx" />
     <Content Include="Documents\5.2.1-P_Quality_Environmental_Health_Safety_Policy-1.4.png" />
     <Content Include="Documents\API.html" />
     <Content Include="Documents\R2 Safety Policy-1.png" />
@@ -1853,6 +1932,7 @@
     <Content Include="Documents\SanvittiFulfillment-soapui-project.xml" />
     <Content Include="Documents\SanvittiInventory-soapui-project.xml" />
     <Content Include="Documents\SanvittiRMA-soapui-project.xml" />
+    <Content Include="DocUpload\DocumentUpload.aspx" />
     <Content Include="DownloadLabel.aspx" />
     <Content Include="Emails\AdminEmail.html" />
     <Content Include="Emails\Contactus.html" />
@@ -1867,10 +1947,12 @@
     <Content Include="fopstyle.css" />
     <Content Include="FulfillmentDetail.aspx" />
     <Content Include="FulfillmentDetails.aspx" />
+    <Content Include="FulfillmentEdit.aspx" />
     <Content Include="FulfillmentEsnAssigned.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="integration.aspx" />
     <Content Include="booststyle.css" />
+    <Content Include="InternalInventory\TransferOrderRequest.aspx" />
     <Content Include="InternalReferences\BarcodeStandard.dll" />
     <Content Include="InternalReferences\TarCode Barcode for ASP.NET.dll" />
     <Content Include="Kitting\KittingByESN.aspx" />
@@ -2217,6 +2299,7 @@
     <Content Include="UIThemes\themes\ui-lightness\ui.slider.css" />
     <Content Include="UIThemes\themes\ui-lightness\ui.tabs.css" />
     <Content Include="UIThemes\themes\ui-lightness\ui.theme.css" />
+    <Content Include="UnProvisionEsns.aspx" />
     <Content Include="UnprovisionPoRequest.aspx" />
     <Content Include="UnprovisionPoSearch.aspx" />
     <Content Include="Vendor\prod.html" />
@@ -2228,6 +2311,11 @@
     <Content Include="Warehouse\Managewarehouse.aspx" />
     <Content Include="Warehouse\ViewWarehouseLocation.aspx" />
     <Content Include="Warehouse\WarehouseSearch.aspx" />
+    <Content Include="Warehouse\WhLocationDetail.aspx" />
+    <Content Include="Warehouse\Whlocationhistory.aspx" />
+    <Content Include="Warehouse\WhlocationRelocate.aspx" />
+    <Content Include="Warehouse\Whlocationreplacement.aspx" />
+    <Content Include="Warehouse\WhLocationReport.aspx" />
     <Content Include="whatwedo.aspx" />
     <EmbeddedResource Include="Admin\admHead.ascx.resx">
       <DependentUpon>admHead.ascx.cs</DependentUpon>
@@ -3566,6 +3654,7 @@
     <Folder Include="Controls\Content\" />
     <Folder Include="fullfillment\" />
     <Folder Include="images\" />
+    <Folder Include="Langlobal\UploadDocument\PO\Dish\" />
     <Folder Include="Module\" />
     <Folder Include="pdffiles\" />
     <Folder Include="RMAData\" />
@@ -3662,5 +3751,5 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v16.0\WebApplications\Microsoft.WebApplication.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v17.0\WebApplications\Microsoft.WebApplication.targets" />
 </Project>

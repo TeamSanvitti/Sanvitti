@@ -542,6 +542,7 @@ namespace SV.Framework.DAL.Fulfillment
                         posKitInfo.SWVersion = (string)clsGeneral.getColumnData(dRowItem, "SWVersion", string.Empty, false);
                         posKitInfo.HWVersion = (string)clsGeneral.getColumnData(dRowItem, "HWVersion", string.Empty, false);
                         posKitInfo.ESN = (string)clsGeneral.getColumnData(dRowItem, "ESN", string.Empty, false);
+                        posKitInfo.IMEI2 = (string)clsGeneral.getColumnData(dRowItem, "IMEI2", string.Empty, false);
                         posKitInfo.MEID = (string)clsGeneral.getColumnData(dRowItem, "MeidDec", string.Empty, false);
                         posKitInfo.HEX = (string)clsGeneral.getColumnData(dRowItem, "MeidHex", string.Empty, false);
                         posKitInfo.ICCID = (string)clsGeneral.getColumnData(dRowItem, "ICC_ID", string.Empty, false);

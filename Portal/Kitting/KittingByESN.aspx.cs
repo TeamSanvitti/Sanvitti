@@ -338,6 +338,7 @@ namespace avii
                 }
 
                 string ProductType = cartonsdb[0].ProductType;
+
                 if (cartons[0].OSType.ToUpper() == "ANDROID")
                 {
                     var memSt = h3LabelOperation.ExportMasterCartonToPDFNew(cartons);

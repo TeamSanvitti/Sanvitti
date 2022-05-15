@@ -55,7 +55,12 @@ namespace avii
                 if (Session["poid"] != null)
                 {
                     bool poQuery = true;
-                    if(Session["reconditioning"] != null || Session["provisioning"] != null || Session["unused"] != null)
+                    if (Session["unrep"] != null)
+                    {
+                        Session["unrep"] = null;
+                        poQuery = false;
+                    }
+                    if (Session["reconditioning"] != null || Session["provisioning"] != null || Session["unused"] != null)
                     {
                         Session["reconditioning"] = null;
                         Session["provisioning"] = null;
@@ -71,6 +76,7 @@ namespace avii
                     BindPO(poid, poQuery);
                     BindComments(poid);
                     BindFulfillmentLog(poid, 1);
+
                 }
                 if (Session["unpoid"] != null)
                 {
@@ -402,6 +408,7 @@ namespace avii
                             List<MasterCartonInfo> cartonsdb = dishLabelOperations.GetMasterCartonLabelInfo(poID);
                             SV.Framework.LabelGenerator.DishLabelOperation dishLabelOperation = new SV.Framework.LabelGenerator.DishLabelOperation();
                             SV.Framework.LabelGenerator.H3LabelOperation h3LabelOperation = new SV.Framework.LabelGenerator.H3LabelOperation();
+                            SV.Framework.LabelGenerator.H5LabelOperation h5LabelOperation = new SV.Framework.LabelGenerator.H5LabelOperation();
 
                             if (cartonsdb != null && cartonsdb.Count > 0)
                             {
@@ -434,43 +441,70 @@ namespace avii
                                     masterCartonInfo.CartonItems = CartonItems;
                                     cartons.Add(masterCartonInfo);
                                 }
+                                MemoryStream memSt = null;// = new MemoryStream();
 
                                 string ProductType = cartonsdb[0].ProductType;
-                                if (cartons != null && cartons[0].OSType.ToUpper() == "ANDROID")
+                                if (ProductType.ToUpper() == "H5")
                                 {
-                                    var memSt = h3LabelOperation.ExportMasterCartonToPDFNew(cartons);
-                                    if (memSt != null)
-                                    {
-                                        string fileType = ".pdf";
-                                        string filename = DateTime.Now.Ticks + fileType;
-                                        Response.Clear();
-                                        //Response.ContentType = "application/pdf";
-                                        Response.ContentType = "application/octet-stream";
-                                        Response.AddHeader("content-disposition", "attachment;filename=" + filename);
-                                        Response.Buffer = true;
-                                        Response.Clear();
-                                        var bytes = memSt.ToArray();
-                                        Response.OutputStream.Write(bytes, 0, bytes.Length);
-                                        Response.OutputStream.Flush();
-                                    }
+                                    memSt = h5LabelOperation.ExportMasterCartonToPDFNew(cartons);
+                                    
                                 }
                                 else
                                 {
-                                    var memSt = dishLabelOperation.ExportMasterCartonToPDFNew(cartons);
-                                    if (memSt != null)
+                                    if (cartons != null && cartons[0].OSType.ToUpper() == "ANDROID")
                                     {
-                                        string fileType = ".pdf";
-                                        string filename = DateTime.Now.Ticks + fileType;
-                                        Response.Clear();
-                                        //Response.ContentType = "application/pdf";
-                                        Response.ContentType = "application/octet-stream";
-                                        Response.AddHeader("content-disposition", "attachment;filename=" + filename);
-                                        Response.Buffer = true;
-                                        Response.Clear();
-                                        var bytes = memSt.ToArray();
-                                        Response.OutputStream.Write(bytes, 0, bytes.Length);
-                                        Response.OutputStream.Flush();
+                                        memSt = h3LabelOperation.ExportMasterCartonToPDFNew(cartons);
+                                        //if (memSt != null)
+                                        //{
+                                        //    string fileType = ".pdf";
+                                        //    string filename = DateTime.Now.Ticks + fileType;
+                                        //    Response.Clear();
+                                        //    //Response.ContentType = "application/pdf";
+                                        //    Response.ContentType = "application/octet-stream";
+                                        //    Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+                                        //    Response.Buffer = true;
+                                        //    Response.Clear();
+                                        //    var bytes = memSt.ToArray();
+                                        //    Response.OutputStream.Write(bytes, 0, bytes.Length);
+                                        //    Response.OutputStream.Flush();
+                                        //}
                                     }
+                                    else
+                                    {
+
+                                        memSt = dishLabelOperation.ExportMasterCartonToPDFNew(cartons);
+
+                                        //if (memSt != null)
+                                        //{
+                                        //    string fileType = ".pdf";
+                                        //    string filename = DateTime.Now.Ticks + fileType;
+                                        //    Response.Clear();
+                                        //    //Response.ContentType = "application/pdf";
+                                        //    Response.ContentType = "application/octet-stream";
+                                        //    Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+                                        //    Response.Buffer = true;
+                                        //    Response.Clear();
+                                        //    var bytes = memSt.ToArray();
+                                        //    Response.OutputStream.Write(bytes, 0, bytes.Length);
+                                        //    Response.OutputStream.Flush();
+                                        //}
+                                    }
+                                    
+                                }
+                                
+                                if (memSt != null)
+                                {
+                                    string fileType = ".pdf";
+                                    string filename = DateTime.Now.Ticks + fileType;
+                                    Response.Clear();
+                                    //Response.ContentType = "application/pdf";
+                                    Response.ContentType = "application/octet-stream";
+                                    Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+                                    Response.Buffer = true;
+                                    Response.Clear();
+                                    var bytes = memSt.ToArray();
+                                    Response.OutputStream.Write(bytes, 0, bytes.Length);
+                                    Response.OutputStream.Flush();
                                 }
                             }
                             else
@@ -1548,7 +1582,9 @@ namespace avii
                 else
                     gvTracking.DataSource = null;
                 gvTracking.DataBind();
+                //ViewState["CompanyName"] = poInfoList[0].CustomerName;
 
+                LoadFulfillmentDoc(Convert.ToInt32(poInfoList[0].CompanyID), poInfoList[0].PurchaseOrderNumber);
 
                 if (trackingList != null && trackingList.Count > 0)
                 {
@@ -1558,6 +1594,37 @@ namespace avii
                     }
                 }
             }
+        }
+        private void LoadFulfillmentDoc(int companyID, string fulfillmentNumber)
+        {
+            string moduleName = "Fulfillment";
+
+            SV.Framework.Fulfillment.DocumentFileOperation docOperations = SV.Framework.Fulfillment.DocumentFileOperation.CreateInstance<SV.Framework.Fulfillment.DocumentFileOperation>();
+            lblDoc.Text = "";
+            List<DocumentFile> documents = docOperations.GetDocuments(companyID, fulfillmentNumber, moduleName);
+            if (documents != null && documents.Count > 0)
+            {
+                var docs = (from item in documents where item.FileName != "" select item).ToList();
+                if (docs != null && docs.Count > 0)
+                {
+                    rptDoc.DataSource = documents;
+                    rptDoc.DataBind();
+                }
+                else
+                {
+                    rptDoc.DataSource = null;
+                    rptDoc.DataBind();
+                    lblDoc.Text = "No document found";
+                }
+
+            }
+            else
+            {
+                rptDoc.DataSource = null;
+                rptDoc.DataBind();
+                lblDoc.Text = "No document found";
+            }
+
         }
         protected void lnkTracking_Command(object sender, CommandEventArgs e)
         {
@@ -2008,6 +2075,7 @@ namespace avii
                         posKitInfo = new SV.Framework.LabelGenerator.PosKitInfo();
                         posKitInfo.CompanyName = item.CompanyName;
                         posKitInfo.ESN = item.ESN; 
+                        posKitInfo.IMEI2 = item.IMEI2; 
                         posKitInfo.HEX = item.HEX; 
                         posKitInfo.HWVersion = item.HWVersion; 
                         posKitInfo.ICCID = item.ICCID; 
@@ -2033,49 +2101,93 @@ namespace avii
 
                     string ProductType = posKITDB[0].ProductType;
                     string OSType = posKITDB[0].OSType;
-                    if (posKITDB[0].OSType.ToUpper() == "ANDROID")
-                    {
-                        SV.Framework.LabelGenerator.H3LabelOperation h3LabelOperation = new SV.Framework.LabelGenerator.H3LabelOperation();
+                    MemoryStream memSt = null;// = new MemoryStream();
 
-                        var memSt = h3LabelOperation.POSKITLabelPdfTarCode(posKITs);
+                    if (ProductType.ToUpper() == "H5")
+                    {
+                        SV.Framework.LabelGenerator.H5LabelOperation h5LabelOperation = new SV.Framework.LabelGenerator.H5LabelOperation();
+
+                        memSt = h5LabelOperation.POSKITLabelPdfTarCode(posKITs);
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "stop loader", "StopProgress()", true);
                         //var memSt = slabel.ExportToPDF(models);
-                        if (memSt != null)
-                        {
-                            string fileType = ".pdf";
-                            string filename = DateTime.Now.Ticks + fileType;
-                            Response.Clear();
-                            //Response.ContentType = "application/pdf";
-                            Response.ContentType = "application/octet-stream";
-                            Response.AddHeader("content-disposition", "attachment;filename=" + filename);
-                            Response.Buffer = true;
-                            Response.Clear();
-                            var bytes = memSt.ToArray();
-                            Response.OutputStream.Write(bytes, 0, bytes.Length);
-                            Response.OutputStream.Flush();
-                            lblMsg2.Text = "Label generated successfully.";
-                        }
+                        //if (memSt != null)
+                        //{
+                        //    string fileType = ".pdf";
+                        //    string filename = DateTime.Now.Ticks + fileType;
+                        //    Response.Clear();
+                        //    //Response.ContentType = "application/pdf";
+                        //    Response.ContentType = "application/octet-stream";
+                        //    Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+                        //    Response.Buffer = true;
+                        //    Response.Clear();
+                        //    var bytes = memSt.ToArray();
+                        //    Response.OutputStream.Write(bytes, 0, bytes.Length);
+                        //    Response.OutputStream.Flush();
+                        //    lblMsg2.Text = "Label generated successfully.";
+                        //}
                     }
                     else
+
                     {
-                        var memSt = dishLabelOperation.POSKITLabelPdfTarCodeNew2(posKITs);
-                        Page.ClientScript.RegisterStartupScript(this.GetType(), "stop loader", "StopProgress()", true);
-                        //var memSt = slabel.ExportToPDF(models);
-                        if (memSt != null)
+                        if (posKITDB[0].OSType.ToUpper() == "ANDROID")
                         {
-                            string fileType = ".pdf";
-                            string filename = DateTime.Now.Ticks + fileType;
-                            Response.Clear();
-                            //Response.ContentType = "application/pdf";
-                            Response.ContentType = "application/octet-stream";
-                            Response.AddHeader("content-disposition", "attachment;filename=" + filename);
-                            Response.Buffer = true;
-                            Response.Clear();
-                            var bytes = memSt.ToArray();
-                            Response.OutputStream.Write(bytes, 0, bytes.Length);
-                            Response.OutputStream.Flush();
-                            lblMsg2.Text = "Label generated successfully.";
+                            SV.Framework.LabelGenerator.H3LabelOperation h3LabelOperation = new SV.Framework.LabelGenerator.H3LabelOperation();
+
+                            memSt = h3LabelOperation.POSKITLabelPdfTarCode(posKITs);
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "stop loader", "StopProgress()", true);
+                            //var memSt = slabel.ExportToPDF(models);
+                            //if (memSt != null)
+                            //{
+                            //    string fileType = ".pdf";
+                            //    string filename = DateTime.Now.Ticks + fileType;
+                            //    Response.Clear();
+                            //    //Response.ContentType = "application/pdf";
+                            //    Response.ContentType = "application/octet-stream";
+                            //    Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+                            //    Response.Buffer = true;
+                            //    Response.Clear();
+                            //    var bytes = memSt.ToArray();
+                            //    Response.OutputStream.Write(bytes, 0, bytes.Length);
+                            //    Response.OutputStream.Flush();
+                            //    lblMsg2.Text = "Label generated successfully.";
+                            //}
                         }
+                        else
+                        {
+                            memSt = dishLabelOperation.POSKITLabelPdfTarCodeNew2(posKITs);
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "stop loader", "StopProgress()", true);
+                            //var memSt = slabel.ExportToPDF(models);
+                            //if (memSt != null)
+                            //{
+                            //    string fileType = ".pdf";
+                            //    string filename = DateTime.Now.Ticks + fileType;
+                            //    Response.Clear();
+                            //    //Response.ContentType = "application/pdf";
+                            //    Response.ContentType = "application/octet-stream";
+                            //    Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+                            //    Response.Buffer = true;
+                            //    Response.Clear();
+                            //    var bytes = memSt.ToArray();
+                            //    Response.OutputStream.Write(bytes, 0, bytes.Length);
+                            //    Response.OutputStream.Flush();
+                            //    lblMsg2.Text = "Label generated successfully.";
+                            //}
+                        }
+                    }
+                    if (memSt != null)
+                    {
+                        string fileType = ".pdf";
+                        string filename = DateTime.Now.Ticks + fileType;
+                        Response.Clear();
+                        //Response.ContentType = "application/pdf";
+                        Response.ContentType = "application/octet-stream";
+                        Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+                        Response.Buffer = true;
+                        Response.Clear();
+                        var bytes = memSt.ToArray();
+                        Response.OutputStream.Write(bytes, 0, bytes.Length);
+                        Response.OutputStream.Flush();
+                        lblMsg2.Text = "Label generated successfully.";
                     }
                 }
             }
@@ -2332,6 +2444,59 @@ namespace avii
                 lblMsg2.Text = "No data found.";
             }
 
+        }
+
+        protected void lnkDoc_Click(object sender, EventArgs e)
+        {
+
+            LinkButton lnkDoc =  sender as LinkButton;
+
+                string customerName = Convert.ToString(ViewState["CustomerName"]);
+
+                SV.Framework.Fulfillment.DocumentFileOperation docOperations = SV.Framework.Fulfillment.DocumentFileOperation.CreateInstance<SV.Framework.Fulfillment.DocumentFileOperation>();
+                string filePath = Server.MapPath("~/langlobal/UploadDocument/PO/" + customerName + "/") + lnkDoc.Text;
+                string extension = Path.GetExtension(filePath);
+                extension = extension.ToLower();
+                // if (".pdf" == extension)
+                //   extension = "octet-stream";
+                string contentType = "";
+
+                if (".pdf" == extension)
+                    contentType = "application/pdf";
+                if (".doc" == extension)
+                    contentType = "application/msword";
+                if (".docx" == extension)
+                    contentType = "application/msword";
+                if (".jpg" == extension)
+                    contentType = "application/octet-stream";
+                if (".jpeg" == extension)
+                    contentType = "application/octet-stream";
+                if (".png" == extension)
+                    contentType = "image/png";
+
+
+                if (".txt" == extension)
+                    contentType = "text/plain";
+
+                string strContents = null;
+                System.IO.StreamReader objReader = default(System.IO.StreamReader);
+                objReader = new System.IO.StreamReader(filePath);
+                strContents = objReader.ReadToEnd();
+                objReader.Close();
+
+                string attachment = "attachment; filename=" + lnkDoc.Text;
+                Response.ClearContent();
+
+                Response.ContentType = contentType;
+                Response.AppendHeader("Content-Disposition", "attachment; filename=" + lnkDoc.Text);
+                Response.TransmitFile(filePath);
+                Response.End();
+
+                //Response.ContentType = "application/" + extension;
+                //Response.AddHeader("content-disposition", attachment);
+                //Response.Write(strContents);
+                //Response.End();
+            
         }
     }
 }

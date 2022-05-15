@@ -4305,6 +4305,11 @@ onkeydown="checkTextAreaMaxLength(this,event,'5000');" onkeyup="checkTextAreaMax
                             CommandArgument='<%# Eval("PurchaseOrderID") %>' ImageUrl="~/Images/view2.png"  runat="server" />
  
                             </td>
+                            <td>
+                                <asp:ImageButton ID="imgDoc"  ToolTip="View Doc" OnCommand="imgDoc_Command"  CausesValidation="false" 
+                            CommandArgument='<%# Eval("CompanyID")+","+Eval("PurchaseOrderNumber") %>' ImageUrl="~/Images/doc1.png"  runat="server" />
+ 
+                            </td>
                         <td>
                         <asp:ImageButton ID="imgDelPo" runat="server"  CommandName="Delete" AlternateText="Delete PO" ImageUrl="~/images/delete.png" />
                         </td>

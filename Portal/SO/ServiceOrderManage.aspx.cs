@@ -8,6 +8,7 @@ using SV.Framework.Models.SOR;
 using SV.Framework.Models.Common;
 using SV.Framework.SOR;
 using System.Configuration;
+using SV.Framework.Models.Inventory;
 
 namespace avii.SO
 {
@@ -69,7 +70,10 @@ namespace avii.SO
                             txtCustOrderNo.Text = arr[0];
 
                             if (arr.Length > 1)
+                            {
                                 dpCompany.SelectedValue = arr[1];
+                                BindWhLocation(Convert.ToInt32(arr[1]));
+                            }
 
                             GetServiceRequestNumber();
                             txtCustOrderNo.Enabled = false;
@@ -118,6 +122,7 @@ namespace avii.SO
                 ddlKitted.SelectedValue = serviceOrder.KittedSKUId.ToString();
 
                 BindRawSKUs(serviceOrder.CompanyId, serviceOrder.KittedSKUId);
+                BindWhLocation(serviceOrder.CompanyId);
                 List<ServiceOrderDetail> esnList = serviceOrder.SODetail;
                 if(esnList != null && esnList.Count > 0)
                 {
@@ -187,30 +192,34 @@ namespace avii.SO
             {
                 userId = userInfo.UserGUID;
             }
-            string errorMessage = string.Empty;
+            string errorMessage = string.Empty, whLocation = string.Empty;
             ServiceOrders serviceOrder = new ServiceOrders();
-            List<ServiceOrderDetail> esnList = default;          
-            
-            serviceOrder.SODetail = esnList;
-            serviceOrder.ServiceOrderId = 0;
-            serviceOrder.CustomerOrderNumber = txtCustOrderNo.Text.Trim();
-            serviceOrder.ServiceOrderNumber = txtSONumber.Text.Trim();
-            serviceOrder.OrderDate = txtOrderDate.Text.Trim();
-            serviceOrder.Quantity = Convert.ToInt32(txtOrderQty.Text);
-            serviceOrder.KittedSKUId = Convert.ToInt32(ddlKitted.SelectedValue);
-
-            int returnResult = serviceOrderOperation.ServiceOrder_NonESN_InsertUpdate(serviceOrder, userId, out errorMessage);
-            if (returnResult > 0 && string.IsNullOrEmpty(errorMessage))
+            List<ServiceOrderDetail> esnList = default;
+            if (ddlLocation.SelectedIndex > 0)
             {
-                lblMsg.Text = "Submitted successfully";
-                
-                btnSubmit.Visible = false;
-                
+                whLocation = ddlLocation.SelectedValue;
+
+                serviceOrder.SODetail = esnList;
+                serviceOrder.ServiceOrderId = 0;
+                serviceOrder.CustomerOrderNumber = txtCustOrderNo.Text.Trim();
+                serviceOrder.ServiceOrderNumber = txtSONumber.Text.Trim();
+                serviceOrder.OrderDate = txtOrderDate.Text.Trim();
+                serviceOrder.Quantity = Convert.ToInt32(txtOrderQty.Text);
+                serviceOrder.KittedSKUId = Convert.ToInt32(ddlKitted.SelectedValue);
+
+                int returnResult = serviceOrderOperation.ServiceOrder_NonESN_InsertUpdate(serviceOrder, userId, whLocation, out errorMessage);
+                if (returnResult > 0 && string.IsNullOrEmpty(errorMessage))
+                {
+                    lblMsg.Text = "Submitted successfully";
+                    btnSubmit.Visible = false;
+                }
+                else
+                {
+                    lblMsg.Text = errorMessage;
+                }
             }
             else
-            {
-                lblMsg.Text = errorMessage;
-            }
+                lblMsg.Text = "Location is required!";
 
         }
 
@@ -417,7 +426,30 @@ namespace avii.SO
                 dpCompany.DataBind();
             }
         }
+        private void BindWhLocation(int companyID)
+        {
+            lblMsg.Text = "";
+            SV.Framework.Inventory.WarehouseOperation warehouseOperation = SV.Framework.Inventory.WarehouseOperation.CreateInstance<SV.Framework.Inventory.WarehouseOperation>();
+            List<WarehouseStorage> warehouseStorages = warehouseOperation.GetWarehouseStorage("", "", companyID);
+            if (warehouseStorages != null && warehouseStorages.Count > 0)
+            {
+                ddlLocation.DataSource = warehouseStorages;
+                ddlLocation.DataValueField = "WarehouseLocation";
+                ddlLocation.DataTextField = "WarehouseLocation";
 
+                ddlLocation.DataBind();
+                ListItem newList = new ListItem("", "");
+                ddlLocation.Items.Insert(0, newList);
+            }
+            else
+            {
+                ddlLocation.DataSource = null;
+                ddlLocation.DataBind();
+                lblMsg.Text = "No location found for this customer!";
+
+            }
+
+        }
         private void BindCompanySKU(int companyID)
         {
             SV.Framework.Catalog.FinishSKUOperations FinishSKUOperations = SV.Framework.Catalog.FinishSKUOperations.CreateInstance<SV.Framework.Catalog.FinishSKUOperations>();

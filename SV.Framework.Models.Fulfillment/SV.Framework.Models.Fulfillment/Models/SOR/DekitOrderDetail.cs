@@ -11,6 +11,7 @@ namespace SV.Framework.Models.SOR
         public int ItemCompanyGUID { get; set; }
         public int DestinationItemCompanyGUID { get; set; }
         public int Quantity { get; set; }
+        public string WhLocation { get; set; }
 
 
     }

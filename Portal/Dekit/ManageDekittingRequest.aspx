@@ -273,7 +273,7 @@
                 <tr class="buttonlabel" align="left">
                 <td>&nbsp;RAW SKU#:</td></tr>
              </table>
-            <asp:Repeater ID="rptSKUs" runat="server">
+            <asp:Repeater ID="rptSKUs" runat="server" OnItemDataBound="rptSKUs_ItemDataBound">
                 <HeaderTemplate>                                    
                     <table bordercolor="#839abf" border="1" cellSpacing="0" cellPadding="0" width="100%" align="center" >
                     <tr bordercolor="#839abf">
@@ -295,13 +295,16 @@
                         &nbsp;
                     </td>
                     <td class="copy10grey" align="right" width="15%">
-                        <%--ESN Starts#:--%>
+                        Location:
                     </td>
                     <td width="20%">
                         <asp:HiddenField ID="hdMappedItemCompanyGUID" Value='<%# Eval("MappedItemCompanyGUID")%>' runat="server" />
                                         
                         <asp:TextBox ID="txtICCID" Visible="false" runat="server"  onkeypress="return isNumberKey(event);"  CssClass="copy10grey" MaxLength="18"  Width="80%"></asp:TextBox>
                         <asp:HiddenField ID="hdIsESNRequired" Value='<%# Eval("IsESNRequired")%>' runat="server" />
+
+                        <asp:DropDownList ID="ddlWhLocation" CssClass="copy10grey" Width="60%" runat="server" />
+
                                         
                     </td>   
                     <td width="15%"  class="copy10grey">
@@ -343,7 +346,7 @@
                                     File format sample: &nbsp;
                                          </td>
                                 <td class="copy10grey" align="left" width="60%">
-                                   <b>ESN</b>,ICCID  <asp:LinkButton ID="lnkButton" runat="server"  Text="Download file format" OnClick="btnCSV_Click"></asp:LinkButton>
+                                   <b>ESN</b>,<b>Location</b>  <asp:LinkButton ID="lnkButton" runat="server"  Text="Download file format" OnClick="btnCSV_Click"></asp:LinkButton>
                                 </td>
                            
                         </tr>
@@ -465,6 +468,12 @@
                                         </table>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                              <asp:TemplateField HeaderText="WhLocation" SortExpression="WhLocation"  ItemStyle-HorizontalAlign="Left" ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
+                                  <ItemTemplate>
+                                        <asp:Label ID="hdWhLocation"  CssClass="copy10grey" Text='<%# Eval("WhLocation")%>' runat="server" />
+                                    </ItemTemplate>
+                              </asp:TemplateField>
+                              
                             </Columns>
                         </asp:GridView>
                             </td>

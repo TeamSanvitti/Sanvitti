@@ -1,26 +1,22 @@
 {
   "format": 1,
   "restore": {
-    "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.Inventory\\SV.Framework.Inventory.csproj": {}
+    "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.Inventory\\SV.Framework.Inventory.csproj": {}
   },
   "projects": {
-    "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory.csproj": {
+    "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory.csproj",
+        "projectUniqueName": "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory.csproj",
         "projectName": "SV.Framework.DAL.Inventory",
-        "projectPath": "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory\\obj\\",
+        "projectPath": "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "D:\\git\\lan\\jbhargava\\SanvittiProjects\\Portal\\NuGet.Config",
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\Portal\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
@@ -32,8 +28,8 @@
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
             "projectReferences": {
-              "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment.csproj": {
-                "projectPath": "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment.csproj"
+              "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment.csproj": {
+                "projectPath": "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment.csproj"
               }
             }
           }
@@ -73,27 +69,23 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.Inventory\\SV.Framework.Inventory.csproj": {
+    "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.Inventory\\SV.Framework.Inventory.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.Inventory\\SV.Framework.Inventory.csproj",
+        "projectUniqueName": "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.Inventory\\SV.Framework.Inventory.csproj",
         "projectName": "SV.Framework.Inventory",
-        "projectPath": "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.Inventory\\SV.Framework.Inventory.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.Inventory\\obj\\",
+        "projectPath": "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.Inventory\\SV.Framework.Inventory.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.Inventory\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "D:\\git\\lan\\jbhargava\\SanvittiProjects\\Portal\\NuGet.Config",
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\Portal\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
@@ -105,8 +97,8 @@
           "netstandard2.0": {
             "targetAlias": "netstandard2.0",
             "projectReferences": {
-              "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory.csproj": {
-                "projectPath": "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory.csproj"
+              "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory.csproj": {
+                "projectPath": "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory\\SV.Framework.DAL.Inventory.csproj"
               }
             }
           }
@@ -146,27 +138,23 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment.csproj": {
+    "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment.csproj",
+        "projectUniqueName": "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment.csproj",
         "projectName": "SV.Framework.Models.Fulfillment",
-        "projectPath": "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment.csproj",
-        "packagesPath": "C:\\Users\\hp\\.nuget\\packages\\",
-        "outputPath": "D:\\git\\lan\\jbhargava\\SanvittiProjects\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment\\obj\\",
+        "projectPath": "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\SV.Framework.Models.Fulfillment\\SV.Framework.Models.Fulfillment\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
-        ],
         "configFilePaths": [
-          "D:\\git\\lan\\jbhargava\\SanvittiProjects\\Portal\\NuGet.Config",
-          "C:\\Users\\hp\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\git\\lan\\Sanvittijbhargava\\Sanvitti\\Portal\\NuGet.Config",
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
@@ -219,7 +207,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

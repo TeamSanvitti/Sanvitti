@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using SV.Framework.Models.Inventory;
+using SV.Framework.Models.Common;
 using SV.Framework.Inventory;
 using System.Reflection;
 
@@ -127,6 +128,8 @@ namespace avii.Warehouse
         protected void btnSearch_Click(object sender, EventArgs e)
         {
             WhLocationBind();
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "stop loader", "StopProgress();", true);
         }
         protected void gvWHCode_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -242,10 +245,102 @@ namespace avii.Warehouse
             }
         }
 
-
-        protected void btnCancel_Click(object sender, EventArgs e)
+        private void ClearForm()
         {
 
+            lblCount.Text = "";
+            lblMsg.Text = "";
+            Session["whLocations"] = null;
+            gvWHCode.DataSource = null;
+            gvWHCode.DataBind();
+            txtDateFrom.Text = "";
+            txtDateTo.Text = "";
+            txtSKU.Text = "";
+            txtWarehouseLocation.Text = "";
+            ddlWarehouse.SelectedIndex = 0;
+            dpCompany.SelectedIndex = 0;
+        }
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            ClearForm();
+        }
+
+        protected void lnkView_Command(object sender, CommandEventArgs e)
+        {
+            string whLocationdetiail = Convert.ToString(e.CommandArgument);
+            string[] array = whLocationdetiail.Split(',');
+            string searchCriteria = array[0] + "," + array[1];
+            string whlocationreport = Session["whlocationreport"] as string;
+            if(whlocationreport != null)
+            {
+                string[] array2 = whlocationreport.Split(',');
+                searchCriteria = searchCriteria + "," + array2[4] + "," + array2[5];
+
+            }
+            Session["whlocationsearchcriteria"] = searchCriteria;
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('WhLocationDetail.aspx')</script>", false);
+
+        }
+
+        protected void lnkHistory_Command(object sender, CommandEventArgs e)
+        {
+            string whLocationdetiail = Convert.ToString(e.CommandArgument);
+            string[] array = whLocationdetiail.Split(',');
+            string searchCriteria = array[0] + "," + array[1];
+            Session["whhistorysearchcriteria"] = searchCriteria;
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('whlocationhistory.aspx')</script>", false);
+
+
+        }
+        private void DownloadToCSV()
+        {
+            List<WhLocationInfo> whLocations = default;
+            List<WhLocationInfoCSV> whLocationscsv = default;
+            WhLocationInfoCSV whLocationInfoCSV = default;
+            if (Session["whLocations"] != null)
+            {
+                whLocations = new List<WhLocationInfo>();
+                whLocations  = Session["whLocations"] as List<WhLocationInfo>;
+                whLocationscsv = new List<WhLocationInfoCSV>();
+
+                foreach (WhLocationInfo item in whLocations)
+                {
+                    whLocationInfoCSV = new WhLocationInfoCSV(); 
+                    whLocationInfoCSV.Customer = item.CompanyName;
+                    whLocationInfoCSV.WarehouseCity = item.WarehouseCity;
+                    whLocationInfoCSV.WarehouseLocation = item.WarehouseLocation ;
+                    whLocationInfoCSV.Aisle = item.Aisle;
+                    whLocationInfoCSV.Bay = item.Bay;
+                    whLocationInfoCSV.RowLevel = item.RowLevel;
+                    whLocationInfoCSV.CategoryName = item.CategoryName;
+                    whLocationInfoCSV.SKU = item.SKU;
+                    whLocationInfoCSV.ProductName = item.ItemName;
+                    whLocationInfoCSV.Quantity = item.Quantity;
+                    whLocationInfoCSV.LastReceivedDate = item.LastReceivedDate.ToString();
+                    whLocationscsv.Add(whLocationInfoCSV);
+                }
+                if (whLocationscsv != null && whLocationscsv.Count > 0)
+                {
+
+                    string string2CSV = whLocationscsv.ToCSV();
+
+                    Response.Clear();
+                    Response.Buffer = true;
+                    Response.AddHeader("content-disposition", "attachment;filename=whLocations.csv");
+                    Response.Charset = "";
+                    Response.ContentType = "application/text";
+                    Response.Output.Write(string2CSV);
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+
+        }
+
+        protected void btnDownload_Click(object sender, EventArgs e)
+        {
+            DownloadToCSV();
         }
     }
 }

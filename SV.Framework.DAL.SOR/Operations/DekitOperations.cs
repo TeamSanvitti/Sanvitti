@@ -414,6 +414,7 @@ namespace SV.Framework.DAL.SOR
                         {
                             DekittingRawSKU rawSKU = new DekittingRawSKU();
                             rawSKU.SKU = clsGeneral.getColumnData(dataRow2, "SKU", string.Empty, false) as string;
+                            rawSKU.WhLocation = clsGeneral.getColumnData(dataRow2, "WhLocation", string.Empty, false) as string;
                             rawSKU.Quantity = Convert.ToInt32(clsGeneral.getColumnData(dataRow2, "Quantity", 0, false));
                             RawSKUs.Add(rawSKU);
                         }
@@ -426,6 +427,7 @@ namespace SV.Framework.DAL.SOR
                             DekittingSKUESN skuESN = new DekittingSKUESN();
                             skuESN.SKU = clsGeneral.getColumnData(dataRow3, "SKU", string.Empty, false) as string;
                             skuESN.ESN = clsGeneral.getColumnData(dataRow3, "ESN", string.Empty, false) as string;
+                            skuESN.WhLocation = clsGeneral.getColumnData(dataRow3, "WhLocation", string.Empty, false) as string;
                             EsnList.Add(skuESN);
                         }
                     }
@@ -478,6 +480,7 @@ namespace SV.Framework.DAL.SOR
                 {
                     DekitESN esnDetail = new DekitESN();
 
+                    esnDetail.WhLocation = clsGeneral.getColumnData(dataRow, "WhLocation", string.Empty, false) as string;
                     esnDetail.ESN = clsGeneral.getColumnData(dataRow, "ESN", string.Empty, false) as string;
                     esnDetail.ValidationMsg = clsGeneral.getColumnData(dataRow, "ValidationMsg", string.Empty, false) as string;
                     esnDetail.ICCIDValidationMsg = clsGeneral.getColumnData(dataRow, "ICCIDValidationMsg", string.Empty, false) as string;

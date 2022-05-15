@@ -32,6 +32,14 @@ namespace SV.Framework.Models.Inventory
         public Int64 KITID { get; set; }
         public string Location { get; set; }
         public string BoxID { get; set; }
+        public DateTime UploadDate { get; set; }
+        public string CategoryName { get; set; }
+        //public string SKU { get; set; }
+        public string ProductName { get; set; }
+        public string Aisle { get; set; }
+        public string Bay { get; set; }
+        public string RowLevel { get; set; }
+        public string ErrorMessage { get; set; }
 
     }
 }

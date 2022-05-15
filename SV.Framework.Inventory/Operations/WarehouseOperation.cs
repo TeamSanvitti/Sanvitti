@@ -11,7 +11,7 @@ namespace SV.Framework.Inventory
     public class WarehouseOperation : BaseCreateInstance
     {
 
-        public  List<WarehouseInfo> GetWarehouse(int warehouseID)
+        public List<WarehouseInfo> GetWarehouse(int warehouseID)
         {
             SV.Framework.DAL.Inventory.WarehouseOperation warehouseOperation = SV.Framework.DAL.Inventory.WarehouseOperation.CreateInstance<SV.Framework.DAL.Inventory.WarehouseOperation>();
 
@@ -32,7 +32,24 @@ namespace SV.Framework.Inventory
             List<WhLocationInfo> warehouseList = warehouseOperation.GetWarehouseLocationReport(warehouseCity, warehouseLocation, companyID, SKU, ReceiveFromDate, ReceiveToDate);
             return warehouseList;
         }
-            public WarehouseStorage GetWarehouseStorageInfo(int warehouseStorageID)
+        public List<WhLocationInfo> GetWarehouseLocationReplacement(string warehouseLocation, int companyID, string SKU)
+        {
+            SV.Framework.DAL.Inventory.WarehouseOperation warehouseOperation = SV.Framework.DAL.Inventory.WarehouseOperation.CreateInstance<SV.Framework.DAL.Inventory.WarehouseOperation>();
+
+            List<WhLocationInfo> warehouseList = warehouseOperation.GetWarehouseLocationReplacement(warehouseLocation, companyID, SKU);
+            return warehouseList;
+        }
+
+        public List<WhLocationInfo> GetWarehouseLocationHistory(string warehouseLocation, int companyID)
+        {
+            SV.Framework.DAL.Inventory.WarehouseOperation warehouseOperation = SV.Framework.DAL.Inventory.WarehouseOperation.CreateInstance<SV.Framework.DAL.Inventory.WarehouseOperation>();
+
+            List<WhLocationInfo> warehouseList = warehouseOperation.GetWarehouseLocationHistory(warehouseLocation, companyID);
+            return warehouseList;
+        }
+
+
+        public WarehouseStorage GetWarehouseStorageInfo(int warehouseStorageID)
         {
             SV.Framework.DAL.Inventory.WarehouseOperation warehouseOperation = SV.Framework.DAL.Inventory.WarehouseOperation.CreateInstance<SV.Framework.DAL.Inventory.WarehouseOperation>();
 
@@ -87,7 +104,40 @@ namespace SV.Framework.Inventory
 
             return returnMessage;
         }
+        public List<EsnInfo> GetWarehouseLocationDetail(int ItemCompanyGUID, string warehouseLocation, string ReceiveFromDate, string ReceiveToDate, out List<NonEsnStorage> accessoryLoactionList)
+        {
+            SV.Framework.DAL.Inventory.WarehouseOperation warehouseOperation = SV.Framework.DAL.Inventory.WarehouseOperation.CreateInstance<SV.Framework.DAL.Inventory.WarehouseOperation>();
 
+            List<EsnInfo> esnWarehouseList = default;
+            accessoryLoactionList = default;
+            esnWarehouseList = warehouseOperation.GetWarehouseLocationDetail(ItemCompanyGUID, warehouseLocation, ReceiveFromDate, ReceiveToDate, out accessoryLoactionList);
+
+            return esnWarehouseList;
+
+
+        }
+        public List<EsnInfo> WarehouseLocationEsnValidate(List<EsnInfo> ESNs, int companyID, string whLocation)
+        {
+            SV.Framework.DAL.Inventory.WarehouseOperation warehouseOperation = SV.Framework.DAL.Inventory.WarehouseOperation.CreateInstance<SV.Framework.DAL.Inventory.WarehouseOperation>();
+
+            List<EsnInfo> esnList = warehouseOperation.WarehouseLocationEsnValidate(ESNs, companyID, whLocation);
+
+            return esnList;
+        }
+        public int WarehouseLocationNonEsnUpdate(int storageID, int userId, int ItemCompanyGUID, string whLocationOld, string whLocationNew, int qty, int oldQty, int loginUserID, string Comment, out string errorMessage)
+        {
+            errorMessage = "";
+            SV.Framework.DAL.Inventory.WarehouseOperation warehouseOperation = SV.Framework.DAL.Inventory.WarehouseOperation.CreateInstance<SV.Framework.DAL.Inventory.WarehouseOperation>();
+            return warehouseOperation.WarehouseLocationNonEsnUpdate(storageID, userId, ItemCompanyGUID, whLocationOld, whLocationNew, qty, oldQty, loginUserID, Comment, out errorMessage);
+
+        }
+        public int WarehouseLocationESNUpdate(List<EsnInfo> ESNs, int userId, int ItemCompanyGUID, string whLocationOld, string whLocationNew, int qty, int loginUserID, string Comment, out string errorMessage)
+        {
+            errorMessage = "";
+            SV.Framework.DAL.Inventory.WarehouseOperation warehouseOperation = SV.Framework.DAL.Inventory.WarehouseOperation.CreateInstance<SV.Framework.DAL.Inventory.WarehouseOperation>();
+            return warehouseOperation.WarehouseLocationESNUpdate(ESNs, userId, ItemCompanyGUID, whLocationOld, whLocationNew, qty, loginUserID, Comment, out errorMessage);
+
+        }
 
 
     }

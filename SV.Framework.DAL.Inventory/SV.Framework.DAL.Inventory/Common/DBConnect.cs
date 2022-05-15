@@ -750,6 +750,7 @@ namespace SV.Framework.DAL.Inventory
            // int result = 0;
             SqlCommand objCmd = new SqlCommand(SQLString, DBConnection());
             objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.CommandTimeout = 0;
             try
             {
                 if (HshParameters != null && arrFieldsSeq != null)

@@ -15,7 +15,14 @@ namespace SV.Framework.Customer
             SV.Framework.DAL.Admin.CustomerOperation customerOperation = SV.Framework.DAL.Admin.CustomerOperation.CreateInstance<SV.Framework.DAL.Admin.CustomerOperation>();
             return customerOperation.GetCompanyInfo(userID);
         }
-        public UsersResponse GetAssignedUsers(int userID)
+        public List<Users> GetInternalUsers(int companyID)
+        {
+            SV.Framework.DAL.Admin.CustomerOperation customerOperation = SV.Framework.DAL.Admin.CustomerOperation.CreateInstance<SV.Framework.DAL.Admin.CustomerOperation>();
+
+            List<Users> userList = customerOperation.GetInternalUsers(companyID);
+            return userList;
+        }
+            public UsersResponse GetAssignedUsers(int userID)
         {
             SV.Framework.DAL.Admin.CustomerOperation customerOperation = SV.Framework.DAL.Admin.CustomerOperation.CreateInstance<SV.Framework.DAL.Admin.CustomerOperation>();
 

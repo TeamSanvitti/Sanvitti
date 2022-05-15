@@ -39,6 +39,7 @@ namespace SV.Framework.Models.SOR
         [XmlIgnore]
         public string UPC { get; set; }
         public int RowNumber { get; set; }
+        public string WhLocation { get; set; }
 
 
 

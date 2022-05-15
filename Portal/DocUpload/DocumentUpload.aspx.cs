@@ -33,6 +33,8 @@ namespace avii.DocUpload
             }
             if (!IsPostBack)
             {
+                
+
                 if (Session["adm"] != null)
                 {
                     BindCustomer();
@@ -44,7 +46,23 @@ namespace avii.DocUpload
                     avii.Classes.UserInfo objUserInfo = Session["userInfo"] as avii.Classes.UserInfo;
                     ViewState["CompanyName"] = objUserInfo.CompanyName; 
                 }
+                LoadPODoc();
 
+            }
+        }
+        private void LoadPODoc()
+        {
+            if(Session["poinfo"] != null)
+            {
+                string poinfo = Convert.ToString(Session["poinfo"]);
+                string[] array = poinfo.Split(',');
+                if(array.Length > 0)
+                {
+                    dpCompany.SelectedValue = array[0];
+                    txtFulfillmentNo.Text = array[1];
+                    LoadSearch();
+                    Session["poinfo"] = null;
+                }    
             }
         }
         protected void BindCustomer()
@@ -294,6 +312,7 @@ namespace avii.DocUpload
                 else
                 {
                     lblMsg.Text = lblMsg.Text +" " + fupDoc2.PostedFile.FileName + " invalid file!";
+                    return;
                 }
             }
             else
@@ -324,6 +343,7 @@ namespace avii.DocUpload
                 else
                 {
                     lblMsg.Text = lblMsg.Text + " " + fupDoc3.PostedFile.FileName + " invalid file!";
+                    return;
                 }
             }
             else
@@ -354,6 +374,7 @@ namespace avii.DocUpload
                 else
                 {
                     lblMsg.Text = lblMsg.Text + " " + fupDoc4.PostedFile.FileName + " invalid file!";
+                    return;
                 }
             }
             else
@@ -384,6 +405,7 @@ namespace avii.DocUpload
                 else
                 {
                     lblMsg.Text = lblMsg.Text + " " + fupDoc5.PostedFile.FileName + " invalid file!";
+                    return;
                 }
             }
             else

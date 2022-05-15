@@ -1013,6 +1013,7 @@ namespace avii.Admin
                             string invalidColumns = string.Empty;
                             System.Text.StringBuilder sbInvalidColumns = new System.Text.StringBuilder();
                             System.Text.StringBuilder sbESN = new System.Text.StringBuilder();
+                            System.Text.StringBuilder sbESN2 = new System.Text.StringBuilder();
                             System.Text.StringBuilder sbHex = new System.Text.StringBuilder();
                             System.Text.StringBuilder sbDec = new System.Text.StringBuilder();
                             System.Text.StringBuilder sbErrors = new System.Text.StringBuilder();
@@ -1065,7 +1066,7 @@ namespace avii.Admin
                                         using (StreamReader sr = new StreamReader(fileName))
                                         {
                                             string line;
-                                            string esn, batch, lteICCID, MeidHex, MeidDec, Location,  SerialNumber, BoxID;//, uploaddate;
+                                            string esn, batch, lteICCID, MeidHex, MeidDec, Location,  SerialNumber, BoxID, IMEI2;//, uploaddate;
                                             int i = 0;
                                             while ((line = sr.ReadLine()) != null)
                                             {
@@ -1076,89 +1077,101 @@ namespace avii.Admin
                                                     line = line.ToLower();
 
                                                     string[] headerArray = line.Split(',');
-                                                    if (headerArray.Length == 2 || headerArray.Length <= 7)
+                                                    if (headerArray.Length == 2 || headerArray.Length <= 8)
                                                     {
                                                         if (headerArray[0].Trim() != "batch")
                                                         {
                                                             invalidColumns = headerArray[0];
                                                             columnsIncorrectFormat = true;
-                                                        }                                                       
+                                                        }
 
-                                                        if (headerArray[1].Trim() != "esn")
+                                                        if (headerArray[1].Trim() != "esn1")
                                                         {
                                                             sbInvalidColumns.Append(headerArray[1] + ",");
 
                                                             columnsIncorrectFormat = true;
                                                         }
 
-                                                        if (headerArray.Length > 2 && headerArray[2].Trim() != "" && headerArray[2].Trim() != "meidhex")
-                                                        {
-                                                            sbInvalidColumns.Append(headerArray[2] + ",");
+                                                        if (headerArray.Length > 2 && headerArray[2].Trim() != "" && headerArray[2].Trim() != "esn2")
+                                                            {
+                                                                sbInvalidColumns.Append(headerArray[2] + ",");
 
-                                                            columnsIncorrectFormat = true;
+                                                                columnsIncorrectFormat = true;
+                                                            }
+                                                        //if (headerArray.Length > 2 && headerArray[2].Trim() != "" && headerArray[2].Trim() != "meidhex")
+                                                            //{
+                                                            //    sbInvalidColumns.Append(headerArray[2] + ",");
+
+                                                            //    columnsIncorrectFormat = true;
+                                                            //}
+                                                            if (headerArray.Length > 3 && headerArray[3].Trim() != "" && headerArray[3].Trim() != "meidhex")
+                                                            {
+                                                                sbInvalidColumns.Append(headerArray[3] + ",");
+
+                                                                columnsIncorrectFormat = true;
+                                                            }
+                                                            if (headerArray.Length > 4 && headerArray[4].Trim() != "" && headerArray[4].Trim() != "meiddec")
+                                                            {
+                                                                sbInvalidColumns.Append(headerArray[4] + ",");
+
+                                                                columnsIncorrectFormat = true;
+                                                            }
+
+                                                            //if (headerArray.Length > 5 && headerArray[5].Trim() != "" && headerArray[5].Trim() != "msl")
+                                                            //{
+                                                            //    sbInvalidColumns.Append(headerArray[5] + ",");
+
+                                                            //    //if (string.IsNullOrEmpty(invalidColumns))
+                                                            //    //    invalidColumns = headerArray[5];
+                                                            //    //else
+                                                            //    //    invalidColumns = invalidColumns + ", " + headerArray[5];
+                                                            //    columnsIncorrectFormat = true;
+                                                            //}
+                                                            //if (headerArray.Length > 6 && headerArray[6].Trim() != "" && headerArray[6].Trim() != "otksl")
+                                                            //{
+                                                            //    sbInvalidColumns.Append(headerArray[6] + ",");
+
+                                                            //    //if (string.IsNullOrEmpty(invalidColumns))
+                                                            //    //    invalidColumns = headerArray[6];
+                                                            //    //else
+                                                            //    //    invalidColumns = invalidColumns + ", " + headerArray[6];
+                                                            //    columnsIncorrectFormat = true;
+                                                            //}
+
+                                                            if (headerArray.Length > 5 && headerArray[5].Trim() != "" && headerArray[5].Trim() != "location")
+                                                            {
+                                                                sbInvalidColumns.Append(headerArray[5] + ",");
+
+                                                                columnsIncorrectFormat = true;
+                                                            }
+                                                            if (headerArray.Length > 6 && headerArray[6].Trim() != "" && headerArray[6].Trim() != "serialnumber")
+                                                            {
+                                                                sbInvalidColumns.Append(headerArray[6] + ",");
+
+                                                                columnsIncorrectFormat = true;
+                                                            }
+                                                            if (headerArray.Length > 7 && headerArray[7].Trim() != "" && headerArray[7].Trim() != "boxid")
+                                                            {
+                                                                sbInvalidColumns.Append(headerArray[7] + ",");
+
+                                                                columnsIncorrectFormat = true;
+                                                            }
+
+                                                            invalidColumns = sbInvalidColumns.ToString();
                                                         }
-                                                        if (headerArray.Length > 3 && headerArray[3].Trim() != "" && headerArray[3].Trim() != "meiddec")
-                                                        {
-                                                            sbInvalidColumns.Append(headerArray[3] + ",");
-
-                                                            columnsIncorrectFormat = true;
-                                                        }
-                                                        if (headerArray.Length > 4 && headerArray[4].Trim() != "" && headerArray[4].Trim() != "location")
-                                                        {
-                                                            sbInvalidColumns.Append(headerArray[4] + ",");
-
-                                                            columnsIncorrectFormat = true;
-                                                        }
-
-                                                        //if (headerArray.Length > 5 && headerArray[5].Trim() != "" && headerArray[5].Trim() != "msl")
-                                                        //{
-                                                        //    sbInvalidColumns.Append(headerArray[5] + ",");
-
-                                                        //    //if (string.IsNullOrEmpty(invalidColumns))
-                                                        //    //    invalidColumns = headerArray[5];
-                                                        //    //else
-                                                        //    //    invalidColumns = invalidColumns + ", " + headerArray[5];
-                                                        //    columnsIncorrectFormat = true;
-                                                        //}
-                                                        //if (headerArray.Length > 6 && headerArray[6].Trim() != "" && headerArray[6].Trim() != "otksl")
-                                                        //{
-                                                        //    sbInvalidColumns.Append(headerArray[6] + ",");
-
-                                                        //    //if (string.IsNullOrEmpty(invalidColumns))
-                                                        //    //    invalidColumns = headerArray[6];
-                                                        //    //else
-                                                        //    //    invalidColumns = invalidColumns + ", " + headerArray[6];
-                                                        //    columnsIncorrectFormat = true;
-                                                        //}
-
-                                                        if (headerArray.Length > 5 && headerArray[5].Trim() != "" && headerArray[5].Trim() != "serialnumber")
-                                                        {
-                                                            sbInvalidColumns.Append(headerArray[5] + ",");
-                                                           
-                                                            columnsIncorrectFormat = true;
-                                                        }
-                                                        if (headerArray.Length > 6 && headerArray[6].Trim() != "" && headerArray[6].Trim() != "boxid")
-                                                        {
-                                                            sbInvalidColumns.Append(headerArray[6] + ",");
-
-                                                            columnsIncorrectFormat = true;
-                                                        }
-
-                                                        invalidColumns = sbInvalidColumns.ToString();
-                                                    }
                                                     else
-                                                    {
-                                                        columnsIncorrectFormat = true;
-                                                        invalidColumns = string.Empty;
+                                                        {
+                                                            columnsIncorrectFormat = true;
+                                                            invalidColumns = string.Empty;
+                                                        }
                                                     }
-                                                }
-                                                else if (!string.IsNullOrEmpty(line) && i > 0)
-                                                {
-                                                    esn = batch = lteICCID = MeidHex = MeidDec = Location = SerialNumber = BoxID = string.Empty;
-                                                    string[] arr = line.Split(',');
+                                                    else if (!string.IsNullOrEmpty(line) && i > 0)
+                                                    {
+                                                        esn = batch = lteICCID = MeidHex = MeidDec = Location = SerialNumber = BoxID = IMEI2 = string.Empty;
+                                                        string[] arr = line.Split(',');
                                                     try
                                                     {
-                                                        assignESN = new EsnUploadNew();                                                        
+                                                        assignESN = new EsnUploadNew();
                                                         batch = arr[0].Trim();
                                                         esn = arr[1].Trim();
                                                         if (!string.IsNullOrEmpty(esn) && !IsWholeNumber(esn))
@@ -1167,24 +1180,33 @@ namespace avii.Admin
                                                         }
                                                         if (arr.Length > 2)
                                                         {
-                                                            MeidHex = arr[2].Trim();
+                                                            IMEI2 = arr[2].Trim();
+                                                            ViewState["IMEI2"] = 1;
+                                                            if (!string.IsNullOrEmpty(IMEI2) && !IsWholeNumber(IMEI2))
+                                                            {
+                                                                sbESN2.Append(IMEI2 + ",");
+                                                            }
+                                                        }
+                                                        if (arr.Length > 3)
+                                                        {
+                                                            MeidHex = arr[3].Trim();
                                                             ViewState["HEX"] = 1;
                                                             if (!string.IsNullOrEmpty(MeidHex) && !IsWholeNumber(MeidHex))
                                                             {
                                                                 sbHex.Append(MeidHex + ",");
                                                             }
                                                         }
-                                                        if (arr.Length > 3)
+                                                        if (arr.Length > 4)
                                                         {
-                                                            MeidDec = arr[3].Trim();
+                                                            MeidDec = arr[4].Trim();
                                                             if (!string.IsNullOrEmpty(MeidDec) && !IsWholeNumber(MeidDec))
                                                             {
                                                                 sbDec.Append(MeidDec + ",");
                                                             }
                                                         }
-                                                        if (arr.Length > 4)
+                                                        if (arr.Length > 5)
                                                         {
-                                                            Location = arr[4].Trim();
+                                                            Location = arr[5].Trim();
                                                         }
                                                         //if (arr.Length > 5)
                                                         //{
@@ -1195,13 +1217,13 @@ namespace avii.Admin
                                                         //    OTKSL = arr[6].Trim();
                                                         //}
 
-                                                        if (arr.Length > 5)
-                                                        {
-                                                            SerialNumber = arr[5].Trim();
-                                                        }
                                                         if (arr.Length > 6)
                                                         {
-                                                            BoxID = arr[6].Trim();
+                                                            SerialNumber = arr[6].Trim();
+                                                        }
+                                                        if (arr.Length > 7)
+                                                        {
+                                                            BoxID = arr[7].Trim();
                                                         }
                                                         if (string.IsNullOrEmpty(esn))
                                                         {
@@ -1219,7 +1241,8 @@ namespace avii.Admin
                                                             assignESN.OTKSL = "";
                                                             assignESN.SerialNumber = SerialNumber;
                                                             assignESN.BoxID = BoxID;
-                                                            
+                                                            assignESN.IMEI2 = IMEI2;
+
                                                             if (string.IsNullOrEmpty(esn) || string.IsNullOrEmpty(batch))
                                                             {
                                                                 if (string.IsNullOrEmpty(esn) && string.IsNullOrEmpty(batch))
@@ -1231,13 +1254,17 @@ namespace avii.Admin
                                                                         if (string.IsNullOrEmpty(batch))
                                                                     lblMsg.Text = "Missing BATCH data";
                                                             }
-                                                            if(batch.Length > batchMaxLen)
+                                                            if (batch.Length > batchMaxLen)
                                                             {
                                                                 lblMsg.Text = "BATCH# length cannot be greater than " + batchMaxLen;
                                                             }
                                                             if (esn.Length > esnMaxLength)
                                                             {
-                                                                lblMsg.Text = "ESN length cannot be greater than " + esnMaxLength;
+                                                                lblMsg.Text = "ESN1 length cannot be greater than " + esnMaxLength;
+                                                            }
+                                                            if (IMEI2.Length > esnMaxLength)
+                                                            {
+                                                                lblMsg.Text = "ESN2 length cannot be greater than " + esnMaxLength;
                                                             }
                                                             if (MeidHex.Length > hexMaxLen)
                                                             {
@@ -1263,13 +1290,25 @@ namespace avii.Admin
                                                             if (hshESN.ContainsKey(esn) && !string.IsNullOrEmpty(esn))
                                                             {
                                                                 sbErrors.Append(esn + ",");
-                                                                assignESN.ErrorMessage = "Duplicate ESN";
-                                                                lblMsg.Text = sbErrors.ToString() + " duplicate ESN(s) exists in the file";
+                                                                assignESN.ErrorMessage = "Duplicate ESN1";
+                                                                lblMsg.Text = sbErrors.ToString() + " duplicate ESN1(s) exists in the file";
                                                             }
                                                             else if (!hshESN.ContainsKey(esn) && !string.IsNullOrEmpty(esn))
                                                             {
                                                                 hshESN.Add(esn, esn);
                                                             }
+
+                                                            if (hshESN.ContainsKey(IMEI2) && !string.IsNullOrEmpty(IMEI2))
+                                                            {
+                                                                sbErrors.Append(IMEI2 + ",");
+                                                                assignESN.ErrorMessage = "Duplicate ESN2";
+                                                                lblMsg.Text = sbErrors.ToString() + " duplicate ESN2(s) exists in the file";
+                                                            }
+                                                            else if (!hshESN.ContainsKey(IMEI2) && !string.IsNullOrEmpty(IMEI2))
+                                                            {
+                                                                hshESN.Add(IMEI2, IMEI2);
+                                                            }
+
                                                             if (!string.IsNullOrEmpty(MeidHex))
                                                             {
                                                                 if (hshESN.ContainsKey(MeidHex) && !string.IsNullOrEmpty(MeidHex))
@@ -1297,7 +1336,8 @@ namespace avii.Admin
                                                             if (!string.IsNullOrEmpty(SerialNumber))
                                                             {
                                                                 if (hshESN.ContainsKey(SerialNumber) && !string.IsNullOrEmpty(SerialNumber))
-                                                                {   assignESN.ErrorMessage = "Duplicate Serial#";
+                                                                {
+                                                                    assignESN.ErrorMessage = "Duplicate Serial#";
                                                                     lblMsg.Text = SerialNumber + " Duplicate SerialNumber(s) exists in the file";
                                                                 }
                                                                 else if (!hshESN.ContainsKey(SerialNumber) && !string.IsNullOrEmpty(SerialNumber))
@@ -1314,6 +1354,7 @@ namespace avii.Admin
                                                             //OTKSL = string.Empty;
                                                             SerialNumber = string.Empty;
                                                             BoxID = string.Empty;
+                                                            IMEI2 = string.Empty;
                                                         }
                                                     }
                                                     catch (ApplicationException ex)
@@ -1324,7 +1365,7 @@ namespace avii.Admin
                                                     {
                                                         lblMsg.Text = exception.Message;
                                                     }
-                                                }
+                                                    }
                                             }
                                             sr.Close();
                                         }
@@ -1416,10 +1457,13 @@ namespace avii.Admin
                                                 {
                                                     stringBuilder.Append(poErrorMessage + " ESN(s) can not re-assign because already assigned to service order" + " <br /> ");
                                                 }
+
                                                 if (!string.IsNullOrEmpty(poEsnMessage))
                                                 {
-                                                    stringBuilder.Append(poEsnMessage + " ESN(s) can not re-assign because already assigned to fulfillment order" + " <br /> ");
+                                                    stringBuilder.Append(poEsnMessage  + " <br /> ");
+                                                //    stringBuilder.Append(poEsnMessage + " ESN(s) can not re-assign because already assigned to fulfillment order" + " <br /> ");
                                                 }
+
                                                 if (!string.IsNullOrEmpty(poESNquarantine))
                                                 {
                                                     stringBuilder.Append(poESNquarantine + " ESN(s) can not re-assign because already quarantine is issued " + " <br /> ");
@@ -1612,7 +1656,7 @@ namespace avii.Admin
         {
             lblMsg.Text = string.Empty;
 
-            string string2CSV = "BATCH,ESN,MeidHex,MeidDec,Location,SerialNumber,BoxID" + Environment.NewLine;
+            string string2CSV = "BATCH,ESN1,ESN2,MeidHex,MeidDec,Location,SerialNumber,BoxID" + Environment.NewLine;
 
             Response.Clear();
             Response.Buffer = true;

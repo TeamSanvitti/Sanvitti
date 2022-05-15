@@ -17,3 +17,13 @@ D:\git\lan\jbhargava\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Debug\ne
 D:\git\lan\jbhargava\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Debug\netcoreapp3.1\SV.Framework.Label.csproj.CoreCompileInputs.cache
 D:\git\lan\jbhargava\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Debug\netcoreapp3.1\SV.Framework.Label.dll
 D:\git\lan\jbhargava\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Debug\netcoreapp3.1\SV.Framework.Label.pdb
+C:\git\lan\Sanvittijbhargava\Sanvitti\LabelApp\SV.Framework.Label\SV.Framework.Label\bin\Debug\netcoreapp3.1\SV.Framework.Label.deps.json
+C:\git\lan\Sanvittijbhargava\Sanvitti\LabelApp\SV.Framework.Label\SV.Framework.Label\bin\Debug\netcoreapp3.1\SV.Framework.Label.dll
+C:\git\lan\Sanvittijbhargava\Sanvitti\LabelApp\SV.Framework.Label\SV.Framework.Label\bin\Debug\netcoreapp3.1\SV.Framework.Label.pdb
+C:\git\lan\Sanvittijbhargava\Sanvitti\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Debug\netcoreapp3.1\SV.Framework.Label.csproj.AssemblyReference.cache
+C:\git\lan\Sanvittijbhargava\Sanvitti\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Debug\netcoreapp3.1\SV.Framework.Label.GeneratedMSBuildEditorConfig.editorconfig
+C:\git\lan\Sanvittijbhargava\Sanvitti\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Debug\netcoreapp3.1\SV.Framework.Label.AssemblyInfoInputs.cache
+C:\git\lan\Sanvittijbhargava\Sanvitti\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Debug\netcoreapp3.1\SV.Framework.Label.AssemblyInfo.cs
+C:\git\lan\Sanvittijbhargava\Sanvitti\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Debug\netcoreapp3.1\SV.Framework.Label.csproj.CoreCompileInputs.cache
+C:\git\lan\Sanvittijbhargava\Sanvitti\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Debug\netcoreapp3.1\SV.Framework.Label.dll
+C:\git\lan\Sanvittijbhargava\Sanvitti\LabelApp\SV.Framework.Label\SV.Framework.Label\obj\Debug\netcoreapp3.1\SV.Framework.Label.pdb

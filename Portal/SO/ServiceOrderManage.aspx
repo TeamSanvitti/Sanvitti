@@ -200,6 +200,27 @@
                 
                     
                 </tr>
+                <tr valign="top">
+                    <td class="copy10grey" align="right" width="15%">
+                    <b>Location:</b>
+                    </td>
+                    <td >
+                          <asp:DropDownList ID="ddlLocation" CssClass="copy10grey" runat="server" Width="80%">
+					        </asp:DropDownList>
+              
+                    </td>
+                    <td >
+
+                    </td>
+                    <td >
+
+                    </td>
+                    <td >
+
+                    </td>
+                </tr>
+                
+                
                 <%--<tr><td>&nbsp;</td></tr>--%>
                 <tr valign="top">
                     <td colspan="5" >

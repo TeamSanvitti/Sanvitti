@@ -176,15 +176,22 @@
                     <td  width="1%">
                         &nbsp;
                     </td>
-                    <td class="copy10grey" align="right" width="15%">
+                    <td class="copy10grey" align="right" width="5%">
                         <%--ESN Starts#:--%>
                     </td>
-                    <td width="20%">
+                    <td width="10%">
                                         
                         <asp:TextBox ID="txtICCID" Visible="false" runat="server"  onkeypress="return isNumberKey(event);"  CssClass="copy10grey" MaxLength="18"  Width="80%"></asp:TextBox>
                        <%-- <asp:HiddenField ID="hdIsESNRequired" Value='<%# Eval("IsESNRequired")%>' runat="server" />--%>
                                         
                     </td>   
+                        <td width="20%"  class="copy10grey">
+                                        
+                        Location: <%# Eval("WhLocation")%>    
+                                                              
+        
+                    </td>  
+                    
                     <td width="15%"  class="copy10grey">
                         <asp:HiddenField ID="hdnQty" Value='<%# Eval("Quantity")%>' runat="server" />
                                         
@@ -305,6 +312,12 @@
                                         </table>--%>
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                              <asp:TemplateField Visible="true" HeaderText="Location" ItemStyle-CssClass="copy10grey"  ItemStyle-Width="19%">
+                                <ItemTemplate>
+                                      <%# Eval("WhLocation")%>
+                                    </ItemTemplate>
+                                </asp:TemplateField> 
+                              
                             </Columns>
                         </asp:GridView>
                             </td>

@@ -132,6 +132,15 @@ namespace avii.SO
         protected global::System.Web.UI.WebControls.TextBox txtOrderQty;
 
         /// <summary>
+        /// ddlLocation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLocation;
+
+        /// <summary>
         /// rptESN control.
         /// </summary>
         /// <remarks>

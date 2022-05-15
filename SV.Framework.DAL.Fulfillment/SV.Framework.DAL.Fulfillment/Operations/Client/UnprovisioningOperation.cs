@@ -251,6 +251,7 @@ namespace SV.Framework.DAL.Fulfillment
                         {
                             fulfillmentInfo = new UnprovisioingInfo();
                             fulfillmentInfo.IsVisible = Convert.ToBoolean(clsGeneral.getColumnData(row, "IsVisible", false, false)); ;
+                            fulfillmentInfo.POID = Convert.ToInt32(clsGeneral.getColumnData(row, "PO_ID", 0, false)); ;
                             fulfillmentInfo.UnprovisioningID = Convert.ToInt32(clsGeneral.getColumnData(row, "UnprovisioningID", 0, false)); ;
                             fulfillmentInfo.TotalQty = Convert.ToInt32(clsGeneral.getColumnData(row, "TotalQty", 0, false)); ;
                             fulfillmentInfo.FulfillmentNumber = Convert.ToString(clsGeneral.getColumnData(row, "PO_Num", string.Empty, false));

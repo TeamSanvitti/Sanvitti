@@ -14,6 +14,7 @@ namespace SV.Framework.LabelGenerator
         public String UPC { get; set; }
         public String SerialNum { get; set; }
         public String ESN { get; set; }
+        public String IMEI2 { get; set; }
         public String MEID { get; set; }
         public String HEX { get; set; }
         public String ICCID { get; set; }

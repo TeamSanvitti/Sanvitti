@@ -10,6 +10,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using SV.Framework.Models.SOR;
 using SV.Framework.Models.Common;
+using SV.Framework.Models.Inventory;
 using SV.Framework.SOR;
 
 namespace avii
@@ -103,6 +104,7 @@ namespace avii
             {
                 BindCompanySKU(companyID);
                 BindUsers(companyID);
+                GetWhLocation(companyID);
             }
             else
             {
@@ -177,6 +179,56 @@ namespace avii
                 lblMsg.Text = "Customer is required!";
                 dpCompany.DataSource = null;
                 dpCompany.DataBind();
+            }
+
+        }
+        private void GetWhLocation(int companyID)
+        {
+
+            SV.Framework.Inventory.WarehouseOperation warehouseOperation = SV.Framework.Inventory.WarehouseOperation.CreateInstance<SV.Framework.Inventory.WarehouseOperation>();
+            List<WarehouseStorage> warehouseStorages = default;
+
+            //companyID = Convert.ToInt32(dpCompany.SelectedValue);
+            warehouseStorages = warehouseOperation.GetWarehouseStorage("", "", companyID);
+            if (warehouseStorages != null && warehouseStorages.Count > 0)
+            {
+                Session["warehouseStorages"] = warehouseStorages;
+
+            }
+        }
+        private void BindWhLocation(DropDownList ddlLocation)
+        {
+            lblMsg.Text = "";
+            int companyID = 0;
+            SV.Framework.Inventory.WarehouseOperation warehouseOperation = SV.Framework.Inventory.WarehouseOperation.CreateInstance<SV.Framework.Inventory.WarehouseOperation>();
+            List<WarehouseStorage> warehouseStorages = default;
+            if (Session["warehouseStorages"] == null)
+            {
+                companyID = Convert.ToInt32(dpCompany.SelectedValue);
+                warehouseStorages = warehouseOperation.GetWarehouseStorage("", "", companyID);
+            }
+            else
+            {
+                warehouseStorages = Session["warehouseStorages"] as List<WarehouseStorage>;
+            }
+            if (warehouseStorages != null && warehouseStorages.Count > 0)
+            {
+                Session["warehouseStorages"] = warehouseStorages;
+
+                ddlLocation.DataSource = warehouseStorages;
+                ddlLocation.DataValueField = "WarehouseLocation";
+                ddlLocation.DataTextField = "WarehouseLocation";
+
+                ddlLocation.DataBind();
+                ListItem newList = new ListItem("", "");
+                ddlLocation.Items.Insert(0, newList);
+            }
+            else
+            {
+                ddlLocation.DataSource = null;
+                ddlLocation.DataBind();
+                lblMsg.Text = "No location found for this customer!";
+
             }
 
         }
@@ -376,29 +428,56 @@ namespace avii
                     int.TryParse(txtOrderQty.Text.Trim(), out qty);
                     if (qty > 0)
                     {
-                        if (RawSKUs != null && RawSKUs.Count > 0)
+                        //if (RawSKUs != null && RawSKUs.Count > 0)
+                        //{
+                        //    foreach (SV.Framework.Models.Catalog.RawSKU item in RawSKUs)
+                        //    {
+                        //        dekitOrderDetail = new DekitOrderDetail();
+                        //        dekitOrderDetail.DeKittingDetailID = 0;
+                        //        dekitOrderDetail.DestinationItemCompanyGUID = item.ItemcompanyGUID;
+                        //        dekitOrderDetail.ItemCompanyGUID = KittedSKUId;
+                        //        dekitOrderDetail.Quantity = qty;
+                        //        dekitDetails.Add(dekitOrderDetail);
+                        //        if (item.MappedItemcompanyGUID > 0)
+                        //        {
+                        //            dekitOrderDetail = new DekitOrderDetail();
+                        //            dekitOrderDetail.DeKittingDetailID = 0;
+                        //            dekitOrderDetail.DestinationItemCompanyGUID = item.MappedItemcompanyGUID;
+                        //            dekitOrderDetail.ItemCompanyGUID = KittedSKUId;
+                        //            dekitOrderDetail.Quantity = qty;
+                        //            dekitDetails.Add(dekitOrderDetail);
+                        //        }
+                        //    }
+                        //}
+                        foreach(RepeaterItem item in rptSKUs.Items)
                         {
-                            foreach (SV.Framework.Models.Catalog.RawSKU item in RawSKUs)
+                            HiddenField hdSKUId = item.FindControl("hdSKUId") as HiddenField;
+                            //HiddenField hdnQty = item.FindControl("hdnQty") as HiddenField;
+                            DropDownList ddlWhLocation = item.FindControl("ddlWhLocation") as DropDownList;
+                           // HiddenField hdMappedItemCompanyGUID = item.FindControl("hdMappedItemCompanyGUID") as HiddenField;
+                            if (hdSKUId != null && ddlWhLocation != null)
                             {
-                                dekitOrderDetail = new DekitOrderDetail();
-                                dekitOrderDetail.DeKittingDetailID = 0;
-                                dekitOrderDetail.DestinationItemCompanyGUID = item.ItemcompanyGUID;
-                                dekitOrderDetail.ItemCompanyGUID = KittedSKUId;
-                                dekitOrderDetail.Quantity = qty;
-                                dekitDetails.Add(dekitOrderDetail);
-                                if (item.MappedItemcompanyGUID > 0)
+                                if (ddlWhLocation.SelectedIndex > 0)
                                 {
                                     dekitOrderDetail = new DekitOrderDetail();
                                     dekitOrderDetail.DeKittingDetailID = 0;
-                                    dekitOrderDetail.DestinationItemCompanyGUID = item.MappedItemcompanyGUID;
+                                    dekitOrderDetail.WhLocation = ddlWhLocation.SelectedValue;
+                                    dekitOrderDetail.DestinationItemCompanyGUID = Convert.ToInt32(hdSKUId.Value);
                                     dekitOrderDetail.ItemCompanyGUID = KittedSKUId;
                                     dekitOrderDetail.Quantity = qty;
                                     dekitDetails.Add(dekitOrderDetail);
                                 }
+                                else
+                                {
+                                    lblMsg.Text = "Raw SKU location is required!";
+                                    return;
+                                }
                             }
                         }
-                        foreach(GridViewRow row in gvEsn.Rows)
+
+                        foreach (GridViewRow row in gvEsn.Rows)
                         {
+                            Label hdWhLocation = row.FindControl("hdWhLocation") as Label;
                             Label hdnSKUId = row.FindControl("hdnSKUId") as Label;
                             Label hdnMappedItemCompanyGUID = row.FindControl("hdnMappedItemCompanyGUID") as Label;
                             TextBox txtESN = row.FindControl("txtESN") as TextBox;
@@ -410,6 +489,7 @@ namespace avii
                                 esnDetail.MappedItemCompanyGUID = Convert.ToInt32(hdnMappedItemCompanyGUID.Text);
                                 esnDetail.ESN = txtESN.Text;
                                 esnDetail.ICCID = txtICCID.Text;
+                                esnDetail.WhLocation = hdWhLocation.Text;
                                 esnList.Add(esnDetail);
                             }
                         }
@@ -528,7 +608,7 @@ namespace avii
                                                     using (StreamReader sr = new StreamReader(fileName))
                                                     {
                                                         string line;
-                                                        string esn, ICCID;
+                                                        string esn, ICCID, location;
                                                         int i = 0;
                                                         while ((line = sr.ReadLine()) != null)
                                                         {
@@ -547,9 +627,20 @@ namespace avii
                                                                         invalidColumns = invalidColumns + ", " + headerArray[0];
                                                                     columnsIncorrectFormat = true;
                                                                 }
+                                                                //if (headerArray.Length > 1 && headerArray[1].Trim() != "")
+                                                                //{
+                                                                //    if (headerArray[1].Trim() != "iccid")
+                                                                //    {
+                                                                //        if (string.IsNullOrEmpty(invalidColumns))
+                                                                //            invalidColumns = headerArray[1];
+                                                                //        else
+                                                                //            invalidColumns = invalidColumns + ", " + headerArray[1];
+                                                                //        columnsIncorrectFormat = true;
+                                                                //    }
+                                                                //}
                                                                 if (headerArray.Length > 1 && headerArray[1].Trim() != "")
                                                                 {
-                                                                    if (headerArray[1].Trim() != "iccid")
+                                                                    if (headerArray[1].Trim() != "location")
                                                                     {
                                                                         if (string.IsNullOrEmpty(invalidColumns))
                                                                             invalidColumns = headerArray[1];
@@ -562,7 +653,7 @@ namespace avii
                                                             }
                                                             else if (!string.IsNullOrEmpty(line) && i > 0)
                                                             {
-                                                                esn = ICCID = string.Empty;// fmupc = lteICCID = lteIMSI = otksl = akey = msl = string.Empty;
+                                                                esn = ICCID = location = string.Empty;// fmupc = lteICCID = lteIMSI = otksl = akey = msl = string.Empty;
                                                                 string[] arr = line.Split(',');
                                                                 try
                                                                 {
@@ -571,10 +662,13 @@ namespace avii
                                                                     {
                                                                         esn = arr[0].Trim();
                                                                     }
+                                                                    //if (arr.Length > 1)
+                                                                    //{
+                                                                    //    ICCID = arr[1].Trim();
+                                                                    //}
                                                                     if (arr.Length > 1)
                                                                     {
-                                                                        ICCID = arr[1].Trim();
-
+                                                                        location = arr[1].Trim();
                                                                     }
 
                                                                     if (string.IsNullOrEmpty(esn))
@@ -596,10 +690,12 @@ namespace avii
                                                                     //uploadEsn = true;
                                                                     esnDetail.ESN = esn;
                                                                     esnDetail.ICCID = ICCID;
+                                                                    esnDetail.WhLocation = location;
                                                                     esnList.Add(esnDetail);
 
                                                                     esn = string.Empty;
                                                                     ICCID = string.Empty;
+                                                                    location = string.Empty;
                                                                 }
                                                                 catch (ApplicationException ex)
                                                                 {
@@ -726,7 +822,7 @@ namespace avii
                                                                         lblMsg.Text = "The ESN/ICCID required for number of kits entered are not correct!";
                                                                     }
                                                                     if (!string.IsNullOrEmpty(errorMessage))
-                                                                        lblMsg.Text = errorMessage + " Customer order number already exists!";
+                                                                        lblMsg.Text = errorMessage;// + " Customer order number already exists!";
                                                                 }
                                                             }
                                                             else
@@ -902,7 +998,8 @@ namespace avii
             //    return;
             //}
             esnInfo.ESN = string.Empty;
-            esnInfo.ICCID = string.Empty;
+           // esnInfo.ICCID = string.Empty;
+            esnInfo.Location = string.Empty;
             esnList.Add(esnInfo);
             //DekitCSV esnInfo1 = new DekitCSV();
             
@@ -1024,5 +1121,18 @@ namespace avii
             return fileStoreLocation + actualFilename;
         }
 
+        protected void rptSKUs_ItemDataBound(object sender, RepeaterItemEventArgs e)
+        {
+            if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
+            {
+                DropDownList ddlWhLocation = e.Item.FindControl("ddlWhLocation") as DropDownList;
+                if (ddlWhLocation != null)
+                {
+                    BindWhLocation(ddlWhLocation);
+                }
+                
+
+            }
+        }
     }
 }

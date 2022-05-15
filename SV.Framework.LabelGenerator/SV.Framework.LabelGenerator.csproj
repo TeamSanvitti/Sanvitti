@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>SV.Framework.LabelGenerator</RootNamespace>
     <AssemblyName>SV.Framework.LabelGenerator</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -86,6 +86,7 @@
     <Compile Include="EwsLabelService.cs" />
     <Compile Include="GetConfigurations.cs" />
     <Compile Include="H3LabelOperation.cs" />
+    <Compile Include="H5LabelOperation.cs" />
     <Compile Include="PackingSlipOperation.cs" />
     <Compile Include="PalletCartonMap.cs" />
     <Compile Include="PosKitInfo.cs" />

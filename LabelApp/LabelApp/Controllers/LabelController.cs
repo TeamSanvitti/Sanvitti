@@ -273,67 +273,76 @@ namespace LabelApp.Controllers
                 else
                 {
                     string labelBase64 = svGeneralShipmentLabel.ShippingLabel;
-
-                    float width = 320, height = 520, envHeight = 500;
-                    byte[] imageBytes = Convert.FromBase64String(labelBase64);
-                    iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(imageBytes);
-                    if (svGeneralShipmentLabel.ShipVia.ToLower() == "first" && svGeneralShipmentLabel.ShipPackage.ToString().ToLower() == "letter")
+                    if (!string.IsNullOrEmpty(labelBase64))
                     {
-                        width = 500;
-                        height = 320;
-                        envHeight = 320;
-                    }
-                    image.ScaleToFit(width, height);
-                    using (System.IO.MemoryStream memoryStream = new System.IO.MemoryStream())
-                    {
-                        Document document = new Document();
-                        iTextSharp.text.Rectangle envelope = new iTextSharp.text.Rectangle(width, envHeight);
-                        document.SetPageSize(envelope);
-                        document.SetMargins(0, 0, 0, 0);
+                        float width = 320, height = 520, envHeight = 500;
+                        byte[] imageBytes = Convert.FromBase64String(labelBase64);
+                        iTextSharp.text.Image image = iTextSharp.text.Image.GetInstance(imageBytes);
+                        if (svGeneralShipmentLabel.ShipVia.ToLower() == "first" && svGeneralShipmentLabel.ShipPackage.ToString().ToLower() == "letter")
+                        {
+                            width = 500;
+                            height = 320;
+                            envHeight = 320;
+                        }
+                        image.ScaleToFit(width, height);
+                        using (System.IO.MemoryStream memoryStream = new System.IO.MemoryStream())
+                        {
+                            Document document = new Document();
+                            iTextSharp.text.Rectangle envelope = new iTextSharp.text.Rectangle(width, envHeight);
+                            document.SetPageSize(envelope);
+                            document.SetMargins(0, 0, 0, 0);
 
-                        PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
-                        document.Open();
+                            PdfWriter writer = PdfWriter.GetInstance(document, memoryStream);
+                            document.Open();
 
-                        document.Add(image);
-                        document.Close();
-                        var bytes = memoryStream.ToArray();
-                        // memoryStream.Close();
-                        // Base64String = "data:application/pdf;base64," + Convert.ToBase64String(bytes, 0, bytes.Length);
-                        Base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
-                        svGeneralShipmentLabel.ShippingLabel = Base64String;
-                        //string fileType = ".pdf";
-                        //string filename = DateTime.Now.Ticks + fileType;
-                        //Response.Clear();
-                        ////Response.ContentType = "application/pdf";
-                        //Response.ContentType = "application/octet-stream";
-                        //Response.AddHeader("content-disposition", "attachment;filename=" + filename);
-                        //Response.Buffer = true;
-                        //Response.Clear();
-                        //// var bytes = memSt.ToArray();
-                        //Response.OutputStream.Write(bytes, 0, bytes.Length);
-                        //Response.OutputStream.Flush();
+                            document.Add(image);
+                            document.Close();
+                            var bytes = memoryStream.ToArray();
+                            // memoryStream.Close();
+                            // Base64String = "data:application/pdf;base64," + Convert.ToBase64String(bytes, 0, bytes.Length);
+                            Base64String = Convert.ToBase64String(bytes, 0, bytes.Length);
+                            svGeneralShipmentLabel.ShippingLabel = Base64String;
+                            //string fileType = ".pdf";
+                            //string filename = DateTime.Now.Ticks + fileType;
+                            //Response.Clear();
+                            ////Response.ContentType = "application/pdf";
+                            //Response.ContentType = "application/octet-stream";
+                            //Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+                            //Response.Buffer = true;
+                            //Response.Clear();
+                            //// var bytes = memSt.ToArray();
+                            //Response.OutputStream.Write(bytes, 0, bytes.Length);
+                            //Response.OutputStream.Flush();
+                        }
+
                     }
+                  //  else
+                       // svGeneralShipmentLabel
                 }
-               
+
 
 
                 //byte[] bytes = Convert.FromBase64String(svGeneralShipmentLabel.ShippingLabel); //"data:image/png;base64," + 
+                if (svGeneralShipmentLabel.TrackingNumber != null)
+                {
+                    HttpContext.Session.SetString("Base64String", Base64String);
+                    HttpContext.Session.SetString("Carrier", svGeneralShipmentLabel.Carrier);
+                    HttpContext.Session.SetString("TrackingNumber", svGeneralShipmentLabel.TrackingNumber);
+                    HttpContext.Session.SetString("FinalPostage", svGeneralShipmentLabel.FinalPostage.ToString());
 
-                HttpContext.Session.SetString("Base64String", Base64String);
-                HttpContext.Session.SetString("Carrier", svGeneralShipmentLabel.Carrier);
-                HttpContext.Session.SetString("TrackingNumber", svGeneralShipmentLabel.TrackingNumber);
-                HttpContext.Session.SetString("FinalPostage", svGeneralShipmentLabel.FinalPostage.ToString());
 
 
+                    // TempData["Carrier"] = svGeneralShipmentLabel.Carrier;
+                    // TempData["TrackingNumber"] = svGeneralShipmentLabel.TrackingNumber;
 
-               // TempData["Carrier"] = svGeneralShipmentLabel.Carrier;
-               // TempData["TrackingNumber"] = svGeneralShipmentLabel.TrackingNumber;
+                    _svGeneralShipmentLabelVM.svGeneralShipmentLabel = svGeneralShipmentLabel;
+                    _db.svGeneralShipmentLabel.Add(_svGeneralShipmentLabelVM.svGeneralShipmentLabel);
+                    _db.SaveChanges();
 
-                _svGeneralShipmentLabelVM.svGeneralShipmentLabel = svGeneralShipmentLabel;
-                _db.svGeneralShipmentLabel.Add(_svGeneralShipmentLabelVM.svGeneralShipmentLabel);
-                _db.SaveChanges();
+                    return RedirectToAction("Download");
+                }
+                //return svGeneralShipmentLabel.FromAddress2;
 
-                return RedirectToAction("Download");
             }
 
             return View(_svGeneralShipmentLabelVM);

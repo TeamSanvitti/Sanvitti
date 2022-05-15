@@ -13,6 +13,10 @@
 		.ui-state-error-text{margin-left: 10px}
 	</style>
     <script type="text/javascript">
+        function OpenNewPage(url) {
+            window.open(url);
+        }
+
         <%--function Refresh() {
             //alert('refreshing..');
             var btnhdPrintlabel = document.getElementById("<%= btnhdDownload.ClientID %>");
@@ -283,7 +287,7 @@
                                             </ItemTemplate>
                                     </asp:TemplateField>  
                                       
-                                    <asp:TemplateField HeaderText="Requested By" SortExpression="EsnCount" HeaderStyle-CssClass="buttongrid"  ItemStyle-HorizontalAlign="Left" 
+                                    <asp:TemplateField HeaderText="Requested By" SortExpression="RequestedBy" HeaderStyle-CssClass="buttongrid"  ItemStyle-HorizontalAlign="Left" 
                                         ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                                         <ItemTemplate>
                                             <%# Eval("RequestedBy")%>                                    
@@ -314,6 +318,29 @@
                                             <%# Eval("Status")%>                                    
                                         </ItemTemplate>
                                     </asp:TemplateField> 
+                                    <asp:TemplateField HeaderText="" HeaderStyle-CssClass="buttongrid"  ItemStyle-HorizontalAlign="center"
+                                      ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
+                                        <ItemTemplate>
+                                            <table>
+                                                <tr valign="top">
+                                                    <td>
+                                                        <asp:ImageButton CssClass="button" ToolTip="View PO" CausesValidation="false" Height="18" OnCommand="imgView_Command" 
+                                                CommandArgument='<%# Eval("POID") %>'  
+                                             ID="imgView"  runat="server" ImageUrl="~/images/view.png"  >
+                                            </asp:ImageButton>      
+                                            &nbsp;
+                                                    </td>
+                                                    <td>
+                                                               <asp:ImageButton ID="imgPOA"  ToolTip="View Unprovioned ESN" OnCommand="imgPOA_Command" Height="18" CausesValidation="false" 
+                                            CommandArgument='<%# Eval("POID") %>' ImageUrl="~/Images/view2.png"  runat="server" />
+ 
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                            
+                                            
+                                        </ItemTemplate>
+                                    </asp:TemplateField>   
                                     
                                     <asp:TemplateField HeaderText="" HeaderStyle-CssClass="buttongrid"  ItemStyle-HorizontalAlign="center"
                                       ItemStyle-CssClass="copy10grey" ItemStyle-Width="2%">

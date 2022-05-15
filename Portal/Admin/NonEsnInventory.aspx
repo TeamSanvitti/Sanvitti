@@ -6,7 +6,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Non ESN Inventory</title>
+    <title>Inventory Receive - Accessory</title>
          <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
@@ -228,7 +228,7 @@
         <table cellSpacing="0" cellPadding="0" align="center" width="95%" border="0">
 		
 			<tr class="buttonlabel">
-				<td  class="buttonlabel">&nbsp;&nbsp;Inventory Receive
+				<td  class="buttonlabel">&nbsp;&nbsp;Inventory Receive - Accessory
 				</td>
 			</tr>            
         </table>
@@ -274,7 +274,7 @@
                                 </td>
                                 <td  align="left"  width="28%" >
                                      <asp:DropDownList ID="ddlReceivedAs" runat="server" class="copy10grey" Width="80%">
-                                         <asp:ListItem Text="None" Value="None"></asp:ListItem>
+                                         <%--<asp:ListItem Text="None" Value="None"></asp:ListItem>--%>
                                          <asp:ListItem Text="Product without ASN" Value="Product without ASN"></asp:ListItem>
                                          <asp:ListItem Text="Product with ASN" Value="Product with ASN"></asp:ListItem>
                                          <asp:ListItem Text="Others" Value="Others"></asp:ListItem>                                         
@@ -378,7 +378,7 @@
                             </tr>
                             <tr >
                                 <td  class="copy10grey" align="right" width="22%" >
-                                     Pieces per Box:&nbsp;
+                                     Pieces per Carton:&nbsp;
                                 </td>
                                 <td align="left"  width="28%">
                                    <asp:TextBox ID="txtBoxQty" runat="server" onkeypress="return isNumberKey(event);"  CssClass="copy10grey" MaxLength="20"  Width="80%"></asp:TextBox>

@@ -162,6 +162,10 @@ namespace avii
                 rdScan.Enabled = false;
 
                 dpCompany.SelectedValue = serviceOrder.CompanyId.ToString();
+                if(serviceOrder.CompanyId==470)
+                {
+                    btnPrint.Visible = false;
+                }
                 BindCompanySKU(serviceOrder.CompanyId);
                 txtCustOrderNo.Text = serviceOrder.CustomerOrderNumber;
                 txtOrderDate.Text = serviceOrder.OrderDate;
@@ -219,7 +223,7 @@ namespace avii
                 }
                 if (!IsMappedSKU)
                 {
-                    gvSOEsn.Columns[3].Visible = false;
+                    gvSOEsn.Columns[5].Visible = false;
                     gvSOEsn.Columns[4].Visible = false;
                 }
 
@@ -538,7 +542,7 @@ namespace avii
             ServiceOrders serviceOrder = new ServiceOrders();
             List<ServiceOrderDetail> esnList = new List<ServiceOrderDetail>();
             ServiceOrderDetail esnDetail = null;
-            string esn = string.Empty, iccid = string.Empty, sku = string.Empty;
+            string esn = string.Empty, iccid = string.Empty, sku = string.Empty, location = "";
             int.TryParse(txtOrderQty.Text.Trim(), out qty);
 
             //foreach (RepeaterItem item in rptESN.Items)
@@ -693,6 +697,7 @@ namespace avii
                 Label hdnMappedItemCompanyGUID = item.FindControl("hdnMappedItemCompanyGUID") as Label;
                 Label hdSKU = item.FindControl("hdSKU") as Label;
                 Label hdUPC = item.FindControl("hdUPC") as Label;
+                Label hdWhLocation = item.FindControl("hdWhLocation") as Label;
                 HiddenField hdRowNumber = item.FindControl("hdRowNumber") as HiddenField;
                 TextBox txtICCID = item.FindControl("txtICCID") as TextBox;
 
@@ -710,6 +715,7 @@ namespace avii
                 esnDetail.ItemCompanyGUID = ItemCompanyGUID;
                 esnDetail.MappedItemCompanyGUID = mappedItemCompanyGUID;
                 esnDetail.RowNumber = rowNumber;
+                esnDetail.WhLocation = hdWhLocation.Text;
                 esnList.Add(esnDetail);
             }
 
@@ -723,7 +729,7 @@ namespace avii
             serviceOrder.KittedSKUId = Convert.ToInt32(ddlKitted.SelectedValue);
 
 
-            int returnResult = serviceOrderOperation.ServiceOrder_InsertUpdate_New(serviceOrder, userId, out errorMessage);
+            int returnResult = serviceOrderOperation.ServiceOrder_InsertUpdate_New2(serviceOrder, userId, out errorMessage);
             if (returnResult > 0 && string.IsNullOrEmpty(errorMessage))
             {
                 lblMsg.Text = "Submitted successfully";
@@ -742,10 +748,10 @@ namespace avii
                 btnSubmit.Visible = false;
                 btnPrint.Visible = true;
                 //btnDownload.Visible = true;
-                gvSOEsn.Columns[6].Visible = true;
+                gvSOEsn.Columns[7].Visible = true;
                 if (!IsMappedSKU)
                 {
-                    gvSOEsn.Columns[3].Visible = false;
+                    gvSOEsn.Columns[6].Visible = false;
                     gvSOEsn.Columns[4].Visible = false;
                     gvSOEsn.Columns[5].Visible = false;
 
@@ -1391,6 +1397,7 @@ namespace avii
                         }
                     }
                 }
+                sb.Append("Location");
                 Session["filecolumns"] = sb.ToString();
                 sb.Append("\r\n");
 
@@ -1654,6 +1661,10 @@ namespace avii
                             }
                         }
                     }
+
+                    dt.Columns.Add("Location");
+                    sbColumns.Append("Location,");
+
                     fileColumns = sbColumns.ToString();
 
                 }
@@ -1722,7 +1733,7 @@ namespace avii
                                                 using (StreamReader sr = new StreamReader(fileName))
                                                 {
                                                     string line;
-                                                    string SKU, esn, ICCID;
+                                                    string SKU, esn, ICCID, Location;
                                                     int i = 0;
                                                     while ((line = sr.ReadLine()) != null)
                                                     {
@@ -1778,7 +1789,7 @@ namespace avii
                                                         else if (!string.IsNullOrEmpty(line) && i > 0)
                                                         {
                                                             List<string> columnValues = new List<string>();
-                                                            SKU = esn = ICCID = string.Empty;// fmupc = lteICCID = lteIMSI = otksl = akey = msl = string.Empty;
+                                                            SKU = esn = ICCID = Location = string.Empty;// fmupc = lteICCID = lteIMSI = otksl = akey = msl = string.Empty;
                                                             string[] arr = line.Split(',');
                                                             try
                                                             {
@@ -1873,6 +1884,7 @@ namespace avii
                                                                 esnDetail.ESN = row[col.ColumnName].ToString();
                                                                 esnDetail.ICCID = "";
                                                                 esnDetail.RowNumber = rowRumber;
+                                                                esnDetail.WhLocation = row["Location"].ToString();
                                                                 esnList.Add(esnDetail);
                                                                 rowRumber = rowRumber + 1;
                                                             }
@@ -1954,7 +1966,7 @@ namespace avii
                                                             string AlreadyInUseICCIDMessase = string.Empty, ICCIDNotExistsMessase = string.Empty, InvalidICCIDMessase = string.Empty, AlreadyMappedESNMessase = string.Empty;
 
                                                             //List<ServiceOrderDetail> esnList2 = ServiceOrderOperation.ValidateServiceOrder(serviceOrder, out errorMessage, out IsValidate);
-                                                            esnList = serviceOrderOperation.Validate_ServiceOrder_New3(serviceOrder, out errorMessage, out IsValidate);
+                                                            esnList = serviceOrderOperation.Validate_ServiceOrder_New4(serviceOrder, out errorMessage, out IsValidate);
                                                             if (esnList != null && esnList.Count > 0)
                                                             {
                                                                 foreach (ServiceOrderDetail item in esnList)
@@ -1972,10 +1984,10 @@ namespace avii
                                                                     TextBox txtICCID = item.FindControl("txtICCID") as TextBox;
                                                                     txtICCID.Enabled = false;
                                                                 }
-                                                                gvSOEsn.Columns[6].Visible = false;
+                                                                gvSOEsn.Columns[7].Visible = false;
                                                                 if (!IsMappedSKU)
                                                                 {
-                                                                    gvSOEsn.Columns[3].Visible = false;
+                                                                    gvSOEsn.Columns[6].Visible = false;
                                                                     gvSOEsn.Columns[4].Visible = false;
                                                                     gvSOEsn.Columns[5].Visible = false;
                                                                 }
@@ -2007,8 +2019,9 @@ namespace avii
                                                                     {
                                                                         lblMsg.Text = "The ESN/ICCID required for number of kits entered are not correct!";
                                                                     }
+
                                                                     if (!string.IsNullOrEmpty(errorMessage))
-                                                                        lblMsg.Text = errorMessage + " Customer order number already exists!";
+                                                                        lblMsg.Text = errorMessage;// + " Customer order number already exists!";
                                                                 }
                                                             }
                                                             else
