@@ -122,7 +122,7 @@ namespace LabelApp.Models
             }
             else
                 labelInfo.PackageShape = SV.Framework.Common.LabelGenerator.ShipPackageShape.Letter;
-            string Endicia = "AccountID=1353742,RequesterID=Lang,PassPhrase=12031Lan1@"; //12031Lan1@
+            string Endicia = "AccountID=1353742,RequesterID=Lang,PassPhrase=L@np3c4080";//12031Lan1@"; //12031Lan1@
             string shipStationApiUrl = "", shipStationAuthString = "";
             shipStationApiUrl = "https://ssapi.shipstation.com/";
             shipStationAuthString = "Basic M2NhOWRhM2ViZGIyNDM3MTgyNmJiY2FjMGY3YjMzY2Q6MjAzNDYyZTI0Y2EzNDAyYmFmNGE4ZmFlYmM1YTZkMTE=";

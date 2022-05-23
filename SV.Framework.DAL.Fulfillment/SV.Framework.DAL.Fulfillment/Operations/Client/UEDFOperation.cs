@@ -169,6 +169,7 @@ namespace SV.Framework.DAL.Fulfillment
                                             device.meidHex = clsGeneral.getColumnData(dataRow3, "MeidHex", string.Empty, false) as string;
                                             device.meidDec = clsGeneral.getColumnData(dataRow3, "MeidDec", string.Empty, false) as string;
                                             device.imeiDec = clsGeneral.getColumnData(dataRow3, "ESN", string.Empty, false) as string;
+                                            device.imeiDec2 = clsGeneral.getColumnData(dataRow3, "IMEI2", string.Empty, false) as string;
                                             device.serialNumber = clsGeneral.getColumnData(dataRow3, "serialNumber", string.Empty, false) as string;
                                             device.msl = clsGeneral.getColumnData(dataRow3, "MSL", string.Empty, false) as string;
                                             device.otksl = clsGeneral.getColumnData(dataRow3, "otksl", string.Empty, false) as string;

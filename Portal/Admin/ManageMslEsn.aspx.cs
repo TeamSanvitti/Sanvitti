@@ -76,11 +76,66 @@ namespace avii.Admin
                     txtShipDate.Text = currentDate;
                     txtOrderNumber.Text = OerderNo;
                     txtOrderNumber.Enabled = false;
+
+                    if(Session["orderTransferID"] != null)
+                    {
+                        Int64 orderTransferID = Convert.ToInt64(Session["orderTransferID"]);
+                        GetTransferOrderDetail(orderTransferID);
+                        Session["orderTransferID"] = null;
+                    }
                 }
                 //else
                 //EsnHeaderId = false;
                 //trSKU.Visible = true;
             }
+        }
+        private void GetTransferOrderDetail(Int64 orderTransferID)
+        {
+            SV.Framework.Inventory.TransferOrderOperation orderOperations = SV.Framework.Inventory.TransferOrderOperation.CreateInstance<SV.Framework.Inventory.TransferOrderOperation>();
+            TransferOrder transferOrder = orderOperations.GetTransferOrderDetail(orderTransferID);
+            int companyID = 0, orderQty = 0;
+            ViewState["orderTransferID"] = orderTransferID;
+            ViewState["IsESNRequired"] = 1;
+            if (transferOrder != null)
+            {
+                if (Session["orderqty"] != null)
+                {
+                    orderQty = Convert.ToInt32(Session["orderqty"]);
+                    txtOrderQty.Text = orderQty.ToString();
+                    txtShipQty.Text = txtOrderQty.Text;
+                }
+
+                dpCompany.SelectedValue = transferOrder.CustomerInfo;
+                dpCompany.Enabled = false;               
+
+                string[] arr = transferOrder.CustomerInfo.Split(',');
+                companyID = Convert.ToInt32(arr[0]);
+                ViewState["CompanyAccountNumber"] = arr[1];
+            }
+            if (companyID > 0)
+            {
+                List<ItemCategory> categoryList = ViewState["categoryList"] as List<ItemCategory>;
+                if (categoryList != null && categoryList.Count > 0)
+                {
+                    var category = (from item in categoryList where item.CategoryGUID.Equals(transferOrder.CategoryID) select item).ToList();
+                    if (category != null && category.Count > 0)
+                    {
+                        ddlCategory.SelectedValue = category[0].CategoryWithProductAllowed;// transferOrder.CategoryID.ToString();
+                        ddlCategory.Enabled = false;
+                        //ddlCategory.SelectedIndex = 3;
+                    }
+                }
+                BindCompanySKU(companyID);
+                ddlSKU.SelectedValue = transferOrder.DestinationItemCompanyGUID.ToString();
+                ddlSKU.Enabled = false;
+            }
+            else
+            {
+                //  trSKU.Visible = true;
+                ddlSKU.DataSource = null;
+                ddlSKU.DataBind();
+            }
+        
         }
         protected void GetEsnHeaderDetail(int esnHeaderId)
         {
@@ -108,7 +163,7 @@ namespace avii.Admin
                 BindSKUs(esnHeader.CategoryID);
 
                 ddlSKU.SelectedValue = esnHeader.ItemCompanyGUID.ToString();
-                ddlReceivedAs.SelectedValue = esnHeader.ReceivedAs;
+               // ddlReceivedAs.SelectedValue = esnHeader.ReceivedAs;
                 chkInspection.Checked = esnHeader.IsInspection;
 
                 txtComment.Text = esnHeader.CustomerOrderNumber;
@@ -569,13 +624,17 @@ namespace avii.Admin
         }
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            string receivedAs = ddlReceivedAs.SelectedValue;
+            string receivedAs = "Product without ASN";// ddlReceivedAs.SelectedValue;
             bool IsInspection = chkInspection.Checked;
             int itemCompanyGUID, insertCount, updateCount, esnHeaderId;
+            Int64 orderTransferID=0;
             EsnHeaderUpload esnHeaderUpload = new EsnHeaderUpload();
             itemCompanyGUID = insertCount = updateCount = esnHeaderId = 0;
             bool returnValue = false;
             string errorMessage = string.Empty, companyAccountNumber = string.Empty;
+            if (ViewState["orderTransferID"] != null)
+                orderTransferID = Convert.ToInt64(ViewState["orderTransferID"]);
+
             if (ViewState["CompanyAccountNumber"] != null)
                 companyAccountNumber = Convert.ToString(ViewState["CompanyAccountNumber"]);
             if (ViewState["headerid"] != null)
@@ -653,6 +712,8 @@ namespace avii.Admin
             esnHeaderUpload.IsESNRequired = true;
             esnHeaderUpload.IsInspection = IsInspection;
             esnHeaderUpload.ReceivedAs = receivedAs;
+            esnHeaderUpload.SupplierName = txtSuppliername.Text.Trim();
+
             int userID = 0;
             avii.Classes.UserInfo userInfo = Session["userInfo"] as avii.Classes.UserInfo;
             if (userInfo != null)
@@ -709,6 +770,7 @@ namespace avii.Admin
                     //{
                     //    uploadDate = Convert.ToDateTime("01/01/1900");
                     //}
+
                     uploadDate = DateTime.SpecifyKind(uploadDate, DateTimeKind.Unspecified);
 
                     if (string.IsNullOrEmpty(errorMessage))
@@ -717,7 +779,7 @@ namespace avii.Admin
                         esnHeaderUpload.ESNs = esnList;
 
 
-                        returnValue = mslOperation.MslEsnInsertUpdateNew(esnHeaderUpload, filename, out insertCount, out updateCount, out errorMessage);
+                        returnValue = mslOperation.MslEsnInsertUpdateNew(esnHeaderUpload, filename, orderTransferID, out insertCount, out updateCount, out errorMessage);
                         if (returnValue)
                         {
                             if (esnHeaderId == 0)
@@ -842,7 +904,7 @@ namespace avii.Admin
                         List<EsnUploadNew> esnList = new List<EsnUploadNew>();
                         esnHeaderUpload.ESNs = esnList;
 
-                        returnValue = mslOperation.MslEsnInsertUpdateNew(esnHeaderUpload, filename, out insertCount, out updateCount, out errorMessage);
+                        returnValue = mslOperation.MslEsnInsertUpdateNew(esnHeaderUpload, filename, 0, out insertCount, out updateCount, out errorMessage);
                         if (returnValue)
                         {
                             if (esnHeaderId == 0)
@@ -1020,7 +1082,7 @@ namespace avii.Admin
                             EsnUploadNew assignESN = null;
                             List<EsnUploadNew> esnList = new List<EsnUploadNew>();
 
-                            if (extension == ".csv")
+                             if (extension == ".csv")
                             {
                                 try
                                 {

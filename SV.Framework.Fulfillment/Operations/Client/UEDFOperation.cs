@@ -97,6 +97,7 @@ namespace SV.Framework.Fulfillment
                     {
                         XElement device = new XElement(tns + "device");
                         XElement serialization = new XElement(tns + "serialization");
+
                         if (edfFileInfo.edfData.product.edfSerialType.ToUpper() == "H")
                         {
                             XElement meidHex = new XElement(tns + "meidHex", device1.meidHex);
@@ -104,9 +105,30 @@ namespace SV.Framework.Fulfillment
 
                             XElement meidDec = new XElement(tns + "meidDec", device1.meidDec);
                             serialization.Add(meidDec);
+
+                            XElement imeiDec = new XElement(tns + "imeiDec", device1.imeiDec);
+                            serialization.Add(imeiDec);
                         }
-                        XElement imeiDec = new XElement(tns + "imeiDec", device1.imeiDec);
-                        serialization.Add(imeiDec);
+                        else if (edfFileInfo.edfData.product.edfSerialType.ToUpper() == "H5")
+                        {
+                            XElement meidHex = new XElement(tns + "meidHex", device1.meidHex);
+                            serialization.Add(meidHex);
+
+                            XElement meidDec = new XElement(tns + "meidDec", device1.meidDec);
+                            serialization.Add(meidDec);
+
+                            XElement imeiDec = new XElement(tns + "imeiDec", device1.imeiDec);
+                            serialization.Add(imeiDec);
+
+                            XElement imeiDec2 = new XElement(tns + "imeiDec2", device1.imeiDec2);
+                            serialization.Add(imeiDec2);
+                        }
+                        else if (edfFileInfo.edfData.product.edfSerialType.ToUpper() == "H3")
+                        {
+                            XElement imeiDec = new XElement(tns + "imeiDec", device1.imeiDec);
+                            serialization.Add(imeiDec);
+
+                        }
 
                         //XElement serialNumber = new XElement(tns + "serialNumber", device1.serialNumber);
                         //serialization.Add(serialNumber);

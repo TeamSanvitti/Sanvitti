@@ -137,7 +137,7 @@
                     File format sample: &nbsp;
                             </td>
                 <td class="copy10grey" align="left">
-                    Seq.No.,BATCH,ESN,MeidHex,MeidDec,Location,MSL,OTKSL,SerialNumber,BoxID <asp:LinkButton ID="lnkDownload" runat="server"   Text="Download file format" OnClick="lnkDownload_Click"></asp:LinkButton>
+                   <b> Seq.No.,BATCH,ESN1</b>,ESN2,<b>MeidHex,MeidDec,Location,MSL,OTKSL,SerialNumber,BoxID</b> <asp:LinkButton ID="lnkDownload" runat="server"   Text="Download file format" OnClick="lnkDownload_Click"></asp:LinkButton>
                     <%--<asp:Label ID="lblUploadDate" runat="server" Text=",uploaddate"></asp:Label>--%>
 
                 </td>

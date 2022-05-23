@@ -263,7 +263,7 @@ namespace avii.ESN
                                             using (StreamReader sr = new StreamReader(fileName))
                                             {
                                                 string line;
-                                                string SNo, esn, batch, lteICCID, MeidHex, MeidDec, Location, MSL, OTKSL, SerialNumber, BoxID;//, uploaddate;
+                                                string SNo, esn, imei2, batch, lteICCID, MeidHex, MeidDec, Location, MSL, OTKSL, SerialNumber, BoxID;//, uploaddate;
                                                 int i = 0;
                                                 while ((line = sr.ReadLine()) != null)
                                                 {
@@ -273,7 +273,7 @@ namespace avii.ESN
                                                         line = line.ToLower();
 
                                                         string[] headerArray = line.Split(',');
-                                                        if (headerArray.Length == 2 || headerArray.Length <= 10)
+                                                        if (headerArray.Length == 2 || headerArray.Length <= 11)
                                                         {
                                                             if (headerArray[0].Trim() != "seq.no.")
                                                             {
@@ -286,55 +286,60 @@ namespace avii.ESN
                                                                 columnsIncorrectFormat = true;
                                                             }
 
-                                                            if (headerArray[2].Trim() != "esn")
+                                                            if (headerArray[2].Trim() != "esn1")
                                                             {
                                                                 sbInvalidColumns.Append(headerArray[2] + ",");
 
                                                                 columnsIncorrectFormat = true;
                                                             }
-
-                                                            if (headerArray.Length > 2 && headerArray[3].Trim() != "" && headerArray[3].Trim() != "meidhex")
+                                                            if (headerArray.Length > 3 && headerArray[3].Trim() != "" && headerArray[3].Trim() != "esn2")
                                                             {
                                                                 sbInvalidColumns.Append(headerArray[3] + ",");
 
                                                                 columnsIncorrectFormat = true;
                                                             }
-                                                            if (headerArray.Length > 4 && headerArray[4].Trim() != "" && headerArray[4].Trim() != "meiddec")
+                                                            if (headerArray.Length > 4 && headerArray[4].Trim() != "" && headerArray[4].Trim() != "meidhex")
                                                             {
                                                                 sbInvalidColumns.Append(headerArray[4] + ",");
 
                                                                 columnsIncorrectFormat = true;
                                                             }
-                                                            
-
-                                                            if (headerArray.Length > 5 && headerArray[5].Trim() != "" && headerArray[5].Trim() != "location")
+                                                            if (headerArray.Length > 5 && headerArray[5].Trim() != "" && headerArray[5].Trim() != "meiddec")
                                                             {
                                                                 sbInvalidColumns.Append(headerArray[5] + ",");
 
                                                                 columnsIncorrectFormat = true;
                                                             }
-                                                            if (headerArray.Length > 6 && headerArray[6].Trim() != "" && headerArray[6].Trim() != "msl")
+                                                            
+
+                                                            if (headerArray.Length > 6 && headerArray[6].Trim() != "" && headerArray[6].Trim() != "location")
                                                             {
                                                                 sbInvalidColumns.Append(headerArray[6] + ",");
 
                                                                 columnsIncorrectFormat = true;
                                                             }
-
-                                                            if (headerArray.Length > 7 && headerArray[7].Trim() != "" && headerArray[7].Trim() != "otksl")
+                                                            if (headerArray.Length > 7 && headerArray[7].Trim() != "" && headerArray[7].Trim() != "msl")
                                                             {
                                                                 sbInvalidColumns.Append(headerArray[7] + ",");
 
                                                                 columnsIncorrectFormat = true;
                                                             }
-                                                            if (headerArray.Length > 8 && headerArray[8].Trim() != "" && headerArray[8].Trim() != "serialnumber")
+
+                                                            if (headerArray.Length > 8 && headerArray[8].Trim() != "" && headerArray[8].Trim() != "otksl")
                                                             {
                                                                 sbInvalidColumns.Append(headerArray[8] + ",");
 
                                                                 columnsIncorrectFormat = true;
                                                             }
-                                                            if (headerArray.Length > 9 && headerArray[9].Trim() != "" && headerArray[9].Trim() != "boxid")
+                                                            if (headerArray.Length > 9 && headerArray[9].Trim() != "" && headerArray[9].Trim() != "serialnumber")
                                                             {
                                                                 sbInvalidColumns.Append(headerArray[9] + ",");
+
+                                                                columnsIncorrectFormat = true;
+                                                            }
+                                                            if (headerArray.Length > 10 && headerArray[10].Trim() != "" && headerArray[10].Trim() != "boxid")
+                                                            {
+                                                                sbInvalidColumns.Append(headerArray[10] + ",");
 
                                                                 columnsIncorrectFormat = true;
                                                             }
@@ -351,7 +356,7 @@ namespace avii.ESN
                                                     }
                                                     else if (!string.IsNullOrEmpty(line) && i > 0)
                                                     {
-                                                        SNo = esn = batch = lteICCID = MeidHex = MeidDec = Location = MSL = OTKSL = SerialNumber = BoxID = string.Empty;
+                                                        SNo = esn = imei2 = batch = lteICCID = MeidHex = MeidDec = Location = MSL = OTKSL = SerialNumber = BoxID = string.Empty;
                                                         //poNum = sku = customerAccountNumber = fmupc = esn = lteICCID = lteIMSI = otksl = akey = msl = string.Empty;
                                                         string[] arr = line.Split(',');
                                                         try
@@ -377,38 +382,38 @@ namespace avii.ESN
                                                                 //    sbHex.Append(MeidHex + ",");
                                                                 //}
                                                             }
-                                                            if (arr.Length > 3)
+                                                            if(arr.Length > 3)
                                                             {
-                                                                MeidHex = arr[3].Trim();
-                                                                //if (!string.IsNullOrEmpty(MeidDec) && !IsWholeNumber(MeidDec))
-                                                                //{
-                                                                //    sbDec.Append(MeidDec + ",");
-                                                                //}
+                                                                imei2 = arr[3].Trim();
                                                             }
                                                             if (arr.Length > 4)
                                                             {
-                                                                MeidDec = arr[4].Trim();
+                                                                MeidHex = arr[4].Trim();                                                                
                                                             }
                                                             if (arr.Length > 5)
                                                             {
-                                                                Location = arr[5].Trim();
+                                                                MeidDec = arr[5].Trim();
                                                             }
                                                             if (arr.Length > 6)
                                                             {
-                                                                MSL = arr[6].Trim();
+                                                                Location = arr[6].Trim();
                                                             }
                                                             if (arr.Length > 7)
                                                             {
-                                                                OTKSL = arr[7].Trim();
+                                                                MSL = arr[7].Trim();
                                                             }
                                                             if (arr.Length > 8)
                                                             {
-                                                                SerialNumber = arr[8].Trim();
+                                                                OTKSL = arr[8].Trim();
                                                             }
-
                                                             if (arr.Length > 9)
                                                             {
-                                                                BoxID = arr[9].Trim();
+                                                                SerialNumber = arr[9].Trim();
+                                                            }
+
+                                                            if (arr.Length > 10)
+                                                            {
+                                                                BoxID = arr[10].Trim();
                                                             }
 
                                                             if (string.IsNullOrEmpty(esn))
@@ -419,6 +424,7 @@ namespace avii.ESN
                                                             {
                                                                 assignESN.SNo = SNo;
                                                                 assignESN.ESN = esn;
+                                                                assignESN.IMEI2 = imei2;
                                                                 assignESN.MslNumber = batch;
                                                                 assignESN.ICC_ID = lteICCID;
                                                                 assignESN.MeidHex = MeidHex;
@@ -432,6 +438,7 @@ namespace avii.ESN
                                                                 esnList.Add(assignESN);
                                                                 SNo = string.Empty;
                                                                 esn = string.Empty;
+                                                                imei2 = string.Empty;
                                                                 MeidHex = string.Empty;
                                                                 MeidDec = string.Empty;
                                                                 Location = string.Empty;
@@ -469,6 +476,7 @@ namespace avii.ESN
                                                         esnInfo = new ESNAuthorization();
                                                        // esnInfo.ESN = ITEM.ESN;
                                                         esnInfo.ESN = ITEM.ESN;
+                                                        esnInfo.IMEI2 = ITEM.IMEI2;
                                                         esnInfo.MeidDec = ITEM.MeidDec;
                                                         esnInfo.MeidHex = ITEM.MeidHex;
                                                         esnInfo.MSL = string.IsNullOrEmpty(ITEM.MSL) ? "000000" : ITEM.MSL;
@@ -489,6 +497,7 @@ namespace avii.ESN
                                                         esnAuthInfo = new EsnUploadNew();
                                                         esnAuthInfo.SNo = ITEM.SNo;
                                                         esnAuthInfo.ESN = ITEM.ESN;
+                                                        esnAuthInfo.IMEI2 = ITEM.IMEI2;
                                                         esnAuthInfo.MeidDec = ITEM.MeidDec;
                                                         esnAuthInfo.MeidHex = ITEM.MeidHex;
                                                         esnAuthInfo.MSL = ITEM.MSL;
@@ -1081,12 +1090,12 @@ namespace avii.ESN
             lblMsg.Text = string.Empty;
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
-            sb.Append("Seq.No.,BATCH,ESN,MeidHex,MeidDec,Location,MSL,OTKSL,SerialNumber,BoxID" + Environment.NewLine);
+            sb.Append("Seq.No.,BATCH,ESN1,ESN2,MeidHex,MeidDec,Location,MSL,OTKSL,SerialNumber,BoxID" + Environment.NewLine);
             int itr = 1;
             int totalrows = 10;
             for (int i=1;i<=totalrows;i++)
             {
-                sb.Append(i + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + Environment.NewLine);
+                sb.Append(i + "," + "" + "," + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + "," + "" + Environment.NewLine);
             }
             //string string2CSV = "Seq.No.,BATCH,ESN,MeidHex,MeidDec,Location,MSL,OTKSL,SerialNumber,BoxID" + Environment.NewLine;
             string string2CSV = sb.ToString(); //"Seq.No.,BATCH,ESN,MeidHex,MeidDec,Location,MSL,OTKSL,SerialNumber,BoxID" + Environment.NewLine;
@@ -1206,6 +1215,7 @@ namespace avii.ESN
                         //{
                         //    KittedItemCompanyGUID = Convert.ToInt32(ddlKitSKU.SelectedValue);
                         //}
+
                         int SequenceNumber = 0; //EsnAuthorizationOperation.ESNAuthorizationInsert(ESNs, esnauthList, ItemCompanyGUID, userID, KittedItemCompanyGUID);
 
                         if (ViewState["SequenceNumber"] != null)
@@ -1297,7 +1307,7 @@ namespace avii.ESN
                 int companyID = Convert.ToInt32(dpCompany.SelectedValue);
 
                 List<EsnUploadNew> esnauthList = Session["esnauthlist"] as List<EsnUploadNew>;
-                DataTable dt = DishLabelOperations.ESNData(esnauthList);
+                DataTable dt = DishLabelOperations.ESNDataNew(esnauthList);
                 List<SV.Framework.LabelGenerator.PosKitInfo> posKITs = new List<SV.Framework.LabelGenerator.PosKitInfo>();
                 SV.Framework.LabelGenerator.PosKitInfo posKitInfo = default;
                 List<SV.Framework.LabelGenerator.KitBoxInfo> kitBoxInfos = default;
@@ -1314,6 +1324,7 @@ namespace avii.ESN
                         posKitInfo = new SV.Framework.LabelGenerator.PosKitInfo();
                         posKitInfo.CompanyName = item.CompanyName;
                         posKitInfo.ESN = item.ESN;
+                        posKitInfo.IMEI2 = item.IMEI2;
                         posKitInfo.HEX = item.HEX;
                         posKitInfo.HWVersion = item.HWVersion;
                         posKitInfo.ICCID = item.ICCID;
@@ -1340,50 +1351,59 @@ namespace avii.ESN
                     if (posKITs != null && posKITs.Count > 0)
                     {
                         string ProductType = posKITs[0].ProductType;
-                        // if (ProductType.ToUpper() == "H3")
-                        if (posKITs[0].OSType.ToUpper() == "ANDROID")
+                        MemoryStream memSt = null;// = new MemoryStream();
+
+                        if (ProductType.ToUpper() == "H5")
+                        {
+                            SV.Framework.LabelGenerator.H5LabelOperation h5LabelOperation = new SV.Framework.LabelGenerator.H5LabelOperation();
+
+                            memSt = h5LabelOperation.POSKITLabelPdfTarCode(posKITs);
+                            Page.ClientScript.RegisterStartupScript(this.GetType(), "stop loader", "StopProgress()", true);
+                        }
+                        else  if (posKITs[0].OSType.ToUpper() == "ANDROID")
                         {
                             SV.Framework.LabelGenerator.H3LabelOperation h3LabelOperation = new SV.Framework.LabelGenerator.H3LabelOperation();
 
-                            var memSt = h3LabelOperation.POSKITLabelPdfTarCode(posKITs);
+                            memSt = h3LabelOperation.POSKITLabelPdfTarCode(posKITs);
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "stop loader", "StopProgress()", true);
                             //var memSt = slabel.ExportToPDF(models);
-                            if (memSt != null)
-                            {
-                                string fileType = ".pdf";
-                                string filename = DateTime.Now.Ticks + fileType;
-                                Response.Clear();
-                                //Response.ContentType = "application/pdf";
-                                Response.ContentType = "application/octet-stream";
-                                Response.AddHeader("content-disposition", "attachment;filename=" + filename);
-                                Response.Buffer = true;
-                                Response.Clear();
-                                var bytes = memSt.ToArray();
-                                Response.OutputStream.Write(bytes, 0, bytes.Length);
-                                Response.OutputStream.Flush();
-                                lblMsg.Text = "Label generated successfully.";
-                            }
+                            
                         }
                         else
                         {
-                            var memSt = dishLabelOperation.POSKITLabelPdfTarCode(posKITs);
+                            memSt = dishLabelOperation.POSKITLabelPdfTarCode(posKITs);
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "stop loader", "StopProgress()", true);
                             //var memSt = slabel.ExportToPDF(models);
-                            if (memSt != null)
-                            {
-                                string fileType = ".pdf";
-                                string filename = DateTime.Now.Ticks + fileType;
-                                Response.Clear();
-                                //Response.ContentType = "application/pdf";
-                                Response.ContentType = "application/octet-stream";
-                                Response.AddHeader("content-disposition", "attachment;filename=" + filename);
-                                Response.Buffer = true;
-                                Response.Clear();
-                                var bytes = memSt.ToArray();
-                                Response.OutputStream.Write(bytes, 0, bytes.Length);
-                                Response.OutputStream.Flush();
-                                lblMsg.Text = "Label generated successfully.";
-                            }
+                            //if (memSt != null)
+                            //{
+                            //    string fileType = ".pdf";
+                            //    string filename = DateTime.Now.Ticks + fileType;
+                            //    Response.Clear();
+                            //    //Response.ContentType = "application/pdf";
+                            //    Response.ContentType = "application/octet-stream";
+                            //    Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+                            //    Response.Buffer = true;
+                            //    Response.Clear();
+                            //    var bytes = memSt.ToArray();
+                            //    Response.OutputStream.Write(bytes, 0, bytes.Length);
+                            //    Response.OutputStream.Flush();
+                            //    lblMsg.Text = "Label generated successfully.";
+                            //}
+                        }
+                        if (memSt != null)
+                        {
+                            string fileType = ".pdf";
+                            string filename = DateTime.Now.Ticks + fileType;
+                            Response.Clear();
+                            //Response.ContentType = "application/pdf";
+                            Response.ContentType = "application/octet-stream";
+                            Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+                            Response.Buffer = true;
+                            Response.Clear();
+                            var bytes = memSt.ToArray();
+                            Response.OutputStream.Write(bytes, 0, bytes.Length);
+                            Response.OutputStream.Flush();
+                            lblMsg.Text = "Label generated successfully.";
                         }
 
                     }

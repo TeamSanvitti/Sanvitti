@@ -308,6 +308,7 @@ namespace avii.ESN
                     {
                         esnInfo = new ESNAuthorization();
                         esnInfo.ESN = ITEM.ESN;
+                        esnInfo.IMEI2 = ITEM.IMEI2;
                         esnInfo.MeidDec = ITEM.MeidDec;
                         esnInfo.MeidHex = ITEM.MeidHex;
                         esnInfo.MSL = string.IsNullOrEmpty(ITEM.MSL) ? "000000" : ITEM.MSL;
@@ -434,10 +435,10 @@ namespace avii.ESN
                         System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
                         //string string2CSV = "";// "BATCH,ESN,MeidHex,MeidDec,Location,MSL,OTKSL,SerialNumber" + Environment.NewLine;
-                        sb.Append("Seq.No.,BATCH,ESN,MeidHex,MeidDec,Location,MSL,OTKSL,SerialNumber,BoxID" + Environment.NewLine);
+                        sb.Append("Seq.No.,BATCH,ESN1,ESN2,MeidHex,MeidDec,Location,MSL,OTKSL,SerialNumber,BoxID" + Environment.NewLine);
                         foreach (EsnUploadNew item in esnList)
                         {
-                            sb.Append(item.SNo + "," + item.MslNumber + "," + item.ESN + "," + item.MeidHex + "," + item.MeidDec + "," + item.Location + "," + item.MSL + "," + item.OTKSL + "," + item.SerialNumber + "," + item.BoxID + Environment.NewLine);
+                            sb.Append(item.SNo + "," + item.MslNumber + "," + item.ESN + "," + item.IMEI2 + "," + item.MeidHex + "," + item.MeidDec + "," + item.Location + "," + item.MSL + "," + item.OTKSL + "," + item.SerialNumber + "," + item.BoxID + Environment.NewLine);
                         }
 
                         Session["string2CSV"] = sb.ToString();
@@ -624,7 +625,7 @@ namespace avii.ESN
                     List<EsnUploadNew> esnList = xmlSer.Deserialize(stringReader) as List<EsnUploadNew>;
                     List<SV.Framework.LabelGenerator.PosKitInfo> posKITs = new List<SV.Framework.LabelGenerator.PosKitInfo>();
                     SV.Framework.LabelGenerator.PosKitInfo posKitInfo = default;
-                    DataTable dt = dishLabelOperations.ESNData(esnList);
+                    DataTable dt = dishLabelOperations.ESNDataNew(esnList);
 
                     List<SV.Framework.Models.Fulfillment.PosKitInfo> posKITsdb = dishLabelOperations.GetPosLabels(companyID, ESNAuthorizationID, dt);
                     List<SV.Framework.LabelGenerator.KitBoxInfo> kitBoxInfos = default;
@@ -640,6 +641,7 @@ namespace avii.ESN
                             posKitInfo = new SV.Framework.LabelGenerator.PosKitInfo();
                             posKitInfo.CompanyName = item.CompanyName;
                             posKitInfo.ESN = item.ESN;
+                            posKitInfo.IMEI2 = item.IMEI2;
                             posKitInfo.HEX = item.HEX;
                             posKitInfo.HWVersion = item.HWVersion;
                             posKitInfo.ICCID = item.ICCID;
@@ -667,48 +669,58 @@ namespace avii.ESN
                         {
                             string ProductType = posKITs[0].ProductType;
                             //if (ProductType.ToUpper() == "H3")
-                            if (posKITs[0].OSType.ToUpper() == "ANDROID")
+                            MemoryStream memSt = null;// = new MemoryStream();
+
+                            if (ProductType.ToUpper() == "H5")
+                            {
+                                SV.Framework.LabelGenerator.H5LabelOperation h5LabelOperation = new SV.Framework.LabelGenerator.H5LabelOperation();
+
+                                memSt = h5LabelOperation.POSKITLabelPdfTarCode(posKITs);
+                                Page.ClientScript.RegisterStartupScript(this.GetType(), "stop loader", "StopProgress()", true);
+                            }
+                            else if (posKITs[0].OSType.ToUpper() == "ANDROID")
                             {
                                 SV.Framework.LabelGenerator.H3LabelOperation h3LabelOperation = new SV.Framework.LabelGenerator.H3LabelOperation();
 
-                                var memSt = h3LabelOperation.POSKITLabelPdfTarCode(posKITs);
+                                memSt = h3LabelOperation.POSKITLabelPdfTarCode(posKITs);
                                 Page.ClientScript.RegisterStartupScript(this.GetType(), "stop loader", "StopProgress()", true);
                                 //var memSt = slabel.ExportToPDF(models);
-                                if (memSt != null)
-                                {
-                                    string fileType = ".pdf";
-                                    string filename = DateTime.Now.Ticks + fileType;
-                                    Response.Clear();
-                                    //Response.ContentType = "application/pdf";
-                                    Response.ContentType = "application/octet-stream";
-                                    Response.AddHeader("content-disposition", "attachment;filename=" + filename);
-                                    Response.Buffer = true;
-                                    Response.Clear();
-                                    var bytes = memSt.ToArray();
-                                    Response.OutputStream.Write(bytes, 0, bytes.Length);
-                                    Response.OutputStream.Flush();
-                                    lblMsg.Text = "Label generated successfully.";
-                                }
+                                
                             }
                             else
                             {
-                                var memSt = dishLabelOperation.POSKITLabelPdfTarCode(posKITs);
+                                 memSt = dishLabelOperation.POSKITLabelPdfTarCode(posKITs);
 
-                                if (memSt != null)
-                                {
-                                    string fileType = ".pdf";
-                                    string filename = DateTime.Now.Ticks + fileType;
-                                    Response.Clear();
-                                    //Response.ContentType = "application/pdf";
-                                    Response.ContentType = "application/octet-stream";
-                                    Response.AddHeader("content-disposition", "attachment;filename=" + filename);
-                                    Response.Buffer = true;
-                                    Response.Clear();
-                                    var bytes = memSt.ToArray();
-                                    Response.OutputStream.Write(bytes, 0, bytes.Length);
-                                    Response.OutputStream.Flush();
-                                    lblMsg.Text = "Label generated successfully.";
-                                }
+                                //if (memSt != null)
+                                //{
+                                //    string fileType = ".pdf";
+                                //    string filename = DateTime.Now.Ticks + fileType;
+                                //    Response.Clear();
+                                //    //Response.ContentType = "application/pdf";
+                                //    Response.ContentType = "application/octet-stream";
+                                //    Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+                                //    Response.Buffer = true;
+                                //    Response.Clear();
+                                //    var bytes = memSt.ToArray();
+                                //    Response.OutputStream.Write(bytes, 0, bytes.Length);
+                                //    Response.OutputStream.Flush();
+                                //    lblMsg.Text = "Label generated successfully.";
+                                //}
+                            }
+                            if (memSt != null)
+                            {
+                                string fileType = ".pdf";
+                                string filename = DateTime.Now.Ticks + fileType;
+                                Response.Clear();
+                                //Response.ContentType = "application/pdf";
+                                Response.ContentType = "application/octet-stream";
+                                Response.AddHeader("content-disposition", "attachment;filename=" + filename);
+                                Response.Buffer = true;
+                                Response.Clear();
+                                var bytes = memSt.ToArray();
+                                Response.OutputStream.Write(bytes, 0, bytes.Length);
+                                Response.OutputStream.Flush();
+                                lblMsg.Text = "Label generated successfully.";
                             }
                         }
                         else

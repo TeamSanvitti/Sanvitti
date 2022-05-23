@@ -121,6 +121,46 @@ namespace SV.Framework.Fulfillment
             }
             return dt;
         }
+        public DataTable ESNDataNew(List<SV.Framework.Models.Inventory.EsnUploadNew> mslEsnList)
+        {
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("ESN", typeof(System.String));
+            dt.Columns.Add("BatchNumber", typeof(System.String));
+            dt.Columns.Add("ICC_ID", typeof(System.String));
+            dt.Columns.Add("MeidHex", typeof(System.String));
+            dt.Columns.Add("MeidDec", typeof(System.String));
+            dt.Columns.Add("Location", typeof(System.String));
+            dt.Columns.Add("MSL", typeof(System.String));
+            dt.Columns.Add("OTKSL", typeof(System.String));
+            dt.Columns.Add("SerialNumber", typeof(System.String));
+            dt.Columns.Add("IMEI2", typeof(System.String));
+
+
+            DataRow row;
+            int rowNumber = 1;
+            if (mslEsnList != null && mslEsnList.Count > 0)
+            {
+                foreach (SV.Framework.Models.Inventory.EsnUploadNew item in mslEsnList)
+                {
+                    row = dt.NewRow();
+                    row["ESN"] = item.ESN;
+                    row["BatchNumber"] = item.MslNumber;
+                    row["ICC_ID"] = rowNumber;
+                    row["MeidHex"] = item.MeidHex;
+                    row["MeidDec"] = item.MeidDec;
+                    row["Location"] = item.Location;
+                    row["MSL"] = item.MSL;
+                    row["OTKSL"] = item.OTKSL;
+                    row["SerialNumber"] = item.SerialNumber;
+                    row["IMEI2"] = item.IMEI2;
+
+                    dt.Rows.Add(row);
+                    rowNumber = rowNumber + 1;
+                }
+            }
+            return dt;
+        }
 
     }
 }

@@ -23,6 +23,7 @@ namespace SV.Framework.Models.Inventory
         public string ReceivedAs { get; set; }
         public bool IsInspection { get; set; }
         public int UserId { get; set; }
+        public string SupplierName { get; set; }
         public List<EsnUploadNew> ESNs { get; set; }
     }
 }

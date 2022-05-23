@@ -316,11 +316,12 @@
 
                                     </td>
                                 <td class="copy10grey" align="right" width="22%" >
-                                    Received As: &nbsp;
+                                    Status: &nbsp;
                                 </td>
                                 <td  align="left"  width="28%" >
-                                     <asp:DropDownList ID="ddlReceivedAs" runat="server" class="copy10grey" Width="80%">
-                                         <%--<asp:ListItem Text="None" Value="None"></asp:ListItem>--%>
+                                    <asp:Label ID="lblStatus" runat="server" Width="100%" CssClass="copy10grey" Text="Receive"></asp:Label>
+ 
+                                     <asp:DropDownList ID="ddlReceivedAs" Visible="false" runat="server" class="copy10grey" Width="80%">
                                          <asp:ListItem Text="Product without ASN" Value="Product without ASN"></asp:ListItem>
                                          <asp:ListItem Text="Product with ASN" Value="Product with ASN"></asp:ListItem>
                                          <asp:ListItem Text="Others" Value="Others"></asp:ListItem>
@@ -334,8 +335,6 @@
                                     <b>Order number:</b> &nbsp;
 
                                 </td>
-                                     
-                                
                                 <td  align="left" width="28%" >
                                      <asp:TextBox ID="txtOrderNumber" runat="server"   CssClass="copy10grey" MaxLength="20"  Width="80%"></asp:TextBox>
                                
@@ -348,6 +347,24 @@
                                      
                                 </td>
                             </tr>
+                            <tr>
+                                <td class="copy10grey" align="right" width="22%" >
+                                    Supplier name: &nbsp;
+
+                                </td>
+                                     
+                                
+                                <td  align="left" width="28%" >
+                                     <asp:TextBox ID="txtSuppliername" runat="server"   CssClass="copy10grey" MaxLength="20"  Width="80%"></asp:TextBox>
+                               
+                                </td>
+                                <td class="copy10grey" align="right" width="22%" >
+                                </td>
+                                <td  align="left"  width="28%" >
+                                     
+                                </td>
+                            </tr>
+
                             <tr id="trReceivedate" runat="server" visible="false">
                                 <td class="copy10grey" align="right" width="22%" >
                                     Receive Date: &nbsp;

@@ -112,9 +112,30 @@ namespace SV.Framework.Inventory
 
                             XElement meidDec = new XElement(tns + "meidDec", device1.MeidDec);
                             serialization.Add(meidDec);
+
+                            XElement imeiDec = new XElement(tns + "imeiDec", device1.ESN);
+                            serialization.Add(imeiDec);
                         }
-                        XElement imeiDec = new XElement(tns + "imeiDec", device1.ESN);
-                        serialization.Add(imeiDec);
+                        if (edfProductType.ToUpper() == "H5")
+                        {
+                            XElement meidHex = new XElement(tns + "meidHex", device1.MeidHex);
+                            serialization.Add(meidHex);
+
+                            XElement meidDec = new XElement(tns + "meidDec", device1.MeidDec);
+                            serialization.Add(meidDec);
+
+                            XElement imeiDec = new XElement(tns + "imeiDec", device1.ESN);
+                            serialization.Add(imeiDec);
+
+                            XElement imeiDec2 = new XElement(tns + "imeiDec2", device1.IMEI2);
+                            serialization.Add(imeiDec2);
+
+                        }
+                        if (edfProductType.ToUpper() == "H3")
+                        {
+                            XElement imeiDec = new XElement(tns + "imeiDec", device1.ESN);
+                            serialization.Add(imeiDec);
+                        }
 
                         //XElement serialNumber = new XElement(tns + "serialNumber", device1.serialNumber);
                         //serialization.Add(serialNumber);
@@ -192,12 +213,16 @@ namespace SV.Framework.Inventory
         {
             bool IsValidate = true;
             System.Text.StringBuilder InvalidEsnSB = new System.Text.StringBuilder();
+            System.Text.StringBuilder InvalidEsn2SB = new System.Text.StringBuilder();
             System.Text.StringBuilder esnLenSB = new System.Text.StringBuilder();
+            System.Text.StringBuilder esn2LenSB = new System.Text.StringBuilder();
             System.Text.StringBuilder decLenSB = new System.Text.StringBuilder();
             System.Text.StringBuilder esnNumSB = new System.Text.StringBuilder();
+            System.Text.StringBuilder esn2NumSB = new System.Text.StringBuilder();
             System.Text.StringBuilder decNumSB = new System.Text.StringBuilder();
             System.Text.StringBuilder hexNumSB = new System.Text.StringBuilder();
             System.Text.StringBuilder esnDupSB = new System.Text.StringBuilder();
+            System.Text.StringBuilder esn2DupSB = new System.Text.StringBuilder();
             System.Text.StringBuilder decDupSB = new System.Text.StringBuilder();
             System.Text.StringBuilder hexDupSB = new System.Text.StringBuilder();
 
@@ -213,7 +238,20 @@ namespace SV.Framework.Inventory
             }
             if(InvalidEsnSB != null && InvalidEsnSB.ToString().Length > 0)
             {
-                InvalidEsnSB.Append(" invalid ESN(s) </br>");
+                InvalidEsnSB.Append(" invalid ESN1(s) </br>");
+                IsValidate = false;
+            }
+
+            foreach (ESNAuthorization item in EsnList)
+            {
+                if (!Luhn.checkLuhn(item.IMEI2))
+                {
+                    InvalidEsn2SB.Append(item.IMEI2 + ",");
+                }
+            }
+            if (InvalidEsn2SB != null && InvalidEsn2SB.ToString().Length > 0)
+            {
+                InvalidEsn2SB.Append(" invalid ESN2(s) </br>");
                 IsValidate = false;
             }
 
@@ -226,10 +264,25 @@ namespace SV.Framework.Inventory
                     foreach (var item in esnWithInvalidLen)
                         esnLenSB.Append(item.ESN + ",");
 
-                    esnLenSB.Append(" ESN(s) length should be " + esnLength + " </br>");
+                    esnLenSB.Append(" ESN1(s) length should be " + esnLength + " </br>");
                     IsValidate = false;
                 }
             }
+            if (esnLength > 0 && !string.IsNullOrEmpty(EsnList[0].IMEI2))
+            {
+                var esnWithInvalidLen = (from item in EsnList where item.IMEI2.Length != esnLength select item).ToList();
+                if (esnWithInvalidLen.Count > 0)
+                {
+                    foreach (var item in esnWithInvalidLen)
+                    {
+                        esn2LenSB.Append(item.IMEI2 + ",");
+                    }
+                    esn2LenSB.Append(" ESN2(s) length should be " + esnLength + " </br>");
+                    IsValidate = false;
+                }
+            }
+
+
             if (decLength > 0)
             {
                 List<ESNAuthorization> decWithInvalidLen = (from item in EsnList where item.MeidDec.Length != decLength select item).ToList();
@@ -252,8 +305,22 @@ namespace SV.Framework.Inventory
 
                 //esnNumSB.Append(String.Join(",", esnWithInvalidNumber));
 
-                esnNumSB.Append(" ESN(s) having value other than numbers </br>");
+                esnNumSB.Append(" ESN1(s) having value other than numbers </br>");
                 IsValidate = false;
+            }
+            if (!string.IsNullOrEmpty(EsnList[0].IMEI2))
+            {
+                var esn2WithInvalidNumber = (from item in EsnList where !IsWholeNumber(item.IMEI2) select item).ToList();
+                if (esn2WithInvalidNumber.Count > 0)
+                {
+                    foreach (var item in esn2WithInvalidNumber)
+                        esn2NumSB.Append(item.IMEI2 + ",");
+
+                    //esnNumSB.Append(String.Join(",", esnWithInvalidNumber));
+
+                    esn2NumSB.Append(" ESN2(s) having value other than numbers </br>");
+                    IsValidate = false;
+                }
             }
             var decWithInvalidNumber = (from item in EsnList where !IsWholeNumber(item.MeidDec) select item).ToList();
             if (decWithInvalidNumber.Count > 0)
@@ -291,8 +358,21 @@ namespace SV.Framework.Inventory
                     esnDupSB.Append(item.Key.ESN + ",");
 
                 //esnDupSB.Append(String.Join(",", ESNs));
-                esnDupSB.Append(" Duplicate ESN(s) exists in the file  </br>");
+                esnDupSB.Append(" Duplicate ESN1(s) exists in the file  </br>");
                 IsValidate = false;
+            }
+            if (!string.IsNullOrEmpty(EsnList[0].IMEI2))
+            {
+                var ESN2s = EsnList.GroupBy(e => new { e.IMEI2 }).Where(g => g.Count() > 1).ToList();
+                if (ESN2s.Count > 0)
+                {
+                    foreach (var item in ESN2s)
+                        esn2DupSB.Append(item.Key.IMEI2 + ",");
+
+                    //esnDupSB.Append(String.Join(",", ESNs));
+                    esn2DupSB.Append(" Duplicate ESN2(s) exists in the file  </br>");
+                    IsValidate = false;
+                }
             }
             var Decs = EsnList.GroupBy(e => new { e.MeidDec }).Where(g => g.Count() > 1).ToList();
             if (Decs.Count > 0 && !string.IsNullOrEmpty(Decs[0].Key.MeidDec))
@@ -316,7 +396,7 @@ namespace SV.Framework.Inventory
                 IsValidate = false;
             }
 
-            returnMessage = InvalidEsnSB.ToString() + esnLenSB.ToString() + decLenSB.ToString() + esnNumSB.ToString() + decNumSB.ToString() + hexNumSB.ToString() + esnDupSB.ToString() + decDupSB.ToString() + hexDupSB.ToString();
+            returnMessage = InvalidEsnSB.ToString() + InvalidEsn2SB.ToString() + esnLenSB.ToString() + esn2LenSB.ToString() + decLenSB.ToString() + esnNumSB.ToString() + esn2NumSB.ToString() + decNumSB.ToString() + hexNumSB.ToString() + esnDupSB.ToString() + esn2DupSB.ToString() + decDupSB.ToString() + hexDupSB.ToString();
             //query[0].
 
 
@@ -350,7 +430,7 @@ namespace SV.Framework.Inventory
             var esns = (from item in EsnList where string.IsNullOrWhiteSpace(item.ESN) select item).ToList();
             if (esns.Count > 0)
             {
-                errorSB.Append(" ESN cannot be empty! </br>");
+                errorSB.Append(" ESN1 cannot be empty! </br>");
                 IsValidate = false;
             }
             var decs = (from item in EsnList where string.IsNullOrWhiteSpace(item.MeidDec) select item).ToList();

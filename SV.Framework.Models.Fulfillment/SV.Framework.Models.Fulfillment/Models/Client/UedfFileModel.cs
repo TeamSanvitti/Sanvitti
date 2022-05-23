@@ -66,6 +66,7 @@ namespace SV.Framework.Models.Fulfillment
         public string meidHex { get; set; }
         public string meidDec { get; set; }
         public string imeiDec { get; set; }
+        public string imeiDec2 { get; set; }
         public string serialNumber { get; set; }
         public string msl { get; set; }
         public string otksl { get; set; }

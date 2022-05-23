@@ -11,6 +11,7 @@ namespace SV.Framework.Models.Inventory
         //public int RowID { get; set; }
         public string SKU { get; set; }
         public string ESN { get; set; }
+        public string IMEI2 { get; set; }
         public string MeidHex { get; set; }
         public string MeidDec { get; set; }
         public string MSL { get; set; }

@@ -46,14 +46,14 @@ namespace SV.Framework.Inventory
 
             return returnValue;
         }
-        public bool MslEsnInsertUpdateNew(EsnHeaderUpload esnInfo, string fileName, out int insertCout, out int updateCount, out string errorMessage)
+        public bool MslEsnInsertUpdateNew(EsnHeaderUpload esnInfo, string fileName, Int64 orderTransferID, out int insertCout, out int updateCount, out string errorMessage)
         {
             DAL.Inventory.MslOperation mslOperation = DAL.Inventory.MslOperation.CreateInstance<DAL.Inventory.MslOperation>();
 
             insertCout = 0;
             updateCount = 0;
             errorMessage = default;
-            bool returnValue = mslOperation.MslEsnInsertUpdateNew(esnInfo,  fileName, out  insertCout, out  updateCount, out  errorMessage);
+            bool returnValue = mslOperation.MslEsnInsertUpdateNew(esnInfo,  fileName, orderTransferID, out  insertCout, out  updateCount, out  errorMessage);
 
             return returnValue;
         }
