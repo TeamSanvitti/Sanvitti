@@ -16,7 +16,7 @@ namespace SV.Framework.Inventory
             errorMessage = transferOrderOperation.CreateInternalTransferOrder(request);
             return errorMessage;
         }
-        public List<TransferOrder> GetTransferOrders(string OrderTransferNumber, string SKU, int DestinationCompanyID, string fromDate, string toDate)
+        public List<TransferOrder> GetTransferOrders(int OrderTransferNumber, string SKU, int DestinationCompanyID, string fromDate, string toDate)
         {
             SV.Framework.DAL.Inventory.TransferOrderOperation transferOrderOperation = SV.Framework.DAL.Inventory.TransferOrderOperation.CreateInstance<SV.Framework.DAL.Inventory.TransferOrderOperation>();
 

@@ -59,13 +59,15 @@ namespace avii.InternalInventory
             gvOrders.DataBind();
 
             SV.Framework.Inventory.TransferOrderOperation orderOperations = SV.Framework.Inventory.TransferOrderOperation.CreateInstance<SV.Framework.Inventory.TransferOrderOperation>();
-
-            string transferOrderNumber =txtOrderTransferNumber.Text.Trim();
+            int transferOrderNumber = 0;
+            if (!string.IsNullOrEmpty(txtOrderTransferNumber.Text))
+                transferOrderNumber = Convert.ToInt32(txtOrderTransferNumber.Text);
+             
             string fromDate =txtDateFrom.Text.Trim();
             string toDate =txtDateTo.Text.Trim();
             string SKU =txtSKU.Text.Trim();
             int companyID = Convert.ToInt32(dpCompany.SelectedValue);
-            if(companyID == 0 && string.IsNullOrWhiteSpace(transferOrderNumber) && string.IsNullOrWhiteSpace(fromDate) && string.IsNullOrWhiteSpace(toDate) && string.IsNullOrWhiteSpace(SKU))
+            if(companyID == 0 && string.IsNullOrWhiteSpace(txtOrderTransferNumber.Text) && string.IsNullOrWhiteSpace(fromDate) && string.IsNullOrWhiteSpace(toDate) && string.IsNullOrWhiteSpace(SKU))
             {
                 lblMsg.Text = "Please enter search criteria!";
             }
@@ -184,6 +186,9 @@ namespace avii.InternalInventory
             string orderInfo = Convert.ToString(e.CommandArgument);
             string[] array = orderInfo.Split(','); 
             string orderStatus = "";
+            bool IsESNRequired = true;
+            string url = "../admin/ManageMslEsn.aspx";
+
             if (linkButton != null && linkButton.Text.ToLower().Contains("approve"))
             {
                 int rowIndex = Convert.ToInt32(array[1]);
@@ -200,13 +205,19 @@ namespace avii.InternalInventory
             SV.Framework.Inventory.TransferOrderOperation orderOperations = SV.Framework.Inventory.TransferOrderOperation.CreateInstance<SV.Framework.Inventory.TransferOrderOperation>();
             Int64 orderTransferID = Convert.ToInt64(array[0]);
             int userID = Convert.ToInt32(Session["UserID"]);
+            if (array.Length > 2)
+                IsESNRequired = Convert.ToBoolean(array[2]);
+            if (!IsESNRequired)
+                url = "../admin/NonEsnInventory.aspx";
 
             string returnMessage = orderOperations.OrderTransferStatusUpdate(orderTransferID, orderStatus, userID);
             lblMsg.Text = returnMessage;
             if(returnMessage.ToLower().Contains("approve"))
             {
                 Session["orderTransferID"] = orderTransferID;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('../admin/ManageMslEsn.aspx')</script>", false);
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('" + url + "')</script>", false);
+
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('../admin/ManageMslEsn.aspx')</script>", false);
             }
         }
         protected void lnkReceive_Command(object sender, CommandEventArgs e)
@@ -215,19 +226,32 @@ namespace avii.InternalInventory
             string orderInfo = Convert.ToString(e.CommandArgument);
             string[] array = orderInfo.Split(',');
             string orderStatus = "";
+            bool IsESNRequired = true;
+            string url = "../admin/ManageMslEsn.aspx";
+
             if (linkButton != null)
             {
-                int rowIndex = Convert.ToInt32(array[1]);
-
-                orderStatus = linkButton.Text;
-                GridViewRow row = gvOrders.Rows[rowIndex];
-
-                TextBox textBox = row.FindControl("txtQty") as TextBox;
-                if (textBox != null)
+                if (array.Length > 1)
                 {
-                    Session["orderqty"] = textBox.Text;
+                    int rowIndex = Convert.ToInt32(array[1]);
+
+                    orderStatus = linkButton.Text;
+                    GridViewRow row = gvOrders.Rows[rowIndex];
+
+                    TextBox textBox = row.FindControl("txtQty") as TextBox;
+                    if (textBox != null)
+                    {
+                        Session["orderqty"] = textBox.Text;
+                    }
                 }
             }
+            
+            if (array.Length > 2)
+                IsESNRequired = Convert.ToBoolean(array[2]);
+            if (!IsESNRequired)
+                url = "../admin/NonEsnInventory.aspx";
+
+
             SV.Framework.Inventory.TransferOrderOperation orderOperations = SV.Framework.Inventory.TransferOrderOperation.CreateInstance<SV.Framework.Inventory.TransferOrderOperation>();
             Int64 orderTransferID = Convert.ToInt64(array[0]);
             
@@ -238,7 +262,8 @@ namespace avii.InternalInventory
             //if (orderStatus.ToLower().Contains("approve"))
             {
                 Session["orderTransferID"] = orderTransferID;
-                ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('../admin/ManageMslEsn.aspx')</script>", false);
+            
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('"+url+"')</script>", false);
             }
         }
 

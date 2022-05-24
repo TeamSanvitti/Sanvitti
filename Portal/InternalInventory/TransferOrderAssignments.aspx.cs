@@ -30,7 +30,7 @@ namespace avii.InternalInventory
                 List<TransferOrderAssignment> orderList = orderOperations.GetTransferOrderAssignments(orderTransferID);
                 if (orderList != null && orderList.Count > 0)
                 {
-                    lblOrderTransferNumber.Text = orderList[0].OrderTransferNumber;
+                    lblOrderTransferNumber.Text = orderList[0].OrderTransferNumber.ToString();
                     lblOrderDate.Text = orderList[0].OrderTransferDate;
                     lblRequestedQty.Text = orderList[0].RequestedQty.ToString();
                     lblOrderStatus.Text = orderList[0].OrderTransferStatus;

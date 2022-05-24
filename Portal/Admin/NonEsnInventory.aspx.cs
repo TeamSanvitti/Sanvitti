@@ -53,8 +53,63 @@ namespace avii.Admin
                     string OerderNo = mslOperation.GenerateOrderNumber();
                     txtOrderNumber.Text = OerderNo;
                     txtOrderNumber.Enabled = false;
+                    if (Session["orderTransferID"] != null)
+                    {
+                        Int64 orderTransferID = Convert.ToInt64(Session["orderTransferID"]);
+                        GetTransferOrderDetail(orderTransferID);
+                        Session["orderTransferID"] = null;
+                    }
                 }
             }
+        }
+        private void GetTransferOrderDetail(Int64 orderTransferID)
+        {
+            SV.Framework.Inventory.TransferOrderOperation orderOperations = SV.Framework.Inventory.TransferOrderOperation.CreateInstance<SV.Framework.Inventory.TransferOrderOperation>();
+            TransferOrder transferOrder = orderOperations.GetTransferOrderDetail(orderTransferID);
+            int companyID = 0, orderQty = 0;
+            ViewState["orderTransferID"] = orderTransferID;
+         //   ViewState["IsESNRequired"] = 0;
+            if (transferOrder != null)
+            {
+                if (Session["orderqty"] != null)
+                {
+                    orderQty = Convert.ToInt32(Session["orderqty"]);
+                    txtTotalQty.Text = orderQty.ToString();
+                    //txtShipQty.Text = txtOrderQty.Text;
+                }
+
+                
+                string[] arr = transferOrder.CustomerInfo.Split(',');
+                companyID = Convert.ToInt32(arr[0]);
+                ViewState["CompanyAccountNumber"] = arr[1];
+                dpCompany.SelectedValue = companyID.ToString();
+                dpCompany.Enabled = false;
+
+            }
+            if (companyID > 0)
+            {
+                List<ItemCategory> categoryList = ViewState["categoryList"] as List<ItemCategory>;
+                if (categoryList != null && categoryList.Count > 0)
+                {
+                    var category = (from item in categoryList where item.CategoryGUID.Equals(transferOrder.CategoryID) select item).ToList();
+                    if (category != null && category.Count > 0)
+                    {
+                        ddlCategory.SelectedValue = category[0].CategoryWithProductAllowed;// transferOrder.CategoryID.ToString();
+                        ddlCategory.Enabled = false;
+                        //ddlCategory.SelectedIndex = 3;
+                    }
+                }
+                BindCompanySKU(companyID, true);
+                ddlSKU.SelectedValue = transferOrder.DestinationItemCompanyGUID.ToString();
+                ddlSKU.Enabled = false;
+            }
+            else
+            {
+                //  trSKU.Visible = true;
+                ddlSKU.DataSource = null;
+                ddlSKU.DataBind();
+            }
+
         }
 
         private void GetNonEsnDetail()
@@ -68,7 +123,7 @@ namespace avii.Admin
                 tblUpload.Visible = false;
                 pnlHeader.Visible = true;
                 trReceivedate.Visible = true;
-
+                txtSuppliername.Text = nonEsnHeader.SupplierName;
                 txtBoxQty.Text = nonEsnHeader.PiecesPerBox.ToString();
                 txtCarton.Text = nonEsnHeader.CartonCount.ToString();
                 txtPallet.Text = nonEsnHeader.PalletCount.ToString();
@@ -83,7 +138,7 @@ namespace avii.Admin
                 BindCompanySKU(nonEsnHeader.CompanyID, true);
                 ddlSKU.SelectedValue = nonEsnHeader.ItemCompanyGUID.ToString();
 
-                ddlReceivedAs.SelectedValue = nonEsnHeader.ReceivedAs;
+               // ddlReceivedAs.SelectedValue = nonEsnHeader.ReceivedAs;
                 if (nonEsnHeader.StorageList.Count > 0)
                 {
                     gvMSL.DataSource = nonEsnHeader.StorageList;
@@ -256,10 +311,14 @@ namespace avii.Admin
             List<NonEsnStorage> nonesnList = Session["nonesnList"] as  List<NonEsnStorage>;
             NonESNInventory nonESNInventory = new NonESNInventory();
             int cartonCount = 0, palletCount = 0, PiecesPerBox = 0, totalQuantity = 0, CompanyID = 0, itemCompanyGUID = 0, userID=0;
-            string orderNumber = "", custOrderNumber = "", ReceivedAs="";
+            string orderNumber = "", custOrderNumber = "", ReceivedAs= "None", SupplierName="";
             orderNumber = txtOrderNumber.Text.Trim();
+            SupplierName = txtSuppliername.Text.Trim();
             custOrderNumber = txtCustOrderNumber.Text.Trim();
-            ReceivedAs = ddlReceivedAs.SelectedValue;
+            // ReceivedAs = ddlReceivedAs.SelectedValue;
+            Int64 orderTransferID = 0;
+            if (ViewState["orderTransferID"] != null)
+                orderTransferID = Convert.ToInt64(ViewState["orderTransferID"]);
 
             int.TryParse(txtCarton.Text.Trim(), out cartonCount);
             int.TryParse(txtPallet.Text.Trim(), out palletCount);
@@ -288,6 +347,9 @@ namespace avii.Admin
                         nonESNInventory.ReceivedAs = ReceivedAs;
                         nonESNInventory.TotalQuantity = totalQuantity;
                         nonESNInventory.UserID = userID;
+                        nonESNInventory.SupplierName = SupplierName;
+                        nonESNInventory.OrderTransferID = orderTransferID;
+
                         int index = 0;
                         foreach(GridViewRow row in gvMSL.Rows)
                         {

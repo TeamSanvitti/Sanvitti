@@ -46,7 +46,7 @@ namespace SV.Framework.DAL.Inventory
         }
 
 
-        public List<TransferOrder> GetTransferOrders(string OrderTransferNumber, string SKU, int DestinationCompanyID, string fromDate, string toDate)
+        public List<TransferOrder> GetTransferOrders(int OrderTransferNumber, string SKU, int DestinationCompanyID, string fromDate, string toDate)
         {
             List<TransferOrder> orderList = default;// new List<Carriers>();
             using (DBConnect db = new DBConnect())
@@ -210,7 +210,7 @@ namespace SV.Framework.DAL.Inventory
                         //orderInfo.AssignedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "OrderTransferID", 0, false));
                         orderInfo.RequestedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "RequestedQty", 0, false));
                         orderInfo.TransferedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "TransferedQty", 0, false));
-                        orderInfo.OrderTransferNumber = clsGeneral.getColumnData(dataRow, "OrderTransferNumber", string.Empty, false) as string;
+                        orderInfo.OrderTransferNumber = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "OrderTransferNumber", 0, false));
                         orderInfo.SKU = clsGeneral.getColumnData(dataRow, "DestinationSKU", string.Empty, false) as string;
                         orderInfo.ProductName = clsGeneral.getColumnData(dataRow, "DestinationItemName", string.Empty, false) as string;
                         orderInfo.OrderTransferDate = clsGeneral.getColumnData(dataRow, "OrderTransferDate", string.Empty, false) as string;
@@ -250,7 +250,7 @@ namespace SV.Framework.DAL.Inventory
                         orderInfo.RequestedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "RequestedQty", 0, false));
                         orderInfo.SourceStock_in_Hand = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "SourceStock_in_Hand", 0, false));
                         orderInfo.DestinationStock_in_Hand = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "DestinationStock_in_Hand", 0, false));
-                        orderInfo.OrderTransferNumber = clsGeneral.getColumnData(dataRow, "OrderTransferNumber", string.Empty, false) as string;
+                        orderInfo.OrderTransferNumber = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "OrderTransferNumber", 0, false));
                         orderInfo.SourceCustomer = clsGeneral.getColumnData(dataRow, "SourceCustomer", string.Empty, false) as string;
                         orderInfo.SourceSKU = clsGeneral.getColumnData(dataRow, "SourceSKU", string.Empty, false) as string;
                         orderInfo.SourceItemName = clsGeneral.getColumnData(dataRow, "SourceItemName", string.Empty, false) as string;
@@ -294,7 +294,8 @@ namespace SV.Framework.DAL.Inventory
                         orderInfo.RequestedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "RequestedQty", 0, false));
                         orderInfo.SourceStock_in_Hand = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "SourceStock_in_Hand", 0, false));
                         orderInfo.DestinationStock_in_Hand = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "DestinationStock_in_Hand", 0, false));
-                        orderInfo.OrderTransferNumber = clsGeneral.getColumnData(dataRow, "OrderTransferNumber", string.Empty, false) as string;
+                        orderInfo.OrderTransferNumber = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "OrderTransferNumber", 0, false));
+                        orderInfo.IsESNRequired = Convert.ToBoolean(clsGeneral.getColumnData(dataRow, "IsESNRequired", false, false));
                         orderInfo.SourceCustomer = clsGeneral.getColumnData(dataRow, "SourceCustomer", string.Empty, false) as string;
                         orderInfo.SourceSKU = clsGeneral.getColumnData(dataRow, "SourceSKU", string.Empty, false) as string;
                         orderInfo.SourceItemName = clsGeneral.getColumnData(dataRow, "SourceItemName", string.Empty, false) as string;

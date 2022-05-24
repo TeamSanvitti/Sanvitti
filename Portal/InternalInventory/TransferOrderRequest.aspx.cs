@@ -36,6 +36,11 @@ namespace avii.InternalInventory
             {
                 BindCustomer();
                 BindCategory();
+                int internalordercustomer = Convert.ToInt32(ConfigurationSettings.AppSettings["internalordercustomer"]);
+                dpSourceCompany.SelectedValue = internalordercustomer.ToString();
+                BindCustomerSKU(internalordercustomer, "source");
+                string orderDate = DateTime.Now.ToShortDateString();
+                txtOrderDate.Text = orderDate;
             }
         }
         protected void BindCustomer()
@@ -98,12 +103,12 @@ namespace avii.InternalInventory
         {
             TransferOrder request = new TransferOrder();
             TransferOrderOperation serviceRequestOperations = TransferOrderOperation.CreateInstance<TransferOrderOperation>();
-            int OrderTransferID, SourceCompanyID, SourceItemCompanyGUID, DestinationCompanyID, DestinationItemCompanyGUID, RequestedQty, RequestedBy, CreatedBy;
+            int OrderTransferNumber, OrderTransferID, SourceCompanyID, SourceItemCompanyGUID, DestinationCompanyID, DestinationItemCompanyGUID, RequestedQty, RequestedBy, CreatedBy;
             OrderTransferID = SourceCompanyID = SourceItemCompanyGUID = DestinationCompanyID = DestinationItemCompanyGUID = RequestedBy = CreatedBy = 0;
             CreatedBy = Convert.ToInt32(Session["UserID"]);
 
-            string OrderTransferNumber, OrderTransferDate, Comment, errorMessage;
-            OrderTransferNumber = txtTranferOrderNo.Text;
+            string OrderTransferDate, Comment, errorMessage;
+            OrderTransferNumber = 0;// txtTranferOrderNo.Text;
             request.OrderTransferNumber = OrderTransferNumber;
             OrderTransferDate = txtOrderDate.Text;
             request.OrderTransferDate = OrderTransferDate;
@@ -141,7 +146,7 @@ namespace avii.InternalInventory
             txtComment.Text = "";
             txtOrderDate.Text = "";
             txtRequestQty.Text = "";
-            txtTranferOrderNo.Text = "";
+           // txtTranferOrderNo.Text = "";
             ddlDestinationCategory.SelectedIndex = 0;
             ddlDestinationSKU.Items.Clear();
             ddlDestinationCompany.SelectedIndex = 0;

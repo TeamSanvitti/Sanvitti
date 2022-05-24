@@ -109,12 +109,17 @@
              <table width="100%" border="0" class="" align="center" cellpadding="5" cellspacing="5">    
                  <tr>
                 <td class="copy10grey"  align="right" width="20%" >
-                   <b> Tranfer Order:</b>
+                  <%-- <b> Tranfer Order:</b>--%>
+                        <b>Source Customer:</b>
 
                 </td>
                 <td width="30%" >
-                    <asp:TextBox ID="txtTranferOrderNo" TabIndex="1" onkeypress="return alphaNumericCheck(event);"  runat="server" CssClass="copy10grey" Width="60%" >									
-                    </asp:TextBox>                 
+                   
+                    <asp:DropDownList ID="dpSourceCompany" TabIndex="3"  runat="server" CssClass="copy10grey" Width="60%" 
+                        AutoPostBack="true" OnSelectedIndexChanged="dpSourceCompany_SelectedIndexChanged">									
+                    </asp:DropDownList>  
+                    <%--<asp:TextBox ID="txtTranferOrderNo" TabIndex="1" onkeypress="return alphaNumericCheck(event);"  runat="server" CssClass="copy10grey" Width="60%" >									
+                    </asp:TextBox>--%>                 
 
                 </td>
                 <td  width="1%">
@@ -130,15 +135,12 @@
                    
                     </td>   
                 </tr>
-                 <tr>
+                 <%--<tr>
                 <td class="copy10grey"  align="right" width="20%" >
                    <b>Source Customer:</b>
 
                 </td>
-                <td width="30%" >
-                    <asp:DropDownList ID="dpSourceCompany" TabIndex="3"  runat="server" CssClass="copy10grey" Width="60%" 
-                        AutoPostBack="true" OnSelectedIndexChanged="dpSourceCompany_SelectedIndexChanged">									
-                    </asp:DropDownList>                 
+                <td width="30%" >               
 
                 </td>
                 <td  width="1%">
@@ -151,7 +153,7 @@
                 <td width="35%" >
 
                     </td>   
-                </tr>
+                </tr>--%>
                  <tr valign="top">
                 <td class="copy10grey"  align="right" width="20%" >
                   <b> Category Name:</b>

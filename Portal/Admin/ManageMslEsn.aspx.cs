@@ -166,6 +166,7 @@ namespace avii.Admin
                // ddlReceivedAs.SelectedValue = esnHeader.ReceivedAs;
                 chkInspection.Checked = esnHeader.IsInspection;
 
+                txtSuppliername.Text = esnHeader.SupplierName;
                 txtComment.Text = esnHeader.CustomerOrderNumber;
                 txtCustOrderNumber.Text = esnHeader.CustomerOrderNumber;
                 txtOrderDate.Text = esnHeader.OrderDate;

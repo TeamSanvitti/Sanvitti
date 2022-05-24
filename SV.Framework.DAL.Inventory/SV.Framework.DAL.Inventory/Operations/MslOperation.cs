@@ -614,7 +614,6 @@ namespace SV.Framework.DAL.Inventory
                     // objCompHash.Add("@TrackingNumber", TrackingNumber);
                     objCompHash.Add("@ESNHeaderId", ESNHeaderId);
 
-
                     arrSpFieldSeq = new string[] { "@ESNHeaderId" };
                     ds = db.GetDataSet(objCompHash, "AV_EsnMslSelect", arrSpFieldSeq);
                     headerDetail = PopulateESNwithHeaderDetail(ds);
@@ -705,6 +704,7 @@ namespace SV.Framework.DAL.Inventory
                     headerDetail.UserName = clsGeneral.getColumnData(dataRow, "UserName", string.Empty, false) as string;
                     headerDetail.SKU = clsGeneral.getColumnData(dataRow, "SKU", string.Empty, false) as string;
                     headerDetail.TrackingNumber = clsGeneral.getColumnData(dataRow, "TrackingNumber", string.Empty, false) as string;
+                    headerDetail.SupplierName = clsGeneral.getColumnData(dataRow, "SupplierName", string.Empty, false) as string;
 
                     if (dataset.Tables.Count > 1 && dataset.Tables[1].Rows.Count > 0)
                     {

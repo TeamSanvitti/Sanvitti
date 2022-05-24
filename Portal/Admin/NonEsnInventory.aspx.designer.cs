@@ -69,13 +69,13 @@ namespace avii.Admin
         protected global::System.Web.UI.WebControls.DropDownList dpCompany;
 
         /// <summary>
-        /// ddlReceivedAs control.
+        /// lblStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlReceivedAs;
+        protected global::System.Web.UI.WebControls.Label lblStatus;
 
         /// <summary>
         /// txtOrderNumber control.
@@ -94,6 +94,15 @@ namespace avii.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCustOrderNumber;
+
+        /// <summary>
+        /// txtSuppliername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSuppliername;
 
         /// <summary>
         /// trReceivedate control.

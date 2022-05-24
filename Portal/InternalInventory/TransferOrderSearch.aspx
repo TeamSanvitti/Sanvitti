@@ -429,12 +429,12 @@
                                 <td>
                                     <asp:LinkButton  ToolTip="Accept" Visible='<%# Convert.ToString(Eval("OrderTransferStatus")) == "Pending" ? true : false %>' CausesValidation="false" Height="18" 
                                         OnCommand="lnkAccept_Command" 
-                                                            CommandArgument='<%# Eval("OrderTransferID") +","+ Container.DataItemIndex %>'  
+                                                            CommandArgument='<%# Eval("OrderTransferID") +","+ Container.DataItemIndex +","+ Eval("IsESNRequired") %>'  
                                                          ID="lnkAccept"  runat="server" Text="Approve" >
                                     </asp:LinkButton>
                                     <asp:LinkButton  ToolTip="Receive" Visible='<%# Convert.ToString(Eval("OrderTransferStatus")) == "Approved" ? true : false %>' CausesValidation="false" Height="18" 
                                         OnCommand="lnkReceive_Command" 
-                                                            CommandArgument='<%# Eval("OrderTransferID") +","+ Container.DataItemIndex %>'  
+                                                            CommandArgument='<%# Eval("OrderTransferID") +","+ Container.DataItemIndex +","+ Eval("IsESNRequired") %>'  
                                                          ID="lnkReceive"  runat="server" Text="Receive" >
                                     </asp:LinkButton>
                         

@@ -120,11 +120,14 @@ namespace SV.Framework.DAL.Inventory
                     objCompHash.Add("@UserID", request.UserID);
                     objCompHash.Add("@Comment", request.Comment);
                     objCompHash.Add("@ReceivedAs", request.ReceivedAs);
+                    objCompHash.Add("@SupplierName", request.SupplierName);
+                    objCompHash.Add("@InventoryStatusID", 2);
+                    objCompHash.Add("@OrderTransferID", request.OrderTransferID);
 
                     objCompHash.Add("@avNonESNUpload", dtStorageData);
 
                     arrSpFieldSeq = new string[] { "@CompanyID", "@ESNHeaderId", "@OrderNumber", "@CustOrderNumber", "@TotalQty", "@PalletCount",
-                    "@CartonCount","@PiecesPerBox", "@ItemCompanyGUID", "@UserID", "@Comment", "@ReceivedAs", "@avNonESNUpload" };
+                    "@CartonCount","@PiecesPerBox", "@ItemCompanyGUID", "@UserID", "@Comment", "@ReceivedAs","@SupplierName", "@InventoryStatusID","@OrderTransferID", "@avNonESNUpload" };
                     db.ExecCommand(objCompHash, "Av_NonESN_InsertUpdate", arrSpFieldSeq, "@poInsertCount", out insertCout, "@poUpdateCount", out updateCount, "@poErrorMessage", out errorMessage, "@InvalidStock", out returnResult);
 
                 }
@@ -213,6 +216,7 @@ namespace SV.Framework.DAL.Inventory
                     headerDetail.CategoryWithProductAllowed = clsGeneral.getColumnData(dataRow, "CategoryWithProductAllowed", string.Empty, false) as string;
                     headerDetail.SKU = clsGeneral.getColumnData(dataRow, "SKU", string.Empty, false) as string;
                     headerDetail.UserName = clsGeneral.getColumnData(dataRow, "UserName", string.Empty, false) as string;
+                    headerDetail.SupplierName = clsGeneral.getColumnData(dataRow, "SupplierName", string.Empty, false) as string;
                     //headerDetail.TrackingNumber = clsGeneral.getColumnData(dataRow, "TrackingNumber", string.Empty, false) as string;
 
                     if (dataset.Tables.Count > 1 && dataset.Tables[1].Rows.Count > 0)
