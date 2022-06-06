@@ -96,6 +96,15 @@ namespace avii.InternalInventory
         protected global::System.Web.UI.WebControls.DropDownList ddlSourceSKU;
 
         /// <summary>
+        /// lblProductname control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblProductname;
+
+        /// <summary>
         /// lblSCurrentStock control.
         /// </summary>
         /// <remarks>
@@ -105,6 +114,24 @@ namespace avii.InternalInventory
         protected global::System.Web.UI.WebControls.Label lblSCurrentStock;
 
         /// <summary>
+        /// lblModelNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblModelNumber;
+
+        /// <summary>
+        /// lblUPC control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUPC;
+
+        /// <summary>
         /// ddlDestinationCompany control.
         /// </summary>
         /// <remarks>
@@ -112,15 +139,6 @@ namespace avii.InternalInventory
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlDestinationCompany;
-
-        /// <summary>
-        /// ddlDestinationCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDestinationCategory;
 
         /// <summary>
         /// ddlDestinationSKU control.

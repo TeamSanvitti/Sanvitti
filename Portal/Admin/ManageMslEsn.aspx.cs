@@ -101,6 +101,7 @@ namespace avii.Admin
                 if (Session["orderqty"] != null)
                 {
                     orderQty = Convert.ToInt32(Session["orderqty"]);
+                    ViewState["orderqty"] = orderQty;
                     txtOrderQty.Text = orderQty.ToString();
                     txtShipQty.Text = txtOrderQty.Text;
                 }
@@ -679,13 +680,27 @@ namespace avii.Admin
             trackingNumber = txtTrackingNo.Text.Trim();
 
             if (!string.IsNullOrEmpty(txtOrderQty.Text))
-                orderQty = Convert.ToInt32(txtOrderQty.Text);
+              orderQty = Convert.ToInt32(txtOrderQty.Text);
 
             //else
             //{ lblMsg.Text = "Order quantity is required"; return; }
 
             if (!string.IsNullOrEmpty(txtShipQty.Text))
+            { 
                 shipQty = Convert.ToInt32(txtShipQty.Text);
+                if (orderTransferID > 0)
+                {
+                    if (ViewState["orderqty"] != null)
+                    {
+                        int transferQty = Convert.ToInt32(ViewState["orderqty"]);
+                        if (shipQty > transferQty)
+                        {
+                            lblMsg.Text = "Received quantity cannot be greater than transfer quantity";
+                            return;
+                        }
+                    }
+                }
+            }
             else
             {
                 if (Convert.ToInt32(ViewState["IsESNRequired"]) == 0)
@@ -693,7 +708,13 @@ namespace avii.Admin
                     lblMsg.Text = "Received quantity is required";
                     return;
                 }
-            }  
+                if (orderTransferID > 0)
+                {
+                    lblMsg.Text = "Received quantity is required";
+                    return;
+                }
+
+            }
 
             if (!string.IsNullOrEmpty(txtUnitPrice.Text))
                 unitPrice = Convert.ToDecimal(txtUnitPrice.Text);
@@ -783,6 +804,8 @@ namespace avii.Admin
                         returnValue = mslOperation.MslEsnInsertUpdateNew(esnHeaderUpload, filename, orderTransferID, out insertCount, out updateCount, out errorMessage);
                         if (returnValue)
                         {
+                            ViewState["orderqty"] = null;
+                            ViewState["orderTransferID"] = null;
                             if (esnHeaderId == 0)
                                 ClearForm();
                             if (insertCount > 0 && updateCount > 0)
@@ -985,6 +1008,26 @@ namespace avii.Admin
         {
             gvMSL.DataSource = null;
             gvMSL.DataBind();
+            Int64 orderTransferID = 0;
+            if (ViewState["orderTransferID"] != null)
+            {
+                orderTransferID = Convert.ToInt64(ViewState["orderTransferID"]);
+                if (!string.IsNullOrEmpty(txtShipQty.Text))
+                {
+                    int ReceivedQty = Convert.ToInt32(txtShipQty.Text);
+                    if (ViewState["orderqty"] != null)
+                    {
+                        int transferQty = Convert.ToInt32(Session["orderqty"]);
+                        if (ReceivedQty > transferQty)
+                        {
+                            lblMsg.Text = "Received quantity cannot be greater than transfer quantity";
+                            return;
+                        }
+                    }
+                }
+
+            }
+
             string receivelength = ConfigurationSettings.AppSettings["receivelength"].ToString();
             string[] lenArray = receivelength.Split(',');
             int esnMaxLength = 0, batchMaxLen = 0, hexMaxLen = 0, decMaxLen=0, locationMaxlen = 0, serialNoMaxLen = 0, boxIDMaxLen=0;
@@ -1504,7 +1547,7 @@ namespace avii.Admin
                                                 var esnToUpload = (from item in esnList.Take(esnCount) select item).ToList();
 
                                                 //Upload/Assign ESN to POs
-                                                mslOperation.MslESNs_ValidateNew1(esnToUpload, itemCompanyGUID, orderNumber, 
+                                                mslOperation.MslESNs_ValidateNew1(esnToUpload, itemCompanyGUID, orderNumber, orderTransferID,
                                                     out poErrorMessage, out duplicateESN, out poSimMessage, out isLTE, out IsOrderNumber, 
                                                     out returnValue, out poEsnMessage, out poESNquarantine, out poESNBoxIDs, out poLOcations);
 

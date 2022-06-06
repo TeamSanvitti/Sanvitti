@@ -381,8 +381,39 @@ namespace SV.Framework.DAL.Inventory
             }
             return skuList;
         }
+        public List<CompanySKUno> GetCompanySKUsNew(int companyID, int isSIM, string ModelNumber)
+        {
+            List<CompanySKUno> skuList = default;
+            using (DBConnect db = new DBConnect())
+            {
+                string[] arrSpFieldSeq;
+                DataTable dt = default;//new DataTable();
+                Hashtable objCompHash = new Hashtable();
 
-        public  List<EsnUpload> MslESNs_Validate(List<EsnUpload> mslEsnList, int itemCompanyGUID, out string errorMessage, out string duplicateESN, out string simMessage, out bool isLTE, out bool isSim, out int returnValue, out string poEsnMessage)
+                try
+                {
+                    objCompHash.Add("@CompanyID", companyID);
+                    objCompHash.Add("@IsSIM", isSIM);
+                    objCompHash.Add("@ModelNumber", ModelNumber);
+
+                    arrSpFieldSeq = new string[] { "@CompanyID", "@IsSIM", "@ModelNumber" };
+                    dt = db.GetTableRecords(objCompHash, "av_Company_SKUs_select", arrSpFieldSeq);
+                    skuList = PopulateSKUs(dt);
+
+                }
+                catch (Exception objExp)
+                {
+                    Logger.LogMessage(objExp, this);// throw new Exception(objExp.Message.ToString());
+                }
+                finally
+                {
+                    // db = null;
+                }
+            }
+            return skuList;
+        }
+
+        public List<EsnUpload> MslESNs_Validate(List<EsnUpload> mslEsnList, int itemCompanyGUID, out string errorMessage, out string duplicateESN, out string simMessage, out bool isLTE, out bool isSim, out int returnValue, out string poEsnMessage)
         {
             List<EsnUpload> esnList = default;//null;
             poEsnMessage = string.Empty;
@@ -504,7 +535,7 @@ namespace SV.Framework.DAL.Inventory
             }
             return esnList;
         }
-        public List<EsnUploadNew> MslESNs_ValidateNew1(List<EsnUploadNew> mslEsnList, int itemCompanyGUID, string OrderNumber, out string errorMessage, 
+        public List<EsnUploadNew> MslESNs_ValidateNew1(List<EsnUploadNew> mslEsnList, int itemCompanyGUID, string OrderNumber, Int64 OrderTransferID, out string errorMessage, 
             out string duplicateESN, out string simMessage, out bool isLTE, out bool isOrderNumber, out int returnValue, out string poEsnMessage, 
             out string poESNquarantine, out string poESNBoxIDs, out string poLocations)
         {
@@ -532,8 +563,9 @@ namespace SV.Framework.DAL.Inventory
                     objCompHash.Add("@piEsnDT", esnTable);
                     objCompHash.Add("@itemCompanyGUID", itemCompanyGUID);
                     objCompHash.Add("@OrderNumber", OrderNumber);
+                    objCompHash.Add("@OrderTransferID", OrderTransferID);
 
-                    arrSpFieldSeq = new string[] { "@piEsnDT", "@itemCompanyGUID", "@OrderNumber" };
+                    arrSpFieldSeq = new string[] { "@piEsnDT", "@itemCompanyGUID", "@OrderNumber", "@OrderTransferID" };
                     // dt = db.GetTableRecords(objCompHash, "Av_MSL_ESN_ValidateNew", arrSpFieldSeq, "@poErrorMessage", "@poDuplicateESNMessage", "@poSimMessage", "@poLteAttribute", "@poOrderNumber", "@poEsnMessage", out errorMessage, out duplicateESN, out simMessage, out isLTE, out isOrderNumber, out returnValue, out poEsnMessage);
                     // dt = db.GetTableRecords(objCompHash, "Av_MSL_ESN_ValidateNew", arrSpFieldSeq, "@poErrorMessage", "@poMeidLengthMessage", "@poEsnLengthMessage", "@poLteAttribute", "@poOrderNumber", "@poEsnMessage", out errorMessage, out duplicateESN, out simMessage, out isLTE, out isOrderNumber, out returnValue, out poEsnMessage);
                     dt = db.GetTableRecords(objCompHash, "Av_MSL_ESN_ValidateNew1", arrSpFieldSeq, "@poErrorMessage", "@poMeidLengthMessage", "@poEsnLengthMessage",
@@ -755,9 +787,9 @@ namespace SV.Framework.DAL.Inventory
                     //objESN.CARTONID = clsGeneral.getColumnData(dataRow, "carton", string.Empty, false) as string;
                     //objESN.HEX = clsGeneral.getColumnData(dataRow, "HEX", string.Empty, false) as string;
                     objESN.ICC_ID = clsGeneral.getColumnData(dataRow, "icc_id", string.Empty, false) as string;
-                    // objESN.LTE_IMSI = clsGeneral.getColumnData(dataRow, "lte_imsi", string.Empty, false) as string;
+                    objESN.ErrorMessage = clsGeneral.getColumnData(dataRow, "ErrorMessage", string.Empty, false) as string;
 
-                    //objESN.ItemcompanyGUID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ItemCompanyGUID", 0, false));
+                    objESN.EsnID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "esnID", 0, false));
 
                     esnList.Add(objESN);
                 }
@@ -825,6 +857,9 @@ namespace SV.Framework.DAL.Inventory
                 {
                     CompanySKUno objInventoryItem = new CompanySKUno();
                     objInventoryItem.SKU = clsGeneral.getColumnData(dataRow, "SKU", string.Empty, false) as string;
+                    objInventoryItem.ProductName = clsGeneral.getColumnData(dataRow, "ITEMNAME", string.Empty, false) as string;
+                    objInventoryItem.UPC = clsGeneral.getColumnData(dataRow, "upc", string.Empty, false) as string;
+                    objInventoryItem.ModelNumber = clsGeneral.getColumnData(dataRow, "ModelNumber", string.Empty, false) as string;
                     //objInventoryItem.MASSKU = clsGeneral.getColumnData(dataRow, "SKU", string.Empty, false) as string;
                     objInventoryItem.ItemcompanyGUID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ItemCompanyGUID", 0, false));
                     objInventoryItem.CategoryID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "CategoryID", 0, false));

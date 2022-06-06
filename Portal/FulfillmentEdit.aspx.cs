@@ -141,6 +141,8 @@ namespace avii
             {
                 chkShipRequired.Checked = poInfoList[0].IsShipmentRequired;
                 lblPONo.Text = poInfoList[0].PurchaseOrderNumber;
+                txtCustomerOrderNumber.Text = poInfoList[0].CustomerOrderNumber;
+                txtFactOrderNumber.Text = poInfoList[0].FactOrderNumber;
                 lblPoTye.Text = poInfoList[0].POType;
                 //lblPoDate.Text = poInfoList[0].PurchaseOrderDate.ToShortDateString();
                 txtPODate.Text = poInfoList[0].PurchaseOrderDate.ToShortDateString();
@@ -265,11 +267,15 @@ namespace avii
         protected void btnEditPO_Click(object sender, EventArgs e)
         {
             PurchaseOrder purchaseOrderOperation = PurchaseOrder.CreateInstance<PurchaseOrder>();
+            SV.Framework.RMA.RMAUtility rmaUtility = SV.Framework.RMA.RMAUtility.CreateInstance<SV.Framework.RMA.RMAUtility>();
+
             PurchaseOrders purchaseOrders = (PurchaseOrders)Session["POS"];
             int uploadDateRange = 1095;
+            bool POCustNoValidate = false;
             bool IsShipmentRequired = chkShipRequired.Checked;
 
-            uploadDateRange = Convert.ToInt32(ConfigurationSettings.AppSettings["UploadAdminDateRange"]);
+            
+                uploadDateRange = Convert.ToInt32(ConfigurationSettings.AppSettings["UploadAdminDateRange"]);
             string poDate = string.Empty;
             DateTime uploadDate = Convert.ToDateTime(txtPODate.Text.Trim());
             string errorMessage = string.Empty;
@@ -335,6 +341,8 @@ namespace avii
                 purchaseOrder = purchaseOrders.FindPurchaseOrder(poID);
                 purchaseOrder.PurchaseOrderDate = Convert.ToDateTime(txtPODate.Text.Trim());
                 purchaseOrder.PurchaseOrderStatusID = statusID;
+                purchaseOrder.FactOrderNumber = txtFactOrderNumber.Text.Trim();
+                purchaseOrder.CustomerAccountNumber = txtCustomerOrderNumber.Text.Trim();
                 purchaseOrder.PurchaseOrderStatus = (PurchaseOrderStatus)Convert.ToInt16(ddlStatus.SelectedValue);
                 purchaseOrder.Shipping.ContactName = txtContactName.Text;
                 purchaseOrder.Shipping.ShipToAttn = txtContactName.Text;
@@ -346,7 +354,21 @@ namespace avii
                 purchaseOrder.Shipping.ShipToState = dpState.SelectedValue;
 
                 purchaseOrder.Shipping.ShipToZip = txtZip.Text;
-
+                SV.Framework.Models.RMA.RMAUserCompany companyInfo = rmaUtility.getRMAUserCompanyInfo(Convert.ToInt32(purchaseOrder.CompanyID), string.Empty, -1, -1);
+                if (companyInfo != null && companyInfo.UserID > 0)
+                {
+                    POCustNoValidate = companyInfo.POCustNoValidate;
+                }
+                if(POCustNoValidate && txtCustomerOrderNumber.Text.Trim().Length > 11)
+                {
+                    lblMsg.Text = "Customer order number length should be between 5 to 11 characters";
+                    return;
+                }
+                else if (!POCustNoValidate && txtCustomerOrderNumber.Text.Trim().Length < 5)
+                {
+                    lblMsg.Text = "Customer order number length should be between 5 to 20 characters";
+                    return;
+                }
                 //default shipvia
                 //if (statusID == 1 && statusID == 2 && statusID == 8)
                 purchaseOrder.Tracking.ShipToBy = dpShipVia.SelectedValue; // txtShipBy.Text;// ;
@@ -374,14 +396,22 @@ namespace avii
                     items.Add(item);
                 }
                 purchaseOrder.PurchaseOrderItems = items;
-                purchaseOrderOperation.UpdatePurchaseOrder(purchaseOrder, userID);
-               // gvPOQuery.EditIndex = -1;
+                if (string.IsNullOrEmpty(purchaseOrder.CustomerAccountNumber))
+                {
+                    lblMsg.Text = "Customer order number required!";
+                    return;
+                }
+                string response = purchaseOrderOperation.UpdatePurchaseOrder(purchaseOrder, userID);
+                // gvPOQuery.EditIndex = -1;
                 Session["POS"] = purchaseOrders;
                 //gvPOQuery.DataSource = purchaseOrders.PurchaseOrderList;
                 //gvPOQuery.DataBind();
                 //TriggerClientGridRefresh();
-                lblMsg.Text = "Updated successfully";
-               // RegisterStartupScript("jsUnblockDialog", "closeEditDialog();");
+                lblMsg.Text = response;// "Updated successfully";
+                // RegisterStartupScript("jsUnblockDialog", "closeEditDialog();");
+                //}
+                //else
+                    //lblMsg.Text = "Fact order number required!";
             }
         }
 

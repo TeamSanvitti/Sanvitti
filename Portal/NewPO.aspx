@@ -357,6 +357,22 @@
                                           runat="server">*</asp:RequiredFieldValidator>--%>
                                 </td>
                             </tr>
+                            <%--<tr>
+                                 <td align="left" class="copy10grey">Fact Order#:</td>
+                                <td></td>
+                                <td align="left">
+                                    <asp:TextBox ID="txtFactOrderNumber" runat="server" MaxLength="13" CssClass="copy10grey"  onkeypress="return isNumberHiphen(event);"></asp:TextBox>
+                                     
+                                </td>
+                                <td align="right" class="copy10grey">
+
+                                </td>
+                                <td>
+
+                                </td>
+                                <td>
+                                </td>
+                            </tr>--%>
                             <tr  height="8">
                                 <td  >
                                 

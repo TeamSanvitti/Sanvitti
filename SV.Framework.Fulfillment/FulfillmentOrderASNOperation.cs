@@ -47,12 +47,14 @@ namespace SV.Framework.Fulfillment
 
                     asnInfo.ARZM = clsGeneral.getColumnData(dataRow, "ARZM", string.Empty, false) as string;
                     PO = clsGeneral.getColumnData(dataRow, "PO_Num", string.Empty, false) as string;
-                    string[] poParts = PO.Split('-');
-                    if(poParts.Length > 1)
-                    {
-                        FO = PO;
-                        PO = poParts[0];                        
-                    }
+                    FO = clsGeneral.getColumnData(dataRow, "FactOrderNumber", string.Empty, false) as string;
+                    
+                    //string[] poParts = PO.Split('-');
+                    //if(poParts.Length > 1)
+                    //{
+                    //    FO = PO;
+                    //    PO = poParts[0];                        
+                    //}
 
                     asnInfo.PO = PO;
                     asnInfo.FO = FO;

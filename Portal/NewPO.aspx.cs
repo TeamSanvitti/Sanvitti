@@ -40,6 +40,7 @@ namespace avii
                         avii.Classes.UserInfo userInfo = Session["userInfo"] as avii.Classes.UserInfo;
                         if (userInfo != null && userInfo.UserGUID > 0)
                         {
+                            ViewState["POCustNoValidate"] = userInfo.POCustNoValidate;
                             userID = userInfo.UserGUID;
                             ViewState["userid"] = userID;
                             if (userID > 0)
@@ -657,8 +658,30 @@ namespace avii
 
         private bool ValidateSave()
         {
-            bool success = true;
+            bool success = true, POCustNoValidate = false;
+            int companyID = 0;
             string errormessage = string.Empty;
+            if(ViewState["POCustNoValidate"] != null)
+            {
+                POCustNoValidate = Convert.ToBoolean(ViewState["POCustNoValidate"]);
+            }
+            if (Session["adm"] != null)
+            {
+                if (ddlCustomer.SelectedIndex == 0)
+                {
+                    success = false;
+                    errormessage = "Company name is required";
+                }
+                else
+                    int.TryParse(ddlCustomer.SelectedValue, out companyID);
+            }
+            else
+            {
+                avii.Classes.UserInfo userInfo = Session["userInfo"] as avii.Classes.UserInfo;
+                if (userInfo != null && userInfo.UserGUID > 0)
+                    companyID = userInfo.CompanyGUID;
+
+            }
             if (string.IsNullOrEmpty(txtPoNum.Text.Trim()))
             {
                 success = false;
@@ -672,7 +695,15 @@ namespace avii
             else if (txtCustOrderNo.Text.Trim().Length < 5)
             {
                 success = false;
-                errormessage = "Length should be between 5 to 20 characters";
+                if (POCustNoValidate)
+                    errormessage = "Customer order number length should be between 5 to 11 characters";
+                else
+                    errormessage = "Customer order number length should be between 5 to 20 characters";
+            }
+            else if (POCustNoValidate && txtCustOrderNo.Text.Trim().Length > 11)
+            {
+                success = false;
+                errormessage = "Customer order number length should be between 5 to 11 characters";
             }
 
             else if (string.IsNullOrEmpty(txtPoDate.Text.Trim()))
@@ -710,14 +741,8 @@ namespace avii
                 success = false;
                 errormessage = "Zip code is required";
             }
-            if (Session["adm"] != null)
-            {
-                if (ddlCustomer.SelectedIndex == 0)
-                {
-                    success = false;
-                    errormessage = "Company name is required";
-                }
-            }
+            
+ 
             DateTime currentDate = DateTime.Now;
             DateTime podate = new DateTime();
                 
@@ -794,6 +819,7 @@ namespace avii
                         }
                         else if (ValidateSave())
                         {
+                            purchaseOrder.FactOrderNumber = "";// txtFactOrderNumber.Text.Trim();
                             purchaseOrder.RequestedShipDate = Convert.ToDateTime(txtRequestedshipdate.Text.Trim());
                             purchaseOrder.PurchaseOrderStatus = PurchaseOrderStatus.Pending;
                             purchaseOrder.PurchaseOrderNumber = txtPoNum.Text.Trim();
@@ -855,6 +881,7 @@ namespace avii
             //lblStoreName.Text = string.Empty;
             txtRequestedshipdate.Text = DateTime.Now.ToShortDateString();
 
+           // txtFactOrderNumber.Text = string.Empty;
             txtCustOrderNo.Text = string.Empty;
             txtCommments.Text = string.Empty;
             txtPoNum.Text = DateTime.Now.Ticks.ToString();
@@ -917,11 +944,14 @@ namespace avii
             //if (ViewState["userid"] != null)
             //    userID = Convert.ToInt32(ViewState["userid"]);
             int companyID = Convert.ToInt32(ddlCustomer.SelectedValue);
+            bool POCustNoValidate = false;
             BindUserStores(0, companyID);
             ViewState["companyID"] = companyID;
             SV.Framework.Models.RMA.RMAUserCompany companyInfo = rmaUtility.getRMAUserCompanyInfo(companyID, string.Empty, -1, -1);
             if (companyInfo != null && companyInfo.UserID > 0)
             {
+                POCustNoValidate = companyInfo.POCustNoValidate;
+                ViewState["POCustNoValidate"] = POCustNoValidate;
                 Session["inventory"] = null;
                 ViewState["userid"] = companyInfo.UserID;
                 InventoryList inventoryList = GetInventoryItems(companyInfo.UserID, sim);

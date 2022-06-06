@@ -235,12 +235,15 @@
           <asp:UpdatePanel ID="UpdatePanel1"  runat="server" UpdateMode="Conditional" >
             <ContentTemplate>
     
-            <table cellSpacing="0" cellPadding="0" align="center" width="100%" border="0">
+            <table cellSpacing="0" cellPadding="0" align="center" width="95%" border="0">
     		<tr>                    
                 <td colspan="2">
                     <asp:Label ID="lblMsg" runat="server"  CssClass="errormessage"></asp:Label></td>
-            </tr>  
-            <tr>
+            </tr> 
+                </table>
+            <table cellSpacing="0" cellPadding="0" align="center" width="100%" border="0">
+    		
+                <tr>
                 <td align="center">
 
                 <table  cellSpacing="1" cellPadding="1" width="95%">

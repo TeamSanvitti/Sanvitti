@@ -78,13 +78,13 @@ namespace avii
         protected global::System.Web.UI.WebControls.Label lblPONo;
 
         /// <summary>
-        /// lblPoTye control.
+        /// txtCustomerOrderNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPoTye;
+        protected global::System.Web.UI.WebControls.TextBox txtCustomerOrderNumber;
 
         /// <summary>
         /// txtPODate control.
@@ -94,6 +94,33 @@ namespace avii
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtPODate;
+
+        /// <summary>
+        /// lblPoTye control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblPoTye;
+
+        /// <summary>
+        /// dpShipVia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dpShipVia;
+
+        /// <summary>
+        /// lblDShipvia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblDShipvia;
 
         /// <summary>
         /// lblPOStatus control.
@@ -123,22 +150,13 @@ namespace avii
         protected global::System.Web.UI.WebControls.Label lblStatus;
 
         /// <summary>
-        /// dpShipVia control.
+        /// txtReqShipDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dpShipVia;
-
-        /// <summary>
-        /// lblDShipvia control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDShipvia;
+        protected global::System.Web.UI.WebControls.TextBox txtReqShipDate;
 
         /// <summary>
         /// chkShipRequired control.
@@ -150,13 +168,13 @@ namespace avii
         protected global::System.Web.UI.WebControls.CheckBox chkShipRequired;
 
         /// <summary>
-        /// txtReqShipDate control.
+        /// txtFactOrderNumber control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtReqShipDate;
+        protected global::System.Web.UI.WebControls.TextBox txtFactOrderNumber;
 
         /// <summary>
         /// lblCustomer control.

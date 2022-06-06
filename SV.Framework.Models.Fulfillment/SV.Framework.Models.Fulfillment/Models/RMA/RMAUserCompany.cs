@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace SV.Framework.Models.RMA
 {
@@ -12,7 +13,8 @@ namespace SV.Framework.Models.RMA
         private string _companyName;
         private string _email;
         private int _userid;
-
+        [XmlIgnore]
+        public bool POCustNoValidate { get; set; }
         public int UserID
         {
             get

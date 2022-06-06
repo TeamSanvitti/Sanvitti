@@ -171,15 +171,52 @@
                 </td>
                 <td class="copy10grey"  align="right" width="14%" >
                       <b>SKU: </b>
-                    <br /><br />
-                    Current Stock:
                 </td>
                 <td width="35%" class="copy10grey"  >
                     <asp:DropDownList ID="ddlSourceSKU" TabIndex="5"  runat="server" CssClass="copy10grey" Width="60%" 
                         AutoPostBack="true" OnSelectedIndexChanged="ddlSourceSKU_SelectedIndexChanged">									
                     </asp:DropDownList>                 
-                    <br /><br />
-                     <asp:label ID="lblSCurrentStock"  CssClass="copy10grey" runat="server"   ></asp:label>
+                     
+                    </td>   
+                </tr>
+                <tr >
+                <td class="copy10grey"  align="right" width="20%" >
+                  <b> Product Name:</b>
+
+                </td>
+                <td width="30%" >
+                    <asp:label ID="lblProductname"  CssClass="copy10grey" runat="server"   ></asp:label>
+                </td>
+                <td  width="1%">
+                       &nbsp;
+                    
+                </td>
+                <td class="copy10grey"  align="right" width="14%" >
+                    <b>Current Stock:</b>
+                </td>
+                <td width="35%" class="copy10grey"  >
+                 <asp:label ID="lblSCurrentStock"  CssClass="copy10grey" runat="server"   ></asp:label>
+                     
+                    </td>   
+                </tr>
+                <tr >
+                <td class="copy10grey"  align="right" width="20%" >
+                  <b> Model Number:</b>
+
+                </td>
+                <td width="30%" >
+                    <asp:label ID="lblModelNumber"  CssClass="copy10grey" runat="server"   ></asp:label>
+                </td>
+                <td  width="1%">
+                       &nbsp;
+                    
+                </td>
+                <td class="copy10grey"  align="right" width="14%" >
+                    <b>UPC:</b>
+                </td>
+                <td width="35%" class="copy10grey"  >
+                 <asp:label ID="lblUPC"  CssClass="copy10grey" runat="server"   ></asp:label>
+                     
                     </td>   
                 </tr>
 
@@ -211,13 +248,17 @@
                     
                 </td>
                 <td class="copy10grey"  align="right" width="14%" >
-                     
+                                           <b>SKU: </b>
+
                 </td>
                 <td width="35%" >
-
+                    <asp:DropDownList ID="ddlDestinationSKU" TabIndex="8"  runat="server" CssClass="copy10grey" Width="60%" 
+                        AutoPostBack="true" OnSelectedIndexChanged="ddlDestinationSKU_SelectedIndexChanged" >									
+                    </asp:DropDownList>                 
+                    
                     </td>   
                 </tr>
-                 <tr>
+                 <%--<tr>
                 <td class="copy10grey"  align="right" width="20%" >
                    <b>Category Name:</b>
 
@@ -233,19 +274,15 @@
                     
                 </td>
                 <td class="copy10grey"  align="right" width="14%" >
-                      <b>SKU: </b>
                 </td>
                 <td width="35%" >
-                    <asp:DropDownList ID="ddlDestinationSKU" TabIndex="8"  runat="server" CssClass="copy10grey" Width="60%" 
-                        AutoPostBack="true" OnSelectedIndexChanged="ddlDestinationSKU_SelectedIndexChanged" >									
-                    </asp:DropDownList>                 
                     
                      </td>   
-                </tr>
+                </tr>--%>
                  
                 <tr>
                 <td class="copy10grey"  align="right" width="20%" >
-                <b>Request Quantity:</b>
+                <b>Requested Quantity:</b>
 
                 </td>
                 <td width="30%" >
@@ -329,15 +366,13 @@
     </form>
     <script type="text/javascript">
         formatParentCatDropDown(document.getElementById("<%=ddlSourceCategory.ClientID%>"));
-        formatParentCatDropDown(document.getElementById("<%=ddlDestinationCategory.ClientID%>"));
-
+        
         var prm = Sys.WebForms.PageRequestManager.getInstance();
         if (prm != null) {
             prm.add_endRequest(function (sender, e) {
                 if (sender._postBackSettings.panelsToUpdate != null) {
                     formatParentCatDropDown(document.getElementById("<%=ddlSourceCategory.ClientID %>"));
-                    formatParentCatDropDown(document.getElementById("<%=ddlDestinationCategory.ClientID %>"));
-
+                    
                 }
             });
         };

@@ -74,8 +74,13 @@ namespace avii.Admin
                 if (Session["orderqty"] != null)
                 {
                     orderQty = Convert.ToInt32(Session["orderqty"]);
+
+                    ViewState["orderqty"] = orderQty;
+                    Session["orderqty"] = null;
                     txtTotalQty.Text = orderQty.ToString();
                     //txtShipQty.Text = txtOrderQty.Text;
+
+                    
                 }
 
                 
@@ -316,18 +321,30 @@ namespace avii.Admin
             SupplierName = txtSuppliername.Text.Trim();
             custOrderNumber = txtCustOrderNumber.Text.Trim();
             // ReceivedAs = ddlReceivedAs.SelectedValue;
+            int.TryParse(txtTotalQty.Text.Trim(), out totalQuantity);
+
             Int64 orderTransferID = 0;
             if (ViewState["orderTransferID"] != null)
+            {
                 orderTransferID = Convert.ToInt64(ViewState["orderTransferID"]);
+                if (ViewState["orderqty"] != null)
+                {
+                    int transferQty = Convert.ToInt32(ViewState["orderqty"]);
+                    if (totalQuantity > transferQty)
+                    {
+                        lblMsg.Text = "Total quantity cannot be greater than transfer quantity";
+                        return;
+                    }
+                }
+            }
 
             int.TryParse(txtCarton.Text.Trim(), out cartonCount);
             int.TryParse(txtPallet.Text.Trim(), out palletCount);
             int.TryParse(txtBoxQty.Text.Trim(), out PiecesPerBox);
-            int.TryParse(txtTotalQty.Text.Trim(), out totalQuantity);
             userID = Convert.ToInt32(Session["UserID"]);
             if (dpCompany.SelectedIndex > 0)
             {
-                if (ddlSKU.SelectedIndex > 0)
+                //if (ddlSKU.SelectedIndex > 0)
                 {
                     if (totalQuantity > 0)
                     {
@@ -365,6 +382,8 @@ namespace avii.Admin
                             int returnResult = nonEsnOperation.NonESNInventoryInsert(nonESNInventory, out insertCount, out updateCount, out errorMessage);
                             if (!string.IsNullOrEmpty(errorMessage))
                             {
+                                ViewState["orderqty"] = null;
+                                ViewState["orderTransferID"] = null;
                                 lblMsg.Text = errorMessage;
                                 btnUpload.Visible = true;
                                 btnSubmit.Visible = false;
@@ -397,10 +416,10 @@ namespace avii.Admin
                     else
                     { lblMsg.Text = "Total quantity required!"; }
                 }
-                else
-                {
-                    lblMsg.Text = "SKU required!";
-                }
+                //else
+                //{
+                //    lblMsg.Text = "SKU required!";
+                //}
             }
             else
                 lblMsg.Text = "Customer required!";
@@ -447,7 +466,19 @@ namespace avii.Admin
             //else
             //{ lblMsg.Text = "Customer order number is required"; return; }
             if (!string.IsNullOrEmpty(txtTotalQty.Text))
+            { 
                 totalQty = Convert.ToInt32(txtTotalQty.Text.Trim());
+                if (ViewState["orderqty"] != null)
+                {
+                    int transferQty = Convert.ToInt32(ViewState["orderqty"]);
+                    if (totalQty > transferQty)
+                    {
+                        lblMsg.Text = "Total quantity cannot be greater than transfer quantity";
+                        return;
+                    }
+                }
+
+            }
             else
             { lblMsg.Text = "total quantity is required"; return; }
 
@@ -818,6 +849,7 @@ namespace avii.Admin
                     ddlSKU.DataValueField = "itemcompanyguid";
                     ddlSKU.DataTextField = "sku";
                     ddlSKU.DataBind();
+
                 }
 
                 //  ddlSKU.DataBind();

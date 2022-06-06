@@ -191,16 +191,16 @@ namespace avii.InternalInventory
 
             if (linkButton != null && linkButton.Text.ToLower().Contains("approve"))
             {
-                int rowIndex = Convert.ToInt32(array[1]);
+            //    int rowIndex = Convert.ToInt32(array[1]);
 
                 orderStatus = linkButton.Text;
-                GridViewRow row = gvOrders.Rows[rowIndex];
+            //    GridViewRow row = gvOrders.Rows[rowIndex];
 
-                TextBox textBox = row.FindControl("txtQty") as TextBox;
-                if (textBox != null)
-                {
-                    Session["orderqty"] = textBox.Text;
-                }
+            //    TextBox textBox = row.FindControl("txtQty") as TextBox;
+            //    if (textBox != null)
+            //    {
+            //        Session["orderqty"] = textBox.Text;
+            //    }
             }
             SV.Framework.Inventory.TransferOrderOperation orderOperations = SV.Framework.Inventory.TransferOrderOperation.CreateInstance<SV.Framework.Inventory.TransferOrderOperation>();
             Int64 orderTransferID = Convert.ToInt64(array[0]);
@@ -209,6 +209,8 @@ namespace avii.InternalInventory
                 IsESNRequired = Convert.ToBoolean(array[2]);
             if (!IsESNRequired)
                 url = "../admin/NonEsnInventory.aspx";
+            if(array.Length > 3)
+                Session["orderqty"] = array[3];
 
             string returnMessage = orderOperations.OrderTransferStatusUpdate(orderTransferID, orderStatus, userID);
             lblMsg.Text = returnMessage;
@@ -231,19 +233,19 @@ namespace avii.InternalInventory
 
             if (linkButton != null)
             {
-                if (array.Length > 1)
-                {
-                    int rowIndex = Convert.ToInt32(array[1]);
+            //    if (array.Length > 1)
+            //    {
+            //        int rowIndex = Convert.ToInt32(array[1]);
 
                     orderStatus = linkButton.Text;
-                    GridViewRow row = gvOrders.Rows[rowIndex];
+            //        GridViewRow row = gvOrders.Rows[rowIndex];
 
-                    TextBox textBox = row.FindControl("txtQty") as TextBox;
-                    if (textBox != null)
-                    {
-                        Session["orderqty"] = textBox.Text;
-                    }
-                }
+            //        TextBox textBox = row.FindControl("txtQty") as TextBox;
+            //        if (textBox != null)
+            //        {
+            //            Session["orderqty"] = textBox.Text;
+            //        }
+            //    }
             }
             
             if (array.Length > 2)
@@ -251,6 +253,8 @@ namespace avii.InternalInventory
             if (!IsESNRequired)
                 url = "../admin/NonEsnInventory.aspx";
 
+            if (array.Length > 3)
+                Session["orderqty"] = array[3];
 
             SV.Framework.Inventory.TransferOrderOperation orderOperations = SV.Framework.Inventory.TransferOrderOperation.CreateInstance<SV.Framework.Inventory.TransferOrderOperation>();
             Int64 orderTransferID = Convert.ToInt64(array[0]);

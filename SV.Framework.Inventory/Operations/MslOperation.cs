@@ -94,6 +94,13 @@ namespace SV.Framework.Inventory
             List<CompanySKUno> skuList = mslOperation.GetCompanySKUs(companyID, isSIM);
             return skuList;
         }
+        public List<CompanySKUno> GetCompanySKUsNew(int companyID, int isSIM, string ModelNumber)
+        {
+            DAL.Inventory.MslOperation mslOperation = DAL.Inventory.MslOperation.CreateInstance<DAL.Inventory.MslOperation>();
+
+            List<CompanySKUno> skuList = mslOperation.GetCompanySKUsNew(companyID, isSIM, ModelNumber);
+            return skuList;
+        }
 
         public List<EsnUpload> MslESNs_Validate(List<EsnUpload> mslEsnList, int itemCompanyGUID, out string errorMessage, out string duplicateESN, out string simMessage, out bool isLTE, out bool isSim, out int returnValue, out string poEsnMessage)
         {
@@ -142,7 +149,7 @@ namespace SV.Framework.Inventory
             List<EsnUploadNew> esnList = mslOperation.MslESNs_ValidateNew2(mslEsnList,  itemCompanyGUID, OrderNumber, out errorMessage, out duplicateESN, out simMessage, out isLTE, out isOrderNumber, out returnValue, out poEsnMessage, out poESNquarantine, out  poESNBoxIDs);
             return esnList;
         }
-        public List<EsnUploadNew> MslESNs_ValidateNew1(List<EsnUploadNew> mslEsnList, int itemCompanyGUID, string OrderNumber, out string errorMessage, 
+        public List<EsnUploadNew> MslESNs_ValidateNew1(List<EsnUploadNew> mslEsnList, int itemCompanyGUID, string OrderNumber, Int64 orderTransferID, out string errorMessage, 
             out string duplicateESN, out string simMessage, out bool isLTE, out bool isOrderNumber, out int returnValue, out string poEsnMessage, 
             out string poESNquarantine, out string poESNBoxIDs, out string poLocations)
         {
@@ -158,7 +165,7 @@ namespace SV.Framework.Inventory
             simMessage = string.Empty;
             isOrderNumber = false;
             returnValue = 0;
-            List<EsnUploadNew> esnList = mslOperation.MslESNs_ValidateNew1(mslEsnList, itemCompanyGUID, OrderNumber, out errorMessage, out duplicateESN, out simMessage, out isLTE, out isOrderNumber, out returnValue, out poEsnMessage, out poESNquarantine, out poESNBoxIDs, out poLocations);
+            List<EsnUploadNew> esnList = mslOperation.MslESNs_ValidateNew1(mslEsnList, itemCompanyGUID, OrderNumber, orderTransferID, out errorMessage, out duplicateESN, out simMessage, out isLTE, out isOrderNumber, out returnValue, out poEsnMessage, out poESNquarantine, out poESNBoxIDs, out poLocations);
             return esnList;
         }
 

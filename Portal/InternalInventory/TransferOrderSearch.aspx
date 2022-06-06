@@ -19,9 +19,8 @@
 	<%--<script type="text/javascript" src="../JQuery/jquery.min.js"></script>
     <script type="text/javascript" src="../JQuery/jquery-ui.min.js"></script>--%>
 	<script type="text/javascript" src="../JQuery/jquery.blockUI.js"></script>
-	
 
-        <link rel="stylesheet"  type="text/css" href="../fullfillment/calendar/dhtmlgoodies_calendar.css" media="screen" />
+    <link rel="stylesheet"  type="text/css" href="../fullfillment/calendar/dhtmlgoodies_calendar.css" media="screen" />
 	<script type="text/javascript" src="../fullfillment/calendar/dhtmlgoodies_calendar.js"></script>  
     
          <script type="text/javascript">
@@ -363,12 +362,6 @@
                         <%# Eval("SourceStock_in_Hand")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
-                <asp:TemplateField HeaderText="Requested Qty" SortExpression="RequestedQty"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Right" 
-                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
-                    <ItemTemplate>
-                        <%# Eval("RequestedQty")%>
-                        </ItemTemplate>
-                </asp:TemplateField>  
                 <asp:TemplateField HeaderText="Destination Customer" SortExpression="DestinationCompanyName"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="8%">
                     <ItemTemplate>
@@ -387,13 +380,14 @@
                     <ItemTemplate>
                         <%# Eval("DestinationItemName")%>
 
-<%--                                 <asp:LinkButton  ToolTip="View detail" Visible='<%# Convert.ToInt32(Eval("Quantity")) > 0 ? true : false %>' CausesValidation="false" Height="18" OnCommand="lnkView_Command" 
+                        <%--     <asp:LinkButton  ToolTip="View detail" Visible='<%# Convert.ToInt32(Eval("Quantity")) > 0 ? true : false %>' CausesValidation="false" Height="18" OnCommand="lnkView_Command" 
                                                 CommandArgument='<%# Convert.ToString(Eval("WarehouseLocation")) + ","+ Convert.ToString(Eval("ItemCompanyGUID")) %>'  
                                              ID="lnkView"  runat="server"  ><%# Eval("DestinationItemName")%>
                                  </asp:LinkButton>                                           
                         --%>           
                         </ItemTemplate>
                 </asp:TemplateField>
+                
                  <asp:TemplateField HeaderText="Current Stock" SortExpression="DestinationStock_in_Hand"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Right" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                     <ItemTemplate>
@@ -406,15 +400,30 @@
                         <%# Eval("OrderTransferStatus")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
-               
-                <asp:TemplateField HeaderText="Order Qty"   HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
-                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="6%">
+               <asp:TemplateField HeaderText="Requested Qty" SortExpression="RequestedQty"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Right" 
+                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                     <ItemTemplate>
-                              <asp:TextBox ID="txtQty" runat="server" class="copy10grey" Text='<%# Eval("TransferQty")%>' onkeydown="return isNumberKey(event);"  Width="100%" MaxLength="5" onchange="return ValidateQty(this);"   ></asp:TextBox>
-                              <asp:HiddenField ID="hdQty" runat="server"  Value='<%# Eval("TransferQty")%>'    ></asp:HiddenField>
-              
+                        <%# Eval("RequestedQty")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
+                
+                <asp:TemplateField HeaderText="Transfered Qty"   HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Right" 
+                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="6%">
+                    <ItemTemplate>
+                            <%# Eval("TransferQty")%>
+
+              <%--                <asp:TextBox ID="txtQty" runat="server" class="copy10grey" Text='<%# Eval("TransferQty")%>' onkeydown="return isNumberKey(event);"  Width="100%" MaxLength="5" onchange="return ValidateQty(this);"   ></asp:TextBox>
+                              <asp:HiddenField ID="hdQty" runat="server"  Value='<%# Eval("TransferQty")%>'    ></asp:HiddenField>
+              --%>
+                        </ItemTemplate>
+                </asp:TemplateField>  
+                <asp:TemplateField HeaderText="Approved By" SortExpression="ApprovedUser"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
+                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
+                    <ItemTemplate>
+                        <%# Eval("ApprovedUser")%>
+                        </ItemTemplate>
+                </asp:TemplateField>  
+                 
                
                 <asp:TemplateField HeaderText="" HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
@@ -429,12 +438,12 @@
                                 <td>
                                     <asp:LinkButton  ToolTip="Accept" Visible='<%# Convert.ToString(Eval("OrderTransferStatus")) == "Pending" ? true : false %>' CausesValidation="false" Height="18" 
                                         OnCommand="lnkAccept_Command" 
-                                                            CommandArgument='<%# Eval("OrderTransferID") +","+ Container.DataItemIndex +","+ Eval("IsESNRequired") %>'  
+                                                            CommandArgument='<%# Eval("OrderTransferID") +","+ Container.DataItemIndex +","+ Eval("IsESNRequired") +","+Eval("ToBeTransferQty") %>'  
                                                          ID="lnkAccept"  runat="server" Text="Approve" >
                                     </asp:LinkButton>
                                     <asp:LinkButton  ToolTip="Receive" Visible='<%# Convert.ToString(Eval("OrderTransferStatus")) == "Approved" ? true : false %>' CausesValidation="false" Height="18" 
                                         OnCommand="lnkReceive_Command" 
-                                                            CommandArgument='<%# Eval("OrderTransferID") +","+ Container.DataItemIndex +","+ Eval("IsESNRequired") %>'  
+                                                            CommandArgument='<%# Eval("OrderTransferID") +","+ Container.DataItemIndex +","+ Eval("IsESNRequired")+","+Eval("ToBeTransferQty") %>'  
                                                          ID="lnkReceive"  runat="server" Text="Receive" >
                                     </asp:LinkButton>
                         

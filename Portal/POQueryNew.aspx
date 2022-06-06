@@ -4140,7 +4140,14 @@ onkeydown="checkTextAreaMaxLength(this,event,'5000');" onkeyup="checkTextAreaMax
                         <%# Eval("CustomerOrderNumber") %>
                     </ItemTemplate>
                 </asp:TemplateField>
-                
+
+<%--                <asp:TemplateField HeaderText="Fact Order#" HeaderStyle-CssClass="buttonundlinelabel" SortExpression="FactOrderNumber"  ItemStyle-CssClass="copy10grey" 
+                    ItemStyle-Width="6%">
+                    <ItemTemplate>
+                        <%# Eval("FactOrderNumber") %>
+                    </ItemTemplate>
+                </asp:TemplateField>
+                --%>
                 <asp:TemplateField HeaderText="Fulfillment Date" HeaderStyle-CssClass="buttonundlinelabel"  SortExpression="PurchaseOrderDate" ItemStyle-CssClass="copy10grey"  
                     ItemStyle-Width="5%">
                     <ItemTemplate><%# DataBinder.Eval(Container.DataItem, "PurchaseOrderDate", "{0:d}") %></ItemTemplate>

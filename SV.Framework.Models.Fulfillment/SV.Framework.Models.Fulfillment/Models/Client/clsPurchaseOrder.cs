@@ -142,7 +142,9 @@ namespace SV.Framework.Models.Fulfillment
 
         }
 
+        
         [XmlElement(ElementName = "purchaseordernumber", IsNullable = true)]
+
         public string PurchaseOrderNumber
         {
             get
@@ -169,6 +171,9 @@ namespace SV.Framework.Models.Fulfillment
                 _customerOrderNumber = value;
             }
         }
+        [XmlElement(ElementName = "factordernumber", IsNullable = true)]
+        public string FactOrderNumber { get; set; }
+
         [XmlIgnore]
         [XmlElement(ElementName = "purchaseorderID", IsNullable = true)]
         public int? PurchaseOrderID

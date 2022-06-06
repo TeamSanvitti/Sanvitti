@@ -18,6 +18,7 @@ namespace SV.Framework.Models.Inventory
         public string ShipDate { get; set; }
         public string Shipvia { get; set; }
         public string TrackingNumber { get; set; }
+        public string SupplierName { get; set; }
         public int OrderQty { get; set; }
         public int ShipQty { get; set; }
         public int AssignedQty { get; set; }

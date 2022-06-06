@@ -23,6 +23,12 @@ namespace SV.Framework.Models.Inventory
         private int parentCategoryID;
         [XmlIgnore]
         public int CurrentStock { get; set; }
+        [XmlIgnore]
+        public string UPC { get; set; }
+        [XmlIgnore]
+        public string ModelNumber { get; set; }
+        [XmlIgnore]
+        public string ProductName { get; set; }
 
         [XmlIgnore]
         public bool IsDisable { get; set; }

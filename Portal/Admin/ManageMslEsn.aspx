@@ -273,16 +273,18 @@
             <asp:UpdatePanel ID="UpdatePanel1"  runat="server" UpdateMode="Conditional" >
             <ContentTemplate>
     
-            <table cellSpacing="0" cellPadding="0" align="center" width="100%" border="0">
+            <table cellSpacing="0" cellPadding="0" align="center" width="95%" border="0">
     		<tr>                    
                 <td colspan="2">
                     <asp:Label ID="lblMsg" runat="server" Width="100%" CssClass="errormessage"></asp:Label></td>
-            </tr>               
-            
+            </tr> 
+            </table
+            <table cellSpacing="0" cellPadding="0" align="center" width="100%" border="0">
+    		 
             <tr>
                 <td align="center">
 
-                    <table  cellSpacing="1" cellPadding="1" width="95%">
+                    <table  cellSpacing="1" cellPadding="1" width="95%" border="0" align="center" >
                         <tr><td class="copy10grey" align="left">
                         <%--- Create/Update ESN(s) to Customer assigned SKU#(s).<br />&nbsp;--%>
                             <asp:Label ID="lblFilesize" runat="server" CssClass="copy10grey">&nbsp;- Upload file should be less than 3 MB. <br /></asp:Label>

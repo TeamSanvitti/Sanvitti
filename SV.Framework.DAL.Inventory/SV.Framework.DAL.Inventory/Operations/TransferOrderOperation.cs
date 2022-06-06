@@ -217,6 +217,8 @@ namespace SV.Framework.DAL.Inventory
                         orderInfo.TransferedDate = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "TransferedDate", DateTime.Now, false));
                         orderInfo.OrderTransferStatus = clsGeneral.getColumnData(dataRow, "OrderTransferStatus", string.Empty, false) as string;
                         orderInfo.OrderTransferAssignmentStatus = clsGeneral.getColumnData(dataRow, "OrderTransferAssignmentStatus", string.Empty, false) as string;
+                        orderInfo.AssignedBy = clsGeneral.getColumnData(dataRow, "Username", string.Empty, false) as string;
+                        orderInfo.CategoryName = clsGeneral.getColumnData(dataRow, "CategoryName", string.Empty, false) as string;
 
                         //orderInfo.CreatedBy = clsGeneral.getColumnData(dataRow, "UserName", string.Empty, false) as string;
                         // warehouseInfo.Specialinstructions = clsGeneral.getColumnData(dataRow, "Specialinstructions", string.Empty, false) as string;
@@ -290,7 +292,8 @@ namespace SV.Framework.DAL.Inventory
                     {
                         TransferOrder orderInfo = new TransferOrder();
                         orderInfo.OrderTransferID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "OrderTransferID", 0, false));
-                        orderInfo.TransferQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "TransferQty", 0, false));
+                        orderInfo.TransferQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "TransferedQty", 0, false));
+                        orderInfo.ToBeTransferQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ToBeTransferQty", 0, false));
                         orderInfo.RequestedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "RequestedQty", 0, false));
                         orderInfo.SourceStock_in_Hand = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "SourceStock_in_Hand", 0, false));
                         orderInfo.DestinationStock_in_Hand = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "DestinationStock_in_Hand", 0, false));
@@ -306,6 +309,8 @@ namespace SV.Framework.DAL.Inventory
                         //orderInfo.TransferOrderDate = clsGeneral.getColumnData(dataRow, "CreateDate", string.Empty, false) as string;
                         orderInfo.OrderTransferDateTime = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "OrderTransferDate", DateTime.Now, false));
                         orderInfo.OrderTransferStatus = clsGeneral.getColumnData(dataRow, "OrderTransferStatus", string.Empty, false) as string;
+                        orderInfo.ApprovedUser = clsGeneral.getColumnData(dataRow, "ApprovedUser", string.Empty, false) as string;
+                        orderInfo.TransferedUser = clsGeneral.getColumnData(dataRow, "TransferedUser", string.Empty, false) as string;
 
                         //orderInfo.CreatedBy = clsGeneral.getColumnData(dataRow, "UserName", string.Empty, false) as string;
                         // warehouseInfo.Specialinstructions = clsGeneral.getColumnData(dataRow, "Specialinstructions", string.Empty, false) as string;

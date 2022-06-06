@@ -283,8 +283,12 @@
                                     <ItemTemplate>                                                
                                          <%# Eval("DiscardedSKU")%>
                                     </ItemTemplate>
-                                </asp:TemplateField> 
-                              
+                                </asp:TemplateField>  
+                               <asp:TemplateField HeaderText="Transfer Count" SortExpression="TransferCount" HeaderStyle-HorizontalAlign="Center" ItemStyle-HorizontalAlign="Right" ItemStyle-CssClass="copy10grey" ItemStyle-Width="6%">
+                                    <ItemTemplate>                                                
+                                         <%# Eval("TransferCount")%>
+                                    </ItemTemplate>
+                                </asp:TemplateField>  
                                <asp:TemplateField HeaderText="Closing Balance*" ItemStyle-HorizontalAlign="Right" ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                                     <ItemTemplate>
                                          <%# Eval("ClosingBalance")%>
@@ -304,7 +308,9 @@
                         </tr>
                             <tr>
                             <td align="left">
-                                <asp:Label ID="lblNote" Visible="false" CssClass="copy10grey" runat="server" ><strong>*</strong> Closing Balance = (Opening Balance + Stock Received - Stock Assigned - Stock Reaassignment)</asp:Label>
+                                <asp:Label ID="lblNote" Visible="false" CssClass="copy10grey" runat="server" >
+                                    <strong>*</strong> Closing Balance = (Opening Balance + Stock Received + RMA Count + Dekit Count + UnProvisioning Count - Stock Assigned - Stock Reaassignment - Kitted SKU Dekit Count - Transfer Count - Adjustment Count)</asp:Label>
+                                
                             </td>
                         </tr>
                         

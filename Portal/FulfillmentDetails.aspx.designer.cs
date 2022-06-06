@@ -141,6 +141,24 @@ namespace avii
         protected global::System.Web.UI.WebControls.Label lblvPODate;
 
         /// <summary>
+        /// lblFO control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFO;
+
+        /// <summary>
+        /// lblCustomerOrderNumber control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCustomerOrderNumber;
+
+        /// <summary>
         /// lblCustName control.
         /// </summary>
         /// <remarks>

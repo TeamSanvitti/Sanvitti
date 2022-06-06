@@ -46,8 +46,8 @@ namespace SV.Framework.Fulfillment
                        new XElement(tns + "phoneType", edfFileInfo.edfData.edfHeader.phoneType),
                        new XElement(tns + "phoneOwnership", edfFileInfo.edfData.edfHeader.phoneOwnership),
                        new XElement(tns + "transactionType", edfFileInfo.edfData.edfHeader.transactionType),
-                       new XElement(tns + "poOrder", poOrder),
-                       new XElement(tns + "factOrder", edfFileInfo.edfData.edfHeader.poOrder),
+                       new XElement(tns + "poOrder", edfFileInfo.edfData.edfHeader.poOrder),
+                       new XElement(tns + "factOrder", edfFileInfo.edfData.edfHeader.factOrder),
                        new XElement(tns + "locationDestination", edfFileInfo.edfData.edfHeader.locationDestination),
                        new XElement(tns + "uedfRevisionNumber", edfFileInfo.edfData.edfHeader.uedfRevisionNumber)
 
@@ -356,6 +356,11 @@ namespace SV.Framework.Fulfillment
             if (string.IsNullOrWhiteSpace(edfFileInfo.edfData.edfHeader.poOrder))
             {
                 errorSB.Append(" PO Order cannot be empty! </br>"); 
+                IsValidate = false;
+            }
+            if (string.IsNullOrWhiteSpace(edfFileInfo.edfData.edfHeader.factOrder))
+            {
+                errorSB.Append(" Fact Order cannot be empty! </br>");
                 IsValidate = false;
             }
             

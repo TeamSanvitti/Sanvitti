@@ -7,6 +7,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Transfer Order Assigments</title>
+    <script>
+        function close_window() {
+            if (confirm("Close Window?")) {
+                window.close();
+                return true;
+            }
+            else
+                return false
+        }
+    </script>
+
 </head>
 <body bgcolor="#ffffff" leftmargin="0" rightmargin="0" topmargin="0">
 
@@ -120,8 +131,7 @@
             <td colspan="2" align="center">
 
         <asp:GridView ID="gvOrders" AutoGenerateColumns="false"   
-        Width="100%" ShowHeader="true"  ShowFooter="false" runat="server" GridLines="Both"
-        >                        
+        Width="100%" ShowHeader="true"  ShowFooter="false" runat="server" GridLines="Both">                        
         <RowStyle BackColor="Gainsboro" />
         <AlternatingRowStyle BackColor="white" />
         <HeaderStyle  CssClass="buttongrid" ForeColor="white"/>
@@ -132,22 +142,29 @@
                         <%#  Container.DataItemIndex + 1%>               
                 </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="SKU" SortExpression="SKU"  HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
+                <asp:TemplateField HeaderText="CategoryName" SortExpression="CategoryName"  HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="8%">
+                    <ItemTemplate>
+                        <%# Eval("CategoryName")%>
+                        </ItemTemplate>
+                </asp:TemplateField>  
+                
+                <asp:TemplateField HeaderText="SKU" SortExpression="SKU"  HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
+                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="12%">
                     <ItemTemplate>
                         <%# Eval("SKU")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
                 
                 <asp:TemplateField HeaderText="Product Name" SortExpression="ProductName"  HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
-                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
+                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="20%">
                     <ItemTemplate>
                         <%# Eval("ProductName")%>
                         </ItemTemplate>
                 </asp:TemplateField> 
 
                  <asp:TemplateField HeaderText="Transfer Date" SortExpression="OrderTransferDateTime"  HeaderStyle-CssClass="buttongrid" ItemStyle-HorizontalAlign="Left" 
-                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
+                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="8%">
                     <ItemTemplate>
                         <%# Convert.ToDateTime( Eval("TransferedDate")).ToString("MM/dd/yyyy")%>
                         </ItemTemplate>
@@ -159,6 +176,12 @@
                         <%# Eval("TransferedQty")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
+                <asp:TemplateField HeaderText="Transfered By" SortExpression="TransferedQty"  HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
+                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
+                    <ItemTemplate>
+                        <%# Eval("AssignedBy")%>
+                        </ItemTemplate>
+                </asp:TemplateField>  
 
                      
                                     
@@ -168,7 +191,17 @@
     </tr> 
         
 </table>
-    
+     <br />
+ 
+
+                <table width="95%" align="center">
+                <tr>
+                    <td align="center">
+                         <asp:Button ID="btnCancel" runat="server" Text="Close" CssClass="button" Visible="true" OnClientClick="return close_window();"  />
+                    </td>
+                </tr>
+                </table>
+        
             </ContentTemplate>
             </asp:UpdatePanel>
 		

@@ -123,6 +123,15 @@ namespace avii.InternalInventory
         protected global::System.Web.UI.WebControls.GridView gvOrders;
 
         /// <summary>
+        /// btnCancel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancel;
+
+        /// <summary>
         /// Menuheader2 control.
         /// </summary>
         /// <remarks>

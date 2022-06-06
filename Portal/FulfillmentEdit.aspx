@@ -13,6 +13,18 @@
     <div id="Div1" runat="server"> 
 	
     <script>
+        function isNumberHiphen(evt) {
+
+            var charCodes = evt.keyCode ? evt.keyCode : evt.which ? evt.which : evt.charCode;
+            if (((((charCodes > 31 && (charCodes < 48 || charCodes > 57) && charCodes != 45) && charCodes != 46) && charCodes != 95) && !(charCodes > 96 && charCodes < 123)) && !(charCodes > 64 && charCodes < 91)) {
+                //alert(charCodes);
+
+                charCodes = 0;
+                return false;
+            }
+
+            return true;
+        }
         function set_focus1() {
             var img = document.getElementById("img1");
             var st = document.getElementById("txtContactName");
@@ -283,12 +295,15 @@
                                 &nbsp;
                                 </td>
                                 <td class="copy10grey" align="right" width="17%">
-                                    <b>Fulfillment Type:</b>
+                                    <b> Customer Order#:</b>
+                                    
                                 </td>
                                 <td width="32%">
 
-                                   &nbsp;  <asp:Label ID="lblPoTye" runat="server" CssClass="copy10grey"></asp:Label>
-                                    
+                                   &nbsp;  
+                                    <asp:TextBox ID="txtCustomerOrderNumber" runat="server" MaxLength="20" Width="200" CssClass="copy10grey"></asp:TextBox>   
+                                    <%--<asp:Label ID="lblCustomerOrderNumber" runat="server" CssClass="copy10grey"></asp:Label>   
+                                    --%>
                                 </td>
 
                             </tr>
@@ -310,27 +325,15 @@
                                 &nbsp;
                                 </td>
                     
-                                <td align="right" width="17%">
-                                   <b><asp:Label ID="lblPOStatus" CssClass="copy10grey" runat="server" Text="Status:"></asp:Label></b>
+                                <td align="right" width="17%" class="copy10grey">
+                                    <b>Fulfillment Type:</b>
+                                    
+                                   
                                 </td>    
                                 <td width="32%">
-                                 &nbsp;<asp:DropDownList ID="ddlStatus" runat="server" class="copy10grey">
-                                            <asp:ListItem Text="" Value=""></asp:ListItem>
-                                            <asp:ListItem Text="Pending" Value="1"></asp:ListItem>
-                                            <asp:ListItem Text="In Process" Value="8"></asp:ListItem>
-                                            <asp:ListItem Text="Partial Processed" Value="10"></asp:ListItem>
-                                            <asp:ListItem Text="Partial Shipped" Value="11"></asp:ListItem>
-                                            <asp:ListItem Text="Processed" Value="2"></asp:ListItem>
-                                            <asp:ListItem Text="Shipped" Value="3"></asp:ListItem>
-                                            <asp:ListItem Text="Closed" Value="4"></asp:ListItem>
-                                            <asp:ListItem Text="Return" Value="5"></asp:ListItem>
-
-                                            <asp:ListItem Text="Cancel" Value="9"></asp:ListItem>
-                                        <asp:ListItem Text="On Hold" Value="6"></asp:ListItem>
-                                            <asp:ListItem Text="Out of Stock" Value="7"></asp:ListItem>
-                                        </asp:DropDownList>
-
-                                        &nbsp;  <asp:Label ID="lblStatus" runat="server" CssClass="copy10grey"></asp:Label>   
+                                 &nbsp;<asp:Label ID="lblPoTye" runat="server" CssClass="copy10grey"></asp:Label>
+                                    
+                                    
                                 </td>
                             </tr>
                             <tr>
@@ -347,11 +350,29 @@
                                 &nbsp;
                                 </td>
                                 <td class="copy10grey" align="right" width="17%">
-                                       Shipment required:
+                                    <b><asp:Label ID="lblPOStatus" CssClass="copy10grey" runat="server" Text="Status:"></asp:Label></b>
+                                       
                                 </td>
                                 <td width="32%">
 
-                                   &nbsp;<asp:CheckBox ID="chkShipRequired" runat="server" />   
+                                   &nbsp;<asp:DropDownList ID="ddlStatus" runat="server" class="copy10grey">
+                                            <asp:ListItem Text="" Value=""></asp:ListItem>
+                                            <asp:ListItem Text="Pending" Value="1"></asp:ListItem>
+                                            <asp:ListItem Text="In Process" Value="8"></asp:ListItem>
+                                            <asp:ListItem Text="Partial Processed" Value="10"></asp:ListItem>
+                                            <asp:ListItem Text="Partial Shipped" Value="11"></asp:ListItem>
+                                            <asp:ListItem Text="Processed" Value="2"></asp:ListItem>
+                                            <asp:ListItem Text="Shipped" Value="3"></asp:ListItem>
+                                            <asp:ListItem Text="Closed" Value="4"></asp:ListItem>
+                                            <asp:ListItem Text="Return" Value="5"></asp:ListItem>
+
+                                            <asp:ListItem Text="Cancel" Value="9"></asp:ListItem>
+                                        <asp:ListItem Text="On Hold" Value="6"></asp:ListItem>
+                                            <asp:ListItem Text="Out of Stock" Value="7"></asp:ListItem>
+                                        </asp:DropDownList>
+
+                                        &nbsp;  <asp:Label ID="lblStatus" runat="server" CssClass="copy10grey"></asp:Label>   
+                                    
                                 </td>
 
                         
@@ -376,9 +397,12 @@
                                 &nbsp;
                                 </td>
                                 <td class="copy10grey" align="right" width="17%">
+                                   Shipment required:
                                 </td>
                                 <td width="32%">
-
+                                    <asp:CheckBox ID="chkShipRequired" runat="server" />   
+                                    <asp:TextBox ID="txtFactOrderNumber" Visible="false" runat="server" MaxLength="13" CssClass="copy10grey"  onkeypress="return isNumberHiphen(event);"></asp:TextBox>
+                                    
                                 </td>
 
                             </tr>

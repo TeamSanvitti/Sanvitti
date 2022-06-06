@@ -294,82 +294,105 @@
                  <asp:Label ID="lblpoid" runat="server" Visible="false" ></asp:Label>
 <table width="100%" align="center" cellpadding="0" cellspacing="0">
 <tr valign="top">
-    <td width="50%">
+    <td width="62%">
         <table bordercolor="#839abf" border="1" cellSpacing="0" cellPadding="0" width="100%" align="center" >
            <tr bordercolor="#839abf">
                 <td>
-                    <table width="100%" cellSpacing="2" cellPadding="2">
+                    <table width="100%" cellSpacing="2" cellPadding="2" border="0">
                     <tr>
-                        <td class="copy10grey" width="22%" align="left">
+                        <td class="copy10grey" width="15%" align="left">
                             Fulfillment#:
                         </td>
                         <td width="1%">&nbsp;</td>
-                        <td  align="left" width="32%" class="copy10grey" >
+                        <td  align="left" width="24%" class="copy10grey" >
                             <asp:Label ID="lblTpye" CssClass="copy10grey" runat="server" ></asp:Label> - <asp:Label ID="lblPO" CssClass="copy10grey" runat="server" ></asp:Label>(<asp:Label ID="lblvStatus" CssClass="copy10grey" runat="server" ></asp:Label>)
                         </td>
-                        <td class="copy10grey" width="15%" align="right">
+                        <td class="copy10grey" width="18%" align="right">
                        <%--<strong>  Status:</strong>--%>
                             Fulfillment Date:
                         </td>
                         <td width="1%">&nbsp;</td>
-                        <td  align="left" width="29%" >
-                              <asp:Label ID="lblvPODate" CssClass="copy10grey" runat="server" ></asp:Label>
+                        <td  align="left" width="19%" class="copy10grey">
+                              <asp:Label ID="lblvPODate" CssClass="copy10grey" runat="server" ></asp:Label> &nbsp;&nbsp;&nbsp;&nbsp;
                             
                         </td>
-                   
+                        <td class="copy10grey" width="8%" align="right">
+                            FO#: 
+                            </td>
+                        <td align="left" width="16%" class="copy10grey">
+                             <asp:Label ID="lblFO" CssClass="copy10grey" runat="server" ></asp:Label>
+                            </td>
                     </tr>
                     <tr>
-                        <td class="copy10grey" width="22%" align="left">
-                            Customer name:
+                        <td class="copy10grey" align="left">
+                            Customer Order#:
                         </td>
                         <td width="1%">&nbsp;</td>
-                        <td  align="left" width="32%" >
+                        <td  align="left"  >
+                           <asp:Label ID="lblCustomerOrderNumber" CssClass="copy10grey" runat="server" ></asp:Label>    
+                        </td>
+                        <td class="copy10grey"  align="right">
+                          Customer name:
+                        </td>
+                        <td width="1%">&nbsp;</td>
+                        <td  align="left"  colspan="1" >
                            <asp:Label ID="lblCustName" CssClass="copy10grey" runat="server" ></asp:Label>                        
                         </td>
-                        <td class="copy10grey" width="22%" align="right">
-                          Store ID:
-                        </td>
-                        <td width="1%">&nbsp;</td>
-                        <td  align="left" width="22%" >
-                           <asp:Label ID="lblvStoreID" CssClass="copy10grey" runat="server" ></asp:Label>
-                        </td>
+                         <td class="copy10grey"  align="right">
+                            Store ID:
+                            </td>
+                        <td align="left"  class="copy10grey">
+                             <asp:Label ID="lblvStoreID" CssClass="copy10grey" runat="server" ></asp:Label>
+                            </td>
                     </tr>
                     <tr>
-                        <td class="copy10grey" width="22%" align="left">
+                        <td class="copy10grey"  align="left">
                             Default ShipVia:
                         </td>
                         <td width="1%">&nbsp;</td>
-                        <td  align="left" width="32%" >
+                        <td  align="left" >
                              <asp:Label ID="lblShipViaCode" CssClass="copy10grey" runat="server" ></asp:Label>
                         
                         </td>
-                        <td class="copy10grey" width="22%" align="right" >
+                        <td class="copy10grey"  align="right" >
                            Requested Shipping Date:
                         </td>
                         <td width="1%" >&nbsp;</td>
-                        <td  align="left" width="22%" >
+                        <td  align="left"  colspan="1">
                             <asp:Label ID="lblReqShipDate" CssClass="copy10grey" runat="server" ></asp:Label>
                         </td>
                         
+                         <td class="copy10grey"  align="right">
+                            
+                            </td>
+                        <td align="left"  class="copy10grey">
+                             
+                            </td>
                     </tr>
                     <tr>
-                        <td class="copy10grey" width="22%" align="left">
+                        <td class="copy10grey" align="left">
                             Total Containers:
                         </td>
                         <td width="1%">&nbsp;</td>
-                        <td  align="left" width="32%" >
+                        <td  align="left"  >
                            <asp:Label ID="lblItemsPerContainer"  CssClass="copy10grey" runat="server"></asp:Label>
                 
                         </td>
-                        <td class="copy10grey" width="22%" align="right">
+                        <td class="copy10grey" align="right">
                             Total Pallets:
                         </td>
                         <td width="1%" >&nbsp;</td>
-                        <td  align="left" width="22%" >
+                        <td  align="left"  colspan="1">
                             <asp:Label ID="lblContainersPerPallet"  CssClass="copy10grey" runat="server"></asp:Label>
                 
                         </td>
                         
+                         <td class="copy10grey"  align="right">
+                            
+                            </td>
+                        <td align="left"  class="copy10grey">
+                             
+                            </td>
                     </tr>
                     </table>
                 </td>
@@ -380,7 +403,7 @@
     <td>
         &nbsp;
     </td>
-    <td width="50%" >
+    <td width="38%" >
     
         <table bordercolor="#839abf" border="1" cellSpacing="0" cellPadding="0" width="100%" align="center" >
            <tr bordercolor="#839abf">

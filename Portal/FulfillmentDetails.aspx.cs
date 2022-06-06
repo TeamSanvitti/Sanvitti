@@ -1504,6 +1504,8 @@ namespace avii
                     }                    
                 }
                 lblPO.Text = poInfoList[0].PurchaseOrderNumber;
+                lblCustomerOrderNumber.Text = poInfoList[0].CustomerOrderNumber;
+                lblFO.Text = poInfoList[0].FactOrderNumber;
                 int ItemsPerContainer = 0, ContainersPerPallet = 0, requiredContainers=0;
                 var totalContainers = 0;
                 var totalPallets = 0;

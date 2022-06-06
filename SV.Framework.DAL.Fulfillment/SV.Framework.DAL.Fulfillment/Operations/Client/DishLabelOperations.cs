@@ -668,11 +668,11 @@ namespace SV.Framework.DAL.Fulfillment
                         fulfillmentPallet.ShipDate = (string)clsGeneral.getColumnData(dRowItem, "ShipTo_Date", string.Empty, false);
                         poNumber = (string)clsGeneral.getColumnData(dRowItem, "PO_Num", string.Empty, false);
                         string[] array = poNumber.Split('-');
-                        
-                        fulfillmentPallet.PoNumber = array[0];
+
+                        fulfillmentPallet.PoNumber = poNumber;// array[0];
 
                         // if (array.Length > 1)
-                        fulfillmentPallet.FO = poNumber; // (string)clsGeneral.getColumnData(dRowItem, "PO_Num", string.Empty, false);
+                        fulfillmentPallet.FO =  (string)clsGeneral.getColumnData(dRowItem, "FactOrderNumber", string.Empty, false);
                         //else
                         //    fulfillmentPallet.FO = "";
 

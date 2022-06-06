@@ -28,6 +28,7 @@ namespace SV.Framework.Models.Fulfillment
         public string phoneOwnership { get; set; }
         public string transactionType { get; set; }
         public string poOrder { get; set; }
+        public string factOrder { get; set; }
         public string locationDestination { get; set; }
         public string uedfRevisionNumber { get; set; }
     }

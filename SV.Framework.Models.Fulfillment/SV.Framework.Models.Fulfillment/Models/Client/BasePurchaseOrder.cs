@@ -80,6 +80,8 @@ namespace SV.Framework.Models.Fulfillment
 
         [XmlIgnore]
         public string POSource { get; set; }
+        [XmlIgnore]
+        public string FactOrderNumber { get; set; }
 
         [XmlIgnore]
         public int LineItemCount { get; set; }

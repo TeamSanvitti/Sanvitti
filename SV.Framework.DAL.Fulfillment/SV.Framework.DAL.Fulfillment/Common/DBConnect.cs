@@ -539,9 +539,9 @@ namespace SV.Framework.DAL.Fulfillment
                             objCmd.Parameters.AddWithValue(strField, HshParameters[strField]);
                         }
                     }
-                objCmd.Parameters.Add(sOutParam, SqlDbType.VarChar, 50);
+                objCmd.Parameters.Add(sOutParam, SqlDbType.VarChar, 200);
                 objCmd.Parameters[sOutParam].Direction = ParameterDirection.Output;
-                objCmd.Parameters.Add(sOutParam2, SqlDbType.VarChar, 20);
+                objCmd.Parameters.Add(sOutParam2, SqlDbType.VarChar, 200);
                 objCmd.Parameters[sOutParam2].Direction = ParameterDirection.Output;
 
                 DbParameter returnValue;

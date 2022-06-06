@@ -32,6 +32,8 @@ namespace avii.Classes
         {
             userGuid = GUID;
         }
+        public bool POCustNoValidate { get; set; }
+
         public string MenuCss
         {
             get
@@ -541,6 +543,7 @@ namespace avii.Classes
                     {
                         foreach (DataRow dataRow in ds.Tables[0].Rows)
                         {
+                            objUserInfo.POCustNoValidate = Convert.ToBoolean(clsGeneral.getColumnData(dataRow, "POCustNoValidate", false, false));
                             objUserInfo.CompanyGUID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "CompanyID", 0, false));
                             objUserInfo.SignInID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "SignInID", 0, false));
                             objUserInfo.CompanyAccountNumber = clsGeneral.getColumnData(dataRow, "CompanyAccountNumber", string.Empty, false) as string;

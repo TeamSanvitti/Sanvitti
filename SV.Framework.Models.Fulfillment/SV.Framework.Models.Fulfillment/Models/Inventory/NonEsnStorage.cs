@@ -35,12 +35,15 @@ namespace SV.Framework.Models.Inventory
         public int TotalQuantity { get; set; }
         public string Comment { get; set; }
         public string ReceivedAs { get; set; }
+        public string SupplierName { get; set; }
+        public Int64 OrderTransferID { get; set; }
         public List<NonEsnStorage> nonEsnList { get; set; }
     }
 
     public class NonEsnHeader
     {
         public string CategoryWithProductAllowed { get; set; }
+        public string SupplierName { get; set; }
         public string UserName { get; set; }
         public bool IsESN { get; set; }
         public string CategoryName { get; set; }

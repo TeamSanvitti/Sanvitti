@@ -34,6 +34,7 @@ namespace SV.Framework.DAL.RMA
                         objRMAcompany = new RMAUserCompany();
                         foreach (DataRow dataRow in dataTable.Rows)
                         {
+                            objRMAcompany.POCustNoValidate = Convert.ToBoolean(clsGeneral.getColumnData(dataRow, "POCustNoValidate", false, false));
                             objRMAcompany.CompanyID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "CompanyID", 0, false));
                             objRMAcompany.UserID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "userID", 0, false));
                             objRMAcompany.CompanyName = clsGeneral.getColumnData(dataRow, "CompanyName", string.Empty, false) as string;
