@@ -696,14 +696,14 @@ namespace avii
             {
                 success = false;
                 if (POCustNoValidate)
-                    errormessage = "Customer order number length should be between 5 to 11 characters";
+                    errormessage = "Customer order number length should be between 8 to 11 characters";
                 else
                     errormessage = "Customer order number length should be between 5 to 20 characters";
             }
             else if (POCustNoValidate && txtCustOrderNo.Text.Trim().Length > 11)
             {
                 success = false;
-                errormessage = "Customer order number length should be between 5 to 11 characters";
+                errormessage = "Customer order number length should be between 8 to 11 characters";
             }
 
             else if (string.IsNullOrEmpty(txtPoDate.Text.Trim()))

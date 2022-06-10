@@ -32,6 +32,7 @@ namespace avii.InternalInventory
                     Response.Redirect(url);
                 }
             }
+
             if (!IsPostBack)
             {
                 BindCustomer();
@@ -40,9 +41,10 @@ namespace avii.InternalInventory
                 dpSourceCompany.SelectedValue = internalordercustomer.ToString();
                 BindCustomerSKU(internalordercustomer, "source","");
                 string orderDate = DateTime.Now.ToShortDateString();
-                txtOrderDate.Text = orderDate;
+                lblOrderDate.Text = orderDate;
             }
         }
+
         protected void BindCustomer()
         {
             DataTable dt = avii.Classes.clsCompany.GetCompany(0, 0);
@@ -110,7 +112,7 @@ namespace avii.InternalInventory
             string OrderTransferDate, Comment, errorMessage;
             OrderTransferNumber = 0;// txtTranferOrderNo.Text;
             request.OrderTransferNumber = OrderTransferNumber;
-            OrderTransferDate = txtOrderDate.Text;
+            OrderTransferDate = lblOrderDate.Text;
             request.OrderTransferDate = OrderTransferDate; 
             Comment = txtComment.Text;
             request.Comment = Comment;
@@ -215,7 +217,7 @@ namespace avii.InternalInventory
         private void ClearForm()
         {
             string orderDate = DateTime.Now.ToShortDateString();
-            txtOrderDate.Text = orderDate;
+            lblOrderDate.Text = orderDate;
             lblMsg.Text = "";
             txtComment.Text = "";
             txtRequestQty.Text = "";

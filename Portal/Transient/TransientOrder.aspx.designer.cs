@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace avii.InternalInventory
+namespace avii.Transient
 {
 
 
-    public partial class TransferOrderRequest
+    public partial class TransientOrder
     {
 
         /// <summary>
@@ -60,13 +60,13 @@ namespace avii.InternalInventory
         protected global::System.Web.UI.WebControls.Label lblMsg;
 
         /// <summary>
-        /// dpSourceCompany control.
+        /// dpCompany control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList dpSourceCompany;
+        protected global::System.Web.UI.WebControls.DropDownList dpCompany;
 
         /// <summary>
         /// lblOrderDate control.
@@ -78,22 +78,22 @@ namespace avii.InternalInventory
         protected global::System.Web.UI.WebControls.Label lblOrderDate;
 
         /// <summary>
-        /// ddlSourceCategory control.
+        /// ddlCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSourceCategory;
+        protected global::System.Web.UI.WebControls.DropDownList ddlCategory;
 
         /// <summary>
-        /// ddlSourceSKU control.
+        /// ddlSKU control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSourceSKU;
+        protected global::System.Web.UI.WebControls.DropDownList ddlSKU;
 
         /// <summary>
         /// lblProductname control.
@@ -114,58 +114,22 @@ namespace avii.InternalInventory
         protected global::System.Web.UI.WebControls.Label lblSCurrentStock;
 
         /// <summary>
-        /// lblModelNumber control.
+        /// txtSupplier control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblModelNumber;
+        protected global::System.Web.UI.WebControls.TextBox txtSupplier;
 
         /// <summary>
-        /// lblUPC control.
+        /// txtOrderedQty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUPC;
-
-        /// <summary>
-        /// ddlDestinationCompany control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDestinationCompany;
-
-        /// <summary>
-        /// ddlDestinationSKU control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlDestinationSKU;
-
-        /// <summary>
-        /// txtRequestQty control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtRequestQty;
-
-        /// <summary>
-        /// lblDCurrentStock control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblDCurrentStock;
+        protected global::System.Web.UI.WebControls.TextBox txtOrderedQty;
 
         /// <summary>
         /// ddlUsers control.
@@ -175,6 +139,15 @@ namespace avii.InternalInventory
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlUsers;
+
+        /// <summary>
+        /// txtProposedReceiveDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtProposedReceiveDate;
 
         /// <summary>
         /// txtComment control.

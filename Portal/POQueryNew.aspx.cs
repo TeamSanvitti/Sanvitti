@@ -6015,7 +6015,7 @@ namespace avii
                     {
                         productList = new List<SV.Framework.LabelGenerator.ProductModel>();
                         
-                        poInfo.PurchaseOrderNumber = poInfoList[0].PurchaseOrderNumber;
+                        poInfo.PurchaseOrderNumber = poInfoList[0].CustomerOrderNumber;
                         poInfo.SalesOrder = poInfoList[0].PurchaseOrderNumber;
                         poInfo.DocumentDate = poInfoList[0].PurchaseOrderDate.ToString("MM-dd-yyyy");
                         poInfo.ReqShippingDate = poInfoList[0].RequestedShipDate.ToString("MM-dd-yyyy");
@@ -6243,7 +6243,7 @@ namespace avii
                             {
                                 productList = new List<SV.Framework.LabelGenerator.ProductModel>();
 
-                                poInfo.PurchaseOrderNumber = poInfoList[0].PurchaseOrderNumber;
+                                poInfo.PurchaseOrderNumber = poInfoList[0].CustomerOrderNumber;
                                 poInfo.SalesOrder = poInfoList[0].PurchaseOrderNumber;
                                 poInfo.DocumentDate = poInfoList[0].PurchaseOrderDate.ToString("MM-dd-yyyy");
                                 poInfo.ReqShippingDate = poInfoList[0].RequestedShipDate.ToString("MM-dd-yyyy");

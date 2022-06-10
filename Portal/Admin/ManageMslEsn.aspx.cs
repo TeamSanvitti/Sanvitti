@@ -83,12 +83,68 @@ namespace avii.Admin
                         GetTransferOrderDetail(orderTransferID);
                         Session["orderTransferID"] = null;
                     }
+                    if (Session["transientOrderID"] != null)
+                    {
+                        Int64 transientOrderID = Convert.ToInt64(Session["transientOrderID"]);
+                        GetTransientOrderDetail(transientOrderID);
+                        Session["transientOrderID"] = null;
+                    }
                 }
                 //else
                 //EsnHeaderId = false;
                 //trSKU.Visible = true;
             }
         }
+        private void GetTransientOrderDetail(Int64 transientOrderID)
+        {
+            TransientOrderOperation serviceRequestOperations = TransientOrderOperation.CreateInstance<TransientOrderOperation>();
+            TransientReceiveOrder transientOrder = serviceRequestOperations.GetTransientOrderDetail(transientOrderID);
+            int companyID = 0, orderQty = 0;
+            ViewState["transientOrderID"] = transientOrderID;
+            ViewState["IsESNRequired"] = 1;
+            if (transientOrder != null)
+            {
+                if (Session["orderqty"] != null)
+                {
+                    orderQty = Convert.ToInt32(Session["orderqty"]);
+                    ViewState["orderqty"] = orderQty;
+                    txtOrderQty.Text = orderQty.ToString();
+                    txtShipQty.Text = txtOrderQty.Text;
+                }
+
+                dpCompany.SelectedValue = transientOrder.CustomerInfo;
+                dpCompany.Enabled = false;
+
+                string[] arr = transientOrder.CustomerInfo.Split(',');
+                companyID = Convert.ToInt32(arr[0]);
+                ViewState["CompanyAccountNumber"] = arr[1];
+            }
+            if (companyID > 0)
+            {
+                List<ItemCategory> categoryList = ViewState["categoryList"] as List<ItemCategory>;
+                if (categoryList != null && categoryList.Count > 0)
+                {
+                    var category = (from item in categoryList where item.CategoryGUID.Equals(transientOrder.CategoryID) select item).ToList();
+                    if (category != null && category.Count > 0)
+                    {
+                        ddlCategory.SelectedValue = category[0].CategoryWithProductAllowed;// transferOrder.CategoryID.ToString();
+                        ddlCategory.Enabled = false;
+                        //ddlCategory.SelectedIndex = 3;
+                    }
+                }
+                BindCompanySKU(companyID);
+                ddlSKU.SelectedValue = transientOrder.ItemCompanyGUID.ToString();
+                ddlSKU.Enabled = false;
+            }
+            else
+            {
+                //  trSKU.Visible = true;
+                ddlSKU.DataSource = null;
+                ddlSKU.DataBind();
+            }
+
+        }
+
         private void GetTransferOrderDetail(Int64 orderTransferID)
         {
             SV.Framework.Inventory.TransferOrderOperation orderOperations = SV.Framework.Inventory.TransferOrderOperation.CreateInstance<SV.Framework.Inventory.TransferOrderOperation>();

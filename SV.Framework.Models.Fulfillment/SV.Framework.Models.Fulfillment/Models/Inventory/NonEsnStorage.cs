@@ -37,6 +37,7 @@ namespace SV.Framework.Models.Inventory
         public string ReceivedAs { get; set; }
         public string SupplierName { get; set; }
         public Int64 OrderTransferID { get; set; }
+        public Int64 TransientOrderID { get; set; }
         public List<NonEsnStorage> nonEsnList { get; set; }
     }
 

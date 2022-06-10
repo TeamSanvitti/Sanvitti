@@ -310,7 +310,9 @@ namespace SV.Framework.DAL.Inventory
                         orderInfo.OrderTransferDateTime = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "OrderTransferDate", DateTime.Now, false));
                         orderInfo.OrderTransferStatus = clsGeneral.getColumnData(dataRow, "OrderTransferStatus", string.Empty, false) as string;
                         orderInfo.ApprovedUser = clsGeneral.getColumnData(dataRow, "ApprovedUser", string.Empty, false) as string;
-                        orderInfo.TransferedUser = clsGeneral.getColumnData(dataRow, "TransferedUser", string.Empty, false) as string;
+                        //orderInfo.TransferedUser = clsGeneral.getColumnData(dataRow, "TransferedUser", string.Empty, false) as string;
+                        orderInfo.CreatedByUser = clsGeneral.getColumnData(dataRow, "CreatedByUser", string.Empty, false) as string;
+                        orderInfo.RequestedByUser = clsGeneral.getColumnData(dataRow, "RequestedByUser", string.Empty, false) as string;
 
                         //orderInfo.CreatedBy = clsGeneral.getColumnData(dataRow, "UserName", string.Empty, false) as string;
                         // warehouseInfo.Specialinstructions = clsGeneral.getColumnData(dataRow, "Specialinstructions", string.Empty, false) as string;

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TransferOrderSearch.aspx.cs" Inherits="avii.InternalInventory.TransferOrderSearch" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TransientOrderSearch.aspx.cs" Inherits="avii.Transient.TransientOrderSearch" %>
 <%@ Register TagPrefix="foot" TagName="MenuFooter" Src="~/Controls/Footer.ascx" %>
 <%@ Register TagPrefix="head" TagName="MenuHeader" Src="~/Controls/Header.ascx" %>
 
@@ -6,8 +6,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Transfer Order Search</title>
-     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <title>Transient Receive Search</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
@@ -159,22 +159,22 @@
 }
 
   </style>
-</head>
-<body bgcolor="#ffffff" leftmargin="0" rightmargin="0" topmargin="0">
 
+</head>
+<body  bgcolor="#ffffff" leftmargin="0" rightmargin="0" topmargin="0">
     <form id="form1" runat="server">
     <asp:ScriptManager ID="ScriptManager1" runat="server">
     </asp:ScriptManager>
-    
-    <table cellSpacing="0" cellPadding="0" align="center" width="100%" border="0">
+      <table cellSpacing="0" cellPadding="0" align="center" width="100%" border="0">
         <tr>
 			<td><head:MenuHeader id="HeadAdmin" runat="server"></head:MenuHeader></td>
 		</tr>
      </table>
+
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="95%">
 		<tr>
 			<td  bgcolor="#dee7f6" class="buttonlabel">
-            &nbsp;&nbsp;Transfer Order Search
+            &nbsp;&nbsp;Transient Order
 			</td>
 		</tr>    
     </table>
@@ -194,10 +194,10 @@
              <table width="100%" border="0" class="" align="center" cellpadding="5" cellspacing="5">    
                  <tr>
                  <td class="copy10grey"  align="right" width="20%" >
-                      Destination Customer:
+                      Customer:
                 </td>
                 <td width="30%" >
-                    <asp:DropDownList ID="dpCompany" TabIndex="2" runat="server" CssClass="copy10grey" Width="60%" AutoPostBack="false">									
+                    <asp:DropDownList ID="dpCompany" TabIndex="1" runat="server" CssClass="copy10grey" Width="60%" AutoPostBack="false">									
                     </asp:DropDownList>
                     <%--OnSelectedIndexChanged="dpCompany_SelectedIndexChanged"  --%>
                 </td>
@@ -206,20 +206,22 @@
                     
                 </td>
                 <td class="copy10grey"  align="right" width="19%" >
-                      
+                      Supplier Name:
                 </td>
                 <td width="30%" >
-
+                    <asp:TextBox ID="txtSupplierName" TabIndex="2" runat="server" MaxLength="100" CssClass="copy10grey" Width="60%" AutoPostBack="false">									
+                    </asp:TextBox>
+                    
                 </td>   
                 </tr>
                 
                  <tr>
                
                 <td class="copy10grey"  align="right" width="20%" >
-                 Order Transfer #:
+                 Memo #:
                 </td>
                 <td width="30%" >
-                       <asp:TextBox ID="txtOrderTransferNumber"  onkeypress="return IsAlphaNumericHiphen(event);"  
+                       <asp:TextBox ID="txtMenoNumber"  onkeypress="return IsAlphaNumericHiphen(event);"  
                             TabIndex="2" CssClass="copy10grey" runat="server" Width="60%" MaxLength="10" ></asp:TextBox>
                 </td>
                
@@ -255,10 +257,10 @@
                 <td width="30%">
                    
                   <asp:TextBox ID="txtDateTo" runat="server" onkeydown="return ReadOnly2(event);"  onfocus="set_focus2();"  CssClass="copy10grey" MaxLength="12"  Width="60%"></asp:TextBox>
-                    <img id="img2" alt="" onclick="document.getElementById('<%=txtDateTo.ClientID%>').value = ''; displayCalendar(document.getElementById('<%=txtDateTo.ClientID%>'),'mm/dd/yyyy',this,true);" src="../fullfillment/calendar/sscalendar.jpg" />
+                  <img id="img2" alt="" onclick="document.getElementById('<%=txtDateTo.ClientID%>').value = ''; displayCalendar(document.getElementById('<%=txtDateTo.ClientID%>'),'mm/dd/yyyy',this,true);" src="../fullfillment/calendar/sscalendar.jpg" />
                                                 
         
-                </td>                  
+                </td>                 
                     
                 </tr>
            
@@ -320,98 +322,77 @@
                         <%#  Container.DataItemIndex + 1%>               
                 </ItemTemplate>
                 </asp:TemplateField>
-                <asp:TemplateField HeaderText="Order #" SortExpression="OrderTransferNumber"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
+                <asp:TemplateField HeaderText="Memo #" SortExpression="MemoNumber"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="8%">
                     <ItemTemplate>
-                        <%# Eval("OrderTransferNumber")%>
+                        <%# Eval("MemoNumber")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
                  <asp:TemplateField HeaderText="Order Date" SortExpression="OrderTransferDateTime"  HeaderStyle-CssClass="buttonundlinelabel" ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                     <ItemTemplate>
-                        <%# Convert.ToDateTime( Eval("OrderTransferDateTime")).ToString("MM/dd/yyyy")%>
+                        <%# Convert.ToDateTime( Eval("TransientOrderDateTime")).ToString("MM/dd/yyyy")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
                
-                <asp:TemplateField HeaderText="Source Customer" SortExpression="SourceCustomer"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
+<%--                <asp:TemplateField HeaderText="Source Customer" SortExpression="SourceCustomer"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="8%">
                     <ItemTemplate>
-                        <%# Eval("SourceCustomer")%>
-                        <%-- <asp:LinkButton  ToolTip="View location history" CausesValidation="false" Height="18" OnCommand="lnkHistory_Command" 
-                                                CommandArgument='<%# Convert.ToString(Eval("WarehouseLocation")) + ","+ Convert.ToString(Eval("CompanyID")) %>'  
-                                             ID="lnkHistory"  runat="server"  ><%# Eval("WarehouseLocation")%>
-                                 </asp:LinkButton>                                           
-                        --%>        
+                        <%# Eval("CustomerName")%>
+                               
                         </ItemTemplate>
-                </asp:TemplateField>  
-                <asp:TemplateField HeaderText="SKU" SortExpression="SourceSKU"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
+                </asp:TemplateField>  --%>
+                <asp:TemplateField HeaderText="Category" SortExpression="CategoryName"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                     <ItemTemplate>
-                        <%# Eval("SourceSKU")%>
+                        <%# Eval("CategoryName")%>
+                        </ItemTemplate>
+                </asp:TemplateField>  
+                
+                <asp:TemplateField HeaderText="SKU" SortExpression="SKU"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
+                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
+                    <ItemTemplate>
+                        <%# Eval("SKU")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
                 <asp:TemplateField HeaderText="Product Name" SortExpression="SourceItemName"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="15%">
                     <ItemTemplate>
-                        <%# Eval("SourceItemName")%>
+                        <%# Eval("ProductName")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
-                <asp:TemplateField HeaderText="Current Stock" SortExpression="SourceStock_in_Hand"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Right" 
+                <asp:TemplateField HeaderText="Current Stock" SortExpression="Stock_in_Hand"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Right" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                     <ItemTemplate>
-                        <%# Eval("SourceStock_in_Hand")%>
+                        <%# Eval("Stock_in_Hand")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
-                <asp:TemplateField HeaderText="Destination Customer" SortExpression="DestinationCompanyName"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
+                <asp:TemplateField HeaderText="Supplier Name" SortExpression="SupplierName"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="8%">
                     <ItemTemplate>
-                        <%# Eval("DestinationCompanyName")%>
+                        <%# Eval("SupplierName")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
-                <asp:TemplateField HeaderText="Destination SKU" SortExpression="DestinationSKU"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
+                 <asp:TemplateField HeaderText="Proposed Receive Date" SortExpression="ProposedReceiveDateTime"  HeaderStyle-CssClass="buttonundlinelabel" ItemStyle-HorizontalAlign="Left" 
+                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
+                    <ItemTemplate>
+                        <%# Convert.ToDateTime( Eval("ProposedReceiveDateTime")).ToString("MM/dd/yyyy")%>
+                        </ItemTemplate>
+                </asp:TemplateField>  
+               
+                <asp:TemplateField HeaderText="Ordered Qty" SortExpression="OrderedQty"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                     <ItemTemplate>
-                        <%# Eval("DestinationSKU")%>
+                        <%# Eval("OrderedQty")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
-                  
-                <asp:TemplateField HeaderText="Destination Product" SortExpression="DestinationItemName"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
-                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="15%">
-                    <ItemTemplate>
-                        <%# Eval("DestinationItemName")%>
-
-                        <%--     <asp:LinkButton  ToolTip="View detail" Visible='<%# Convert.ToInt32(Eval("Quantity")) > 0 ? true : false %>' CausesValidation="false" Height="18" OnCommand="lnkView_Command" 
-                                                CommandArgument='<%# Convert.ToString(Eval("WarehouseLocation")) + ","+ Convert.ToString(Eval("ItemCompanyGUID")) %>'  
-                                             ID="lnkView"  runat="server"  ><%# Eval("DestinationItemName")%>
-                                 </asp:LinkButton>                                           
-                        --%>           
-                        </ItemTemplate>
-                </asp:TemplateField>
-                
-                 <asp:TemplateField HeaderText="Current Stock" SortExpression="DestinationStock_in_Hand"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Right" 
-                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
-                    <ItemTemplate>
-                        <%# Eval("DestinationStock_in_Hand")%>
-                        </ItemTemplate>
-                </asp:TemplateField>  
-                 <asp:TemplateField HeaderText="Requested Qty" SortExpression="RequestedQty"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Right" 
-                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
-                    <ItemTemplate>
-                        <%# Eval("RequestedQty")%>
-                        </ItemTemplate>
-                </asp:TemplateField>  
-                
-                <asp:TemplateField HeaderText="Transfered Qty"   HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Right" 
+                <asp:TemplateField HeaderText="Received Qty"   HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Right" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="6%">
                     <ItemTemplate>
-                            <%# Eval("TransferQty")%>
+                            <%# Eval("ReceivedQty")%>
 
-              <%--                <asp:TextBox ID="txtQty" runat="server" class="copy10grey" Text='<%# Eval("TransferQty")%>' onkeydown="return isNumberKey(event);"  Width="100%" MaxLength="5" onchange="return ValidateQty(this);"   ></asp:TextBox>
-                              <asp:HiddenField ID="hdQty" runat="server"  Value='<%# Eval("TransferQty")%>'    ></asp:HiddenField>
-              --%>
                         </ItemTemplate>
-                </asp:TemplateField> 
-                
+                </asp:TemplateField>                 
                 <asp:TemplateField HeaderText="Created By" SortExpression="CreatedByUser"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
                     <ItemTemplate>
@@ -424,16 +405,10 @@
                         <%# Eval("RequestedByUser")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
-                <asp:TemplateField HeaderText="Approved By" SortExpression="ApprovedUser"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
-                    ItemStyle-CssClass="copy10grey" ItemStyle-Width="5%">
-                    <ItemTemplate>
-                        <%# Eval("ApprovedUser")%>
-                        </ItemTemplate>
-                </asp:TemplateField>  
-                 <asp:TemplateField HeaderText="Status" SortExpression="OrderTransferStatus"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
+                    <asp:TemplateField HeaderText="Status" SortExpression="OrderTransientStatus"  HeaderStyle-CssClass="buttonundlinelabel"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="3%">
                     <ItemTemplate>
-                        <%# Eval("OrderTransferStatus")%>
+                        <%# Eval("OrderTransientStatus")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
                
@@ -445,32 +420,32 @@
                             <tr valign="top">
                                 <td>
                                      <asp:ImageButton ID="imgTO"  ToolTip="View Assignment" OnCommand="imgTO_Command"  CausesValidation="false" 
-                                        CommandArgument='<%# Eval("OrderTransferID") %>' ImageUrl="~/Images/view.png"  runat="server" />
+                                        CommandArgument='<%# Eval("TransientOrderID") %>' ImageUrl="~/Images/view.png"  runat="server" />
                         
                                 </td>
                                 <td>
-                                    <asp:LinkButton  ToolTip="Accept" Visible='<%# Convert.ToString(Eval("OrderTransferStatus")) == "Pending" ? true : false %>' CausesValidation="false" Height="18" 
+                                    <%--<asp:LinkButton  ToolTip="Accept" Visible='<%# Convert.ToString(Eval("OrderTransferStatus")) == "Pending" ? true : false %>' CausesValidation="false" Height="18" 
                                         OnCommand="lnkAccept_Command" 
                                                             CommandArgument='<%# Eval("OrderTransferID") +","+ Container.DataItemIndex +","+ Eval("IsESNRequired") +","+Eval("ToBeTransferQty") %>'  
                                                          ID="lnkAccept"  runat="server" Text="Approve" >
-                                    </asp:LinkButton>
-                                    <asp:LinkButton  ToolTip="Receive" Visible='<%# Convert.ToString(Eval("OrderTransferStatus")) == "Approved" ? true : false %>' CausesValidation="false" Height="18" 
+                                    </asp:LinkButton>--%>
+                                    <asp:LinkButton  ToolTip="Receive" Visible='<%# Convert.ToString(Eval("OrderTransientStatus")) == "Pending" ? true  : Convert.ToString(Eval("OrderTransientStatus")) == "Received"  ? true : false %>' CausesValidation="false" Height="18" 
                                         OnCommand="lnkReceive_Command" 
-                                                            CommandArgument='<%# Eval("OrderTransferID") +","+ Container.DataItemIndex +","+ Eval("IsESNRequired")+","+Eval("ToBeTransferQty") %>'  
+                                                            CommandArgument='<%# Eval("TransientOrderID") +","+ Container.DataItemIndex +","+ Eval("IsESNRequired")+","+Eval("ToBeReceiveQty") %>'  
                                                          ID="lnkReceive"  runat="server" Text="Receive" >
                                     </asp:LinkButton>
                         
                                 </td>
-                                <td>
+                                <%--<td>
                                     <asp:LinkButton  ToolTip="Reject" Visible='<%# Convert.ToString(Eval("OrderTransferStatus")) == "Pending" ? true : false %>' CausesValidation="false" Height="18" 
                                         OnCommand="lnkReject_Command" CommandArgument='<%# Eval("OrderTransferID") %>'  
                                                          ID="lnkReject"  runat="server" Text="Reject"  > 
                                     </asp:LinkButton>
                         
-                                </td>
+                                </td>--%>
                                 <td>
-                                    <asp:LinkButton  ToolTip="Cancel" Visible='<%# Convert.ToString(Eval("OrderTransferStatus")) == "Pending" ? true : false %>' CausesValidation="false" Height="18" 
-                                        OnCommand="lnkCancel_Command" CommandArgument='<%# Eval("OrderTransferID") %>'  
+                                    <asp:LinkButton  ToolTip="Cancel" Visible='<%# Convert.ToString(Eval("OrderTransientStatus")) == "Pending" ? true : false %>' CausesValidation="false" Height="18" 
+                                        OnCommand="lnkCancel_Command" CommandArgument='<%# Eval("TransientOrderID") %>'  
                                                          ID="lnkCancel"  runat="server" Text="Cancel"  > 
                                     </asp:LinkButton>
                         
@@ -504,7 +479,7 @@
 		    </td>
 	    </tr>
         </table>
-        
+    
     </form>
 </body>
 </html>

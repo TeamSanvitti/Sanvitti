@@ -59,9 +59,71 @@ namespace avii.Admin
                         GetTransferOrderDetail(orderTransferID);
                         Session["orderTransferID"] = null;
                     }
+                    if (Session["transientOrderID"] != null)
+                    {
+                        Int64 transientOrderID = Convert.ToInt64(Session["transientOrderID"]);
+                        GetTransientOrderDetail(transientOrderID);
+                        Session["transientOrderID"] = null;
+                    }
                 }
             }
         }
+        private void GetTransientOrderDetail(Int64 transientOrderID)
+        {
+            TransientOrderOperation serviceRequestOperations = TransientOrderOperation.CreateInstance<TransientOrderOperation>();
+            TransientReceiveOrder transientOrder = serviceRequestOperations.GetTransientOrderDetail(transientOrderID);
+
+            int companyID = 0, orderQty = 0;
+            ViewState["transientOrderID"] = transientOrderID;
+            //   ViewState["IsESNRequired"] = 0;
+            if (transientOrder != null)
+            {
+                if (Session["orderqty"] != null)
+                {
+                    orderQty = Convert.ToInt32(Session["orderqty"]);
+
+                    ViewState["orderqty"] = orderQty;
+                    Session["orderqty"] = null;
+                    txtTotalQty.Text = orderQty.ToString();
+                    //txtShipQty.Text = txtOrderQty.Text;
+
+
+                }
+
+
+                string[] arr = transientOrder.CustomerInfo.Split(',');
+                companyID = Convert.ToInt32(arr[0]);
+                ViewState["CompanyAccountNumber"] = arr[1];
+                dpCompany.SelectedValue = companyID.ToString();
+                dpCompany.Enabled = false;
+
+            }
+            if (companyID > 0)
+            {
+                List<ItemCategory> categoryList = ViewState["categoryList"] as List<ItemCategory>;
+                if (categoryList != null && categoryList.Count > 0)
+                {
+                    var category = (from item in categoryList where item.CategoryGUID.Equals(transientOrder.CategoryID) select item).ToList();
+                    if (category != null && category.Count > 0)
+                    {
+                        ddlCategory.SelectedValue = category[0].CategoryWithProductAllowed;// transferOrder.CategoryID.ToString();
+                        ddlCategory.Enabled = false;
+                        //ddlCategory.SelectedIndex = 3;
+                    }
+                }
+                BindCompanySKU(companyID, true);
+                ddlSKU.SelectedValue = transientOrder.ItemCompanyGUID.ToString();
+                ddlSKU.Enabled = false;
+            }
+            else
+            {
+                //  trSKU.Visible = true;
+                ddlSKU.DataSource = null;
+                ddlSKU.DataBind();
+            }
+
+        }
+
         private void GetTransferOrderDetail(Int64 orderTransferID)
         {
             SV.Framework.Inventory.TransferOrderOperation orderOperations = SV.Framework.Inventory.TransferOrderOperation.CreateInstance<SV.Framework.Inventory.TransferOrderOperation>();
@@ -323,7 +385,7 @@ namespace avii.Admin
             // ReceivedAs = ddlReceivedAs.SelectedValue;
             int.TryParse(txtTotalQty.Text.Trim(), out totalQuantity);
 
-            Int64 orderTransferID = 0;
+            Int64 orderTransferID = 0, transientOrderID = 0;
             if (ViewState["orderTransferID"] != null)
             {
                 orderTransferID = Convert.ToInt64(ViewState["orderTransferID"]);
@@ -337,7 +399,10 @@ namespace avii.Admin
                     }
                 }
             }
-
+            if (ViewState["transientOrderID"] != null)
+            {
+                transientOrderID = Convert.ToInt64(ViewState["transientOrderID"]);
+            }
             int.TryParse(txtCarton.Text.Trim(), out cartonCount);
             int.TryParse(txtPallet.Text.Trim(), out palletCount);
             int.TryParse(txtBoxQty.Text.Trim(), out PiecesPerBox);
@@ -366,6 +431,7 @@ namespace avii.Admin
                         nonESNInventory.UserID = userID;
                         nonESNInventory.SupplierName = SupplierName;
                         nonESNInventory.OrderTransferID = orderTransferID;
+                        nonESNInventory.TransientOrderID = transientOrderID;
 
                         int index = 0;
                         foreach(GridViewRow row in gvMSL.Rows)

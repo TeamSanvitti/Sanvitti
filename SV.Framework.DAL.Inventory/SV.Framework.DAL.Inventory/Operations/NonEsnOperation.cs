@@ -123,11 +123,13 @@ namespace SV.Framework.DAL.Inventory
                     objCompHash.Add("@SupplierName", request.SupplierName);
                     objCompHash.Add("@InventoryStatusID", 2);
                     objCompHash.Add("@OrderTransferID", request.OrderTransferID);
+                    objCompHash.Add("@TransientOrderID", request.TransientOrderID);
 
                     objCompHash.Add("@avNonESNUpload", dtStorageData);
 
                     arrSpFieldSeq = new string[] { "@CompanyID", "@ESNHeaderId", "@OrderNumber", "@CustOrderNumber", "@TotalQty", "@PalletCount",
-                    "@CartonCount","@PiecesPerBox", "@ItemCompanyGUID", "@UserID", "@Comment", "@ReceivedAs","@SupplierName", "@InventoryStatusID","@OrderTransferID", "@avNonESNUpload" };
+                    "@CartonCount","@PiecesPerBox", "@ItemCompanyGUID", "@UserID", "@Comment", "@ReceivedAs","@SupplierName", "@InventoryStatusID",
+                        "@OrderTransferID", "@TransientOrderID", "@avNonESNUpload" };
                     db.ExecCommand(objCompHash, "Av_NonESN_InsertUpdate", arrSpFieldSeq, "@poInsertCount", out insertCout, "@poUpdateCount", out updateCount, "@poErrorMessage", out errorMessage, "@InvalidStock", out returnResult);
 
                 }

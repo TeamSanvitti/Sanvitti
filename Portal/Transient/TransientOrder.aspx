@@ -1,14 +1,17 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TransferOrderRequest.aspx.cs" Inherits="avii.InternalInventory.TransferOrderRequest" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="TransientOrder.aspx.cs" Inherits="avii.Transient.TransientOrder" %>
 <%@ Register TagPrefix="foot" TagName="MenuFooter" Src="~/Controls/Footer.ascx" %>
 <%@ Register TagPrefix="head" TagName="MenuHeader" Src="~/Controls/Header.ascx" %>
+
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title>Transfer Order Request</title>
+    <title>Transient Receive Order</title>
          
-
+      <link rel="stylesheet"  type="text/css" href="../fullfillment/calendar/dhtmlgoodies_calendar.css" media="screen" />
+	<script type="text/javascript" src="../fullfillment/calendar/dhtmlgoodies_calendar.js"></script>  
+  
          <script type="text/javascript">
              function alphaNumericCheck(evt) {
                  var charCodes = evt.keyCode ? evt.keyCode : evt.which ? evt.which : evt.charCode ? evt.charCode : evt.type;
@@ -47,25 +50,25 @@
             window.open(url);
         }
 
-        //function set_focus1() {
-        //    var img = document.getElementById("img1");
-        //    var st = document.getElementById("");
-        //    st.focus();
-        //    img.click();
-        //}
+        function set_focus1() {
+            var img = document.getElementById("img1");
+            var st = document.getElementById("txtProposedReceiveDate");
+            st.focus();
+            img.click();
+        }
         // function set_focus2() {
         //    var img = document.getElementById("img2");
         //    var st = document.getElementById("btnSearch");
         //    st.focus();
         //    img.click();
         //}
-        //function ReadOnly1(evt) {
-        //    var img = document.getElementById("img1");
-        //    img.click();
-        //    evt.keyCode = 0;
-        //    return false;
+        function ReadOnly1(evt) {
+            var img = document.getElementById("img1");
+            img.click();
+            evt.keyCode = 0;
+            return false;
 
-        //}
+        }
         //function ReadOnly2(evt) {
         //    var img2 = document.getElementById("img2");
         //    img2.click();
@@ -89,7 +92,7 @@
     <table cellspacing="0" cellpadding="0" border="0" align="center" width="95%">
 		<tr>
 			<td  bgcolor="#dee7f6" class="buttonlabel">
-            &nbsp;&nbsp;Transfer Order Request
+            &nbsp;&nbsp;Transient Order
 			</td>
 		</tr>    
     </table>
@@ -105,20 +108,17 @@
             <tr>
             <td>
              <table width="100%" border="0" class="" align="center" cellpadding="5" cellspacing="5">    
-                 <tr>
+                <tr>
                 <td class="copy10grey"  align="right" width="20%" >
-                  <%-- <b> Tranfer Order:</b>--%>
-                        <b>Source Customer:</b>
+                        <b>Customer:</b>
 
                 </td>
                 <td width="30%" >
                    
-                    <asp:DropDownList ID="dpSourceCompany" TabIndex="3"  runat="server" CssClass="copy10grey" Width="60%" 
-                        AutoPostBack="true" OnSelectedIndexChanged="dpSourceCompany_SelectedIndexChanged">									
+                    <asp:DropDownList ID="dpCompany" TabIndex="1"  runat="server" CssClass="copy10grey" Width="60%" 
+                        AutoPostBack="true" OnSelectedIndexChanged="dpCompany_SelectedIndexChanged">									
                     </asp:DropDownList>  
-                    <%--<asp:TextBox ID="txtTranferOrderNo" TabIndex="1" onkeypress="return alphaNumericCheck(event);"  runat="server" CssClass="copy10grey" Width="60%" >									
-                    </asp:TextBox>--%>                 
-
+                   
                 </td>
                 <td  width="1%">
                        &nbsp;
@@ -129,38 +129,17 @@
                 </td>
                 <td width="35%" >
                     <asp:Label ID="lblOrderDate" runat="server"  CssClass="copy10grey"></asp:Label>
-                     <%--<asp:TextBox ID="txtOrderDate" runat="server" TabIndex="2" onkeydown="return ReadOnly1(event);"  onfocus="set_focus1();"  CssClass="copy10grey" MaxLength="12"  Width="60%"></asp:TextBox>
-                     <img id="img1" alt="" onclick="document.getElementById('<%=txtOrderDate.ClientID%>').value = ''; displayCalendar(document.getElementById('<%=txtOrderDate.ClientID%>'),'mm/dd/yyyy',this,true);" src="../fullfillment/calendar/sscalendar.jpg" />
-                   --%>
+                     
                     </td>   
                 </tr>
-                 <%--<tr>
-                <td class="copy10grey"  align="right" width="20%" >
-                   <b>Source Customer:</b>
-
-                </td>
-                <td width="30%" >               
-
-                </td>
-                <td  width="1%">
-                       &nbsp;
-                    
-                </td>
-                <td class="copy10grey"  align="right" width="14%" >
-                     
-                </td>
-                <td width="35%" >
-
-                    </td>   
-                </tr>--%>
-                 <tr valign="top">
+                <tr valign="top">
                 <td class="copy10grey"  align="right" width="20%" >
                   <b> Category Name:</b>
 
                 </td>
                 <td width="30%" >
-                    <asp:DropDownList ID="ddlSourceCategory" TabIndex="4"  runat="server" CssClass="copy10grey" Width="60%" 
-                        AutoPostBack="true" OnSelectedIndexChanged="ddlSourceCategory_SelectedIndexChanged">									
+                    <asp:DropDownList ID="ddlCategory" TabIndex="2"  runat="server" CssClass="copy10grey" Width="60%" 
+                        AutoPostBack="true" OnSelectedIndexChanged="ddlCategory_SelectedIndexChanged">									
                     </asp:DropDownList>                 
 
                 </td>
@@ -172,8 +151,8 @@
                       <b>SKU: </b>
                 </td>
                 <td width="35%" class="copy10grey"  >
-                    <asp:DropDownList ID="ddlSourceSKU" TabIndex="5"  runat="server" CssClass="copy10grey" Width="60%" 
-                        AutoPostBack="true" OnSelectedIndexChanged="ddlSourceSKU_SelectedIndexChanged">									
+                    <asp:DropDownList ID="ddlSKU" TabIndex="3"  runat="server" CssClass="copy10grey" Width="60%" 
+                        AutoPostBack="true" OnSelectedIndexChanged="ddlSKU_SelectedIndexChanged">									
                     </asp:DropDownList>                 
                      
                     </td>   
@@ -198,94 +177,12 @@
                      
                     </td>   
                 </tr>
-                <tr >
-                <td class="copy10grey"  align="right" width="20%" >
-                  <b> Model Number:</b>
-
-                </td>
-                <td width="30%" >
-                    <asp:label ID="lblModelNumber"  CssClass="copy10grey" runat="server"   ></asp:label>
-                </td>
-                <td  width="1%">
-                       &nbsp;
-                    
-                </td>
-                <td class="copy10grey"  align="right" width="14%" >
-                    <b>UPC:</b>
-                </td>
-                <td width="35%" class="copy10grey"  >
-                 <asp:label ID="lblUPC"  CssClass="copy10grey" runat="server"   ></asp:label>
-                     
-                    </td>   
-                </tr>
-
-                </table>
-               
-            </td>
-            </tr>
-            </table>
-                <br />
-
-            <table bordercolor="#839abf" border="1" width="95%" align="center" cellpadding="0" cellspacing="0">
-            <tr>
-            <td>
-             <table width="100%" border="0" class="" align="center" cellpadding="5" cellspacing="5">    
-            
-                 <tr>
-                <td class="copy10grey"  align="right" width="20%" >
-                   <b>Destination Customer:</b>
-
-                </td>
-                <td width="30%" >
-                    <asp:DropDownList ID="ddlDestinationCompany" TabIndex="6"  runat="server" CssClass="copy10grey" Width="60%" 
-                        AutoPostBack="true" OnSelectedIndexChanged="ddlDestinationCompany_SelectedIndexChanged">									
-                    </asp:DropDownList>                 
-
-                </td>
-                <td  width="1%">
-                       &nbsp;
-                    
-                </td>
-                <td class="copy10grey"  align="right" width="14%" >
-                                           <b>SKU: </b>
-
-                </td>
-                <td width="35%" >
-                    <asp:DropDownList ID="ddlDestinationSKU" TabIndex="8"  runat="server" CssClass="copy10grey" Width="60%" 
-                        AutoPostBack="true" OnSelectedIndexChanged="ddlDestinationSKU_SelectedIndexChanged" >									
-                    </asp:DropDownList>                 
-                    
-                    </td>   
-                </tr>
-                 <%--<tr>
-                <td class="copy10grey"  align="right" width="20%" >
-                   <b>Category Name:</b>
-
-                </td>
-                <td width="30%" >
-                    <asp:DropDownList ID="ddlDestinationCategory" TabIndex="7"  runat="server" CssClass="copy10grey" Width="60%" 
-                        AutoPostBack="true" OnSelectedIndexChanged="ddlDestinationCategory_SelectedIndexChanged">									
-                    </asp:DropDownList>                 
-
-                </td>
-                <td  width="1%">
-                       &nbsp;
-                    
-                </td>
-                <td class="copy10grey"  align="right" width="14%" >
-                </td>
-                <td width="35%" >
-                    
-                     </td>   
-                </tr>--%>
-                 
                 <tr>
                 <td class="copy10grey"  align="right" width="20%" >
-                <b>Requested Quantity:</b>
-
+                 <b>Supplier name: </b>
                 </td>
                 <td width="30%" >
-                     <asp:TextBox ID="txtRequestQty"  CssClass="copy10grey" MaxLength="4" onkeydown="return isNumberKey(event);" TabIndex="9" runat="server"   Width="60%" ></asp:TextBox>
+                      <asp:TextBox ID="txtSupplier" runat="server" TabIndex="7" CssClass="copy10grey" Width="60%" ></asp:TextBox>
 
                     
                 </td>
@@ -294,32 +191,25 @@
                     
                 </td>
                 <td class="copy10grey"  align="right" width="14%" >
-                      Current Stock:
+                    <b>Ordered Quantity:</b>
+
+ 
                 </td>
                 <td width="35%" >
                     
-                     <asp:label ID="lblDCurrentStock"  CssClass="copy10grey" runat="server"   ></asp:label>
+                    <asp:TextBox ID="txtOrderedQty"  CssClass="copy10grey" MaxLength="4" onkeydown="return isNumberKey(event);" TabIndex="9" runat="server"   Width="60%" ></asp:TextBox>
 
+                   
 
                       
                 </td>   
                 </tr>
-                 </table>
-                </td>
-                </tr>
-                </table>
-                <br />
-                <table bordercolor="#839abf" border="1" width="95%" align="center" cellpadding="0" cellspacing="0">
-            <tr>
-            <td>
-             <table width="100%" border="0" class="" align="center" cellpadding="5" cellspacing="5">    
-            
-                 <tr valign="top">
+                 <tr >
                 <td class="copy10grey"  align="right" width="20%" >
                     <b>Requested By:</b>
                 </td>
                 <td width="30%" >    
-                       <asp:DropDownList ID="ddlUsers" TabIndex="10" runat="server" Width="60%" CssClass="copy10grey">                         
+                    <asp:DropDownList ID="ddlUsers" TabIndex="6" runat="server" Width="60%" CssClass="copy10grey">                         
                     </asp:DropDownList>
 
               
@@ -329,17 +219,30 @@
                     
                 </td>
                 <td class="copy10grey"  align="right" width="14%" >
-                   Comment: 
+                  <b> Proposed Receive Date:</b>
                 </td>
                 <td width="35%" >
-                      <asp:TextBox ID="txtComment" runat="server" TabIndex="11" CssClass="copy10grey" TextMode="MultiLine" Width="94%" Rows="3"></asp:TextBox>
+                       <asp:TextBox ID="txtProposedReceiveDate" runat="server" TabIndex="5" onkeydown="return ReadOnly1(event);"  onfocus="set_focus1();"  CssClass="copy10grey" MaxLength="12"  Width="60%"></asp:TextBox>
+                     <img id="img1" alt="" onclick="document.getElementById('<%=txtProposedReceiveDate.ClientID%>').value = ''; displayCalendar(document.getElementById('<%=txtProposedReceiveDate.ClientID%>'),'mm/dd/yyyy',this,true);" src="../fullfillment/calendar/sscalendar.jpg" />
+                   
+                </td>   
+                </tr>
+                <tr valign="top">
+                
+                <td class="copy10grey"  align="right" width="20%" >
+                   Comment: 
+                </td>
+                <td width="80%" colspan="4" >
+                     <asp:TextBox ID="txtComment" runat="server" TabIndex="8" CssClass="copy10grey" TextMode="MultiLine" Width="85%" Rows="3"></asp:TextBox>
 
                 </td>   
                 </tr>
-                    </Table>
-                </td>
-                </tr>
-                 </table>
+                </table>
+               
+            </td>
+            </tr>
+            </table>
+                
                      <br />
           
                 <table width="100%" align="center" >
@@ -373,18 +276,5 @@
         </table>
        
     </form>
-    <script type="text/javascript">
-        formatParentCatDropDown(document.getElementById("<%=ddlSourceCategory.ClientID%>"));
-        
-        var prm = Sys.WebForms.PageRequestManager.getInstance();
-        if (prm != null) {
-            prm.add_endRequest(function (sender, e) {
-                if (sender._postBackSettings.panelsToUpdate != null) {
-                    formatParentCatDropDown(document.getElementById("<%=ddlSourceCategory.ClientID %>"));
-                    
-                }
-            });
-        };
-    </script>
 </body>
 </html>

@@ -402,6 +402,43 @@ namespace SV.Framework.DAL.Inventory
 			}
 			//return objCmd.CommandText.ToString();
 		}
+        public void ExeCommand(Hashtable HshParameters, string SQLString, string[] arrFieldsSeq, string sOutParam, string sOutParam2, out string sCode, out Int64 sCode2)
+        {
+            SqlCommand objCmd = new SqlCommand(SQLString, DBConnection());
+            objCmd.CommandType = CommandType.StoredProcedure;
+            try
+            {
+                if (HshParameters != null && arrFieldsSeq != null)
+                    if (HshParameters.Count > 0 && arrFieldsSeq.Length > 0)
+                    {
+                        foreach (string strField in arrFieldsSeq)
+                        {
+                            //objCmd.Parameters.Add(strField, HshParameters[strField]);
+                            objCmd.Parameters.AddWithValue(strField, HshParameters[strField]);
+                        }
+                    }
+                objCmd.Parameters.Add(sOutParam, SqlDbType.VarChar, 500);
+                objCmd.Parameters[sOutParam].Direction = ParameterDirection.Output;
+                objCmd.Parameters.Add(sOutParam2, SqlDbType.Int);
+                objCmd.Parameters[sOutParam2].Direction = ParameterDirection.Output;
+
+                objCmd.ExecuteNonQuery();
+                sCode = objCmd.Parameters[sOutParam].Value.ToString();
+                sCode2 = Convert.ToInt64(objCmd.Parameters[sOutParam2].Value);
+
+                //sCode = (string)objCmd.ExecuteScalar();
+            }
+            catch (Exception objExp)
+            {
+                throw new Exception(objExp.Message.ToString());
+            }
+            finally
+            {
+                objCmd = null;
+                DBClose();
+            }
+            //return objCmd.CommandText.ToString();
+        }
         public int ExecCommand(Hashtable HshParameters, string SQLString, string[] arrFieldsSeq)
         {
             int result = 0;
