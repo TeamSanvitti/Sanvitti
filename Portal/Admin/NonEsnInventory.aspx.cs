@@ -450,6 +450,7 @@ namespace avii.Admin
                             {
                                 ViewState["orderqty"] = null;
                                 ViewState["orderTransferID"] = null;
+                                ViewState["transientOrderID"] = null;
                                 lblMsg.Text = errorMessage;
                                 btnUpload.Visible = true;
                                 btnSubmit.Visible = false;

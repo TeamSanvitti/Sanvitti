@@ -78,13 +78,13 @@ namespace avii.Transient
         protected global::System.Web.UI.WebControls.Label lblOrderDate;
 
         /// <summary>
-        /// lblRequestedQty control.
+        /// lblOrderedQty control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblRequestedQty;
+        protected global::System.Web.UI.WebControls.Label lblOrderedQty;
 
         /// <summary>
         /// lblOrderStatus control.

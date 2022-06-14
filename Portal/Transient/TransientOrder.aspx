@@ -13,6 +13,12 @@
 	<script type="text/javascript" src="../fullfillment/calendar/dhtmlgoodies_calendar.js"></script>  
   
          <script type="text/javascript">
+             function formatParentCatDropDown(objddl) {
+
+                 for (i = 0; i < objddl.options.length; i++) {
+                     objddl.options[i].innerHTML = objddl.options[i].innerHTML.replace(/&amp;/g, '&');
+                 }
+             }
              function alphaNumericCheck(evt) {
                  var charCodes = evt.keyCode ? evt.keyCode : evt.which ? evt.which : evt.charCode ? evt.charCode : evt.type;
                  //alert(charCodes);
@@ -108,7 +114,28 @@
             <tr>
             <td>
              <table width="100%" border="0" class="" align="center" cellpadding="5" cellspacing="5">    
-                <tr>
+                <tr id="trMemo" runat="server" visible="false">
+                <td class="copy10grey"  align="right" width="20%" >
+                        <b>Memo#:</b>
+
+                </td>
+                <td width="30%" >
+                   
+                    <asp:Label ID="lblMemoNo" runat="server"  CssClass="copy10grey"></asp:Label>
+                    
+                </td>
+                <td  width="1%">
+                       &nbsp;
+                    
+                </td>
+                <td class="copy10grey"  align="right" width="14%" >
+                      
+                </td>
+                <td width="35%" >
+                     
+                    </td>   
+                </tr>
+                 <tr>
                 <td class="copy10grey"  align="right" width="20%" >
                         <b>Customer:</b>
 
@@ -253,7 +280,8 @@
                     </div>--%>
                        
 			            <asp:Button ID="btnSubmit" runat="server" TabIndex="18" Visible="true" CssClass="button" Text="   Submit   " onclick="btnSubmit_Click" />&nbsp;&nbsp;
-                        <asp:Button ID="btnCancel" runat="server" TabIndex="19" CssClass="button" CausesValidation="false"  Text="   Cancel   " onclick="btnCancel_Click" />
+                        <asp:Button ID="btnCancel" runat="server" TabIndex="19" CssClass="button" CausesValidation="false"  Text="   Cancel   " onclick="btnCancel_Click" />&nbsp;&nbsp;
+                        <asp:Button ID="btnAdd" runat="server" Visible="false" TabIndex="19" CssClass="button" CausesValidation="false"  Text="New Transient Receive" onclick="btnAdd_Click" />
                         
 			        </td>
 			    </tr>
@@ -276,5 +304,18 @@
         </table>
        
     </form>
+    <script type="text/javascript">
+        formatParentCatDropDown(document.getElementById("<%=ddlCategory.ClientID%>"));
+
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        if (prm != null) {
+            prm.add_endRequest(function (sender, e) {
+                if (sender._postBackSettings.panelsToUpdate != null) {
+                    formatParentCatDropDown(document.getElementById("<%=ddlCategory.ClientID %>"));
+
+                }
+            });
+        };
+    </script>
 </body>
 </html>

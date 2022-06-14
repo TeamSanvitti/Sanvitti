@@ -419,10 +419,17 @@
                         <table cellpadding="2">
                             <tr valign="top">
                                 <td>
-                                     <asp:ImageButton ID="imgTO"  ToolTip="View Assignment" OnCommand="imgTO_Command"  CausesValidation="false" 
+                                     <asp:ImageButton ID="imgTO"  ToolTip="View" OnCommand="imgTO_Command"  CausesValidation="false" 
                                         CommandArgument='<%# Eval("TransientOrderID") %>' ImageUrl="~/Images/view.png"  runat="server" />
                         
                                 </td>
+                                <td>
+                                     <asp:ImageButton ID="imgEdit" Visible='<%# Convert.ToString(Eval("OrderTransientStatus")) == "Pending" ? true : false %>'
+                                         ToolTip="Edit" OnCommand="imgEdit_Command"  CausesValidation="false" 
+                                        CommandArgument='<%# Eval("TransientOrderID") %>' ImageUrl="~/Images/edit.png"  runat="server" />
+                        
+                                </td>
+                                
                                 <td>
                                     <%--<asp:LinkButton  ToolTip="Accept" Visible='<%# Convert.ToString(Eval("OrderTransferStatus")) == "Pending" ? true : false %>' CausesValidation="false" Height="18" 
                                         OnCommand="lnkAccept_Command" 

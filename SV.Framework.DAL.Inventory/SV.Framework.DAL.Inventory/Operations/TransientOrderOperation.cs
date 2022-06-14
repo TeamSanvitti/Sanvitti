@@ -21,7 +21,7 @@ namespace SV.Framework.DAL.Inventory
                 try
                 {
                     objCompHash.Add("@TransientOrderID", request.TransientOrderID);
-                    objCompHash.Add("@TransientOrderDate", request.TransientOrderDateTime);
+                    objCompHash.Add("@TransientOrderDate", request.TransientOrderDate);
                     objCompHash.Add("@CompanyID", request.CompanyID);
                     objCompHash.Add("@ItemCompanyGUID", request.ItemCompanyGUID);
                     objCompHash.Add("@OrderedQty", request.OrderedQty);
@@ -33,7 +33,7 @@ namespace SV.Framework.DAL.Inventory
 
                     arrSpFieldSeq = new string[] { "@TransientOrderID", "@TransientOrderDate", "@CompanyID", "@ItemCompanyGUID","@OrderedQty",
                         "@SupplierName","@ProposedReceiveDate", "@Comments","@UserID","@RequestedBy" };
-                    db.ExeCommand(objCompHash, "av_TransientOrderInsertUpdate", arrSpFieldSeq, "@poErrorMessage", "@poErrorMessage", out errorMessage, out transientOrderID);
+                    db.ExeCommand(objCompHash, "av_TransientOrderInsertUpdate", arrSpFieldSeq, "@poErrorMessage", "@ReturnID", out errorMessage, out transientOrderID);
                 }
                 catch (Exception exp)
                 {
@@ -206,11 +206,12 @@ namespace SV.Framework.DAL.Inventory
                     {
                         TransientOrderAssignment orderInfo = new TransientOrderAssignment();
                         //orderInfo.AssignedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "OrderTransferID", 0, false));
-                       // orderInfo.RequestedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "RequestedQty", 0, false));
+                        //orderInfo. = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "RequestedQty", 0, false));
+                        orderInfo.OrderedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "OrderedQty", 0, false));
                         orderInfo.ReceivedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ReceivedQty", 0, false));
                         orderInfo.MemoNumber = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "MemoNumber", 0, false));
-                        orderInfo.SKU = clsGeneral.getColumnData(dataRow, "DestinationSKU", string.Empty, false) as string;
-                        orderInfo.ProductName = clsGeneral.getColumnData(dataRow, "DestinationItemName", string.Empty, false) as string;
+                        orderInfo.SKU = clsGeneral.getColumnData(dataRow, "SKU", string.Empty, false) as string;
+                        orderInfo.ProductName = clsGeneral.getColumnData(dataRow, "ItemName", string.Empty, false) as string;
                         orderInfo.TransientOrderDate = clsGeneral.getColumnData(dataRow, "TransientOrderDate", string.Empty, false) as string;
                         orderInfo.ReceivedDate = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "ReceivedDate", DateTime.Now, false));
                         orderInfo.OrderTransientStatus = clsGeneral.getColumnData(dataRow, "OrderTransientStatus", string.Empty, false) as string;
@@ -246,9 +247,10 @@ namespace SV.Framework.DAL.Inventory
                     {
                         orderInfo.TransientOrderID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "TransientOrderID", 0, false));
                         orderInfo.ReceivedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ReceivedQty", 0, false));
-                        orderInfo.ToBeReceiveQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ToBeReceiveQty", 0, false));
+                        orderInfo.ToBeReceiveQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ToBeReceivedQty", 0, false));
                         orderInfo.OrderedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "OrderedQty", 0, false));
                         orderInfo.CategoryID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "CategoryID", 0, false));
+                        orderInfo.CompanyID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "CompanyID", 0, false));
                         orderInfo.ItemCompanyGUID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ItemCompanyGUID", 0, false));
                         orderInfo.RequestedBy = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "RequestedBy", 0, false));
                         orderInfo.Stock_in_Hand = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "Stock_in_Hand", 0, false));
@@ -262,6 +264,8 @@ namespace SV.Framework.DAL.Inventory
                         //orderInfo.OrderTransferStatus = clsGeneral.getColumnData(dataRow, "OrderTransferStatus", string.Empty, false) as string;
                         // orderInfo.OrderTransferAssignmentStatus = clsGeneral.getColumnData(dataRow, "DestinationItemName", string.Empty, false) as string;
                         orderInfo.CustomerInfo = clsGeneral.getColumnData(dataRow, "CustomerInfo", string.Empty, false) as string;
+                        orderInfo.Comment = clsGeneral.getColumnData(dataRow, "Comments", string.Empty, false) as string;
+                        orderInfo.CategoryWithProductAllowed = clsGeneral.getColumnData(dataRow, "CategoryWithProductAllowed", string.Empty, false) as string;
                         //orderInfo.TransientOrderDate = clsGeneral.getColumnData(dataRow, "CreateDate", string.Empty, false) as string;
                         orderInfo.TransientOrderDateTime = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "TransientOrderDate", DateTime.Now, false));
                         orderInfo.ProposedReceiveDateTime = Convert.ToDateTime(clsGeneral.getColumnData(dataRow, "ProposedReceiveDate", DateTime.Now, false));
@@ -299,7 +303,7 @@ namespace SV.Framework.DAL.Inventory
                         TransientReceiveOrder orderInfo = new TransientReceiveOrder();
                         orderInfo.TransientOrderID = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "TransientOrderID", 0, false));
                         orderInfo.ReceivedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ReceivedQty", 0, false));
-                        orderInfo.ToBeReceiveQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ToBeReceiveQty", 0, false));
+                        orderInfo.ToBeReceiveQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "ToBeReceivedQty", 0, false));
                         orderInfo.OrderedQty = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "OrderedQty", 0, false));
                         orderInfo.Stock_in_Hand = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "Stock_in_Hand", 0, false));
                        // orderInfo.DestinationStock_in_Hand = Convert.ToInt32(clsGeneral.getColumnData(dataRow, "DestinationStock_in_Hand", 0, false));

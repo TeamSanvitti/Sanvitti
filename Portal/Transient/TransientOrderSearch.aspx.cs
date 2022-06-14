@@ -35,6 +35,22 @@ namespace avii.Transient
             if (!IsPostBack)
             {
                 BindCustomer();
+                if(Session["trsearchback"] !=null)
+                {
+                    Session["trsearchback"] = null;
+                    string transientsearch = Convert.ToString(Session["transientsearch"]);
+                    string[] array = transientsearch.Split('~');
+                    dpCompany.SelectedValue = array[0];
+                    if (array[1] != "0")
+                        txtMenoNumber.Text = array[1];
+                    txtSKU.Text = array[2];
+                    txtSupplierName.Text = array[3];
+                    txtDateFrom.Text = array[4];
+                    txtDateTo.Text = array[5];
+                    LoadTransientOrders();
+                    //Session["transientsearch"] = companyID.ToString() + "~" + memoNumber.ToString() + "~" + SKU + "~" + Supplier + "~" + fromDate + "~" + todate;
+
+                }
 
             }
         }
@@ -78,6 +94,7 @@ namespace avii.Transient
             }
             else
             {
+                Session["transientsearch"] = companyID.ToString() + "~" + memoNumber.ToString() + "~" + SKU + "~" + Supplier + "~" + fromDate + "~" + todate;
                 List<TransientReceiveOrder> orderList = orderOperations.GetTransientOrders(memoNumber, SKU, companyID, fromDate, todate, Supplier);
                 if (orderList != null && orderList.Count > 0)
                 {
@@ -140,8 +157,8 @@ namespace avii.Transient
 
             int userID = Convert.ToInt32(Session["UserID"]);
 
-            string returnMessage = orderOperations.OrderTransientStatusUpdate(transientOrderID, orderStatus, userID);
-            lblMsg.Text = returnMessage;
+            //string returnMessage = orderOperations.OrderTransientStatusUpdate(transientOrderID, orderStatus, userID);
+            //lblMsg.Text = returnMessage;
             //if (orderStatus.ToLower().Contains("approve"))
             {
                 Session["transientOrderID"] = transientOrderID;
@@ -172,6 +189,34 @@ namespace avii.Transient
                 LoadTransientOrders();
                 lblMsg.Text = returnMessage;
             }
+        }
+
+        protected void imgTO_Command(object sender, CommandEventArgs e)
+        {
+            Int64 transientOrderID = Convert.ToInt64(e.CommandArgument);
+
+            Session["TransientOrderID"] = transientOrderID;
+
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('TransientOrderView.aspx')</script>", false);
+        }
+
+        protected void gvOrders_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+
+        }
+
+        protected void gvOrders_Sorting(object sender, GridViewSortEventArgs e)
+        {
+
+        }
+
+        protected void imgEdit_Command(object sender, CommandEventArgs e)
+        {
+            Int64 transientOrderID = Convert.ToInt64(e.CommandArgument);
+
+            Session["TransientOrderID"] = transientOrderID;
+            Response.Redirect("TransientOrder.aspx", true);
+            //ScriptManager.RegisterStartupScript(this, this.GetType(), "temp", "<script language='javascript'>OpenNewPage('TransientOrder.aspx')</script>", false);
         }
     }
 }

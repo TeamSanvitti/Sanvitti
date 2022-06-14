@@ -60,6 +60,24 @@ namespace avii.Transient
         protected global::System.Web.UI.WebControls.Label lblMsg;
 
         /// <summary>
+        /// trMemo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTableRow trMemo;
+
+        /// <summary>
+        /// lblMemoNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMemoNo;
+
+        /// <summary>
         /// dpCompany control.
         /// </summary>
         /// <remarks>
@@ -175,6 +193,15 @@ namespace avii.Transient
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
+
+        /// <summary>
+        /// btnAdd control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAdd;
 
         /// <summary>
         /// Menuheader2 control.

@@ -685,13 +685,16 @@ namespace avii.Admin
             string receivedAs = "Product without ASN";// ddlReceivedAs.SelectedValue;
             bool IsInspection = chkInspection.Checked;
             int itemCompanyGUID, insertCount, updateCount, esnHeaderId;
-            Int64 orderTransferID=0;
+            Int64 orderTransferID=0, transientOrderID = 0;
             EsnHeaderUpload esnHeaderUpload = new EsnHeaderUpload();
             itemCompanyGUID = insertCount = updateCount = esnHeaderId = 0;
             bool returnValue = false;
             string errorMessage = string.Empty, companyAccountNumber = string.Empty;
             if (ViewState["orderTransferID"] != null)
                 orderTransferID = Convert.ToInt64(ViewState["orderTransferID"]);
+
+            if(ViewState["transientOrderID"]!=null)
+                transientOrderID = Convert.ToInt64(ViewState["transientOrderID"]);
 
             if (ViewState["CompanyAccountNumber"] != null)
                 companyAccountNumber = Convert.ToString(ViewState["CompanyAccountNumber"]);
@@ -857,11 +860,12 @@ namespace avii.Admin
                         esnHeaderUpload.ESNs = esnList;
 
 
-                        returnValue = mslOperation.MslEsnInsertUpdateNew(esnHeaderUpload, filename, orderTransferID, out insertCount, out updateCount, out errorMessage);
+                        returnValue = mslOperation.MslEsnInsertUpdateNew(esnHeaderUpload, filename, orderTransferID, transientOrderID, out insertCount, out updateCount, out errorMessage);
                         if (returnValue)
                         {
                             ViewState["orderqty"] = null;
                             ViewState["orderTransferID"] = null;
+                            ViewState["transientOrderID"] = null;
                             if (esnHeaderId == 0)
                                 ClearForm();
                             if (insertCount > 0 && updateCount > 0)
@@ -984,7 +988,7 @@ namespace avii.Admin
                         List<EsnUploadNew> esnList = new List<EsnUploadNew>();
                         esnHeaderUpload.ESNs = esnList;
 
-                        returnValue = mslOperation.MslEsnInsertUpdateNew(esnHeaderUpload, filename, 0, out insertCount, out updateCount, out errorMessage);
+                        returnValue = mslOperation.MslEsnInsertUpdateNew(esnHeaderUpload, filename, 0, 0, out insertCount, out updateCount, out errorMessage);
                         if (returnValue)
                         {
                             if (esnHeaderId == 0)

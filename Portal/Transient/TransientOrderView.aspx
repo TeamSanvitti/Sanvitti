@@ -8,6 +8,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Transient Receive Order </title>
+
     <script>
         function close_window() {
             if (confirm("Close Window?")) {
@@ -75,7 +76,7 @@
                       <b>Ordered Qty:</b>
                 </td>
                 <td width="30%" >
-                      <asp:Label ID="lblRequestedQty" CssClass="copy10grey" runat="server"  ></asp:Label>
+                      <asp:Label ID="lblOrderedQty" CssClass="copy10grey" runat="server"  ></asp:Label>
                 </td>
                 <td  width="1%">
                        &nbsp;
@@ -170,7 +171,7 @@
                         </ItemTemplate>
                 </asp:TemplateField>  
                 
-                <asp:TemplateField HeaderText="Transfered Qty" SortExpression="ReceivedQty"  HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
+                <asp:TemplateField HeaderText="Received Qty" SortExpression="ReceivedQty"  HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                     <ItemTemplate>
                         <%# Eval("ReceivedQty")%>
@@ -179,7 +180,7 @@
                 <asp:TemplateField HeaderText="Received By" SortExpression="ReceivedBy"  HeaderStyle-CssClass="buttongrid"   ItemStyle-HorizontalAlign="Left" 
                     ItemStyle-CssClass="copy10grey" ItemStyle-Width="10%">
                     <ItemTemplate>
-                        <%# Eval("ReceivedBy")%>
+                        <%# Eval("ReceivedByuser")%>
                         </ItemTemplate>
                 </asp:TemplateField>  
 

@@ -12,37 +12,48 @@ namespace avii.Transient
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!IsPostBack)
-                LoadTransferOrders();
+                LoadTransientOrders();
         }
-        private void LoadTransferOrders()
-        {
 
+        private void LoadTransientOrders()
+        {
             lblCount.Text = "";
             lblMsg.Text = "";
             gvOrders.DataSource = null;
             gvOrders.DataBind();
 
-            if (Session["OrderTransferID"] != null)
+            if (Session["TransientOrderID"] != null)
             {
-                Int64 orderTransferID = Convert.ToInt64(Session["OrderTransferID"]);
+                Int64 TransientOrderID = Convert.ToInt64(Session["TransientOrderID"]);
                 SV.Framework.Inventory.TransientOrderOperation orderOperations = SV.Framework.Inventory.TransientOrderOperation.CreateInstance<SV.Framework.Inventory.TransientOrderOperation>();
-                List<TransientOrderAssignment> orderList = orderOperations.GetTransientOrderAssignments(orderTransferID);
+                List<TransientOrderAssignment> orderList = orderOperations.GetTransientOrderAssignments(TransientOrderID);
                 if (orderList != null && orderList.Count > 0)
                 {
                     lblOrderTransferNumber.Text = orderList[0].MemoNumber.ToString();
                     lblOrderDate.Text = orderList[0].TransientOrderDate;
-                    lblRequestedQty.Text = orderList[0].RequestedQty.ToString();
+                    lblOrderedQty.Text = orderList[0].OrderedQty.ToString();
                     lblOrderStatus.Text = orderList[0].OrderTransientStatus;
                     lblAssignmentStatus.Text = orderList[0].OrderTransientReceiveStatus;
-                    gvOrders.DataSource = orderList;
-                    gvOrders.DataBind();
-                    lblCount.Text = "Total count: " + orderList.Count.ToString();
+                    if (orderList[0].ReceivedQty > 0)
+                    {
+                        gvOrders.DataSource = orderList;
+                        gvOrders.DataBind();
+                        lblCount.Text = "Total count: " + orderList.Count.ToString();
+                    }
+                    else
+                    {
+                        lblMsg.Text = "No receive found";
+                    }
 
+                }
+                else
+                {
+                    lblMsg.Text = "No receive found";
                 }
             }
 
         }
+
     }
 }

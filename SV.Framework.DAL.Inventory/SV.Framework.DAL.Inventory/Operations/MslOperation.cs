@@ -156,7 +156,7 @@ namespace SV.Framework.DAL.Inventory
             }
             return returnValue;
         }
-        public bool MslEsnInsertUpdateNew(EsnHeaderUpload esnInfo, string fileName, Int64 orderTransferID, out int insertCout, out int updateCount, out string errorMessage)
+        public bool MslEsnInsertUpdateNew(EsnHeaderUpload esnInfo, string fileName, Int64 orderTransferID, Int64 transientOrderID, out int insertCout, out int updateCount, out string errorMessage)
         {
             insertCout = 0;
             updateCount = 0;
@@ -196,12 +196,13 @@ namespace SV.Framework.DAL.Inventory
                     objCompHash.Add("@IsInspection", esnInfo.IsInspection);
                     objCompHash.Add("@SupplierName", esnInfo.SupplierName);
                     objCompHash.Add("@OrderTransferID", orderTransferID);
+                    objCompHash.Add("@TransientOrderID", transientOrderID);
 
                     objCompHash.Add("@av_ESNUpload", dt);
 
                     arrSpFieldSeq = new string[] { "@CustomerAccountNumber","@ESNHeaderId", "@OrderNumber", "@CustOrderNumber", "@OrderDate", "@ShipDate", "@ShipVia",
                     "@TrackingNumber", "@SKU", "@OrderQty", "@ShipQty", "@UnitPrice", "@UserID", "@FileName", "@Comment", "@UploadDate","@IsESNRequired",
-                    "@ReceivedAs", "@IsInspection","@SupplierName","@OrderTransferID","@av_ESNUpload" };
+                    "@ReceivedAs", "@IsInspection","@SupplierName","@OrderTransferID","@TransientOrderID","@av_ESNUpload" };
                     db.ExecCommand(objCompHash, "Av_MSL_ESN_InsertUpdateNew", arrSpFieldSeq, "@poInsertCount", out insertCout, "@poUpdateCount", out updateCount, "@poErrorMessage", out errorMessage, "@InvalidStock", out retIntVal);
                     //int.TryParse(retVal.ToString(), out retIntVal);
                     if (retIntVal == 1)

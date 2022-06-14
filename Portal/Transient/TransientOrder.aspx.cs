@@ -39,6 +39,9 @@ namespace avii.Transient
                 int internalordercustomer = Convert.ToInt32(ConfigurationSettings.AppSettings["internalordercustomer"]);
                 string orderDate = DateTime.Now.ToShortDateString();
                 lblOrderDate.Text = orderDate;
+                txtProposedReceiveDate.Text = orderDate;
+
+                GetOrderDetail();
             }
         }
 
@@ -57,26 +60,29 @@ namespace avii.Transient
             if (Session["TransientOrderID"] != null)
             {
                 transientOrderID = Convert.ToInt64(Session["TransientOrderID"]);
+                Session["TransientOrderID"] = null;
                 ViewState["TransientOrderID"] = transientOrderID;
+                ViewState["EDIT"] = 1;
                 TransientOrderOperation serviceRequestOperations = TransientOrderOperation.CreateInstance<TransientOrderOperation>();
                 TransientReceiveOrder transientOrder = serviceRequestOperations.GetTransientOrderDetail(transientOrderID);
                 if(transientOrder != null)
                 {
-
+                    BindUsers(transientOrder.CompanyID);
+                    BindCustomerSKU(transientOrder.CompanyID, true);
+                    trMemo.Visible = true;
+                    lblMemoNo.Text = transientOrder.MemoNumber.ToString();
                     txtComment.Text = transientOrder.Comment;
                     txtOrderedQty.Text = transientOrder.OrderedQty.ToString();
                     txtProposedReceiveDate.Text = transientOrder.ProposedReceiveDate;
                     txtSupplier.Text = transientOrder.SupplierName;
                     ddlSKU.SelectedValue = transientOrder.ItemCompanyGUID.ToString();
                     dpCompany.SelectedValue = transientOrder.CompanyID.ToString();
-                    ddlCategory.SelectedValue = transientOrder.CategoryID.ToString();
+                    ddlCategory.SelectedValue = transientOrder.CategoryWithProductAllowed;
                     ddlUsers.SelectedValue = transientOrder.RequestedBy.ToString();
                     lblSCurrentStock.Text = transientOrder.Stock_in_Hand.ToString();
                     lblProductname.Text = transientOrder.ProductName;
-                    lblOrderDate.Text = transientOrder.TransientOrderDateTime.ToString("dd/MM/yyyy");
-
-
-
+                    lblOrderDate.Text = transientOrder.TransientOrderDateTime.ToString("MM/dd/yyyy");
+                    txtProposedReceiveDate.Text = transientOrder.ProposedReceiveDateTime.ToString("MM/dd/yyyy");
                 }
 
             }
@@ -135,7 +141,8 @@ namespace avii.Transient
             if (dpCompany.SelectedIndex > 0)
             {
                 int companyID = Convert.ToInt32(dpCompany.SelectedValue);
-                BindCustomerSKU(companyID);
+                BindCustomerSKU(companyID, false);
+                BindUsers(companyID);
             }
         }
 
@@ -146,7 +153,6 @@ namespace avii.Transient
             lblMsg.Text = string.Empty;
             ViewState["IsESNRequired"] = 0;
             ddlSKU.Items.Clear();
-            ddlUsers.Items.Clear();
             lblProductname.Text = "";
             lblSCurrentStock.Text = "";
             txtOrderedQty.Text = "";
@@ -216,7 +222,6 @@ namespace avii.Transient
                                             //ddlSourceSKU.DataSource = null;
                                             //ddlSourceSKU.DataBind();
                                             lblMsg.Text = "No SKU(s) are assigned to selected Category";
-
                                         }
                                     }
                                 }
@@ -240,11 +245,11 @@ namespace avii.Transient
             lblMsg.Text = "";
             btnSubmit.Visible = true;
 
-            ddlUsers.Items.Clear();
+           // ddlUsers.Items.Clear();
             lblProductname.Text = "";
             lblSCurrentStock.Text = "";
-            txtOrderedQty.Text = "";
-            txtComment.Text = "";
+            //txtOrderedQty.Text = "";
+           // txtComment.Text = "";
 
             if (ddlSKU.SelectedIndex > 0)
             {
@@ -283,7 +288,6 @@ namespace avii.Transient
 
             if (string.IsNullOrEmpty(response))
             {
-
                 companyID = Convert.ToInt32(dpCompany.SelectedValue);
                 itemCompanyGUID = Convert.ToInt32(ddlSKU.SelectedValue);
                 requestedBy = Convert.ToInt32(ddlUsers.SelectedValue);
@@ -298,27 +302,25 @@ namespace avii.Transient
                 transientOrder.TransientOrderID = transientOrderID;
                 transientOrder.ItemCompanyGUID = itemCompanyGUID;
                 transientOrder.OrderedQty = orderedQty;
-                transientOrder.ProposedReceiveDate = proposedReceiveDate;
+                transientOrder.TransientOrderDate = transientOrderDate;
                 transientOrder.SupplierName = supplierName;
                 transientOrder.ProposedReceiveDate = proposedReceiveDate;
                 transientOrder.RequestedBy = requestedBy;
                 transientOrder.Comment = comments;
+                transientOrder.UserID = userID;
 
                 response = serviceRequestOperations.CreateTransientOrderInsertUpdate(transientOrder, out transientOrderID);
 
-
                 if (transientOrderID > 0)
+                {
                     ViewState["TransientOrderID"] = transientOrderID;
-
+                    btnAdd.Visible= true; 
+                }
 
                 lblMsg.Text = response;
-
-
             }
             else
                 lblMsg.Text = response;
-
-
         }
         private string ValidateTranferOrder()
         {
@@ -365,15 +367,23 @@ namespace avii.Transient
 
         protected void btnCancel_Click(object sender, EventArgs e)
         {
-            ClearForm();
+            if (ViewState["EDIT"] != null)
+            {
+                Session["trsearchback"] = 1;
+                Response.Redirect("TransientOrderSearch.aspx", true);
+            }
+            else
+                ClearForm();
         }
         private void ClearForm()
         {
             string orderDate = DateTime.Now.ToShortDateString();
             lblOrderDate.Text = orderDate;
+            txtProposedReceiveDate.Text = orderDate;
             lblMsg.Text = "";
             txtComment.Text = "";
             txtOrderedQty.Text = "";
+            txtSupplier.Text = "";
             dpCompany.SelectedIndex = 0;
             ddlCategory.SelectedIndex = 0;
             ddlSKU.Items.Clear();
@@ -383,7 +393,7 @@ namespace avii.Transient
             
         }
 
-        private void BindCustomerSKU(int companyID)
+        private void BindCustomerSKU(int companyID, bool IsEdit)
         {
             MslOperation mslOperation = MslOperation.CreateInstance<MslOperation>();
 
@@ -392,6 +402,15 @@ namespace avii.Transient
             if (skuList != null)
             {
                 ViewState["sourceskulist"] = skuList;
+                if(IsEdit)
+                {
+                    ddlSKU.DataSource = skuList;
+                    ddlSKU.DataValueField = "ItemcompanyGUID";
+                    ddlSKU.DataTextField = "SKU";
+                    ddlSKU.DataBind();
+                    ListItem item = new ListItem("", "0");
+                    ddlSKU.Items.Insert(0, item);
+                }
             }
             else
             {
@@ -401,5 +420,9 @@ namespace avii.Transient
             }
         }
 
+        protected void btnAdd_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("TransientOrder.aspx", true);
+        }
     }
 } 
